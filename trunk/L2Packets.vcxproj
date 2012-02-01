@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3932F75F-1D83-4AE1-ABCB-B1495D0B0AF6}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2Packets_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2Packets_Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2Packets_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2Packets_Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>lib;l2packets\sqlite3;l2packets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;SQLITE_THREADSAFE=1;L2P_THROW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)L2Packets_d.pdb</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>lib;l2packets\sqlite3;l2packets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;SQLITE_THREADSAFE=1;L2P_THROW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)L2Packets.pdb</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="L2Packets\base\ByteArray.cpp" />
+    <ClCompile Include="L2Packets\base\L2BasePacket.cpp" />
+    <ClCompile Include="L2Packets\login\L2LoginPacket.cpp" />
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestAuthLogin.cpp" />
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestGGAuth.cpp" />
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestServerList.cpp" />
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestServerLogin.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_AccountKicked.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_GGAuthResponse.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_Init.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_LoginFail.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_LoginOK.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_PlayFail.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_PlayOK.cpp" />
+    <ClCompile Include="L2Packets\login\server\L2Login_ServerList.cpp" />
+    <ClCompile Include="l2packets\game\AionGamePacket.cpp" />
+    <ClCompile Include="L2Packets\game\L2GamePacket.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_Action.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_AuthLogin.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterCreate.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterDelete.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterRestore.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterSelect.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_EnterWorld.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_NewCharacter.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_ProtocolVersion.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestGotoLobby.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestJoinParty.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestUserCommand.cpp" />
+    <ClCompile Include="L2Packets\game\client\L2Game_UseItem.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_AuthLoginFail.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharCreateFail.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharCreateSuccess.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharDeleteFail.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharDeleteSuccess.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharSelected.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_CharSelectionInfo.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_KeyPacket.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_NewCharacterSuccess.cpp" />
+    <ClCompile Include="L2Packets\game\server\L2Game_SSQInfo.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2Character.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2ElementalInfo.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2Experience.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2Npc.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2Object.cpp" />
+    <ClCompile Include="L2Packets\l2world\L2Player.cpp" />
+    <ClCompile Include="L2Packets\l2data\L2Data.cpp" />
+    <ClCompile Include="L2Packets\l2data\L2Data_db.cpp" />
+    <ClCompile Include="L2Packets\l2data\L2Data_Recipes.cpp" />
+    <ClCompile Include="L2Packets\l2data\L2Data_sm.cpp" />
+    <ClCompile Include="L2Packets\net_io\L2Packet_NetLayer.cpp" />
+    <ClCompile Include="L2Packets\net_io\L2Packet_NetLayer_linux.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="L2Packets\net_io\L2PacketReceiver.cpp" />
+    <ClCompile Include="L2Packets\net_io\L2PacketSender.cpp" />
+    <ClCompile Include="L2Packets\sqlite3\sqlite3.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames.cpp" />
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_client.cpp" />
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_client_t23.cpp" />
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_server.cpp" />
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_server_t23.cpp" />
+    <ClCompile Include="L2Packets\pcode_obfuscator\L2PCodeObfuscator.cpp" />
+    <ClCompile Include="L2Packets\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="L2Packets\os\os_abstraction.cpp" />
+    <ClCompile Include="L2Packets\xcpt\L2Packets_xcpt.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2Packets\base\ByteArray.h" />
+    <ClInclude Include="L2Packets\base\L2BasePacket.h" />
+    <ClInclude Include="L2Packets\login\L2LoginPacket.h" />
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestAuthLogin.h" />
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestGGAuth.h" />
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestServerList.h" />
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestServerLogin.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_AccountKicked.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_GGAuthResponse.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_Init.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_LoginFail.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_LoginOK.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_PlayFail.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_PlayOK.h" />
+    <ClInclude Include="L2Packets\login\server\L2Login_ServerList.h" />
+    <ClInclude Include="l2packets\game\AionGamePacket.h" />
+    <ClInclude Include="L2Packets\game\L2GamePacket.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_Action.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_AuthLogin.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterCreate.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterDelete.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterRestore.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterSelect.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_EnterWorld.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_NewCharacter.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_ProtocolVersion.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestGotoLobby.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestJoinParty.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestUserCommand.h" />
+    <ClInclude Include="L2Packets\game\client\L2Game_UseItem.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_AuthLoginFail.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharCreateFail.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharCreateSuccess.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharDeleteFail.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharDeleteSuccess.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharSelected.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_CharSelectionInfo.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_KeyPacket.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_NewCharacterSuccess.h" />
+    <ClInclude Include="L2Packets\game\server\L2Game_SSQInfo.h" />
+    <ClInclude Include="L2Packets\l2world\L2Character.h" />
+    <ClInclude Include="L2Packets\l2world\L2ChatMessageTypes.h" />
+    <ClInclude Include="L2Packets\l2world\L2ElementalInfo.h" />
+    <ClInclude Include="L2Packets\l2world\L2Experience.h" />
+    <ClInclude Include="L2Packets\l2world\L2Npc.h" />
+    <ClInclude Include="L2Packets\l2world\L2Object.h" />
+    <ClInclude Include="L2Packets\l2world\L2Player.h" />
+    <ClInclude Include="L2Packets\l2world\L2PlayerPaperDoll.h" />
+    <ClInclude Include="L2Packets\l2world\L2Skill.h" />
+    <ClInclude Include="L2Packets\l2world\L2World.h" />
+    <ClInclude Include="L2Packets\l2data\L2Data.h" />
+    <ClInclude Include="L2Packets\l2data\L2Data_Recipes.h" />
+    <ClInclude Include="L2Packets\net_io\L2Packet_NetLayer.h" />
+    <ClInclude Include="L2Packets\net_io\L2PacketReceiver.h" />
+    <ClInclude Include="L2Packets\net_io\L2PacketSender.h" />
+    <ClInclude Include="L2Packets\sqlite3\sqlite3.h" />
+    <ClInclude Include="L2Packets\sqlite3\sqlite3ext.h" />
+    <ClInclude Include="L2Packets\packetNames\L2PacketNames.h" />
+    <ClInclude Include="L2Packets\pcode_obfuscator\L2PCodeObfuscator.h" />
+    <ClInclude Include="L2Packets\stdafx.h" />
+    <ClInclude Include="L2Packets\targetver.h" />
+    <ClInclude Include="L2Packets\os\os_abstraction.h" />
+    <ClInclude Include="L2Packets\xcpt\L2Packets_xcpt.h" />
+    <ClInclude Include="l2packets\AionPackets.h" />
+    <ClInclude Include="L2Packets\L2_versions.h" />
+    <ClInclude Include="L2Packets\L2Packets.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

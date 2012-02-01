@@ -29,7 +29,9 @@ int base64_encode_block(const char* plaintext_in, int length_in, char* code_out,
 	
 	switch (state_in->step)
 	{
+#pragma warning( disable: 4127 ) // conditional expression is constant
 		while (1)
+#pragma warning( default: 4127 ) // conditional expression is constant
 		{
 	case step_A:
 			if (plainchar == plaintextend)
@@ -127,7 +129,9 @@ int base64_decode_block(const char* code_in, const int length_in, char* plaintex
 	
 	switch (state_in->step)
 	{
+#pragma warning( disable: 4127 ) // conditional expression is constant
 		while (1)
+#pragma warning( default: 4127 ) // conditional expression is constant
 		{
 	case step_a:
 			do {

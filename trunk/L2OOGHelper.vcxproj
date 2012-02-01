@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F48FE51E-CD31-40EE-93D9-E467841CB79C}</ProjectGuid>
+    <RootNamespace>L2OOGHelper</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2OOGHelper_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2OOGHelper_Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2OOGHelper_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2OOGHelper_Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;lib;l2ooghelper;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;USE_SEH;CHAT_USE_RICHEDIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>true</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName)_d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ShowProgress>false</ShowProgress>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>comctl32.lib;comdlg32.lib;ws2_32.lib;winmm.lib;libeay32_st_MTd.lib;ssleay32_st_MTd.lib;zlib_st_MTd.lib;libpng_st_MTd.lib;libjpegd_st_MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>lib\openssl;lib\libpng;lib\libjpeg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(IntDir)$(TargetName).map</MapFileName>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copying files to dist folder...</Message>
+      <Command>l2ooghelper\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>.;lib;l2ooghelper;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;USE_SEH;CHAT_USE_RICHEDIT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>comctl32.lib;comdlg32.lib;ws2_32.lib;winmm.lib;libeay32_st_MT.lib;ssleay32_st_MT.lib;zlib_st_MT.lib;libpng_st_MT.lib;libjpeg_st_MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\openssl;lib\libpng;lib\libjpeg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copying files to dist folder...</Message>
+      <Command>l2ooghelper\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ResourceCompile Include="l2ooghelper\dialogs.rc" />
+    <ResourceCompile Include="l2ooghelper\menu.rc" />
+    <ResourceCompile Include="l2ooghelper\other.rc" />
+    <ResourceCompile Include="l2ooghelper\tab.rc" />
+    <ResourceCompile Include="l2ooghelper\temp.rc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="l2ooghelper\res\L2OOGHelper.ico" />
+    <None Include="l2ooghelper\res\small.ico" />
+    <None Include="l2ooghelper\ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="l2ooghelper\Resource.h" />
+    <ClInclude Include="l2ooghelper\stdafx.h" />
+    <ClInclude Include="l2ooghelper\targetver.h" />
+    <ClInclude Include="l2ooghelper\MainWindow.h" />
+    <ClInclude Include="l2ooghelper\ProgressHP.h" />
+    <ClInclude Include="l2ooghelper\SEH_global.h" />
+    <ClInclude Include="l2ooghelper\Tabs.h" />
+    <ClInclude Include="l2ooghelper\Account.h" />
+    <ClInclude Include="l2ooghelper\IL2Client.h" />
+    <ClInclude Include="l2ooghelper\L2Client.h" />
+    <ClInclude Include="l2ooghelper\L2ClientAI.h" />
+    <ClInclude Include="l2ooghelper\MapShowParams.h" />
+    <ClInclude Include="l2ooghelper\BotConfig.h" />
+    <ClInclude Include="l2ooghelper\BotConfigIDList.h" />
+    <ClInclude Include="l2ooghelper\AccountDlg.h" />
+    <ClInclude Include="l2ooghelper\ChooseCharDlg.h" />
+    <ClInclude Include="l2ooghelper\ChooseServerDlg.h" />
+    <ClInclude Include="l2ooghelper\CreateCharDlg.h" />
+    <ClInclude Include="l2ooghelper\InputStringDlg.h" />
+    <ClInclude Include="l2ooghelper\MapItemsTabDlg.h" />
+    <ClInclude Include="l2ooghelper\UserBuffTabDlg.h" />
+    <ClInclude Include="l2ooghelper\UserInfoTabDlg.h" />
+    <ClInclude Include="l2ooghelper\UserInvTabDlg.h" />
+    <ClInclude Include="l2ooghelper\UserPartyTabDlg.h" />
+    <ClInclude Include="l2ooghelper\UserSkillsTabDlg.h" />
+    <ClInclude Include="l2ooghelper\BuySellDlg.h" />
+    <ClInclude Include="l2ooghelper\MessageBoxTimeout.h" />
+    <ClInclude Include="l2ooghelper\NpcHtmlMessageDlg.h" />
+    <ClInclude Include="l2ooghelper\PrivateStoreDlg.h" />
+    <ClInclude Include="l2ooghelper\TradeP2PDlg.h" />
+    <ClInclude Include="l2ooghelper\BotCfgDlg.h" />
+    <ClInclude Include="l2ooghelper\Dlg_FindInDB.h" />
+    <ClInclude Include="l2ooghelper\Logger.h" />
+    <ClInclude Include="l2ooghelper\UserBuffs.h" />
+    <ClInclude Include="l2ooghelper\UserEtcStatus.h" />
+    <ClInclude Include="l2ooghelper\UserInfo_c.h" />
+    <ClInclude Include="l2ooghelper\UserInventory.h" />
+    <ClInclude Include="l2ooghelper\UserParty.h" />
+    <ClInclude Include="l2ooghelper\UserSkills.h" />
+    <ClInclude Include="l2ooghelper\UserStorageMaxCount.h" />
+    <ClInclude Include="l2ooghelper\ScriptEngine.h" />
+    <ClInclude Include="l2ooghelper\SE_funcs.h" />
+    <ClInclude Include="l2ooghelper\BinTree.h" />
+    <ClInclude Include="l2ooghelper\BuySellList.h" />
+    <ClInclude Include="l2ooghelper\CharArray.h" />
+    <ClInclude Include="l2ooghelper\ClanList.h" />
+    <ClInclude Include="l2ooghelper\ClanTreeNode.h" />
+    <ClInclude Include="l2ooghelper\GIArray.h" />
+    <ClInclude Include="l2ooghelper\GroundItem.h" />
+    <ClInclude Include="l2ooghelper\NpcArray.h" />
+    <ClInclude Include="l2ooghelper\WorldObjectTree.h" />
+    <ClInclude Include="l2ooghelper\WorldObjectTreeNode.h" />
+    <ClInclude Include="l2ooghelper\utils.h" />
+    <ClInclude Include="l2ooghelper\windowUtils.h" />
+    <ClInclude Include="l2ooghelper\PngJpegImage.h" />
+    <ClInclude Include="l2ooghelper\GlobalMapImages.h" />
+    <ClInclude Include="l2ooghelper\MapWnd.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lapi.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lauxlib.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lcode.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\ldebug.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\ldo.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lfunc.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lgc.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\llex.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\llimits.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lmem.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lobject.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lopcodes.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lparser.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lstate.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lstring.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\ltable.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\ltm.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lua.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lua.hpp" />
+    <ClInclude Include="l2ooghelper\lib\lua\luaconf.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lualib.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lundump.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lvm.h" />
+    <ClInclude Include="l2ooghelper\lib\lua\lzio.h" />
+    <ClInclude Include="l2ooghelper\DBLayer.h" />
+    <ClInclude Include="l2ooghelper\base64.h" />
+    <ClInclude Include="l2ooghelper\HWID.h" />
+    <ClInclude Include="l2ooghelper\bot_interaction\BotIPC.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="l2ooghelper\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MainWindow.cpp" />
+    <ClCompile Include="l2ooghelper\ProgressHP.cpp" />
+    <ClCompile Include="l2ooghelper\SEH_global.cpp" />
+    <ClCompile Include="l2ooghelper\Tabs.cpp" />
+    <ClCompile Include="l2ooghelper\Account.cpp" />
+    <ClCompile Include="l2ooghelper\IL2Client.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_BotIPC.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_GameLoop.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_Login.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_Packets.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_Thread.cpp" />
+    <ClCompile Include="l2ooghelper\L2Client_World.cpp" />
+    <ClCompile Include="l2ooghelper\L2ClientAI.cpp" />
+    <ClCompile Include="l2ooghelper\MapShowParams.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AbnormalStatusUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AskJoinParty.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AuthLoginFail.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_BuyList.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ChangeMoveType.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ChangeWaitType.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharCreateFail.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharCreateSuccess.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharDeleteFail.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharDeleteSuccess.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharSelected.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharSelectionInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ConfirmDlg.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CreatureSay.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_DeleteObject.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_Die.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_DropItem.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_EtcStatusUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExNpcQuestHtmlMessage.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExSetPrivateStoreWholeMsg.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExStorageMaxCount.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_GameGuardQuery.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_GetItem.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_InventoryUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ItemList.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_JoinParty.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_KeyPacket.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MagicSkillCanceld.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MagicSkillUse.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MoveToLocation.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MoveToPawn.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NewCharacterSuccess.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NpcHtmlMessage.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NpcInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartyMemberPosition.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowAdd.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowAll.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowDelete.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowDeleteAll.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySpelled.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PledgeInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreListBuy.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreListSell.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreManageListBuy.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreManageListSell.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreMsgBuy.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreMsgSell.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_RecipeShopManageList.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_RecipeShopMsg.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_Revive.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SellList.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SendTradeRequest.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SetupGauge.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ShortBuffStatusUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SkillCoolTime.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SkillList.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SpawnItem.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SSQInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_StatusUpdate.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_StopMove.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SystemMessage.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TargetSelected.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TargetUnselected.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TeleportToLocation.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeDone.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeOtherAdd.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeOwnAdd.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeStart.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_UserInfo.cpp" />
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ValidateLocation.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_atk.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_BuySell.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_items.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_misc.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_move.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_party.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_pvtStore.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_sys.cpp" />
+    <ClCompile Include="l2ooghelper\packet_send\ps_trade_p2p.cpp" />
+    <ClCompile Include="l2ooghelper\BotConfig.cpp" />
+    <ClCompile Include="l2ooghelper\BotConfigIDList.cpp" />
+    <ClCompile Include="l2ooghelper\AccountDlg.cpp" />
+    <ClCompile Include="l2ooghelper\ChooseCharDlg.cpp" />
+    <ClCompile Include="l2ooghelper\ChooseServerDlg.cpp" />
+    <ClCompile Include="l2ooghelper\CreateCharDlg.cpp" />
+    <ClCompile Include="l2ooghelper\InputStringDlg.cpp" />
+    <ClCompile Include="l2ooghelper\MapItemsTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\UserBuffTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\UserInfoTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\UserInvTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\UserPartyTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\UserSkillsTabDlg.cpp" />
+    <ClCompile Include="l2ooghelper\BuySellDlg.cpp" />
+    <ClCompile Include="l2ooghelper\MessageBoxTimeout.cpp" />
+    <ClCompile Include="l2ooghelper\NpcHtmlMessageDlg.cpp" />
+    <ClCompile Include="l2ooghelper\PrivateStoreDlg.cpp" />
+    <ClCompile Include="l2ooghelper\TradeP2PDlg.cpp" />
+    <ClCompile Include="l2ooghelper\BotCfgDlg.cpp" />
+    <ClCompile Include="l2ooghelper\BotCfgDlg_Party.cpp" />
+    <ClCompile Include="l2ooghelper\BotCfgDlg_Self.cpp" />
+    <ClCompile Include="l2ooghelper\BotCfgDlg_SelfHeal.cpp" />
+    <ClCompile Include="l2ooghelper\Dlg_FindInDB.cpp" />
+    <ClCompile Include="l2ooghelper\Logger.cpp" />
+    <ClCompile Include="l2ooghelper\UserBuffs.cpp" />
+    <ClCompile Include="l2ooghelper\UserEtcStatus.cpp" />
+    <ClCompile Include="l2ooghelper\UserInfo_c.cpp" />
+    <ClCompile Include="l2ooghelper\UserInventory.cpp" />
+    <ClCompile Include="l2ooghelper\UserParty.cpp" />
+    <ClCompile Include="l2ooghelper\UserSkills.cpp" />
+    <ClCompile Include="l2ooghelper\UserStorageMaxCount.cpp" />
+    <ClCompile Include="l2ooghelper\ScriptEngine.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_buffs.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_cfg.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_chat.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_hacks.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_handlers.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_items.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_move.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_party.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_skills.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_targ.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_userInfo.cpp" />
+    <ClCompile Include="l2ooghelper\SE_funcs_world.cpp" />
+    <ClCompile Include="l2ooghelper\BinTree.cpp" />
+    <ClCompile Include="l2ooghelper\BuySellList.cpp" />
+    <ClCompile Include="l2ooghelper\CharArray.cpp" />
+    <ClCompile Include="l2ooghelper\ClanList.cpp" />
+    <ClCompile Include="l2ooghelper\ClanTreeNode.cpp" />
+    <ClCompile Include="l2ooghelper\GIArray.cpp" />
+    <ClCompile Include="l2ooghelper\GroundItem.cpp" />
+    <ClCompile Include="l2ooghelper\NpcArray.cpp" />
+    <ClCompile Include="l2ooghelper\WorldObjectTree.cpp" />
+    <ClCompile Include="l2ooghelper\WorldObjectTreeNode.cpp" />
+    <ClCompile Include="l2ooghelper\utils.cpp" />
+    <ClCompile Include="l2ooghelper\windowUtils.cpp" />
+    <ClCompile Include="l2ooghelper\PngJpegImage.cpp" />
+    <ClCompile Include="l2ooghelper\GlobalMapImages.cpp" />
+    <ClCompile Include="l2ooghelper\MapWnd.cpp" />
+    <ClCompile Include="l2ooghelper\lib\lua\lapi.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lauxlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lbaselib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lcode.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldblib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldebug.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldo.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldump.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lfunc.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lgc.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\linit.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\liolib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\llex.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lmathlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lmem.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\loadlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lobject.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lopcodes.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\loslib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lparser.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstate.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstring.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstrlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltable.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltablib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltm.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lundump.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lvm.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lzio.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\DBLayer.cpp" />
+    <ClCompile Include="l2ooghelper\base64.cpp" />
+    <ClCompile Include="l2ooghelper\HWID.cpp" />
+    <ClCompile Include="l2ooghelper\bot_interaction\BotIPC.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="L2Packets.vcxproj">
+      <Project>{3932f75f-1d83-4ae1-abcb-b1495d0b0af6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

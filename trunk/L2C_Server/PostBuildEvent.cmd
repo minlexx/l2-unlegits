@@ -9,15 +9,23 @@ rem echo 2 = %2
 set out=..\..\out\dist_l2c
 set bin=..\..\bin
 
-rem Copy EXE
+echo Copy EXE %2\%1.exe - %2\%out%
 copy /y %2\%1.exe %2\%out%
 
-rem Copy PDB
+echo Copy PDB /y %2\%1.pdb - %2\%out%
 copy /y %2\%1.pdb %2\%out%
 
 rem Copy DLLs
+
+echo Copy DLL: %2\%bin%\dbghelp.dll - %2\%out%
 copy /y %2\%bin%\dbghelp.dll  %2\%out%
+
+echo Copy DLL: %2\%bin%\libeay32.dll - %2\%out%
 copy /y %2\%bin%\libeay32.dll %2\%out%
+
+echo Copy DLL: %2\%bin%\ssleay32.dll - %2\%out%
 copy /y %2\%bin%\ssleay32.dll %2\%out%
+
+echo Copy DLL: %2\%bin%\libmysql.dll - %2\%out%
 copy /y %2\%bin%\libmysql.dll %2\%out%
-rem copy /y %2\%bin%\*.dll %2\%out%
+
