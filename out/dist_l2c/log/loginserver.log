@@ -1,0 +1,841 @@
+18:28:31.268: LoginServer::start(): created thread 4316
+===================================
+18:28:31.284: Starting login server...
+18:28:31.299: Loading config...
+18:28:31.299: .\config_login\loginserver.properties: loaded 28 vars
+18:28:31.299: .\config_login\telnet.properties: loaded 4 vars
+18:28:31.299: Initializing MySQL... server localhost; db l2jdb; maximum connections 10
+18:28:31.299: Loading LoginController...
+18:28:31.299: Generating 10 RSA keys for communication...  [||||||||||]   OK
+18:28:32.424: Generated 20 blowfish keys.
+18:28:32.440: IP banned: 10.255.255.255; expires: NEVER
+18:28:32.440: IP banned: 10.254.254.254; expires: NEVER
+18:28:32.440: Loaded 2 IP bans.
+18:28:32.440: Loading GameServerTable...
+18:28:32.440: Loaded 127 server names.
+18:28:32.440: Loaded 1 registered game servers.
+18:28:32.440: Generating 10 RSA keys for GS communication...  [||||||||||]   OK
+18:28:32.612: Login server will listen to gameservers on IP 0.0.0.0
+18:28:32.643: Listening to gameservers on 0.0.0.0:9014
+18:28:32.643: Login server ready on *:2105
+18:28:32.643: Login server loaded in 1 seconds (1375 ms).
+===================================
+18:29:01.706: Accepted gameserver 127.0.0.1:2073... 
+18:29:01.753: GSConnThread: sent InitLS
+18:29:01.768: GSConnThread: opcode 00
+18:29:01.768: GS: new BF key rcvd (len 40)
+18:29:01.768: GSConnThread: opcode 01
+18:29:01.768: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:01.862: Accepted gameserver 127.0.0.1:2074... 
+18:29:01.862: GSConnThread: sent InitLS
+18:29:01.862: GSConnThread: opcode 00
+18:29:01.878: GS: new BF key rcvd (len 40)
+18:29:01.878: GSConnThread: opcode 01
+18:29:01.878: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:01.893: Accepted gameserver 127.0.0.1:2075... 
+18:29:01.909: GSConnThread: sent InitLS
+18:29:01.924: GSConnThread: opcode 00
+18:29:01.940: GS: new BF key rcvd (len 40)
+18:29:01.940: GSConnThread: opcode 01
+18:29:01.940: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:01.956: Accepted gameserver 127.0.0.1:2076... 
+18:29:01.971: GSConnThread: sent InitLS
+18:29:01.971: GSConnThread: opcode 00
+18:29:01.987: GS: new BF key rcvd (len 40)
+18:29:01.987: GSConnThread: opcode 01
+18:29:01.987: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.003: Accepted gameserver 127.0.0.1:2077... 
+18:29:02.003: GSConnThread: sent InitLS
+18:29:02.018: GSConnThread: opcode 00
+18:29:02.018: GS: new BF key rcvd (len 40)
+18:29:02.018: GSConnThread: opcode 01
+18:29:02.018: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.034: Accepted gameserver 127.0.0.1:2078... 
+18:29:02.034: GSConnThread: sent InitLS
+18:29:02.049: GSConnThread: opcode 00
+18:29:02.049: GS: new BF key rcvd (len 40)
+18:29:02.065: GSConnThread: opcode 01
+18:29:02.065: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.081: Accepted gameserver 127.0.0.1:2079... 
+18:29:02.081: GSConnThread: sent InitLS
+18:29:02.081: GSConnThread: opcode 00
+18:29:02.081: GS: new BF key rcvd (len 40)
+18:29:02.081: GSConnThread: opcode 01
+18:29:02.081: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.096: Accepted gameserver 127.0.0.1:2080... 
+18:29:02.096: GSConnThread: sent InitLS
+18:29:02.112: GSConnThread: opcode 00
+18:29:02.112: GS: new BF key rcvd (len 40)
+18:29:02.112: GSConnThread: opcode 01
+18:29:02.112: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.128: Accepted gameserver 127.0.0.1:2081... 
+18:29:02.128: GSConnThread: sent InitLS
+18:29:02.159: GSConnThread: opcode 00
+18:29:02.159: GS: new BF key rcvd (len 40)
+18:29:02.159: GSConnThread: opcode 01
+18:29:02.174: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.190: Accepted gameserver 127.0.0.1:2082... 
+18:29:02.190: GSConnThread: sent InitLS
+18:29:02.206: GSConnThread: opcode 00
+18:29:02.206: GS: new BF key rcvd (len 40)
+18:29:02.206: GSConnThread: opcode 01
+18:29:02.206: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.221: Accepted gameserver 127.0.0.1:2083... 
+18:29:02.221: GSConnThread: sent InitLS
+18:29:02.237: GSConnThread: opcode 00
+18:29:02.237: GS: new BF key rcvd (len 40)
+18:29:02.237: GSConnThread: opcode 01
+18:29:02.237: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.253: Accepted gameserver 127.0.0.1:2084... 
+18:29:02.253: GSConnThread: sent InitLS
+18:29:02.268: GSConnThread: opcode 00
+18:29:02.268: GS: new BF key rcvd (len 40)
+18:29:02.268: GSConnThread: opcode 01
+18:29:02.268: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.284: Accepted gameserver 127.0.0.1:2085... 
+18:29:02.299: GSConnThread: sent InitLS
+18:29:02.315: GSConnThread: opcode 00
+18:29:02.315: GS: new BF key rcvd (len 40)
+18:29:02.315: GSConnThread: opcode 01
+18:29:02.315: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.331: Accepted gameserver 127.0.0.1:2086... 
+18:29:02.346: GSConnThread: sent InitLS
+18:29:02.346: GSConnThread: opcode 00
+18:29:02.362: GS: new BF key rcvd (len 40)
+18:29:02.362: GSConnThread: opcode 01
+18:29:02.362: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.378: Accepted gameserver 127.0.0.1:2087... 
+18:29:02.378: GSConnThread: sent InitLS
+18:29:02.393: GSConnThread: opcode 00
+18:29:02.393: GS: new BF key rcvd (len 40)
+18:29:02.393: GSConnThread: opcode 01
+18:29:02.393: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.409: Accepted gameserver 127.0.0.1:2088... 
+18:29:02.409: GSConnThread: sent InitLS
+18:29:02.409: GSConnThread: opcode 00
+18:29:02.424: GS: new BF key rcvd (len 40)
+18:29:02.424: GSConnThread: opcode 01
+18:29:02.424: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.440: Accepted gameserver 127.0.0.1:2089... 
+18:29:02.440: GSConnThread: sent InitLS
+18:29:02.440: GSConnThread: opcode 00
+18:29:02.456: GS: new BF key rcvd (len 40)
+18:29:02.456: GSConnThread: opcode 01
+18:29:02.471: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.487: Accepted gameserver 127.0.0.1:2090... 
+18:29:02.487: GSConnThread: sent InitLS
+18:29:02.487: GSConnThread: opcode 00
+18:29:02.503: GS: new BF key rcvd (len 40)
+18:29:02.503: GSConnThread: opcode 01
+18:29:02.503: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.518: Accepted gameserver 127.0.0.1:2091... 
+18:29:02.518: GSConnThread: sent InitLS
+18:29:02.534: GSConnThread: opcode 00
+18:29:02.534: GS: new BF key rcvd (len 40)
+18:29:02.534: GSConnThread: opcode 01
+18:29:02.534: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.565: Accepted gameserver 127.0.0.1:2092... 
+18:29:02.565: GSConnThread: sent InitLS
+18:29:02.581: GSConnThread: opcode 00
+18:29:02.581: GS: new BF key rcvd (len 40)
+18:29:02.581: GSConnThread: opcode 01
+18:29:02.581: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.596: Accepted gameserver 127.0.0.1:2093... 
+18:29:02.612: GSConnThread: sent InitLS
+18:29:02.612: GSConnThread: opcode 00
+18:29:02.612: GS: new BF key rcvd (len 40)
+18:29:02.612: GSConnThread: opcode 01
+18:29:02.612: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.643: Accepted gameserver 127.0.0.1:2094... 
+18:29:02.643: GSConnThread: sent InitLS
+18:29:02.643: GSConnThread: opcode 00
+18:29:02.659: GS: new BF key rcvd (len 40)
+18:29:02.659: GSConnThread: opcode 01
+18:29:02.659: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.674: Accepted gameserver 127.0.0.1:2095... 
+18:29:02.674: GSConnThread: sent InitLS
+18:29:02.690: GSConnThread: opcode 00
+18:29:02.690: GS: new BF key rcvd (len 40)
+18:29:02.690: GSConnThread: opcode 01
+18:29:02.690: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.706: Accepted gameserver 127.0.0.1:2096... 
+18:29:02.706: GSConnThread: sent InitLS
+18:29:02.721: GSConnThread: opcode 00
+18:29:02.721: GS: new BF key rcvd (len 40)
+18:29:02.721: GSConnThread: opcode 01
+18:29:02.737: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.753: Accepted gameserver 127.0.0.1:2097... 
+18:29:02.753: GSConnThread: sent InitLS
+18:29:02.768: GSConnThread: opcode 00
+18:29:02.768: GS: new BF key rcvd (len 40)
+18:29:02.768: GSConnThread: opcode 01
+18:29:02.768: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.784: Accepted gameserver 127.0.0.1:2098... 
+18:29:02.784: GSConnThread: sent InitLS
+18:29:02.799: GSConnThread: opcode 00
+18:29:02.799: GS: new BF key rcvd (len 40)
+18:29:02.799: GSConnThread: opcode 01
+18:29:02.815: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.831: Accepted gameserver 127.0.0.1:2099... 
+18:29:02.831: GSConnThread: sent InitLS
+18:29:02.831: GSConnThread: opcode 00
+18:29:02.846: GS: new BF key rcvd (len 40)
+18:29:02.846: GSConnThread: opcode 01
+18:29:02.846: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.862: Accepted gameserver 127.0.0.1:2100... 
+18:29:02.878: GSConnThread: sent InitLS
+18:29:02.878: GSConnThread: opcode 00
+18:29:02.878: GS: new BF key rcvd (len 40)
+18:29:02.893: GSConnThread: opcode 01
+18:29:02.893: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.909: Accepted gameserver 127.0.0.1:2101... 
+18:29:02.924: GSConnThread: sent InitLS
+18:29:02.924: GSConnThread: opcode 00
+18:29:02.924: GS: new BF key rcvd (len 40)
+18:29:02.940: GSConnThread: opcode 01
+18:29:02.940: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.956: Accepted gameserver 127.0.0.1:2102... 
+18:29:02.956: GSConnThread: sent InitLS
+18:29:02.971: GSConnThread: opcode 00
+18:29:02.971: GS: new BF key rcvd (len 40)
+18:29:02.971: GSConnThread: opcode 01
+18:29:02.971: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:02.987: Accepted gameserver 127.0.0.1:2103... 
+18:29:02.987: GSConnThread: sent InitLS
+18:29:02.987: GSConnThread: opcode 00
+18:29:02.987: GS: new BF key rcvd (len 40)
+18:29:03.003: GSConnThread: opcode 01
+18:29:03.003: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.018: Accepted gameserver 127.0.0.1:2104... 
+18:29:03.018: GSConnThread: sent InitLS
+18:29:03.018: GSConnThread: opcode 00
+18:29:03.018: GS: new BF key rcvd (len 40)
+18:29:03.018: GSConnThread: opcode 01
+18:29:03.018: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.049: Accepted gameserver 127.0.0.1:2106... 
+18:29:03.065: GSConnThread: sent InitLS
+18:29:03.065: GSConnThread: opcode 00
+18:29:03.065: GS: new BF key rcvd (len 40)
+18:29:03.065: GSConnThread: opcode 01
+18:29:03.065: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.081: Accepted gameserver 127.0.0.1:2107... 
+18:29:03.081: GSConnThread: sent InitLS
+18:29:03.096: GSConnThread: opcode 00
+18:29:03.112: GS: new BF key rcvd (len 40)
+18:29:03.112: GSConnThread: opcode 01
+18:29:03.112: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.128: Accepted gameserver 127.0.0.1:2108... 
+18:29:03.128: GSConnThread: sent InitLS
+18:29:03.128: GSConnThread: opcode 00
+18:29:03.128: GS: new BF key rcvd (len 40)
+18:29:03.143: GSConnThread: opcode 01
+18:29:03.143: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.159: Accepted gameserver 127.0.0.1:2109... 
+18:29:03.159: GSConnThread: sent InitLS
+18:29:03.190: GSConnThread: opcode 00
+18:29:03.190: GS: new BF key rcvd (len 40)
+18:29:03.190: GSConnThread: opcode 01
+18:29:03.190: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.206: Accepted gameserver 127.0.0.1:2110... 
+18:29:03.206: GSConnThread: sent InitLS
+18:29:03.206: GSConnThread: opcode 00
+18:29:03.206: GS: new BF key rcvd (len 40)
+18:29:03.221: GSConnThread: opcode 01
+18:29:03.221: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.237: Accepted gameserver 127.0.0.1:2111... 
+18:29:03.237: GSConnThread: sent InitLS
+18:29:03.237: GSConnThread: opcode 00
+18:29:03.253: GS: new BF key rcvd (len 40)
+18:29:03.253: GSConnThread: opcode 01
+18:29:03.253: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.268: Accepted gameserver 127.0.0.1:2112... 
+18:29:03.284: GSConnThread: sent InitLS
+18:29:03.284: GSConnThread: opcode 00
+18:29:03.284: GS: new BF key rcvd (len 40)
+18:29:03.299: GSConnThread: opcode 01
+18:29:03.299: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.315: Accepted gameserver 127.0.0.1:2113... 
+18:29:03.346: GSConnThread: sent InitLS
+18:29:03.362: GSConnThread: opcode 00
+18:29:03.362: GS: new BF key rcvd (len 40)
+18:29:03.362: GSConnThread: opcode 01
+18:29:03.362: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.378: Accepted gameserver 127.0.0.1:2114... 
+18:29:03.378: GSConnThread: sent InitLS
+18:29:03.393: GSConnThread: opcode 00
+18:29:03.393: GS: new BF key rcvd (len 40)
+18:29:03.393: GSConnThread: opcode 01
+18:29:03.393: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.409: Accepted gameserver 127.0.0.1:2115... 
+18:29:03.424: GSConnThread: sent InitLS
+18:29:03.424: GSConnThread: opcode 00
+18:29:03.424: GS: new BF key rcvd (len 40)
+18:29:03.424: GSConnThread: opcode 01
+18:29:03.424: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.440: Accepted gameserver 127.0.0.1:2116... 
+18:29:03.440: GSConnThread: sent InitLS
+18:29:03.440: GSConnThread: opcode 00
+18:29:03.440: GS: new BF key rcvd (len 40)
+18:29:03.456: GSConnThread: opcode 01
+18:29:03.471: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.487: Accepted gameserver 127.0.0.1:2117... 
+18:29:03.503: GSConnThread: sent InitLS
+18:29:03.503: GSConnThread: opcode 00
+18:29:03.503: GS: new BF key rcvd (len 40)
+18:29:03.503: GSConnThread: opcode 01
+18:29:03.503: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.518: Accepted gameserver 127.0.0.1:2118... 
+18:29:03.518: GSConnThread: sent InitLS
+18:29:03.518: GSConnThread: opcode 00
+18:29:03.534: GS: new BF key rcvd (len 40)
+18:29:03.534: GSConnThread: opcode 01
+18:29:03.534: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.549: Accepted gameserver 127.0.0.1:2119... 
+18:29:03.549: GSConnThread: sent InitLS
+18:29:03.549: GSConnThread: opcode 00
+18:29:03.549: GS: new BF key rcvd (len 40)
+18:29:03.549: GSConnThread: opcode 01
+18:29:03.549: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.565: Accepted gameserver 127.0.0.1:2120... 
+18:29:03.581: GSConnThread: sent InitLS
+18:29:03.581: GSConnThread: opcode 00
+18:29:03.596: GS: new BF key rcvd (len 40)
+18:29:03.596: GSConnThread: opcode 01
+18:29:03.596: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.612: Accepted gameserver 127.0.0.1:2121... 
+18:29:03.612: GSConnThread: sent InitLS
+18:29:03.628: GSConnThread: opcode 00
+18:29:03.628: GS: new BF key rcvd (len 40)
+18:29:03.628: GSConnThread: opcode 01
+18:29:03.628: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.643: Accepted gameserver 127.0.0.1:2122... 
+18:29:03.643: GSConnThread: sent InitLS
+18:29:03.659: GSConnThread: opcode 00
+18:29:03.659: GS: new BF key rcvd (len 40)
+18:29:03.659: GSConnThread: opcode 01
+18:29:03.659: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.674: Accepted gameserver 127.0.0.1:2123... 
+18:29:03.674: GSConnThread: sent InitLS
+18:29:03.690: GSConnThread: opcode 00
+18:29:03.690: GS: new BF key rcvd (len 40)
+18:29:03.706: GSConnThread: opcode 01
+18:29:03.706: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.721: Accepted gameserver 127.0.0.1:2124... 
+18:29:03.721: GSConnThread: sent InitLS
+18:29:03.737: GSConnThread: opcode 00
+18:29:03.737: GS: new BF key rcvd (len 40)
+18:29:03.737: GSConnThread: opcode 01
+18:29:03.737: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.753: Accepted gameserver 127.0.0.1:2125... 
+18:29:03.768: GSConnThread: sent InitLS
+18:29:03.768: GSConnThread: opcode 00
+18:29:03.768: GS: new BF key rcvd (len 40)
+18:29:03.768: GSConnThread: opcode 01
+18:29:03.768: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.784: Accepted gameserver 127.0.0.1:2126... 
+18:29:03.784: GSConnThread: sent InitLS
+18:29:03.784: GSConnThread: opcode 00
+18:29:03.799: GS: new BF key rcvd (len 40)
+18:29:03.799: GSConnThread: opcode 01
+18:29:03.799: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.815: Accepted gameserver 127.0.0.1:2127... 
+18:29:03.831: GSConnThread: sent InitLS
+18:29:03.831: GSConnThread: opcode 00
+18:29:03.846: GS: new BF key rcvd (len 40)
+18:29:03.846: GSConnThread: opcode 01
+18:29:03.846: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.862: Accepted gameserver 127.0.0.1:2128... 
+18:29:03.862: GSConnThread: sent InitLS
+18:29:03.862: GSConnThread: opcode 00
+18:29:03.862: GS: new BF key rcvd (len 40)
+18:29:03.862: GSConnThread: opcode 01
+18:29:03.862: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.893: Accepted gameserver 127.0.0.1:2129... 
+18:29:03.893: GSConnThread: sent InitLS
+18:29:03.893: GSConnThread: opcode 00
+18:29:03.893: GS: new BF key rcvd (len 40)
+18:29:03.893: GSConnThread: opcode 01
+18:29:03.893: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.909: Accepted gameserver 127.0.0.1:2130... 
+18:29:03.909: GSConnThread: sent InitLS
+18:29:03.940: GSConnThread: opcode 00
+18:29:03.940: GS: new BF key rcvd (len 40)
+18:29:03.940: GSConnThread: opcode 01
+18:29:03.940: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.956: Accepted gameserver 127.0.0.1:2131... 
+18:29:03.956: GSConnThread: sent InitLS
+18:29:03.956: GSConnThread: opcode 00
+18:29:03.971: GS: new BF key rcvd (len 40)
+18:29:03.971: GSConnThread: opcode 01
+18:29:03.971: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:03.987: Accepted gameserver 127.0.0.1:2132... 
+18:29:03.987: GSConnThread: sent InitLS
+18:29:03.987: GSConnThread: opcode 00
+18:29:04.003: GS: new BF key rcvd (len 40)
+18:29:04.003: GSConnThread: opcode 01
+18:29:04.003: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:04.018: Accepted gameserver 127.0.0.1:2133... 
+18:29:04.018: GSConnThread: sent InitLS
+18:29:04.034: GSConnThread: opcode 00
+18:29:04.049: GS: new BF key rcvd (len 39)
+18:29:04.049: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.065: Accepted gameserver 127.0.0.1:2134... 
+18:29:04.065: GSConnThread: sent InitLS
+18:29:04.065: GSConnThread: opcode 00
+18:29:04.065: GS: new BF key rcvd (len 39)
+18:29:04.065: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.081: Accepted gameserver 127.0.0.1:2135... 
+18:29:04.096: GSConnThread: sent InitLS
+18:29:04.096: GSConnThread: opcode 00
+18:29:04.096: GS: new BF key rcvd (len 39)
+18:29:04.096: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.112: Accepted gameserver 127.0.0.1:2136... 
+18:29:04.112: GSConnThread: sent InitLS
+18:29:04.112: GSConnThread: opcode 00
+18:29:04.112: GS: new BF key rcvd (len 39)
+18:29:04.128: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.128: Accepted gameserver 127.0.0.1:2137... 
+18:29:04.128: GSConnThread: sent InitLS
+18:29:04.143: GSConnThread: opcode 00
+18:29:04.143: GS: new BF key rcvd (len 39)
+18:29:04.143: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.174: Accepted gameserver 127.0.0.1:2138... 
+18:29:04.174: GSConnThread: sent InitLS
+18:29:04.190: GSConnThread: opcode 00
+18:29:04.190: GS: new BF key rcvd (len 39)
+18:29:04.190: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.206: Accepted gameserver 127.0.0.1:2139... 
+18:29:04.206: GSConnThread: sent InitLS
+18:29:04.206: GSConnThread: opcode 00
+18:29:04.206: GS: new BF key rcvd (len 39)
+18:29:04.206: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.221: Accepted gameserver 127.0.0.1:2140... 
+18:29:04.237: GSConnThread: sent InitLS
+18:29:04.253: GSConnThread: opcode 00
+18:29:04.253: GS: new BF key rcvd (len 39)
+18:29:04.253: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.268: Accepted gameserver 127.0.0.1:2141... 
+18:29:04.268: GSConnThread: sent InitLS
+18:29:04.284: GSConnThread: opcode 00
+18:29:04.284: GS: new BF key rcvd (len 39)
+18:29:04.284: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.299: Accepted gameserver 127.0.0.1:2142... 
+18:29:04.299: GSConnThread: sent InitLS
+18:29:04.315: GSConnThread: opcode 00
+18:29:04.315: GS: new BF key rcvd (len 39)
+18:29:04.315: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.331: Accepted gameserver 127.0.0.1:2143... 
+18:29:04.346: GSConnThread: sent InitLS
+18:29:04.346: GSConnThread: opcode 00
+18:29:04.346: GS: new BF key rcvd (len 39)
+18:29:04.346: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.362: Accepted gameserver 127.0.0.1:2144... 
+18:29:04.362: GSConnThread: sent InitLS
+18:29:04.362: GSConnThread: opcode 00
+18:29:04.362: GS: new BF key rcvd (len 39)
+18:29:04.362: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.378: Accepted gameserver 127.0.0.1:2145... 
+18:29:04.393: GSConnThread: sent InitLS
+18:29:04.393: GSConnThread: opcode 00
+18:29:04.393: GS: new BF key rcvd (len 39)
+18:29:04.393: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.409: Accepted gameserver 127.0.0.1:2146... 
+18:29:04.409: GSConnThread: sent InitLS
+18:29:04.409: GSConnThread: opcode 00
+18:29:04.424: GS: new BF key rcvd (len 39)
+18:29:04.424: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.424: Accepted gameserver 127.0.0.1:2147... 
+18:29:04.440: GSConnThread: sent InitLS
+18:29:04.440: GSConnThread: opcode 00
+18:29:04.440: GS: new BF key rcvd (len 39)
+18:29:04.440: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.456: Accepted gameserver 127.0.0.1:2148... 
+18:29:04.456: GSConnThread: sent InitLS
+18:29:04.456: GSConnThread: opcode 00
+18:29:04.456: GS: new BF key rcvd (len 39)
+18:29:04.456: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.471: Accepted gameserver 127.0.0.1:2149... 
+18:29:04.471: GSConnThread: sent InitLS
+18:29:04.471: GSConnThread: opcode 00
+18:29:04.503: GS: new BF key rcvd (len 39)
+18:29:04.503: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.518: Accepted gameserver 127.0.0.1:2150... 
+18:29:04.518: GSConnThread: sent InitLS
+18:29:04.534: GSConnThread: opcode 00
+18:29:04.534: GS: new BF key rcvd (len 39)
+18:29:04.534: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.549: Accepted gameserver 127.0.0.1:2151... 
+18:29:04.565: GSConnThread: sent InitLS
+18:29:04.565: GSConnThread: opcode 00
+18:29:04.565: GS: new BF key rcvd (len 39)
+18:29:04.565: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.581: Accepted gameserver 127.0.0.1:2152... 
+18:29:04.581: GSConnThread: sent InitLS
+18:29:04.596: GSConnThread: opcode 00
+18:29:04.612: GS: new BF key rcvd (len 39)
+18:29:04.612: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.612: Accepted gameserver 127.0.0.1:2153... 
+18:29:04.612: GSConnThread: sent InitLS
+18:29:04.628: GSConnThread: opcode 00
+18:29:04.628: GS: new BF key rcvd (len 39)
+18:29:04.628: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.643: Accepted gameserver 127.0.0.1:2154... 
+18:29:04.643: GSConnThread: sent InitLS
+18:29:04.643: GSConnThread: opcode 00
+18:29:04.643: GS: new BF key rcvd (len 39)
+18:29:04.643: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.659: Accepted gameserver 127.0.0.1:2155... 
+18:29:04.659: GSConnThread: sent InitLS
+18:29:04.674: GSConnThread: opcode 00
+18:29:04.674: GS: new BF key rcvd (len 39)
+18:29:04.674: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.690: Accepted gameserver 127.0.0.1:2156... 
+18:29:04.690: GSConnThread: sent InitLS
+18:29:04.706: GSConnThread: opcode 00
+18:29:04.706: GS: new BF key rcvd (len 39)
+18:29:04.706: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.721: Accepted gameserver 127.0.0.1:2157... 
+18:29:04.721: GSConnThread: sent InitLS
+18:29:04.721: GSConnThread: opcode 00
+18:29:04.721: GS: new BF key rcvd (len 39)
+18:29:04.721: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.737: Accepted gameserver 127.0.0.1:2158... 
+18:29:04.737: GSConnThread: sent InitLS
+18:29:04.753: GSConnThread: opcode 00
+18:29:04.753: GS: new BF key rcvd (len 39)
+18:29:04.753: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.768: Accepted gameserver 127.0.0.1:2160... 
+18:29:04.768: GSConnThread: sent InitLS
+18:29:04.784: GSConnThread: opcode 00
+18:29:04.784: GS: new BF key rcvd (len 39)
+18:29:04.784: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.815: Accepted gameserver 127.0.0.1:2161... 
+18:29:04.831: GSConnThread: sent InitLS
+18:29:04.846: GSConnThread: opcode 00
+18:29:04.846: GS: new BF key rcvd (len 39)
+18:29:04.846: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.862: Accepted gameserver 127.0.0.1:2162... 
+18:29:04.862: GSConnThread: sent InitLS
+18:29:04.862: GSConnThread: opcode 00
+18:29:04.862: GS: new BF key rcvd (len 39)
+18:29:04.862: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.878: Accepted gameserver 127.0.0.1:2163... 
+18:29:04.878: GSConnThread: sent InitLS
+18:29:04.878: GSConnThread: opcode 00
+18:29:04.893: GS: new BF key rcvd (len 39)
+18:29:04.893: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.909: Accepted gameserver 127.0.0.1:2164... 
+18:29:04.909: GSConnThread: sent InitLS
+18:29:04.924: GSConnThread: opcode 00
+18:29:04.924: GS: new BF key rcvd (len 39)
+18:29:04.924: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.924: Accepted gameserver 127.0.0.1:2165... 
+18:29:04.940: GSConnThread: sent InitLS
+18:29:04.940: GSConnThread: opcode 00
+18:29:04.956: GS: new BF key rcvd (len 39)
+18:29:04.971: Incorrect checksum from GameServer 127.0.0.1. Close connection
+18:29:04.987: Accepted gameserver 127.0.0.1:2166... 
+18:29:04.987: GSConnThread: sent InitLS
+18:29:05.003: GSConnThread: opcode 00
+18:29:05.018: GS: new BF key rcvd (len 40)
+18:29:05.034: GSConnThread: opcode 01
+18:29:05.034: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.049: Accepted gameserver 127.0.0.1:2167... 
+18:29:05.049: GSConnThread: sent InitLS
+18:29:05.065: GSConnThread: opcode 00
+18:29:05.065: GS: new BF key rcvd (len 40)
+18:29:05.065: GSConnThread: opcode 01
+18:29:05.065: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.081: Accepted gameserver 127.0.0.1:2168... 
+18:29:05.081: GSConnThread: sent InitLS
+18:29:05.081: GSConnThread: opcode 00
+18:29:05.081: GS: new BF key rcvd (len 40)
+18:29:05.081: GSConnThread: opcode 01
+18:29:05.081: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.112: Accepted gameserver 127.0.0.1:2169... 
+18:29:05.112: GSConnThread: sent InitLS
+18:29:05.128: GSConnThread: opcode 00
+18:29:05.143: GS: new BF key rcvd (len 40)
+18:29:05.143: GSConnThread: opcode 01
+18:29:05.143: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.159: Accepted gameserver 127.0.0.1:2170... 
+18:29:05.159: GSConnThread: sent InitLS
+18:29:05.174: GSConnThread: opcode 00
+18:29:05.174: GS: new BF key rcvd (len 40)
+18:29:05.174: GSConnThread: opcode 01
+18:29:05.174: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.206: Accepted gameserver 127.0.0.1:2171... 
+18:29:05.206: GSConnThread: sent InitLS
+18:29:05.221: GSConnThread: opcode 00
+18:29:05.221: GS: new BF key rcvd (len 40)
+18:29:05.221: GSConnThread: opcode 01
+18:29:05.221: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.237: Accepted gameserver 127.0.0.1:2172... 
+18:29:05.237: GSConnThread: sent InitLS
+18:29:05.253: GSConnThread: opcode 00
+18:29:05.268: GS: new BF key rcvd (len 40)
+18:29:05.268: GSConnThread: opcode 01
+18:29:05.268: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.299: Accepted gameserver 127.0.0.1:2173... 
+18:29:05.299: GSConnThread: sent InitLS
+18:29:05.299: GSConnThread: opcode 00
+18:29:05.299: GS: new BF key rcvd (len 40)
+18:29:05.299: GSConnThread: opcode 01
+18:29:05.299: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.315: Accepted gameserver 127.0.0.1:2174... 
+18:29:05.315: GSConnThread: sent InitLS
+18:29:05.331: GSConnThread: opcode 00
+18:29:05.331: GS: new BF key rcvd (len 40)
+18:29:05.346: GSConnThread: opcode 01
+18:29:05.346: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.362: Accepted gameserver 127.0.0.1:2175... 
+18:29:05.362: GSConnThread: sent InitLS
+18:29:05.378: GSConnThread: opcode 00
+18:29:05.378: GS: new BF key rcvd (len 40)
+18:29:05.393: GSConnThread: opcode 01
+18:29:05.393: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.409: Accepted gameserver 127.0.0.1:2176... 
+18:29:05.409: GSConnThread: sent InitLS
+18:29:05.409: GSConnThread: opcode 00
+18:29:05.409: GS: new BF key rcvd (len 40)
+18:29:05.424: GSConnThread: opcode 01
+18:29:05.424: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.440: Accepted gameserver 127.0.0.1:2177... 
+18:29:05.440: GSConnThread: sent InitLS
+18:29:05.456: GSConnThread: opcode 00
+18:29:05.456: GS: new BF key rcvd (len 40)
+18:29:05.456: GSConnThread: opcode 01
+18:29:05.456: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.487: Accepted gameserver 127.0.0.1:2178... 
+18:29:05.503: GSConnThread: sent InitLS
+18:29:05.503: GSConnThread: opcode 00
+18:29:05.518: GS: new BF key rcvd (len 40)
+18:29:05.518: GSConnThread: opcode 01
+18:29:05.518: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.549: Accepted gameserver 127.0.0.1:2179... 
+18:29:05.549: GSConnThread: sent InitLS
+18:29:05.565: GSConnThread: opcode 00
+18:29:05.565: GS: new BF key rcvd (len 40)
+18:29:05.565: GSConnThread: opcode 01
+18:29:05.565: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.596: Accepted gameserver 127.0.0.1:2180... 
+18:29:05.596: GSConnThread: sent InitLS
+18:29:05.612: GSConnThread: opcode 00
+18:29:05.612: GS: new BF key rcvd (len 40)
+18:29:05.628: GSConnThread: opcode 01
+18:29:05.628: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.643: Accepted gameserver 127.0.0.1:2181... 
+18:29:05.659: GSConnThread: sent InitLS
+18:29:05.674: GSConnThread: opcode 00
+18:29:05.674: GS: new BF key rcvd (len 40)
+18:29:05.690: GSConnThread: opcode 01
+18:29:05.690: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.706: Accepted gameserver 127.0.0.1:2182... 
+18:29:05.706: GSConnThread: sent InitLS
+18:29:05.706: GSConnThread: opcode 00
+18:29:05.721: GS: new BF key rcvd (len 40)
+18:29:05.721: GSConnThread: opcode 01
+18:29:05.721: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.753: Accepted gameserver 127.0.0.1:2183... 
+18:29:05.753: GSConnThread: sent InitLS
+18:29:05.768: GSConnThread: opcode 00
+18:29:05.768: GS: new BF key rcvd (len 40)
+18:29:05.768: GSConnThread: opcode 01
+18:29:05.768: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.784: Accepted gameserver 127.0.0.1:2184... 
+18:29:05.784: GSConnThread: sent InitLS
+18:29:05.799: GSConnThread: opcode 00
+18:29:05.799: GS: new BF key rcvd (len 40)
+18:29:05.799: GSConnThread: opcode 01
+18:29:05.815: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.831: Accepted gameserver 127.0.0.1:2185... 
+18:29:05.831: GSConnThread: sent InitLS
+18:29:05.831: GSConnThread: opcode 00
+18:29:05.846: GS: new BF key rcvd (len 40)
+18:29:05.846: GSConnThread: opcode 01
+18:29:05.846: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.862: Accepted gameserver 127.0.0.1:2186... 
+18:29:05.878: GSConnThread: sent InitLS
+18:29:05.878: GSConnThread: opcode 00
+18:29:05.878: GS: new BF key rcvd (len 40)
+18:29:05.878: GSConnThread: opcode 01
+18:29:05.878: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.909: Accepted gameserver 127.0.0.1:2187... 
+18:29:05.909: GSConnThread: sent InitLS
+18:29:05.909: GSConnThread: opcode 00
+18:29:05.909: GS: new BF key rcvd (len 40)
+18:29:05.924: GSConnThread: opcode 01
+18:29:05.924: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:05.940: Accepted gameserver 127.0.0.1:2188... 
+18:29:05.956: GSConnThread: sent InitLS
+18:29:05.971: GSConnThread: opcode 00
+18:29:05.971: GS: new BF key rcvd (len 40)
+18:29:05.971: GSConnThread: opcode 01
+18:29:05.971: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.003: Accepted gameserver 127.0.0.1:2189... 
+18:29:06.003: GSConnThread: sent InitLS
+18:29:06.003: GSConnThread: opcode 00
+18:29:06.018: GS: new BF key rcvd (len 40)
+18:29:06.018: GSConnThread: opcode 01
+18:29:06.018: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.034: Accepted gameserver 127.0.0.1:2190... 
+18:29:06.034: GSConnThread: sent InitLS
+18:29:06.034: GSConnThread: opcode 00
+18:29:06.049: GS: new BF key rcvd (len 40)
+18:29:06.049: GSConnThread: opcode 01
+18:29:06.049: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.081: Accepted gameserver 127.0.0.1:2191... 
+18:29:06.081: GSConnThread: sent InitLS
+18:29:06.081: GSConnThread: opcode 00
+18:29:06.096: GS: new BF key rcvd (len 40)
+18:29:06.112: GSConnThread: opcode 01
+18:29:06.112: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.128: Accepted gameserver 127.0.0.1:2192... 
+18:29:06.143: GSConnThread: sent InitLS
+18:29:06.174: GSConnThread: opcode 00
+18:29:06.174: GS: new BF key rcvd (len 40)
+18:29:06.174: GSConnThread: opcode 01
+18:29:06.174: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.190: Accepted gameserver 127.0.0.1:2193... 
+18:29:06.190: GSConnThread: sent InitLS
+18:29:06.206: GSConnThread: opcode 00
+18:29:06.206: GS: new BF key rcvd (len 40)
+18:29:06.206: GSConnThread: opcode 01
+18:29:06.206: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.221: Accepted gameserver 127.0.0.1:2194... 
+18:29:06.221: GSConnThread: sent InitLS
+18:29:06.237: GSConnThread: opcode 00
+18:29:06.237: GS: new BF key rcvd (len 40)
+18:29:06.253: GSConnThread: opcode 01
+18:29:06.253: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.268: Accepted gameserver 127.0.0.1:2195... 
+18:29:06.268: GSConnThread: sent InitLS
+18:29:06.284: GSConnThread: opcode 00
+18:29:06.284: GS: new BF key rcvd (len 40)
+18:29:06.284: GSConnThread: opcode 01
+18:29:06.284: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.299: Accepted gameserver 127.0.0.1:2196... 
+18:29:06.299: GSConnThread: sent InitLS
+18:29:06.315: GSConnThread: opcode 00
+18:29:06.331: GS: new BF key rcvd (len 40)
+18:29:06.331: GSConnThread: opcode 01
+18:29:06.331: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.346: Accepted gameserver 127.0.0.1:2197... 
+18:29:06.346: GSConnThread: sent InitLS
+18:29:06.362: GSConnThread: opcode 00
+18:29:06.362: GS: new BF key rcvd (len 40)
+18:29:06.362: GSConnThread: opcode 01
+18:29:06.362: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.378: Accepted gameserver 127.0.0.1:2198... 
+18:29:06.378: GSConnThread: sent InitLS
+18:29:06.393: GSConnThread: opcode 00
+18:29:06.393: GS: new BF key rcvd (len 40)
+18:29:06.409: GSConnThread: opcode 01
+18:29:06.409: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.424: Accepted gameserver 127.0.0.1:2199... 
+18:29:06.424: GSConnThread: sent InitLS
+18:29:06.440: GSConnThread: opcode 00
+18:29:06.440: GS: new BF key rcvd (len 40)
+18:29:06.440: GSConnThread: opcode 01
+18:29:06.440: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.456: Accepted gameserver 127.0.0.1:2200... 
+18:29:06.456: GSConnThread: sent InitLS
+18:29:06.471: GSConnThread: opcode 00
+18:29:06.471: GS: new BF key rcvd (len 40)
+18:29:06.471: GSConnThread: opcode 01
+18:29:06.471: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.487: Accepted gameserver 127.0.0.1:2201... 
+18:29:06.487: GSConnThread: sent InitLS
+18:29:06.487: GSConnThread: opcode 00
+18:29:06.487: GS: new BF key rcvd (len 40)
+18:29:06.503: GSConnThread: opcode 01
+18:29:06.503: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.518: Accepted gameserver 127.0.0.1:2202... 
+18:29:06.518: GSConnThread: sent InitLS
+18:29:06.534: GSConnThread: opcode 00
+18:29:06.534: GS: new BF key rcvd (len 40)
+18:29:06.534: GSConnThread: opcode 01
+18:29:06.534: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.549: Accepted gameserver 127.0.0.1:2203... 
+18:29:06.565: GSConnThread: sent InitLS
+18:29:06.565: GSConnThread: opcode 00
+18:29:06.565: GS: new BF key rcvd (len 40)
+18:29:06.565: GSConnThread: opcode 01
+18:29:06.565: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.581: Accepted gameserver 127.0.0.1:2204... 
+18:29:06.596: GSConnThread: sent InitLS
+18:29:06.612: GSConnThread: opcode 00
+18:29:06.612: GS: new BF key rcvd (len 40)
+18:29:06.612: GSConnThread: opcode 01
+18:29:06.612: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.643: Accepted gameserver 127.0.0.1:2205... 
+18:29:06.643: GSConnThread: sent InitLS
+18:29:06.659: GSConnThread: opcode 00
+18:29:06.674: GS: new BF key rcvd (len 40)
+18:29:06.674: GSConnThread: opcode 01
+18:29:06.674: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.690: Accepted gameserver 127.0.0.1:2206... 
+18:29:06.706: GSConnThread: sent InitLS
+18:29:06.721: GSConnThread: opcode 00
+18:29:06.721: GS: new BF key rcvd (len 40)
+18:29:06.721: GSConnThread: opcode 01
+18:29:06.721: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.753: Accepted gameserver 127.0.0.1:2207... 
+18:29:06.753: GSConnThread: sent InitLS
+18:29:06.753: GSConnThread: opcode 00
+18:29:06.768: GS: new BF key rcvd (len 40)
+18:29:06.768: GSConnThread: opcode 01
+18:29:06.768: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.784: Accepted gameserver 127.0.0.1:2208... 
+18:29:06.784: GSConnThread: sent InitLS
+18:29:06.784: GSConnThread: opcode 00
+18:29:06.784: GS: new BF key rcvd (len 40)
+18:29:06.784: GSConnThread: opcode 01
+18:29:06.799: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.815: Accepted gameserver 127.0.0.1:2209... 
+18:29:06.831: GSConnThread: sent InitLS
+18:29:06.846: GSConnThread: opcode 00
+18:29:06.862: GS: new BF key rcvd (len 40)
+18:29:06.862: GSConnThread: opcode 01
+18:29:06.862: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.878: Accepted gameserver 127.0.0.1:2210... 
+18:29:06.878: GSConnThread: sent InitLS
+18:29:06.878: GSConnThread: opcode 00
+18:29:06.893: GS: new BF key rcvd (len 40)
+18:29:06.893: GSConnThread: opcode 01
+18:29:06.893: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.924: Accepted gameserver 127.0.0.1:2211... 
+18:29:06.924: GSConnThread: sent InitLS
+18:29:06.940: GSConnThread: opcode 00
+18:29:06.940: GS: new BF key rcvd (len 40)
+18:29:06.940: GSConnThread: opcode 01
+18:29:06.956: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.971: Accepted gameserver 127.0.0.1:2213... 
+18:29:06.971: GSConnThread: sent InitLS
+18:29:06.971: GSConnThread: opcode 00
+18:29:06.971: GS: new BF key rcvd (len 40)
+18:29:06.971: GSConnThread: opcode 01
+18:29:06.971: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:06.987: Accepted gameserver 127.0.0.1:2214... 
+18:29:07.003: GSConnThread: sent InitLS
+18:29:07.003: GSConnThread: opcode 00
+18:29:07.003: GS: new BF key rcvd (len 40)
+18:29:07.018: GSConnThread: opcode 01
+18:29:07.018: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:07.034: Accepted gameserver 127.0.0.1:2216... 
+18:29:07.034: GSConnThread: sent InitLS
+18:29:07.034: GSConnThread: opcode 00
+18:29:07.034: GS: new BF key rcvd (len 40)
+18:29:07.034: GSConnThread: opcode 01
+18:29:07.034: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:07.065: Accepted gameserver 127.0.0.1:2217... 
+18:29:07.065: GSConnThread: sent InitLS
+18:29:07.065: GSConnThread: opcode 00
+18:29:07.065: GS: new BF key rcvd (len 40)
+18:29:07.065: GSConnThread: opcode 01
+18:29:07.065: Auth request for GS #1 (204b45936c923316c6a5a8837267278f)
+18:29:25.846: Stopping login server...
+18:29:26.049: LoginServer MainThread stopped.
+18:29:26.049: LoginServer cleanup complete.
+18:29:26.049: Login server stopping.
+18:30:04.503: Login server stopped.

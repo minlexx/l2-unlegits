@@ -1,0 +1,48 @@
+#include "resource.h"
+#include "targetver.h"
+#include "windows.h"
+
+LANGUAGE 25,1
+
+// manifest
+1 RT_MANIFEST "res\\xp_manifest.xml"
+
+IDI_L2OOGHELPER ICON DISCARDABLE "res/L2OOGHelper.ico"
+IDI_SMALL ICON DISCARDABLE "res/small.ico"
+
+IDC_L2OOGHELPER ACCELERATORS
+BEGIN
+  63,IDM_ABOUT,ASCII,ALT,NOINVERT
+  47,IDM_ABOUT,ASCII,ALT,NOINVERT
+END
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION 0,0,5,0
+PRODUCTVERSION 0,0,5,0
+FILEOS 0x00000004
+FILETYPE 0x00000001
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "041904B0"
+    BEGIN
+      VALUE "FileDescription", "L2OOGHelper\0"
+      VALUE "FileVersion", "0, 0, 5, 0\0"
+      VALUE "InternalName", "L2OOGHelper\0"
+      VALUE "LegalCopyright", "Public Domain (FreeForAll)\0"
+      VALUE "OriginalFilename", "L2OOGHelper.exe\0"
+      VALUE "ProductName", "L2OOGHelper\0"
+      VALUE "ProductVersion", "0, 0, 5, 0\0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0419, 0x04B0
+  END
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+  IDS_APP_TITLE "L2OOGHelper"
+  IDC_L2OOGHELPER "L2OOGHELPER"
+END

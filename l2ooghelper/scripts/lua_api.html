@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ru">
+<head>
+<title>L2OOGHelper LUA script API</title>
+<meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
+<style type="text/css">
+body, td { font-family: Tahoma, Verdana, Sans }
+</style>
+</head>
+<body bgcolor="white" text="black">
+<font size="2">
+
+<p><blockquote>
+<b>l2h_console_enable( <font color="blue">boolean</font> enable )</b><br />
+Включить или выключить отладочную консоль клиента.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2h_print(...)</b><br />
+Вывод ряда параметров разных типов в отладочную консоль клиента.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2h_delay( <font color="blue">int</font> milliseconds )</b><br />
+Задержать выполнение скрипта на <b>milliseconds</b> миллисекунд.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2h_soundAlert()</b><br />
+Звонок!
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2h_time()</b><br />
+Вернет время Unix (к-во секунд, прошедших с 1 января 1970)
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2h_timeMsec()</b><br />
+Вернет к-во миллисекунд, прошедших с момента запуска Windows 
+(<a href="http://msdn.microsoft.com/en-us/library/ms724408%28VS.85%29.aspx">GetTickCount()</a>)
+</blockquote></p>
+
+
+<p><blockquote>
+<b><font color="blue">boolean</font> sys_should_exit()</b><br />
+Вернет значение <b>true</b>, если
+пользовательский интерфейс выдал команду на остановку скрипта. Скрипт должен время от времени
+вызывать эту функцию, и завершать работу, если она вернула <b>true</b>. На остановку скрипта дается 5 секунд,
+иначе скрипт будет грубо прерван, а это может вызвать глюки в будущем. :(
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">boolean</font> l2c_is_IN_GAME()</b><br />
+Вернет true, если клиент в игре (авторизовался и зашел в мир).
+</blockquote></p>
+
+<p><blockquote>
+<b>
+<font color="blue">int</font>, <font color="blue">int</font>,
+<font color="blue">int</font>, <font color="blue">int</font>,
+<font color="blue">int</font>, <font color="blue">int</font>,
+<font color="blue">int</font>, <font color="blue">int</font> 
+l2c_getHPMPCPWeight()</b><br />
+Вернет curHp,maxHp, curMp,maxMp, curCp,maxCp, curLoad,maxLoad.<br />
+</blockquote></p>
+
+<p><blockquote>
+<b>
+<font color="blue">int</font>, <font color="blue">int</font>, 
+<font color="blue">int</font> l2c_getPos()</b><br />
+Вернет x,y,z - текущие координаты клиента.<br />
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getStats()</b><br />
+Вернет структуру с полями, отражающими текущие статы клиента:<br>
+<ul>
+<li><b><font color="blue">int</font>    objectID</b></li>
+<li><b><font color="blue">string</font> name</b></li>
+<li><b><font color="blue">int</font>    heading</b></li>
+<li><b><font color="blue">int</font>    pAtk</b></li>
+<li><b><font color="blue">int</font>    mAtk</b></li>
+<li><b><font color="blue">int</font>    pDef</b></li>
+<li><b><font color="blue">int</font>    mDef</b></li>
+<li><b><font color="blue">int</font>    pAtkApd</b></li>
+<li><b><font color="blue">int</font>    mAtkSpd</b></li>
+</ul>
+</blockquote></p>
+
+
+<p><blockquote>
+<b><font color="blue">boolean</font>, <font color="blue">boolean</font> l2c_getSitRun()</b><br />
+local isSitting, isRunning = l2c_getSitRun()<br />
+isSitting: true, если клиент сидит.<br />
+isRunning: true, если клиент в режиме бега.<br />
+</blockquote></p>
+
+
+<p><blockquote>
+<b>l2c_sitStand()</b><br />
+Переключить пользователя между состояними сидеть/стоять (аналогично кнопке sit/stand клиента, или команде /sitstand)
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_runWalk()</b><br />
+Переключить пользователя между состояними бегом/шагом (аналогично кнопке run/walk клиента)
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2c_getSkillLevel( <font color="blue">int</font> skillID )</b><br />
+Получить уровень скилла с ID skillID, Результат будет 0, если такого скилла нет в списке скиллов клиента.
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2c_getSkillReuseLeft( <font color="blue">int</font> skillID )</b><br />
+Узнать, сколько миллисекунд осталось до того, как скилл снова можно будет использовать.
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">boolean</font> l2c_isCastingNow()</b><br />
+Узнать, кастует ли чар скилл в данный момент.
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2c_getItemCount( <font color="blue">int</font> itemID )</b><br />
+Получить к-во предметов с ID itemID в инвентаре клиента. 0, если таких предметов нет.
+</blockquote></p>
+
+
+<p><blockquote>
+<b>l2c_useItem( <font color="blue">int</font> itemID )</b><br />
+Использовать предмет itemID (если такой есть в инвентаре)
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_useItemByObjectId( <font color="blue">int</font> objectID )</b><br />
+Использовать предмет, но не по itemID, а по его objectID
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font>, <font color="blue">int</font>
+l2c_getPaperdollItem( <font color="blue">int</font> slot )</b><br />
+Получить itemID, objectID надетого в слот <b>slot</b> предмета. <b>slot</b> может быть <b>числом</b> из списка: <br />
+<ul>
+<li>L2_PAPERDOLL_UNDER      0</li>
+<li>L2_PAPERDOLL_REAR       1</li>
+<li>L2_PAPERDOLL_LEAR       2</li>
+<li>L2_PAPERDOLL_LREAR      3</li>
+<li>L2_PAPERDOLL_NECK       4</li>
+<li>L2_PAPERDOLL_LFINGER    5</li>
+<li>L2_PAPERDOLL_RFINGER    6</li>
+<li>L2_PAPERDOLL_LRFINGER   7</li>
+<li>L2_PAPERDOLL_HEAD       8</li>
+<li>L2_PAPERDOLL_RHAND      9</li>
+<li>L2_PAPERDOLL_LHAND      10</li>
+<li>L2_PAPERDOLL_GLOVES     11</li>
+<li>L2_PAPERDOLL_CHEST      12</li>
+<li>L2_PAPERDOLL_LEGS       13</li>
+<li>L2_PAPERDOLL_FEET       14</li>
+<li>L2_PAPERDOLL_BACK       15</li>
+<li>L2_PAPERDOLL_LRHAND     16</li>
+<li>L2_PAPERDOLL_FULLARMOR  17</li>
+<li>L2_PAPERDOLL_HAIR       18</li>
+<li>L2_PAPERDOLL_ALLDRESS   19</li>
+<li>L2_PAPERDOLL_HAIR2      20</li>
+<li>L2_PAPERDOLL_HAIRALL    21</li>
+<li>L2_PAPERDOLL_RBRACELET  22</li>
+<li>L2_PAPERDOLL_LBRACELET  23</li>
+<li>L2_PAPERDOLL_DECO1      24</li>
+<li>L2_PAPERDOLL_DECO2      25</li>
+<li>L2_PAPERDOLL_DECO3      26</li>
+<li>L2_PAPERDOLL_DECO4      27</li>
+<li>L2_PAPERDOLL_DECO5      28</li>
+<li>L2_PAPERDOLL_DECO6      29</li>
+</ul>
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_say( <font color="blue">int</font> channel, <font color="blue">string</font> text )</b><br />
+Сказать <b>text</b> в канал <b>channel</b>. channel может быть <b>числом</b> из списка:
+<ul>
+<li>ALL = 0</li>
+<li>SHOUT = 1</li>
+<li>TELL = 2</li>
+<li>PARTY = 3</li>
+<li>CLAN = 4</li>
+<li>GM = 5</li>
+<li>PETITION_PLAYER = 6</li>
+<li>PETITION_GM = 7</li>
+<li>TRADE = 8</li>
+<li>ALLIANCE = 9</li>
+<li>ANNOUNCEMENT = 10</li>
+<li>PARTYROOM_ALL = 16</li>
+<li>PARTYROOM_COMMANDER = 15</li>
+<li>HERO_VOICE = 17</li>
+</ul>
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_sayPm( <font color="blue">string</font> text, <font color="blue">string</font> to )</b><br />
+Сказать <b>text</b> в ПМ игроку <b>to</b>
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_npcDlg( <font color="blue">string</font> strInDlg )</b><br />
+Выбрать строчку <b>strInDlg</b> в диалоге с НПЦ (диалог с НПЦ должен быть открыт и НПЦ должен быть на таргете).
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_moveTo( <font color="blue">int</font> x, <font color="blue">int</font> y, [<font color="blue">int</font> z] )</b><br />
+Двигаться в точку x,y,z.<br />
+Если последний параметр не задан, он приравнивается текущему z.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_moveToDelta( <font color="blue">int</font> dx, <font color="blue">int</font> dy, [<font color="blue">int</font> dz] )</b><br />
+Сдвинуться на dx,dy,dz относительно текущей позиции. <br />
+Если последний параметр не задан, сдвига по высоте не будет.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_action( <font color="blue">int</font> objectID )</b><br />
+Действие по умолчанию, направленное на <b>objectID</b>. <br />
+Если нет цели, то цель будет выбрана; иначе: с НПЦ будет начат разговор, моб будет атакован, 
+предмет с земли будет поднят.<br />
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_attack()</b><br />
+Атаковать текущую цель. Если цели нет, действие игнорируется.
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_useSkill( <font color="blue">int</font> skillID, [<font color="blue">boolean</font> force] )</b><br />
+Использовать скилл <b>skillID</b> на текущую выбранную цель. <br />
+<b>force</b> - "нажать" при этом Ctrl.<br />
+Если последний параметр не задан, Ctrl не "нажимается".<br />
+<b><font color="red">Важно:</font></b> <font color="gray">вызов этой функции только отсылает пакет
+<b><font color="purple">RequstMagicSkilluse</font></b>,
+что никоим образом не означает, что чар сразу же начал каст скилла (пока от сервера не придет пакет 
+<b><font color="purple">MagicSkilluse</font></b>,
+чар фактически каст скилла не начал); либо по причине Abnormal State, которое не позволяет использовать скилл в данный момент (Stun/Silence);
+либо по причине отсутствия данного скилла у чара; либо пинг до сервера не мгновенный и фактически каст скилла начнется несколькими
+миллисекундами позже.</font>
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_autoSoulshot( <font color="blue">int</font> itemID, [<font color="blue">boolean</font> enable = true] )</b><br />
+Включить или выключить авто-соулшот <b>itemID</b>
+</blockquote></p>
+
+
+<p><blockquote>
+<b>l2c_targetByName( <font color="blue">string</font> charName )</b><br />
+Взять на цель чара с ником <b>charName</b>.<br />
+</blockquote></p>
+
+<p><blockquote>
+<b>l2c_targetCancel()</b><br />
+Отменить текущую цель.<br />
+</blockquote></p>
+
+
+<p><blockquote>
+<b><font color="blue">int, double, double</font> l2c_getTarget()</b><br />
+objectID, curHp, maxHp текущей цели.<br />
+objectID = 0, если не выбрана цель.<br />
+curHp, maxHp = 0 если ХП цели неизвестно.<br />
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getBuffs()</b><br />
+Вернет массив (в стиле луа, нумерующийся с единицы), каждый элемент которого содержит информацию об одном баффе.<br />
+Если баффов нет, массив будет пуст.<br />
+Каждый элемент - структура с полями: <b>skillName, skillID, skillLvl, durationSecs</b><br />
+Строковое имя скилла, ID скилла, его уровень, оставшееся время в секундах.
+</blockquote></p>
+
+
+<p><blockquote>
+<b>l2c_buffCancel( <font color="blue">int</font> skillID )</b><br />
+Запрос на отмену баффа <b>skillID</b>. Доступно только в Грации.<br />
+Если такго бафа нет, действие игнорируется.
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">int</font> l2c_getCharObjectIdByName( <font color="blue">string</font> charName )</b><br />
+<b><font color="blue">int</font> l2c_getNpcObjectIdByName( <font color="blue">string</font> charName )</b><br />
+Получить objectID чара/NPC с ником <b>charName</b>.<br />
+Елси такого чара нет в зоне видимости, вернет <b>nil</b>.
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getObjectInfoByObjectId( <font color="blue">int</font> objectID )</b><br />
+Получить информацию об объекте с <b>objectID</b>.<br />
+Если такого объекта нет в зоне видимости, вернет <b>nil</b>.
+Если объект найдет, вернет структуру с полями: <b>objectID, type, x, y, z, <font color="blue">string</font> name</b><br />
+<b>type</b>: строка, "pc", "npc", "mob", "item"<br />
+Для передвигающихся объектов (pc,npc,mob) также будут доступны поля:
+<b>xDst, yDst, zDst, heading, curHp, maxHp, isAlikeDead</b>. 
+HP,MP может быть неизвестно (равно нулю).<br />
+Для игрока (type = pc): <b>classID</b><br />
+Для моба/нпц (type = mob/npc): <b>templateID</b><br />
+Для предмета, лежащего на земле (type = item): <b>itemID</b>, <font color="blue">boolean</font> <b>stackable, count</b><br />
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">boolean</font> l2c_isCharDead( <font color="blue">int</font> objectID )</b><br />
+Проверяет, является ли объект трупом.<br />
+Если <b>objectID</b> является чаром/НПЦ/мобом, возвращает <b>false</b>, если чар живой (значение isAlikeDead).<br />
+Во всех остальных случаях возвращает <b>true</b> (для итемов, и мертвых чаров).
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getVisibleChars()</b><br />
+<b><font color="blue">table</font> l2c_getVisibleMobs()</b><br />
+<b><font color="blue">table</font> l2c_getVisibleNpcs()</b><br />
+<b><font color="blue">table</font> l2c_getVisibleItems()</b><br />
+Получить информацию об окружающем мире: чары, нпц, мобы, предметы, лежащие на земле.</b>.<br />
+Функция возвращает таблицу, пронумерованную, начиная с номера 1, каждый элемент которой - objectID.<br />
+Например<br />
+chars = l2c_getVisibleChars()<br />
+nChars = #chars<br />
+chars[1] == 23456765<br />
+Для того, чтобы получить уже более подробную информацию об объекте, надо использовать функцию <b>l2c_getObjectInfoByObjectId</b>.<br />
+</blockquote></p>
+
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getParty()</b><br />
+Возвратит массив (таблицу) в стиле lua (нумерующийся с единицы), содержащий информацию о членах пати.<br />
+Если вы не в пати, в массиве будет 0 элементов.<br />
+Если вы в пати, то каждый элемент массива будет структурой со следующими полями:<br />
+<ul>
+<li><b><font color="blue">int</font>    objectID</b></li>
+<li><b><font color="blue">int</font>    targetObjectID</b> - ObjectID таргета пати мембера, или 0, если таргета нет</li>
+<li><b><font color="blue">string</font> name</b></li>
+<li><b><font color="blue">int</font>    level</b></li>
+<li><b><font color="blue">int</font>    classID</b></li>
+<li><b><font color="blue">double</font> curHp</b></li>
+<li><b><font color="blue">double</font> maxHp</b></li>
+<li><b><font color="blue">double</font> curMp</b></li>
+<li><b><font color="blue">double</font> maxMp</b></li>
+<li><b><font color="blue">double</font> curCp</b></li>
+<li><b><font color="blue">double</font> maxCp</b></li>
+</ul>
+</blockquote></p>
+
+<p><blockquote>
+<b><font color="blue">table</font> l2c_getPartyMemberBuffs( <font color="blue">int</font> objectID )</b><br />
+Возвратит массив (таблицу) в стиле lua (нумерующийся с единицы), содержащий информацию о бафах одного члена пати.<br />
+Каждый элемент массива - структура (таблица) с полями, такими же, как и возвращаемые функцией <b>l2c_getBuffs()</b>.<br />
+Если баффов нет, массив будет пуст.<br />
+Каждый элемент - структура с полями: <b>skillName, skillID, skillLvl, durationSecs</b><br />
+Строковое имя скилла, ID скилла, его уровень, оставшееся время в секундах.
+</blockquote></p>
+
+<p><blockquote><b>l2c_partySendInvite( <font color="blue">string</font> name, <font color="blue">int</font> loot )</b><br />
+Отсылает указанному игроку с именем <b>name</b> инвайт в пати с распределением итемов, обозначенным числом <b>loot</b>:<br />
+<ul>
+<li>0 - Finders Keepers</li>
+<li>1 - Random</li>
+<li>2 - Random including spoil</li>
+<li>3 - By turn</li>
+<li>4 - By turn including spoil</li>
+</ul>
+</blockquote></p>
+
+<p><blockquote><b>l2c_partyLeave()</b><br />
+Выйти из пати.
+</blockquote></p>
+
+<p><blockquote><b>l2c_partyKickMember( <font color="blue">string</font> name )</b><br />
+Кикнуть из пати мембера с ником <b>name</b>.
+</blockquote></p>
+
+<p><blockquote><b>l2c_partyChangeLeader( <font color="blue">string</font> name )</b><br />
+Сменить лидера пати на мембера с ником <b>name</b>
+</blockquote></p>
+
+<!-- ============================================== -->
+<h3>Undocumented:</h3>
+
+<p><blockquote><b><font color="blue">table</font> l2ccfg_getAllConfig()</b><br />
+</blockquote></p>
+
+<p><blockquote><b><font color="blue">table</font> l2c_sendPacketHex( <font color="blue">string</font> hexChars )</b><br />
+</blockquote></p>
+
+</font>
+</body>
+</html>
