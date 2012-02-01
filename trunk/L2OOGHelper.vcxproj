@@ -126,6 +126,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="l2ooghelper\PostBuildEvent.cmd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
     <None Include="l2ooghelper\res\L2OOGHelper.ico" />
     <None Include="l2ooghelper\res\small.ico" />
     <None Include="l2ooghelper\ClassDiagram1.cd" />
