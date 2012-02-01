@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="rc">
+      <UniqueIdentifier>{12d94528-d9d2-4076-a7cf-d85f8bf16832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{2ef58cb9-e6ff-4296-b0d8-308c0fa90482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LS">
+      <UniqueIdentifier>{5288305c-e3ce-4714-a135-019fb43a895e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="L2C_Login\L2C.ico">
+      <Filter>rc</Filter>
+    </None>
+    <None Include="L2C_Login\PostBuildEvent.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="L2C_Login\L2Logind.rc">
+      <Filter>rc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2C_Login\Resource.h">
+      <Filter>rc</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\Log.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\pch.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\BanInfo.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\FailedLoginAttempt.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\GameServerInfo.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\GameServerTable.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\GS_ConnectionInfo.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\LoginClient.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\LoginConfig.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\LoginController.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Login\LoginServer.h">
+      <Filter>LS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="L2C_Login\L2Logind.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\Log.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\pch.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\BanInfo.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\FailedLoginAttempt.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\GameServerInfo.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\GameServerTable.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\LoginClient.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\LoginConfig.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\LoginController.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Login\LoginServer.cpp">
+      <Filter>LS</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

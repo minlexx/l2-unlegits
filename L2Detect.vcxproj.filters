@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="res">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{8af63a71-f9fb-40e5-9a89-afe7518c1261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{be287aa6-fa06-46b3-b91c-e91a63df89d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="precompiled">
+      <UniqueIdentifier>{d5973295-be44-4ccf-82ce-836e72af722c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{ce85d7a5-b145-4d60-8788-efff310beaf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{c48fffe7-bfae-4592-b51d-10f14556ba7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login">
+      <UniqueIdentifier>{1d9a9174-061b-43e4-8309-2f5da973a802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{051b84cd-2ded-4ff0-ad67-d131f1466dc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{add44167-bb90-4b0a-8385-47c58a1fd16b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hooks">
+      <UniqueIdentifier>{9a0ef7c2-a0cd-48f7-9bea-2bc8eb97d637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="window">
+      <UniqueIdentifier>{1edfa4f5-9990-4cab-bf1a-00cc441d43df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="userAI">
+      <UniqueIdentifier>{2ea15d32-46ef-49ed-92e1-138553728165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packetFactory">
+      <UniqueIdentifier>{95d41105-bacc-47f9-b889-ea035dc6059c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protoConvert">
+      <UniqueIdentifier>{c8fc94d7-8c9a-4dcb-aca2-783ca6c05dfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialogs">
+      <UniqueIdentifier>{4714da7e-3fb5-4891-8221-ad0d47d7d965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialogs\setup">
+      <UniqueIdentifier>{5dad41e0-165a-44fb-b829-4bea5a1de0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="accountBind">
+      <UniqueIdentifier>{7aaeeac4-61d4-4d4d-850c-b6cbef1786cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hwid">
+      <UniqueIdentifier>{fe9d4031-437d-4d72-802c-3928ba2c5004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua_lib">
+      <UniqueIdentifier>{76b0f27a-75b6-4536-a2e5-45612c76f999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scriptEngine">
+      <UniqueIdentifier>{a50fddda-3e43-45b0-96c4-fb85f45504a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scriptEngine\se_funcs">
+      <UniqueIdentifier>{3745e5c1-ec2e-474b-86e6-23eb59bbfb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="containers">
+      <UniqueIdentifier>{5d461fb3-6851-4297-94e2-8da8d0631fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="containers\binary_tree">
+      <UniqueIdentifier>{4994858a-3444-4194-9821-9507285c1f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="containers\array">
+      <UniqueIdentifier>{32b97b93-778d-4b9a-a7c3-b5b9d5e18c48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="l2detect\res\L2_c.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="l2detect\res\L2_g.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="l2detect\res\L2_v.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="l2detect\res\L2Detect.ico">
+      <Filter>res</Filter>
+    </None>
+    <None Include="l2detect\packets.txt" />
+    <None Include="l2detect\PostBuildEvent.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="l2detect\L2Detect.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2detect\res\L2Detect_icons.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2detect\res\L2Detect_version.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2detect\res\SetupDialogs.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="l2detect\Resource.h">
+      <Filter>res</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ConfigIni.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RemoteServerInfo.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\stdafx.h">
+      <Filter>precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\targetver.h">
+      <Filter>precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\windowUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\Logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\LoginClient.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\LoginListener.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\GameClient.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\GameClientCounters.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\GameListener.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\PacketInjector.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\mymem.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\net_hook.h">
+      <Filter>hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\net_hook_defs.h">
+      <Filter>hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarDllWnd.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarDllWndCfg.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarDllWndHWID.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarDllWndSize.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ClanWarList.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ClassPri.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\DistPri.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\HealItemsTable.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_FolAsiCfg.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_InvisGM.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_LockTargetMgr.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_OffpartyBDSWS.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_QuickTargetMgr.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_QuickTargetOptions.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserAI_QuickTargetSetup.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserBuffs.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserInventory.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserParty.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserSkills.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\UserState.h">
+      <Filter>userAI</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\L2PacketTypes.h">
+      <Filter>packetFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ProtocolConverter.h">
+      <Filter>protoConvert</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\AboutDialog.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ConfigDlg.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\DebugDlg.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\Dlg_FindInDB.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\DlgPressKey.h">
+      <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_Colors.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_FolAsi.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_InvisGM.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_LT.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_OffpartyBDSWS.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_QuickTarget.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_QuickTarget_distPri.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_SelfHeal.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\RadarSetupDlg_SoundAlerts.h">
+      <Filter>dialogs\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\accountBind.h">
+      <Filter>accountBind</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\base64.h">
+      <Filter>hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\HWID.h">
+      <Filter>hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\L2Detect_auth.h">
+      <Filter>hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lapi.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lauxlib.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lcode.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\ldebug.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\ldo.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lfunc.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lgc.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\llex.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\llimits.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lmem.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lobject.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lopcodes.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lparser.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lstate.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lstring.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\ltable.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\ltm.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lua.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lua.hpp">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\luaconf.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lualib.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lundump.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lvm.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\lua\lzio.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ScriptEngine.h">
+      <Filter>scriptEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\se_funcs\SE_funcs.h">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\BinTree.h">
+      <Filter>containers\binary_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\BinTreeNode_Clan.h">
+      <Filter>containers\binary_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\ClanList.h">
+      <Filter>containers\binary_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\WorldObjectTree.h">
+      <Filter>containers\binary_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\WorldObjectTreeNode.h">
+      <Filter>containers\binary_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\CharArray.h">
+      <Filter>containers\array</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\GIArray.h">
+      <Filter>containers\array</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\GroundItem.h">
+      <Filter>containers\array</Filter>
+    </ClInclude>
+    <ClInclude Include="l2detect\NpcArray.h">
+      <Filter>containers\array</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="l2detect\ConfigIni.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RemoteServerInfo.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\stdafx.cpp">
+      <Filter>precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\openssl_winsock_wrapper.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\windowUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\Logger.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\LoginClient.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\LoginListener.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_full.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_full_injectPacket.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_full_PP_client.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_full_PP_server.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_sniff.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_sniff_PP_client.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClient_sniff_PP_server.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameClientCounters.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GameListener.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\PacketInjector.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\mymem.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\net_hook_cmn.cpp">
+      <Filter>hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\net_hook_my.cpp">
+      <Filter>hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWnd.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWnd_Lists.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWndCfg.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWndHWID.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWndProc.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarDllWndSize.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ClanWarList.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ClassPri.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\DistPri.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\HealItemsTable.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Buffs.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_CharInfo.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_DeleteObject.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Die.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_FolAsi.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_FolAsiCfg.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_HPMPCP.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_InvisGM.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Item.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_kb.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_LockTargetMgr.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_MoveToLocation.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_NpcHtml.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_NpcInfo.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_OffpartyBDSWS.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_party.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Process_off_BDSWS.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_ProcessMoves.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_QuickTargetMgr.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_QuickTargetOptions.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_QuickTargetSetup.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Relation.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Skills.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_soundAlerts.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_StatusUpdate.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserAI_Target.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserBuffs.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserInventory.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserParty.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserSkills.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\UserState.cpp">
+      <Filter>userAI</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\L2PacketTypes.cpp">
+      <Filter>packetFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ProtocolConverter.cpp">
+      <Filter>protoConvert</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\AboutDialog.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ConfigDlg.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\DebugDlg.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\Dlg_FindInDB.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\DlgPressKey.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_Colors.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_FolAsi.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_InvisGM.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_LT.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_OffpartyBDSWS.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_QuickTarget.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_QuickTarget_distPri.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_SelfHeal.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\RadarSetupDlg_SoundAlerts.cpp">
+      <Filter>dialogs\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\accountBind.cpp">
+      <Filter>accountBind</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\base64.cpp">
+      <Filter>hwid</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\HWID.cpp">
+      <Filter>hwid</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lapi.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lauxlib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lbaselib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lcode.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldblib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldebug.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldo.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldump.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lfunc.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lgc.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\linit.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\liolib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\llex.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lmathlib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lmem.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\loadlib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lobject.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lopcodes.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\loslib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lparser.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstate.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstring.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstrlib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltable.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltablib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltm.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lundump.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lvm.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lzio.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ScriptEngine.cpp">
+      <Filter>scriptEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\SE_funcs.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_buffs.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_chat.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_items.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_misc.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_move.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_party.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_skills.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_sys.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_targ.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_userInfo.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\se_funcs\sef_world.cpp">
+      <Filter>scriptEngine\se_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\BinTree.cpp">
+      <Filter>containers\binary_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\BinTreeNode_Clan.cpp">
+      <Filter>containers\binary_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\ClanList.cpp">
+      <Filter>containers\binary_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\WorldObjectTree.cpp">
+      <Filter>containers\binary_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\WorldObjectTreeNode.cpp">
+      <Filter>containers\binary_tree</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\CharArray.cpp">
+      <Filter>containers\array</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GIArray.cpp">
+      <Filter>containers\array</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\GroundItem.cpp">
+      <Filter>containers\array</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\NpcArray.cpp">
+      <Filter>containers\array</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\fakeExport.cpp" />
+  </ItemGroup>
+</Project>

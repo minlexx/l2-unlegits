@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="rsrc">
+      <UniqueIdentifier>{ecdf2dbd-2ece-4fc7-876f-fbd9961ef9a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{078d81f8-1510-47f7-86c2-f4a5e56cb3cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="L2Detect_starter\L2Detect_starter.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2Detect_starter\resource.h">
+      <Filter>rsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_starter\stdafx.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_starter\targetver.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_starter\ChooseDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="L2Detect_starter\stdafx.cpp">
+      <Filter>pch</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_starter\ChooseDlg.cpp" />
+    <ClCompile Include="L2Detect_starter\L2Detect_starter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="L2Detect_starter\PostBuildEvent.cmd" />
+  </ItemGroup>
+</Project>

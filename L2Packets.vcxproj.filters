@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{737a8ee6-edd8-481a-aad6-16a527695e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login">
+      <UniqueIdentifier>{24fd5f7d-714d-4044-ad55-55dab183581b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login\client">
+      <UniqueIdentifier>{bc505c21-96a4-47b4-af96-3ea1de9d7787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="login\server">
+      <UniqueIdentifier>{a8c35658-a4c7-4466-abe0-8000bd9a08fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{7aa4acb9-76e7-4fbe-ad2f-84b64e850e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\client">
+      <UniqueIdentifier>{5cc8af67-0574-409d-9f59-380ad6639cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\server">
+      <UniqueIdentifier>{e3dcfc7e-25b2-4965-9550-42e5f14619cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{119096b2-1754-45ba-8e08-553607980dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{76cd1466-a4f3-4946-ab99-19e4dba61d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="net_io">
+      <UniqueIdentifier>{fd0251f5-5ee9-480b-a092-0f926f9217b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sqlite3">
+      <UniqueIdentifier>{b805d270-b8d1-41dd-b010-8c3f060922d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packetNames">
+      <UniqueIdentifier>{acc6c79b-794d-47bd-9e27-ee4e8cdd1b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="opcodeObfuscator">
+      <UniqueIdentifier>{02d2bd4f-3ecd-4100-ad56-79b1d6aa3ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="precompiled">
+      <UniqueIdentifier>{623c1f24-f43d-49cf-8ca5-d0821c945795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="os">
+      <UniqueIdentifier>{583ad917-d850-40a0-be90-ebe3a1f71d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xcpt">
+      <UniqueIdentifier>{30119642-7cbe-4f6a-8833-233dc0aca25d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="L2Packets\base\ByteArray.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\base\L2BasePacket.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\L2LoginPacket.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestAuthLogin.cpp">
+      <Filter>login\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestGGAuth.cpp">
+      <Filter>login\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestServerList.cpp">
+      <Filter>login\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\client\L2Login_RequestServerLogin.cpp">
+      <Filter>login\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_AccountKicked.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_GGAuthResponse.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_Init.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_LoginFail.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_LoginOK.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_PlayFail.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_PlayOK.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\login\server\L2Login_ServerList.cpp">
+      <Filter>login\server</Filter>
+    </ClCompile>
+    <ClCompile Include="l2packets\game\AionGamePacket.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\L2GamePacket.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_Action.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_AuthLogin.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterCreate.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterDelete.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterRestore.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_CharacterSelect.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_EnterWorld.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_NewCharacter.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_ProtocolVersion.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestGotoLobby.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestJoinParty.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_RequestUserCommand.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\client\L2Game_UseItem.cpp">
+      <Filter>game\client</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_AuthLoginFail.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharCreateFail.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharCreateSuccess.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharDeleteFail.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharDeleteSuccess.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharSelected.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_CharSelectionInfo.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_KeyPacket.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_NewCharacterSuccess.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\game\server\L2Game_SSQInfo.cpp">
+      <Filter>game\server</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2Character.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2ElementalInfo.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2Experience.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2Npc.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2Object.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2world\L2Player.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2data\L2Data.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2data\L2Data_db.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2data\L2Data_Recipes.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\l2data\L2Data_sm.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\net_io\L2Packet_NetLayer.cpp">
+      <Filter>net_io</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\net_io\L2Packet_NetLayer_linux.cpp">
+      <Filter>net_io</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\net_io\L2PacketReceiver.cpp">
+      <Filter>net_io</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\net_io\L2PacketSender.cpp">
+      <Filter>net_io</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\sqlite3\sqlite3.c">
+      <Filter>sqlite3</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames.cpp">
+      <Filter>packetNames</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_client.cpp">
+      <Filter>packetNames</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_client_t23.cpp">
+      <Filter>packetNames</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_server.cpp">
+      <Filter>packetNames</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\packetNames\L2PacketNames_server_t23.cpp">
+      <Filter>packetNames</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\pcode_obfuscator\L2PCodeObfuscator.cpp">
+      <Filter>opcodeObfuscator</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\stdafx.cpp">
+      <Filter>precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\os\os_abstraction.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Packets\xcpt\L2Packets_xcpt.cpp">
+      <Filter>xcpt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2Packets\base\ByteArray.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\base\L2BasePacket.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\L2LoginPacket.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestAuthLogin.h">
+      <Filter>login\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestGGAuth.h">
+      <Filter>login\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestServerList.h">
+      <Filter>login\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\client\L2Login_RequestServerLogin.h">
+      <Filter>login\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_AccountKicked.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_GGAuthResponse.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_Init.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_LoginFail.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_LoginOK.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_PlayFail.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_PlayOK.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\login\server\L2Login_ServerList.h">
+      <Filter>login\server</Filter>
+    </ClInclude>
+    <ClInclude Include="l2packets\game\AionGamePacket.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\L2GamePacket.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_Action.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_AuthLogin.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterCreate.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterDelete.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterRestore.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_CharacterSelect.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_EnterWorld.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_NewCharacter.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_ProtocolVersion.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestGotoLobby.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestJoinParty.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_RequestUserCommand.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\client\L2Game_UseItem.h">
+      <Filter>game\client</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_AuthLoginFail.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharCreateFail.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharCreateSuccess.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharDeleteFail.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharDeleteSuccess.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharSelected.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_CharSelectionInfo.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_KeyPacket.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_NewCharacterSuccess.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\game\server\L2Game_SSQInfo.h">
+      <Filter>game\server</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Character.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2ChatMessageTypes.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2ElementalInfo.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Experience.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Npc.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Object.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Player.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2PlayerPaperDoll.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2Skill.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2world\L2World.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2data\L2Data.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\l2data\L2Data_Recipes.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\net_io\L2Packet_NetLayer.h">
+      <Filter>net_io</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\net_io\L2PacketReceiver.h">
+      <Filter>net_io</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\net_io\L2PacketSender.h">
+      <Filter>net_io</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\sqlite3\sqlite3.h">
+      <Filter>sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\sqlite3\sqlite3ext.h">
+      <Filter>sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\packetNames\L2PacketNames.h">
+      <Filter>packetNames</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\pcode_obfuscator\L2PCodeObfuscator.h">
+      <Filter>opcodeObfuscator</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\stdafx.h">
+      <Filter>precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\targetver.h">
+      <Filter>precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\os\os_abstraction.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Packets\xcpt\L2Packets_xcpt.h">
+      <Filter>xcpt</Filter>
+    </ClInclude>
+    <ClInclude Include="l2packets\AionPackets.h" />
+    <ClInclude Include="L2Packets\L2_versions.h" />
+    <ClInclude Include="L2Packets\L2Packets.h" />
+  </ItemGroup>
+</Project>
