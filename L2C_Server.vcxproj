@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{72DC0189-0628-48FC-AA67-A7A279A2A171}</ProjectGuid>
+    <RootNamespace>L2C_Server</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2C_Server_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2C_Server_Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2C_Server_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2C_Server_Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>L2C_Server;l2packets;libl2c_utils;lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;comctl32.lib;libeay32_st_MTd.lib;ssleay32_st_MTd.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>lib\openssl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy files to dist folder...</Message>
+      <Command>L2C_Server\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>L2C_Server;l2packets;libl2c_utils;lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;comctl32.lib;libeay32_st_MT.lib;ssleay32_st_MT.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\openssl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy files to dist folder...</Message>
+      <Command>L2C_Server\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="L2C_Server\L2Serverd.cpp" />
+    <ClCompile Include="L2C_Server\Log.cpp" />
+    <ClCompile Include="L2C_Server\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\GS.cpp" />
+    <ClCompile Include="L2C_Server\GS_Cfg.cpp" />
+    <ClCompile Include="L2C_Server\LS_Connection.cpp" />
+    <ClCompile Include="L2C_Server\datatables\CharNameTable.cpp" />
+    <ClCompile Include="L2C_Server\datatables\CharTemplateTable.cpp" />
+    <ClCompile Include="L2C_Server\datatables\ItemTable.cpp" />
+    <ClCompile Include="L2C_Server\world\model\GameObject.cpp" />
+    <ClCompile Include="L2C_Server\world\model\base\ClassId.cpp" />
+    <ClCompile Include="L2C_Server\world\model\base\ClassIdTree.cpp" />
+    <ClCompile Include="L2C_Server\world\model\character\GameCharacter.cpp" />
+    <ClCompile Include="L2C_Server\world\model\character\GameNpc.cpp" />
+    <ClCompile Include="L2C_Server\world\model\character\GamePlayer.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\StatsSet.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\chars\L2CharTemplate.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\chars\L2PlayerTemplate.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\item\L2ArmorTemplate.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\item\L2EtcItemTemplate.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\item\L2ItemTemplate.cpp" />
+    <ClCompile Include="L2C_Server\world\templates\item\L2WeaponTemplate.cpp" />
+    <ClCompile Include="L2C_Server\net\ClientPacketHandler.cpp" />
+    <ClCompile Include="L2C_Server\net\ClientPool.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_AuthLogin.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_CharacterCreate.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_CharacterSelect.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_Logout.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_NewCharacter.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_ProtocolVersion.cpp" />
+    <ClCompile Include="L2C_Server\net\clientpackets\c_RequestGotoLobby.cpp" />
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharacterSelectionInfo.cpp" />
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharCreateFail.cpp" />
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharCreateOK.cpp" />
+    <ClCompile Include="L2C_Server\net\serverpackets\s_KeyPacket.cpp" />
+    <ClCompile Include="L2C_Server\net\serverpackets\s_NewCharacterSuccess.cpp" />
+    <ClCompile Include="L2C_Server\net\GameClient\GameClient.cpp" />
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientNet.cpp" />
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientNetStats.cpp" />
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientThread.cpp" />
+    <ClCompile Include="L2C_Server\utils\Debugging.cpp" />
+    <ClCompile Include="L2C_Server\utils\Exception.cpp" />
+    <ClCompile Include="L2C_Server\utils\IdFactory.cpp" />
+    <ClCompile Include="L2C_Server\utils\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="L2C_Server\L2Serverd.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2C_Server\Log.h" />
+    <ClInclude Include="L2C_Server\pch.h" />
+    <ClInclude Include="L2C_Server\Resource.h" />
+    <ClInclude Include="L2C_Server\enums.h" />
+    <ClInclude Include="L2C_Server\GS.h" />
+    <ClInclude Include="L2C_Server\GS_Cfg.h" />
+    <ClInclude Include="L2C_Server\LS_Connection.h" />
+    <ClInclude Include="L2C_Server\datatables\CharNameTable.h" />
+    <ClInclude Include="L2C_Server\datatables\CharTemplateTable.h" />
+    <ClInclude Include="L2C_Server\datatables\ItemTable.h" />
+    <ClInclude Include="L2C_Server\world\model\GameObject.h" />
+    <ClInclude Include="L2C_Server\world\model\base\ClassId.h" />
+    <ClInclude Include="L2C_Server\world\model\base\ClassIdTree.h" />
+    <ClInclude Include="L2C_Server\world\model\base\Race.h" />
+    <ClInclude Include="L2C_Server\world\model\character\GameCharacter.h" />
+    <ClInclude Include="L2C_Server\world\model\character\GameNpc.h" />
+    <ClInclude Include="L2C_Server\world\model\character\GamePlayer.h" />
+    <ClInclude Include="L2C_Server\world\templates\StatsSet.h" />
+    <ClInclude Include="L2C_Server\world\templates\chars\L2CharTemplate.h" />
+    <ClInclude Include="L2C_Server\world\templates\chars\L2PlayerTemplate.h" />
+    <ClInclude Include="L2C_Server\world\templates\item\L2ArmorTemplate.h" />
+    <ClInclude Include="L2C_Server\world\templates\item\L2EtcItemTemplate.h" />
+    <ClInclude Include="L2C_Server\world\templates\item\L2ItemTemplate.h" />
+    <ClInclude Include="L2C_Server\world\templates\item\L2ItemType.h" />
+    <ClInclude Include="L2C_Server\world\templates\item\L2WeaponTemplate.h" />
+    <ClInclude Include="L2C_Server\net\ClientPacketHandler.h" />
+    <ClInclude Include="L2C_Server\net\ClientPool.h" />
+    <ClInclude Include="L2C_Server\net\ServerPackets.h" />
+    <ClInclude Include="L2C_Server\net\GameClient\GameClient.h" />
+    <ClInclude Include="L2C_Server\net\GameClient\GameClientNetStats.h" />
+    <ClInclude Include="L2C_Server\utils\Debugging.h" />
+    <ClInclude Include="L2C_Server\utils\Exception.h" />
+    <ClInclude Include="L2C_Server\utils\IdFactory.h" />
+    <ClInclude Include="L2C_Server\utils\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="L2Packets.vcxproj">
+      <Project>{3932f75f-1d83-4ae1-abcb-b1495d0b0af6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="libl2c_utils.vcxproj">
+      <Project>{6710ad5f-9c7d-4828-8eaf-79478c1e6f9a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="L2C_Server\PostBuildEvent.cmd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

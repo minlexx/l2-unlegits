@@ -1,7 +1,7 @@
 set out=..\..\out\dist_L2Detect
 
-rem Copy DLL
+echo Copy DLL %2\%1.dll - %2\%out%
 copy /y %2\%1.dll %2\%out%
 
-rem Copy PDB
+echo Copy PDB %2\%1.pdb - %2\%out%
 rem copy /y %2\%1.pdb %2\%out%

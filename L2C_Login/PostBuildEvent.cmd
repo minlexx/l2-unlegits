@@ -8,8 +8,8 @@ rem echo 2 = %2
 
 set out=..\..\out\dist_l2c
 
-rem Copy EXE
+echo Copy EXE %2\%1.exe - %2\%out%
 copy /y %2\%1.exe %2\%out%
 
-rem Copy PDB
+echo Copy PDB %2\%1.pdb - %2\%out%
 copy /y %2\%1.pdb %2\%out

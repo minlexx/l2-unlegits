@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DDEA0898-F57F-4337-BBBD-D47060FD0564}</ProjectGuid>
+    <RootNamespace>L2Detect</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2Detect_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_build\L2Detect_Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2Detect_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">_build\L2Detect_Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;lib;lib\directX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)L2Detect_d.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0419</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);l2detect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>dxguid.lib;ddraw.lib;libeay32_st_MTd.lib;ssleay32_st_MTd.lib;winmm.lib;shell32.lib;comctl32.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>l2detect;lib\openssl;lib\directX;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy L2Detect.dll to dist</Message>
+      <Command>l2detect\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/I"../include" /I"../L2Packets" /I"../sqlite_lib" %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;lib;lib\directX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)L2Detect.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0419</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);l2detect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>libeay32_st_MT.lib;ssleay32_st_MT.lib;user32.lib;advapi32.lib;gdi32.lib;comctl32.lib;winmm.lib;dxguid.lib;ddraw.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>l2detect;lib\openssl;lib\directX;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy L2Detect.dll to dist</Message>
+      <Command>l2detect\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="l2detect\PostBuildEvent.cmd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="l2detect\res\L2_c.ico" />
+    <None Include="l2detect\res\L2_g.ico" />
+    <None Include="l2detect\res\L2_v.ico" />
+    <None Include="l2detect\res\L2Detect.ico" />
+    <None Include="l2detect\packets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="l2detect\L2Detect.rc" />
+    <ResourceCompile Include="l2detect\res\L2Detect_icons.rc" />
+    <ResourceCompile Include="l2detect\res\L2Detect_version.rc" />
+    <ResourceCompile Include="l2detect\res\SetupDialogs.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="l2detect\Resource.h" />
+    <ClInclude Include="l2detect\ConfigIni.h" />
+    <ClInclude Include="l2detect\RemoteServerInfo.h" />
+    <ClInclude Include="l2detect\stdafx.h" />
+    <ClInclude Include="l2detect\targetver.h" />
+    <ClInclude Include="l2detect\utils.h" />
+    <ClInclude Include="l2detect\windowUtils.h" />
+    <ClInclude Include="l2detect\Logger.h" />
+    <ClInclude Include="l2detect\LoginClient.h" />
+    <ClInclude Include="l2detect\LoginListener.h" />
+    <ClInclude Include="l2detect\GameClient.h" />
+    <ClInclude Include="l2detect\GameClientCounters.h" />
+    <ClInclude Include="l2detect\GameListener.h" />
+    <ClInclude Include="l2detect\PacketInjector.h" />
+    <ClInclude Include="l2detect\mymem.h" />
+    <ClInclude Include="l2detect\net_hook.h" />
+    <ClInclude Include="l2detect\net_hook_defs.h" />
+    <ClInclude Include="l2detect\RadarDllWnd.h" />
+    <ClInclude Include="l2detect\RadarDllWndCfg.h" />
+    <ClInclude Include="l2detect\RadarDllWndHWID.h" />
+    <ClInclude Include="l2detect\RadarDllWndSize.h" />
+    <ClInclude Include="l2detect\ClanWarList.h" />
+    <ClInclude Include="l2detect\ClassPri.h" />
+    <ClInclude Include="l2detect\DistPri.h" />
+    <ClInclude Include="l2detect\HealItemsTable.h" />
+    <ClInclude Include="l2detect\UserAI.h" />
+    <ClInclude Include="l2detect\UserAI_FolAsiCfg.h" />
+    <ClInclude Include="l2detect\UserAI_InvisGM.h" />
+    <ClInclude Include="l2detect\UserAI_LockTargetMgr.h" />
+    <ClInclude Include="l2detect\UserAI_OffpartyBDSWS.h" />
+    <ClInclude Include="l2detect\UserAI_QuickTargetMgr.h" />
+    <ClInclude Include="l2detect\UserAI_QuickTargetOptions.h" />
+    <ClInclude Include="l2detect\UserAI_QuickTargetSetup.h" />
+    <ClInclude Include="l2detect\UserBuffs.h" />
+    <ClInclude Include="l2detect\UserInventory.h" />
+    <ClInclude Include="l2detect\UserParty.h" />
+    <ClInclude Include="l2detect\UserSkills.h" />
+    <ClInclude Include="l2detect\UserState.h" />
+    <ClInclude Include="l2detect\L2PacketTypes.h" />
+    <ClInclude Include="l2detect\ProtocolConverter.h" />
+    <ClInclude Include="l2detect\AboutDialog.h" />
+    <ClInclude Include="l2detect\ConfigDlg.h" />
+    <ClInclude Include="l2detect\DebugDlg.h" />
+    <ClInclude Include="l2detect\Dlg_FindInDB.h" />
+    <ClInclude Include="l2detect\DlgPressKey.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_Colors.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_FolAsi.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_InvisGM.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_LT.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_OffpartyBDSWS.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_QuickTarget.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_QuickTarget_distPri.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_SelfHeal.h" />
+    <ClInclude Include="l2detect\RadarSetupDlg_SoundAlerts.h" />
+    <ClInclude Include="l2detect\accountBind.h" />
+    <ClInclude Include="l2detect\base64.h" />
+    <ClInclude Include="l2detect\HWID.h" />
+    <ClInclude Include="l2detect\L2Detect_auth.h" />
+    <ClInclude Include="l2detect\lua\lapi.h" />
+    <ClInclude Include="l2detect\lua\lauxlib.h" />
+    <ClInclude Include="l2detect\lua\lcode.h" />
+    <ClInclude Include="l2detect\lua\ldebug.h" />
+    <ClInclude Include="l2detect\lua\ldo.h" />
+    <ClInclude Include="l2detect\lua\lfunc.h" />
+    <ClInclude Include="l2detect\lua\lgc.h" />
+    <ClInclude Include="l2detect\lua\llex.h" />
+    <ClInclude Include="l2detect\lua\llimits.h" />
+    <ClInclude Include="l2detect\lua\lmem.h" />
+    <ClInclude Include="l2detect\lua\lobject.h" />
+    <ClInclude Include="l2detect\lua\lopcodes.h" />
+    <ClInclude Include="l2detect\lua\lparser.h" />
+    <ClInclude Include="l2detect\lua\lstate.h" />
+    <ClInclude Include="l2detect\lua\lstring.h" />
+    <ClInclude Include="l2detect\lua\ltable.h" />
+    <ClInclude Include="l2detect\lua\ltm.h" />
+    <ClInclude Include="l2detect\lua\lua.h" />
+    <ClInclude Include="l2detect\lua\lua.hpp" />
+    <ClInclude Include="l2detect\lua\luaconf.h" />
+    <ClInclude Include="l2detect\lua\lualib.h" />
+    <ClInclude Include="l2detect\lua\lundump.h" />
+    <ClInclude Include="l2detect\lua\lvm.h" />
+    <ClInclude Include="l2detect\lua\lzio.h" />
+    <ClInclude Include="l2detect\ScriptEngine.h" />
+    <ClInclude Include="l2detect\se_funcs\SE_funcs.h" />
+    <ClInclude Include="l2detect\BinTree.h" />
+    <ClInclude Include="l2detect\BinTreeNode_Clan.h" />
+    <ClInclude Include="l2detect\ClanList.h" />
+    <ClInclude Include="l2detect\WorldObjectTree.h" />
+    <ClInclude Include="l2detect\WorldObjectTreeNode.h" />
+    <ClInclude Include="l2detect\CharArray.h" />
+    <ClInclude Include="l2detect\GIArray.h" />
+    <ClInclude Include="l2detect\GroundItem.h" />
+    <ClInclude Include="l2detect\NpcArray.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="l2detect\ConfigIni.cpp" />
+    <ClCompile Include="l2detect\RemoteServerInfo.cpp" />
+    <ClCompile Include="l2detect\main.cpp" />
+    <ClCompile Include="l2detect\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="l2detect\openssl_winsock_wrapper.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="l2detect\utils.cpp" />
+    <ClCompile Include="l2detect\windowUtils.cpp" />
+    <ClCompile Include="l2detect\Logger.cpp" />
+    <ClCompile Include="l2detect\LoginClient.cpp" />
+    <ClCompile Include="l2detect\LoginListener.cpp" />
+    <ClCompile Include="l2detect\GameClient.cpp" />
+    <ClCompile Include="l2detect\GameClient_full.cpp" />
+    <ClCompile Include="l2detect\GameClient_full_injectPacket.cpp" />
+    <ClCompile Include="l2detect\GameClient_full_PP_client.cpp" />
+    <ClCompile Include="l2detect\GameClient_full_PP_server.cpp" />
+    <ClCompile Include="l2detect\GameClient_sniff.cpp" />
+    <ClCompile Include="l2detect\GameClient_sniff_PP_client.cpp" />
+    <ClCompile Include="l2detect\GameClient_sniff_PP_server.cpp" />
+    <ClCompile Include="l2detect\GameClientCounters.cpp" />
+    <ClCompile Include="l2detect\GameListener.cpp" />
+    <ClCompile Include="l2detect\PacketInjector.cpp" />
+    <ClCompile Include="l2detect\mymem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="l2detect\net_hook_cmn.cpp" />
+    <ClCompile Include="l2detect\net_hook_my.cpp" />
+    <ClCompile Include="l2detect\RadarDllWnd.cpp" />
+    <ClCompile Include="l2detect\RadarDllWnd_Lists.cpp" />
+    <ClCompile Include="l2detect\RadarDllWndCfg.cpp" />
+    <ClCompile Include="l2detect\RadarDllWndHWID.cpp" />
+    <ClCompile Include="l2detect\RadarDllWndProc.cpp" />
+    <ClCompile Include="l2detect\RadarDllWndSize.cpp" />
+    <ClCompile Include="l2detect\ClanWarList.cpp" />
+    <ClCompile Include="l2detect\ClassPri.cpp" />
+    <ClCompile Include="l2detect\DistPri.cpp" />
+    <ClCompile Include="l2detect\HealItemsTable.cpp" />
+    <ClCompile Include="l2detect\UserAI.cpp" />
+    <ClCompile Include="l2detect\UserAI_Buffs.cpp" />
+    <ClCompile Include="l2detect\UserAI_CharInfo.cpp" />
+    <ClCompile Include="l2detect\UserAI_DeleteObject.cpp" />
+    <ClCompile Include="l2detect\UserAI_Die.cpp" />
+    <ClCompile Include="l2detect\UserAI_FolAsi.cpp" />
+    <ClCompile Include="l2detect\UserAI_FolAsiCfg.cpp" />
+    <ClCompile Include="l2detect\UserAI_HPMPCP.cpp" />
+    <ClCompile Include="l2detect\UserAI_InvisGM.cpp" />
+    <ClCompile Include="l2detect\UserAI_Item.cpp" />
+    <ClCompile Include="l2detect\UserAI_kb.cpp" />
+    <ClCompile Include="l2detect\UserAI_LockTargetMgr.cpp" />
+    <ClCompile Include="l2detect\UserAI_MoveToLocation.cpp" />
+    <ClCompile Include="l2detect\UserAI_NpcHtml.cpp" />
+    <ClCompile Include="l2detect\UserAI_NpcInfo.cpp" />
+    <ClCompile Include="l2detect\UserAI_OffpartyBDSWS.cpp" />
+    <ClCompile Include="l2detect\UserAI_party.cpp" />
+    <ClCompile Include="l2detect\UserAI_Process_off_BDSWS.cpp" />
+    <ClCompile Include="l2detect\UserAI_ProcessMoves.cpp" />
+    <ClCompile Include="l2detect\UserAI_QuickTargetMgr.cpp" />
+    <ClCompile Include="l2detect\UserAI_QuickTargetOptions.cpp" />
+    <ClCompile Include="l2detect\UserAI_QuickTargetSetup.cpp" />
+    <ClCompile Include="l2detect\UserAI_Relation.cpp" />
+    <ClCompile Include="l2detect\UserAI_Skills.cpp" />
+    <ClCompile Include="l2detect\UserAI_soundAlerts.cpp" />
+    <ClCompile Include="l2detect\UserAI_StatusUpdate.cpp" />
+    <ClCompile Include="l2detect\UserAI_Target.cpp" />
+    <ClCompile Include="l2detect\UserBuffs.cpp" />
+    <ClCompile Include="l2detect\UserInventory.cpp" />
+    <ClCompile Include="l2detect\UserParty.cpp" />
+    <ClCompile Include="l2detect\UserSkills.cpp" />
+    <ClCompile Include="l2detect\UserState.cpp" />
+    <ClCompile Include="l2detect\L2PacketTypes.cpp" />
+    <ClCompile Include="l2detect\ProtocolConverter.cpp" />
+    <ClCompile Include="l2detect\AboutDialog.cpp" />
+    <ClCompile Include="l2detect\ConfigDlg.cpp" />
+    <ClCompile Include="l2detect\DebugDlg.cpp" />
+    <ClCompile Include="l2detect\Dlg_FindInDB.cpp" />
+    <ClCompile Include="l2detect\DlgPressKey.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_Colors.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_FolAsi.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_InvisGM.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_LT.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_OffpartyBDSWS.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_QuickTarget.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_QuickTarget_distPri.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_SelfHeal.cpp" />
+    <ClCompile Include="l2detect\RadarSetupDlg_SoundAlerts.cpp" />
+    <ClCompile Include="l2detect\accountBind.cpp" />
+    <ClCompile Include="l2detect\base64.cpp" />
+    <ClCompile Include="l2detect\HWID.cpp" />
+    <ClCompile Include="l2detect\lua\lapi.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lauxlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lbaselib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lcode.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldblib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldebug.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldo.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ldump.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lfunc.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lgc.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\linit.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\liolib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\llex.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lmathlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lmem.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\loadlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lobject.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lopcodes.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\loslib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lparser.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstate.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstring.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lstrlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltable.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltablib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\ltm.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lundump.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lvm.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lzio.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\ScriptEngine.cpp" />
+    <ClCompile Include="l2detect\se_funcs\SE_funcs.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_buffs.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_chat.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_items.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_misc.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_move.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_party.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_skills.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_sys.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_targ.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_userInfo.cpp" />
+    <ClCompile Include="l2detect\se_funcs\sef_world.cpp" />
+    <ClCompile Include="l2detect\BinTree.cpp" />
+    <ClCompile Include="l2detect\BinTreeNode_Clan.cpp" />
+    <ClCompile Include="l2detect\ClanList.cpp" />
+    <ClCompile Include="l2detect\WorldObjectTree.cpp" />
+    <ClCompile Include="l2detect\WorldObjectTreeNode.cpp" />
+    <ClCompile Include="l2detect\CharArray.cpp" />
+    <ClCompile Include="l2detect\GIArray.cpp" />
+    <ClCompile Include="l2detect\GroundItem.cpp" />
+    <ClCompile Include="l2detect\NpcArray.cpp" />
+    <ClCompile Include="l2detect\fakeExport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="L2Packets.vcxproj">
+      <Project>{3932f75f-1d83-4ae1-abcb-b1495d0b0af6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="L2Detect.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
