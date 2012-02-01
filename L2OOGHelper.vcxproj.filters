@@ -99,6 +99,7 @@
       <Filter>rsrc</Filter>
     </None>
     <None Include="l2ooghelper\ClassDiagram1.cd" />
+    <None Include="l2ooghelper\PostBuildEvent.cmd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="l2ooghelper\Resource.h">
