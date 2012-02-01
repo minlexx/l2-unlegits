@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{78fe8d1e-6ab0-4b43-afc1-195981a943d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS">
+      <UniqueIdentifier>{5aea64ba-dcb0-47d3-82a6-a25bb843c0b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\datatables">
+      <UniqueIdentifier>{0699e9f5-f987-4a64-8549-2f61c58d9233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world">
+      <UniqueIdentifier>{33927899-ead1-4659-95f5-474f4575cb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\model">
+      <UniqueIdentifier>{2a736c27-07be-464e-b4f7-757982618797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\model\base">
+      <UniqueIdentifier>{2ac9fc24-0fa1-4faa-bd18-e8150d8c2fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\model\character">
+      <UniqueIdentifier>{a2917952-21b3-477a-a4c1-99f192d3d40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\templates">
+      <UniqueIdentifier>{8b152d61-13bf-4b47-a973-e169c326c512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\templates\chars">
+      <UniqueIdentifier>{9191dabf-0fd3-43f5-8da8-da6fadf03b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\world\templates\item">
+      <UniqueIdentifier>{a0e76426-2b2f-4970-a9d6-5596ced45499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\net">
+      <UniqueIdentifier>{1503082c-1fdf-4b8a-a10d-6e64c6b63f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\net\clientpackets">
+      <UniqueIdentifier>{e349cdf1-b805-4ff6-961b-bbe1d2a83ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\net\serverpackets">
+      <UniqueIdentifier>{de0d8527-372e-40b5-a0ec-94ef9dde187b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GS\net\GameClient">
+      <UniqueIdentifier>{87a2d2e1-bd98-4249-ad66-5bbafed3b34a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{71d31f3d-d011-40fa-91d3-aef22c47ad48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="L2C_Server\L2Serverd.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\Log.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\pch.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\GS.cpp">
+      <Filter>GS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\GS_Cfg.cpp">
+      <Filter>GS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\LS_Connection.cpp">
+      <Filter>GS</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\datatables\CharNameTable.cpp">
+      <Filter>GS\datatables</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\datatables\CharTemplateTable.cpp">
+      <Filter>GS\datatables</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\datatables\ItemTable.cpp">
+      <Filter>GS\datatables</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\GameObject.cpp">
+      <Filter>GS\world\model</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\base\ClassId.cpp">
+      <Filter>GS\world\model\base</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\base\ClassIdTree.cpp">
+      <Filter>GS\world\model\base</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\character\GameCharacter.cpp">
+      <Filter>GS\world\model\character</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\character\GameNpc.cpp">
+      <Filter>GS\world\model\character</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\model\character\GamePlayer.cpp">
+      <Filter>GS\world\model\character</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\StatsSet.cpp">
+      <Filter>GS\world\templates</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\chars\L2CharTemplate.cpp">
+      <Filter>GS\world\templates\chars</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\chars\L2PlayerTemplate.cpp">
+      <Filter>GS\world\templates\chars</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\item\L2ArmorTemplate.cpp">
+      <Filter>GS\world\templates\item</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\item\L2EtcItemTemplate.cpp">
+      <Filter>GS\world\templates\item</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\item\L2ItemTemplate.cpp">
+      <Filter>GS\world\templates\item</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\world\templates\item\L2WeaponTemplate.cpp">
+      <Filter>GS\world\templates\item</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\ClientPacketHandler.cpp">
+      <Filter>GS\net</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\ClientPool.cpp">
+      <Filter>GS\net</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_AuthLogin.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_CharacterCreate.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_CharacterSelect.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_Logout.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_NewCharacter.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_ProtocolVersion.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\clientpackets\c_RequestGotoLobby.cpp">
+      <Filter>GS\net\clientpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharacterSelectionInfo.cpp">
+      <Filter>GS\net\serverpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharCreateFail.cpp">
+      <Filter>GS\net\serverpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\serverpackets\s_CharCreateOK.cpp">
+      <Filter>GS\net\serverpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\serverpackets\s_KeyPacket.cpp">
+      <Filter>GS\net\serverpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\serverpackets\s_NewCharacterSuccess.cpp">
+      <Filter>GS\net\serverpackets</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\GameClient\GameClient.cpp">
+      <Filter>GS\net\GameClient</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientNet.cpp">
+      <Filter>GS\net\GameClient</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientNetStats.cpp">
+      <Filter>GS\net\GameClient</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\net\GameClient\GameClientThread.cpp">
+      <Filter>GS\net\GameClient</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\utils\Debugging.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\utils\Exception.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\utils\IdFactory.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="L2C_Server\utils\Utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="L2C_Server\L2Serverd.rc">
+      <Filter>main</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2C_Server\Log.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\pch.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\Resource.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\enums.h">
+      <Filter>GS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\GS.h">
+      <Filter>GS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\GS_Cfg.h">
+      <Filter>GS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\LS_Connection.h">
+      <Filter>GS</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\datatables\CharNameTable.h">
+      <Filter>GS\datatables</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\datatables\CharTemplateTable.h">
+      <Filter>GS\datatables</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\datatables\ItemTable.h">
+      <Filter>GS\datatables</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\GameObject.h">
+      <Filter>GS\world\model</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\base\ClassId.h">
+      <Filter>GS\world\model\base</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\base\ClassIdTree.h">
+      <Filter>GS\world\model\base</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\base\Race.h">
+      <Filter>GS\world\model\base</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\character\GameCharacter.h">
+      <Filter>GS\world\model\character</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\character\GameNpc.h">
+      <Filter>GS\world\model\character</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\model\character\GamePlayer.h">
+      <Filter>GS\world\model\character</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\StatsSet.h">
+      <Filter>GS\world\templates</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\chars\L2CharTemplate.h">
+      <Filter>GS\world\templates\chars</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\chars\L2PlayerTemplate.h">
+      <Filter>GS\world\templates\chars</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\item\L2ArmorTemplate.h">
+      <Filter>GS\world\templates\item</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\item\L2EtcItemTemplate.h">
+      <Filter>GS\world\templates\item</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\item\L2ItemTemplate.h">
+      <Filter>GS\world\templates\item</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\item\L2ItemType.h">
+      <Filter>GS\world\templates\item</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\world\templates\item\L2WeaponTemplate.h">
+      <Filter>GS\world\templates\item</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\net\ClientPacketHandler.h">
+      <Filter>GS\net</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\net\ClientPool.h">
+      <Filter>GS\net</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\net\ServerPackets.h">
+      <Filter>GS\net</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\net\GameClient\GameClient.h">
+      <Filter>GS\net\GameClient</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\net\GameClient\GameClientNetStats.h">
+      <Filter>GS\net\GameClient</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\utils\Debugging.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\utils\Exception.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\utils\IdFactory.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="L2C_Server\utils\Utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="L2C_Server\PostBuildEvent.cmd" />
+  </ItemGroup>
+</Project>

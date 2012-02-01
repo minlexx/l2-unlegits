@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="dllmain">
+      <UniqueIdentifier>{03c34ecf-1ace-4281-8335-153a86a34395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="d3d">
+      <UniqueIdentifier>{91fc2a43-09a5-475d-b913-b9da11875e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{7590681a-6100-4dd1-9515-c8358e60e284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{1b727164-8c58-4fc0-b80e-184d70e6962f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hooks">
+      <UniqueIdentifier>{aef02643-ec52-42da-98c0-323e7f6e095c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{3b63e44e-78f6-4ef6-ac3e-99b1ac0e8cf2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="L2Detect_2\dllmain\DllMain.cpp">
+      <Filter>dllmain</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\dllmain\DllThread.cpp">
+      <Filter>dllmain</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\d3d\myIDirect3D9.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\d3d\myIDirect3DDevice9.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\pch.cpp">
+      <Filter>pch</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\hooks\hooks.cpp">
+      <Filter>hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\logger\Logger.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="L2Detect_2\ProxyWndProc.cpp" />
+    <ClCompile Include="L2Detect_2\RadarDisplay.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="L2Detect_2\dllmain\proxydll.def">
+      <Filter>dllmain</Filter>
+    </None>
+    <None Include="L2Detect_2\res\radar.bmp">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="L2Detect_2\d3d\myIDirect3D9.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_2\d3d\myIDirect3DDevice9.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_2\pch.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_2\hooks\hooks.h">
+      <Filter>hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_2\logger\Logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="L2Detect_2\l2d.h" />
+    <ClInclude Include="L2Detect_2\RadarDisplay.h" />
+  </ItemGroup>
+</Project>

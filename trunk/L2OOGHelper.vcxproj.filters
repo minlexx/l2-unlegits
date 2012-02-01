@@ -1,0 +1,932 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="rsrc">
+      <UniqueIdentifier>{1b2da653-7060-448f-bc68-b4c624fa1c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stdafx">
+      <UniqueIdentifier>{bd457093-0652-4791-b896-3aa5bf888098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{1ab4fe27-b1fa-482a-8abc-652885d0be8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="l2client">
+      <UniqueIdentifier>{4918a374-fef7-4c39-8ab3-bfd3588dc5bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="l2client\packet_handlers">
+      <UniqueIdentifier>{32647221-5527-4840-aa0f-6f7a049e188d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="l2client\packet_send">
+      <UniqueIdentifier>{5d88f257-1125-4c0c-9663-5dbeaf182508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="l2client\botconfig">
+      <UniqueIdentifier>{af853884-17a8-46ca-a601-a7f572eeec8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog">
+      <UniqueIdentifier>{c6ed4ef6-de9c-41b7-8c96-7125a1a4dc3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog\tab_dialogs">
+      <UniqueIdentifier>{69a66a6c-e386-43b0-b67b-1aaafff464c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog\game_events">
+      <UniqueIdentifier>{163714f6-68a2-4d81-9350-e98df8de3bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dialog\botCfgDlg">
+      <UniqueIdentifier>{2a2476c3-a825-4fbd-926c-382c682d36c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{1721770f-fc2b-4ba1-99c1-be9342a31ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user">
+      <UniqueIdentifier>{6dffab4b-97d4-481d-850e-da8975014507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripter">
+      <UniqueIdentifier>{17274ca5-023b-4899-a49c-b7e13d634cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripter\SE_funcs">
+      <UniqueIdentifier>{08d9edb2-577d-4ee9-a162-f17fb1771ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="world">
+      <UniqueIdentifier>{c26117ea-666f-440f-9dec-5dc4ef1f683b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{92052523-bd70-4716-adbd-652261d9fbb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="image">
+      <UniqueIdentifier>{1b039fcc-6150-4c7e-89e2-624f21e737bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="map">
+      <UniqueIdentifier>{34ad7f14-4916-4cb5-9e37-717c29d4f8eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{7f03e2bd-01bb-4340-a6ce-64eb4794b132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\lua">
+      <UniqueIdentifier>{7adaa32c-818d-423c-8da5-1b626f5e2c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="db_layer">
+      <UniqueIdentifier>{6f0ac974-6762-49cd-a4d6-894977e1ddf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hwid">
+      <UniqueIdentifier>{7bfe755a-8e6f-4b06-9311-be8423febc96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BotIPC">
+      <UniqueIdentifier>{fd14b1b5-d31e-40d8-916e-d88b5e839b53}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="l2ooghelper\dialogs.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2ooghelper\menu.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2ooghelper\other.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2ooghelper\tab.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="l2ooghelper\temp.rc">
+      <Filter>rsrc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="l2ooghelper\res\L2OOGHelper.ico">
+      <Filter>rsrc</Filter>
+    </None>
+    <None Include="l2ooghelper\res\small.ico">
+      <Filter>rsrc</Filter>
+    </None>
+    <None Include="l2ooghelper\ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="l2ooghelper\Resource.h">
+      <Filter>rsrc</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\stdafx.h">
+      <Filter>stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\targetver.h">
+      <Filter>stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\MainWindow.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ProgressHP.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\SEH_global.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\Tabs.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\Account.h">
+      <Filter>l2client</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\IL2Client.h">
+      <Filter>l2client</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\L2Client.h">
+      <Filter>l2client</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\L2ClientAI.h">
+      <Filter>l2client</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\MapShowParams.h">
+      <Filter>l2client</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BotConfig.h">
+      <Filter>l2client\botconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BotConfigIDList.h">
+      <Filter>l2client\botconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\AccountDlg.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ChooseCharDlg.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ChooseServerDlg.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\CreateCharDlg.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\InputStringDlg.h">
+      <Filter>dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\MapItemsTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserBuffTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserInfoTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserInvTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserPartyTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserSkillsTabDlg.h">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BuySellDlg.h">
+      <Filter>dialog\game_events</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\MessageBoxTimeout.h">
+      <Filter>dialog\game_events</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\NpcHtmlMessageDlg.h">
+      <Filter>dialog\game_events</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\PrivateStoreDlg.h">
+      <Filter>dialog\game_events</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\TradeP2PDlg.h">
+      <Filter>dialog\game_events</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BotCfgDlg.h">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\Dlg_FindInDB.h">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\Logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserBuffs.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserEtcStatus.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserInfo_c.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserInventory.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserParty.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserSkills.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\UserStorageMaxCount.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ScriptEngine.h">
+      <Filter>scripter</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\SE_funcs.h">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BinTree.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\BuySellList.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\CharArray.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ClanList.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\ClanTreeNode.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\GIArray.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\GroundItem.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\NpcArray.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\WorldObjectTree.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\WorldObjectTreeNode.h">
+      <Filter>world</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\windowUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\PngJpegImage.h">
+      <Filter>image</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\GlobalMapImages.h">
+      <Filter>map</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\MapWnd.h">
+      <Filter>map</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lapi.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lauxlib.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lcode.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\ldebug.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\ldo.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lfunc.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lgc.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\llex.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\llimits.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lmem.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lobject.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lopcodes.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lparser.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lstate.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lstring.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\ltable.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\ltm.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lua.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lua.hpp">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\luaconf.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lualib.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lundump.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lvm.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\lib\lua\lzio.h">
+      <Filter>lib\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\DBLayer.h">
+      <Filter>db_layer</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\base64.h">
+      <Filter>hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\HWID.h">
+      <Filter>hwid</Filter>
+    </ClInclude>
+    <ClInclude Include="l2ooghelper\bot_interaction\BotIPC.h">
+      <Filter>BotIPC</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="l2ooghelper\stdafx.cpp">
+      <Filter>stdafx</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MainWindow.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ProgressHP.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SEH_global.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\Tabs.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\Account.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\IL2Client.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_BotIPC.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_GameLoop.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_Login.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_Packets.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_Thread.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2Client_World.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\L2ClientAI.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MapShowParams.cpp">
+      <Filter>l2client</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AbnormalStatusUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AskJoinParty.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_AuthLoginFail.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_BuyList.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ChangeMoveType.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ChangeWaitType.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharCreateFail.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharCreateSuccess.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharDeleteFail.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharDeleteSuccess.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharSelected.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CharSelectionInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ConfirmDlg.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_CreatureSay.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_DeleteObject.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_Die.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_DropItem.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_EtcStatusUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExNpcQuestHtmlMessage.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExSetPrivateStoreWholeMsg.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ExStorageMaxCount.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_GameGuardQuery.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_GetItem.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_InventoryUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ItemList.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_JoinParty.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_KeyPacket.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MagicSkillCanceld.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MagicSkillUse.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MoveToLocation.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_MoveToPawn.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NewCharacterSuccess.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NpcHtmlMessage.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_NpcInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartyMemberPosition.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowAdd.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowAll.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowDelete.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowDeleteAll.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySmallWindowUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PartySpelled.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PledgeInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreListBuy.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreListSell.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreManageListBuy.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreManageListSell.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreMsgBuy.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_PrivateStoreMsgSell.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_RecipeShopManageList.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_RecipeShopMsg.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_Revive.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SellList.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SendTradeRequest.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SetupGauge.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ShortBuffStatusUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SkillCoolTime.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SkillList.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SpawnItem.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SSQInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_StatusUpdate.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_StopMove.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_SystemMessage.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TargetSelected.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TargetUnselected.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TeleportToLocation.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeDone.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeOtherAdd.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeOwnAdd.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_TradeStart.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_UserInfo.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_handlers\ph_ValidateLocation.cpp">
+      <Filter>l2client\packet_handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_atk.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_BuySell.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_items.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_misc.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_move.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_party.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_pvtStore.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_sys.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\packet_send\ps_trade_p2p.cpp">
+      <Filter>l2client\packet_send</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotConfig.cpp">
+      <Filter>l2client\botconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotConfigIDList.cpp">
+      <Filter>l2client\botconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\AccountDlg.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ChooseCharDlg.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ChooseServerDlg.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\CreateCharDlg.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\InputStringDlg.cpp">
+      <Filter>dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MapItemsTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserBuffTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserInfoTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserInvTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserPartyTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserSkillsTabDlg.cpp">
+      <Filter>dialog\tab_dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BuySellDlg.cpp">
+      <Filter>dialog\game_events</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MessageBoxTimeout.cpp">
+      <Filter>dialog\game_events</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\NpcHtmlMessageDlg.cpp">
+      <Filter>dialog\game_events</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\PrivateStoreDlg.cpp">
+      <Filter>dialog\game_events</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\TradeP2PDlg.cpp">
+      <Filter>dialog\game_events</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotCfgDlg.cpp">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotCfgDlg_Party.cpp">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotCfgDlg_Self.cpp">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BotCfgDlg_SelfHeal.cpp">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\Dlg_FindInDB.cpp">
+      <Filter>dialog\botCfgDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\Logger.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserBuffs.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserEtcStatus.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserInfo_c.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserInventory.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserParty.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserSkills.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\UserStorageMaxCount.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ScriptEngine.cpp">
+      <Filter>scripter</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_buffs.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_cfg.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_chat.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_hacks.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_handlers.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_items.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_move.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_party.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_skills.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_targ.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_userInfo.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\SE_funcs_world.cpp">
+      <Filter>scripter\SE_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BinTree.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\BuySellList.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\CharArray.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ClanList.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\ClanTreeNode.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\GIArray.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\GroundItem.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\NpcArray.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\WorldObjectTree.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\WorldObjectTreeNode.cpp">
+      <Filter>world</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\windowUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\PngJpegImage.cpp">
+      <Filter>image</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\GlobalMapImages.cpp">
+      <Filter>map</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\MapWnd.cpp">
+      <Filter>map</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lapi.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lauxlib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lbaselib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lcode.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldblib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldebug.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldo.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ldump.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lfunc.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lgc.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\linit.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\liolib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\llex.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lmathlib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lmem.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\loadlib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lobject.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lopcodes.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\loslib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lparser.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstate.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstring.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lstrlib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltable.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltablib.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\ltm.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lundump.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lvm.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\lib\lua\lzio.c">
+      <Filter>lib\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\DBLayer.cpp">
+      <Filter>db_layer</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\base64.cpp">
+      <Filter>hwid</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\HWID.cpp">
+      <Filter>hwid</Filter>
+    </ClCompile>
+    <ClCompile Include="l2ooghelper\bot_interaction\BotIPC.cpp">
+      <Filter>BotIPC</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
