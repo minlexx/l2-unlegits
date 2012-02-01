@@ -1,0 +1,68 @@
+===================================
+18:30:08.081: Starting game server...
+18:30:08.096: Config loaded.
+18:30:08.096: MySQL connection test OK
+18:30:08.768: IdFactory: used 10 object IDs, 234876928 bytes
+18:30:08.768: ItemTable: loading 2937 armors, 3498 weapons, 10042 etcitems
+18:30:08.768: ItemTable: max itemId = 22172 (armor 22172, etc 22153, weapon 20867)
+18:30:18.706: ===== ClientPool clients dump =====
+18:30:18.706: ===== ClientPool clients dump end =====
+18:30:21.143: ItemTable: loaded, used 2708318 bytes
+18:30:21.362: CharTemplateTable: loaded 103 character templates.
+18:30:21.362: Game server loaded in 13 seconds (13296 ms).
+===================================
+18:30:21.378: Connecting to login at 127.0.0.1:9014...
+18:30:23.737: ===== Throwing an exception... =====
+18:30:23.831: Got exception: test exception: max players: 10
+18:30:23.831:      0: L2C_Server_d!Exception::Exception()   (0x005258D0 + 191)   [v:\dev\l2\unlegits\trunk\l2c_server\utils\exception.cpp line 13]
+18:30:23.831:      1: L2C_Server_d!Main_OnTestExceptions()   (0x004ED320 + 151)   [v:\dev\l2\unlegits\trunk\l2c_server\l2serverd.cpp line 29]
+18:30:23.831:      2: L2C_Server_d!Main_OnButtonDebug()   (0x004ED7E0 + 256)   [v:\dev\l2\unlegits\trunk\l2c_server\l2serverd.cpp line 83]
+18:30:23.831:      3: L2C_Server_d!Main_OnCommand()   (0x004EDB00 + 96)   [v:\dev\l2\unlegits\trunk\l2c_server\l2serverd.cpp line 122]
+18:30:23.831:      4: L2C_Server_d!MainDlgProc()   (0x004EDBA0 + 164)   [v:\dev\l2\unlegits\trunk\l2c_server\l2serverd.cpp line 132]
+18:30:23.831:      5: USER32!InternalCallWinProc()   (0x7E36870C + 40)
+18:30:23.831:      6: USER32!UserCallDlgProcCheckWow()   (0x7E373C2F + 326)
+18:30:23.831:      7: USER32!DefDlgProcWorker()   (0x7E373AB1 + 168)
+18:30:23.831:      8: USER32!DefDlgProcW()   (0x7E373D3A + 34)
+18:30:23.831:      9: USER32!InternalCallWinProc()   (0x7E36870C + 40)
+18:30:23.831:     10: USER32!UserCallWinProcCheckWow()   (0x7E36875F + 336)
+18:30:23.831:     11: USER32!SendMessageWorker()   (0x7E3791B3 + 1189)
+18:30:23.831:     12: USER32!SendMessageW()   (0x7E37929A + 127)
+18:30:23.831:     13: COMCTL32!Button_NotifyParent()   (0x773E7317 + 61)
+18:30:23.831:     14: COMCTL32!Button_ReleaseCapture()   (0x773E735F + 215)
+18:30:23.831:     15: COMCTL32!Button_WndProc()   (0x773E8EB4 + 2183)
+18:30:23.831:     16: USER32!InternalCallWinProc()   (0x7E36870C + 40)
+18:30:23.831:     17: USER32!UserCallWinProcCheckWow()   (0x7E36875F + 336)
+18:30:23.831:     18: USER32!DispatchMessageWorker()   (0x7E3688F1 + 774)
+18:30:23.831:     19: USER32!DispatchMessageW()   (0x7E368A01 + 15)
+18:30:23.831:     20: USER32!IsDialogMessageW()   (0x7E377424 + 1394)
+18:30:23.846:     21: USER32!DialogBox2()   (0x7E37757B + 324)
+18:30:23.846:     22: USER32!InternalDialogBox()   (0x7E37490E + 208)
+18:30:23.846:     23: USER32!DialogBoxIndirectParamAorW()   (0x7E3749D0 + 55)
+18:30:23.846:     24: USER32!DialogBoxParamW()   (0x7E3747AB + 63)
+18:30:23.846:     25: L2C_Server_d!wWinMain()   (0x004EDCA0 + 379)   [v:\dev\l2\unlegits\trunk\l2c_server\l2serverd.cpp line 146]
+18:30:23.846:     26: L2C_Server_d!__tmainCRTStartup()   (0x00615A50 + 357)   [f:\dd\vctools\crt_bld\self_x86\crt\src\crt0.c line 189]
+18:30:23.846:     27: L2C_Server_d!wWinMainCRTStartup()   (0x00615A30 + 15)   [f:\dd\vctools\crt_bld\self_x86\crt\src\crt0.c line 172]
+18:30:23.846:     28: kernel32!BaseProcessStart()   (0x7C817044 + 35)
+18:30:23.846: ===== Exceptions test complete =====
+18:30:26.378: LoginConnection thread: Exception: Connect to LS failed!
+18:30:26.378:      0: L2C_Server_d!Exception::Exception()   (0x005258D0 + 191)   [v:\dev\l2\unlegits\trunk\l2c_server\utils\exception.cpp line 13]
+18:30:26.378:      1: L2C_Server_d!LoginConnection::LS_ConnThread()   (0x004F2BE0 + 579)   [v:\dev\l2\unlegits\trunk\l2c_server\ls_connection.cpp line 91]
+18:30:26.378:      2: L2C_Server_d!_callthreadstartex()   (0x0060F2A0 + 83)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 335]
+18:30:26.378:      3: L2C_Server_d!_threadstartex()   (0x0060F1C0 + 164)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 260]
+18:30:26.378:      4: kernel32!BaseThreadStart()   (0x7C80B6DC + 55)
+18:30:26.378: Connecting to login at 127.0.0.1:9014... (try #2)
+18:30:31.378: LoginConnection thread: Exception: Connect to LS failed!
+18:30:31.378:      0: L2C_Server_d!Exception::Exception()   (0x005258D0 + 191)   [v:\dev\l2\unlegits\trunk\l2c_server\utils\exception.cpp line 13]
+18:30:31.378:      1: L2C_Server_d!LoginConnection::LS_ConnThread()   (0x004F2BE0 + 579)   [v:\dev\l2\unlegits\trunk\l2c_server\ls_connection.cpp line 91]
+18:30:31.378:      2: L2C_Server_d!_callthreadstartex()   (0x0060F2A0 + 83)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 335]
+18:30:31.378:      3: L2C_Server_d!_threadstartex()   (0x0060F1C0 + 164)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 260]
+18:30:31.378:      4: kernel32!BaseThreadStart()   (0x7C80B6DC + 55)
+18:30:31.393: Connecting to login at 127.0.0.1:9014... (try #3)
+18:30:36.393: LoginConnection thread: Exception: Connect to LS failed!
+18:30:36.393:      0: L2C_Server_d!Exception::Exception()   (0x005258D0 + 191)   [v:\dev\l2\unlegits\trunk\l2c_server\utils\exception.cpp line 13]
+18:30:36.393:      1: L2C_Server_d!LoginConnection::LS_ConnThread()   (0x004F2BE0 + 579)   [v:\dev\l2\unlegits\trunk\l2c_server\ls_connection.cpp line 91]
+18:30:36.393:      2: L2C_Server_d!_callthreadstartex()   (0x0060F2A0 + 83)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 335]
+18:30:36.393:      3: L2C_Server_d!_threadstartex()   (0x0060F1C0 + 164)   [f:\dd\vctools\crt_bld\self_x86\crt\src\threadex.c line 260]
+18:30:36.393:      4: kernel32!BaseThreadStart()   (0x7C80B6DC + 55)
+18:30:36.393: Connecting to login at 127.0.0.1:9014... (try #4)
+18:30:41.456: GS Stopped.

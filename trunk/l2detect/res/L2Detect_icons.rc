@@ -1,0 +1,17 @@
+#include "resource.h"
+#include "targetver.h"
+#include <windows.h>
+#define IDC_STATIC -1
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MFC                 ICON                    "res\\L2Detect.ico"
+IDI_L2_GREEN            ICON                    "res\\L2_g.ico"
+IDI_L2_BLACK            ICON                    "res\\L2_c.ico"
+IDI_L2_PURPLE           ICON                    "res\\L2_v.ico"
+IDI_L2_BLUE             ICON                    "res\\L2_b.ico"
+IDI_RED_CIRCLE          ICON                    "res\\red_circle.ico"
+IDI_GREEN_CIRCLE        ICON                    "res\\green_circle.ico"
+IDI_CROSS               ICON                    "res\\cross.ico"
+IDI_RED_HALF_CIRCLE     ICON                    "res\\red_half_circle.ico"
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,47 @@
+L2Detect packet fixes to Epilogue
+
+===== receives from client: =====
+Action                             v
+AuthLogin                          v
+ChangeWaitType2                    v
+MoveBackwardToLocation             v
+ProtocolVersion                    v
+RequestGmList                      v
+
+======== sends (injects) ========
+RequestActionUse                   v
+GameGuardReply                     +  added
+
+===== fixes (from L2Walker) =====
+MoveBackwardToLocation             v
+
+===== receives from server: =====
+CharacterSelectionInfo             v
+CharInfo                           v  not critical fixes
+CharSelected                       v  fix comment
+DeleteObject                       v
+Die                                v
+GameGuardQuery                     +  added handler to reply to standard L2J GameGuardQuery
+InventoryUpdate                    v  !!! critical fixes
+ItemList                           v  !!! critical fixes
+KeyPacket                          v
+LeaveWorld                         v
+MoveToLocation                     v
+MyTargetSelected                   v  fix comment
+NewCharacterSuccess                -  removed
+NpcInfo                            v  not critical fixes
+PartySmallWindowAdd                v  fix comment
+PartySmallWindowAll                v  !!! critical fixes
+PartySmallWindowDelete             v
+PartySmallWindowDeleteAll          v
+PartySmallWindowUpdate             v
+PledgeInfo                         v
+PledgeReceiveWarList               v  fix comment
+RelationChanged                    v  not critical fixes
+Revive                             v
+RestartResponse                    v  !!! important fixes
+StatusUpdate                       v  type fixes xD
+StopMove                           v  not critical fixes
+TargetSelected                     v
+TargetUnselected                   v
+UserInfo                           v  !!! critical fixes

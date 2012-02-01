@@ -1,0 +1,43 @@
+#include <windows.h>
+#include "Resource.h"
+#define IDC_STATIC -1
+
+// icon
+IDI_MAIN ICON "L2C.ico"
+
+// version
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION 0,0,0,1
+PRODUCTVERSION 0,0,0,1
+FILEOS 0x00000004
+FILETYPE 0x00000001
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "041904B0"
+    BEGIN
+      VALUE "FileDescription", "L2Logind\0"
+      VALUE "FileVersion", "0, 0, 0, 9\0"
+      VALUE "InternalName", "L2Logind\0"
+      VALUE "LegalCopyright", "Public Domain (FreeForAll)\0"
+      VALUE "OriginalFilename", "L2Logind.exe\0"
+      VALUE "ProductName", "L2Logind\0"
+      VALUE "ProductVersion", "0, 0, 0, 1\0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0419, 0x04B0
+  END
+END
+
+// dialog
+IDD_MAIN DIALOGEX 6,6,365,200
+CAPTION "L2 Login Server"
+FONT 8,"MS Shell Dlg",400,0,0
+STYLE WS_VISIBLE|WS_OVERLAPPEDWINDOW
+BEGIN
+  CONTROL "Controls",IDC_STATIC_CONTROLS,"Button",WS_CHILD|WS_VISIBLE|BS_GROUPBOX,4,151,354,43
+  CONTROL "Server",IDC_B_SERVER,"Button",WS_CHILD|WS_VISIBLE|WS_TABSTOP,14,166,60,19
+END
+
