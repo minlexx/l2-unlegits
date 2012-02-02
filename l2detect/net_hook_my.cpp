@@ -41,7 +41,8 @@ void Hook_InterceptConnect_my()
 		return;
 	}
 
-	if( Proxied_VirtualProtectEx ) log_error( LOG_WARNING, "Using proxied VirtualProtectEx!\n" );
+	if( Proxied_VirtualProtectEx )
+		log_error( LOG_WARNING, "Hook_InterceptConnect_my(): Using proxied VirtualProtectEx!\n" );
 
 	BOOL ret;
 	DWORD old_protect = 0, old_protect_2 = 0;
@@ -63,6 +64,7 @@ void Hook_InterceptConnect_my()
 	//ret = VirtualProtect( (void *)connect_orig, 6, PAGE_EXECUTE_WRITECOPY, &old_protect );
 	//ret = VirtualProtect( (void *)connect_orig, 6, PAGE_EXECUTE_READWRITE, &old_protect );
 	DWORD flProtect = g_hook_flag_allow_write;
+	ret = 0;
 	if( Proxied_VirtualProtectEx )
 		ret = Proxy_VirtualProtectEx( (HANDLE)-1, (void *)connect_orig, 6, flProtect, &old_protect );
 	else
@@ -70,7 +72,10 @@ void Hook_InterceptConnect_my()
 	if( (ret != TRUE) )
 	{
 		DWORD le = GetLastError();
-		ErrorLogger_LogLastError( "Hook_InterceptConnect_my(): VirtialProtectEx() failed (allow write)", le );
+		if( le == ERROR_ACCESS_DENIED )
+			log_error( LOG_ERROR, "Hook_InterceptConnect_my(): VirtialProtectEx() failed (allow write): (%d) ERROR_ACCESS_DENIED\n", le );
+		else
+			ErrorLogger_LogLastError( "Hook_InterceptConnect_my(): VirtialProtectEx() failed (allow write)", le );
 		ErrorLogger_FlushLogFile();
 	}
 
@@ -231,7 +236,8 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	BOOL vp_ret = FALSE;
 	DWORD le = 0;
 
-	if( Proxied_VirtualProtectEx ) log_error( LOG_WARNING, "connect_hook_my(): Using proxied VirtualProtectEx!\n" );
+	if( Proxied_VirtualProtectEx )
+		log_error( LOG_WARNING, "connect_hook_my(): Using proxied VirtualProtectEx!\n" );
 
 /*#ifdef _DEBUG
 	log_error( LOG_DEBUGDUMP, "connect_hook_my(): before restoring old code\n" );
@@ -252,7 +258,10 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	if( !vp_ret )
 	{
 		le = GetLastError();
-		ErrorLogger_LogLastError( "connect_hook_my(): VirtualProtectEx() failed (allow write)", le );
+		if( le == ERROR_ACCESS_DENIED )
+			log_error( LOG_ERROR, "connect_hook_my(): VirtualProtectEx() failed (allow write): (%d) ERROR_ACCESS_DENIED\n", le );
+		else
+			ErrorLogger_LogLastError( "connect_hook_my(): VirtualProtectEx() failed (allow write)", le );
 	}
 	pc[0] = po[0]; pc[1] = po[1]; pc[2] = po[2];
 	pc[3] = po[3]; pc[4] = po[4]; pc[5] = po[5];
@@ -271,7 +280,7 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	{
 		port = ((paddr->sin_port & 0x00FF) << 8) | ((paddr->sin_port & 0xFF00) >> 8);
 #ifdef _DEBUG
-		log_error( LOG_DEBUG, "\n hooked: connect_hook_my(): %d.%d.%d.%d:%d... ",
+		log_error( LOG_DEBUG, "\n hooked: connect_hook_my(): Requested connection to: %d.%d.%d.%d:%d... ",
 			(int)paddr->sin_addr.S_un.S_un_b.s_b1,
 			(int)paddr->sin_addr.S_un.S_un_b.s_b2,
 			(int)paddr->sin_addr.S_un.S_un_b.s_b3,
