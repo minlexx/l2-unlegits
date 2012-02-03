@@ -7,15 +7,42 @@
 extern CConfig        g_cfg;
 extern GameListener  *g_pgame;
 
+/* =================================
+8B FF    MOV    EDI, EDI
+55       PUSH   EBP
+8B EC    MOV    EBP, ESP
+..........................
+51       PUSH   ECX
+56       PUSH   ESI
+5D       POP    EBP
+=================================
+
+WSAConnect      8B FF 55 8B EC 51
+WSARecv         8B FF 55 8B EC 51
+WSASend         8B FF 55 8B EC 51
+connect         8B FF 55 8B EC 83
+send            8B FF 55 8B EC 83
+recv            8B FF 55 8B EC 83
+
+VirtualProtectEx (from kernelbase.dll)  8B FF 55 8B EC 56
+VirtualProtectEx (kernel32)             8B FF 55 8B EC 5D     // jump follows, relocate,
+                  //  rejump/relocate to VirtualProtectEx  inside  kernelbase.dll
+===================================== */
+
 unsigned char old_func_prologue[6] = {0,0,0, 0,0,0}; // область для хранения 6-ти затираемых байт начала функции
 jmp_push_ret  jump_code;               // машинные инструкции push addr; ret
 unsigned int  connect_orig;            // будущий адрес оригинальной функции
 
 //typedef int ( __stdcall *CONNECT_FUNC)( unsigned int /*socket*/, void * /*sockaddr*/, int /*addrlen*/ );
 
-const unsigned char original_ws2_32_connect_6_bytes[6] = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x83 };
-const unsigned char original_vpex_6_bytes[6]           = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x56 };
-const unsigned char l2walker_connect_6_bytes[6]        = { 0xE9, 0xB1, 0x3A, 0xB7, 0x90, 0xC3 };
+const unsigned char original_ws2_32_connect_6_bytes[6]    = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x83 };
+const unsigned char original_ws2_32_recv_6_bytes[6]       = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x83 };
+const unsigned char original_ws2_32_send_6_bytes[6]       = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x83 };
+const unsigned char original_ws2_32_WSAConnect_6_bytes[6] = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_ws2_32_WSARecv_6_bytes[6]    = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_ws2_32_WSASend_6_bytes[6]    = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_vpex_6_bytes[6]              = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x56 };
+const unsigned char l2walker_connect_6_bytes[6]           = { 0xE9, 0xB1, 0x3A, 0xB7, 0x90, 0xC3 };
 
 unsigned int   g_hook_flag_allow_write  = PAGE_EXECUTE_READWRITE; // PAGE_EXECUTE_WRITECOPY;
 bool           g_hook_restore_read_only = false;
@@ -105,6 +132,46 @@ void Hook_InterceptConnect_my()
 }
 
 
+bool Hook_check_func_prolog( LPCWSTR dllName, LPCSTR funcName, const unsigned char *orig_bytes )
+{
+	HINSTANCE hDll = GetModuleHandleW( dllName );
+	if( !hDll )
+	{
+		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%ls] not found!\n", dllName );
+		return false;
+	}
+	unsigned int func_addr = (unsigned int)GetProcAddress( hDll, funcName );
+	if( func_addr == 0 )
+	{
+		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%ls] does not have func [%s]\n", dllName, funcName );
+		return false;
+	}
+	// read prolog
+	unsigned char cur[6] = {0,0,0, 0,0,0};
+	unsigned char *pc = (unsigned char *)func_addr;
+	cur[0] = pc[0];  cur[1] = pc[1];  cur[2] = pc[2];
+	cur[3] = pc[3];  cur[4] = pc[4];  cur[5] = pc[5];
+	// compare
+	if( memcmp( cur, orig_bytes, 6 ) == 0 )
+	{
+		log_error( LOG_OK, "Hook_check_func_prolog(): %ls ! %s() prolog OK\n", dllName, funcName );
+		ErrorLogger_FlushLogFile();
+		return true;
+	}
+	// not equal
+	log_error( LOG_WARNING,
+		"Hook_check_func_prolog(): %ls.%s() prolog modified, dump of machine codes:\n"
+		"  current : %02X %02X %02X %02X %02X %02X\n"
+		"  orig    : %02X %02X %02X %02X %02X %02X\n",
+		(int)cur[0], (int)cur[1], (int)cur[2], (int)cur[3], (int)cur[4], (int)cur[5],
+		(int)orig_bytes[0], (int)orig_bytes[1], (int)orig_bytes[2],
+			(int)orig_bytes[3], (int)orig_bytes[4], (int)orig_bytes[5]
+	);
+	ErrorLogger_FlushLogFile();
+	return false;
+}
+
+
 bool Hook_ValidateInterception_my()
 {
 	//сначала получим абсолютный адрес функции для перехвата
@@ -124,10 +191,10 @@ bool Hook_ValidateInterception_my()
 	}
 
 	unsigned char *pj, *po, *pc;
-	unsigned char current_connect_prolog[6] = {0,0,0,0,0,0};
+	unsigned char current_prolog[6] = {0,0,0,0,0,0};
 
 	// Прочитаем и сохраним первые 6 байт API функции
-	pc = (unsigned char *)&current_connect_prolog;
+	pc = (unsigned char *)&current_prolog;
 	pj = (unsigned char *)connect_ws2;
 	pc[0] = pj[0]; pc[1] = pj[1]; pc[2] = pj[2];
 	pc[3] = pj[3]; pc[4] = pj[4]; pc[5] = pj[5];
@@ -167,62 +234,7 @@ bool Hook_ValidateInterception_my()
 
 bool Hook_IsWinsockConnectOrig()
 {
-	//сначала получим абсолютный адрес функции для перехвата
-	HINSTANCE hws2_32 = GetModuleHandle( TEXT("ws2_32.dll") );
-	if( !hws2_32 )
-	{
-		log_error( LOG_ERROR, "Hool_IsWinsockConnectOrig(): cannot get module handle of ws2_32.dll!\n" );
-		ErrorLogger_FlushLogFile();
-		return false;
-	}
-	unsigned int connect_ws2 = (unsigned int)GetProcAddress( hws2_32, "connect" );
-	if( connect_ws2 == 0 )
-	{
-		log_error( LOG_ERROR, "Hool_IsWinsockConnectOrig(): cannot get adress of original connect()!\n" );
-		ErrorLogger_FlushLogFile();
-		return false;
-	}
-
-	unsigned char *pj, *po, *pc;
-	unsigned char current_connect_prolog[6] = {0,0,0,0,0,0};
-
-	// Прочитаем и сохраним первые 6 байт API функции
-	pc = (unsigned char *)&current_connect_prolog;
-	pj = (unsigned char *)connect_ws2;
-	pc[0] = pj[0]; pc[1] = pj[1]; pc[2] = pj[2];
-	pc[3] = pj[3]; pc[4] = pj[4]; pc[5] = pj[5];
-
-	// does current prolog equal to original?
-	pj = (unsigned char *)&original_ws2_32_connect_6_bytes;
-	po = (unsigned char *)&current_connect_prolog;
-	// test it
-	bool inok = true;
-	int i = 0;
-	for( i=0; i<6; i++ )
-	{
-		if( pc[i] != pj[i] ) inok = false;
-	}
-
-	LOG_LEVEL logLevel = LOG_DEBUGDUMP;
-	if( !inok )
-	{
-		logLevel = LOG_WARNING;
-		log_error( LOG_WARNING, "ws2_32 connect() is not original! Dump will follow...\n" );
-	}
-	else log_error( LOG_OK, "ws2_32 connect() is original!\n" );
-
-	pc = current_connect_prolog;
-	po = (unsigned char *)&original_ws2_32_connect_6_bytes;
-	log_error( logLevel,
-		"dump of machine codes:\n"
-		"current (ws2) : %02X %02X %02X %02X %02X %02X\n"
-		"original code : %02X %02X %02X %02X %02X %02X\n",
-		(int)pc[0], (int)pc[1], (int)pc[2], (int)pc[3], (int)pc[4], (int)pc[5],
-		(int)po[0], (int)po[1], (int)po[2], (int)po[3], (int)po[4], (int)po[5]
-	);
-	ErrorLogger_FlushLogFile();
-
-	return inok;
+	return Hook_check_func_prolog( L"ws2_32.dll", "connect", original_ws2_32_connect_6_bytes );
 }
 
 
@@ -239,10 +251,10 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	if( Proxied_VirtualProtectEx )
 		log_error( LOG_WARNING, "connect_hook_my(): Using proxied VirtualProtectEx!\n" );
 
-/*#ifdef _DEBUG
+#ifdef _DEBUG
 	log_error( LOG_DEBUGDUMP, "connect_hook_my(): before restoring old code\n" );
 	Hook_ValidateInterception_my();
-#endif*/
+#endif
 
 	po = (unsigned char *)&old_func_prologue;
 	pj = (unsigned char *)&jump_code;
@@ -267,10 +279,10 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	pc[3] = po[3]; pc[4] = po[4]; pc[5] = po[5];
 	log_error( LOG_DEBUGDUMP, "connect_hook_my(): after restoring old code\n" );
 
-/*#ifdef _DEBUG
+#ifdef _DEBUG
 	log_error( LOG_DEBUGDUMP, "connect_hook_my(): after restoring old code\n" );
-	//Hook_ValidateInterception_my();
-#endif*/
+	Hook_ValidateInterception_my();
+#endif
 
 	ret = -1;
 	//Здесь вы можете порезвиться от души и выполнить любые, пришедшие вам в голову действия.
@@ -460,37 +472,33 @@ original : 8B FF 55 8B EC 56
 **/
 bool Hook_CheckVirtualProtect()
 {
-	HINSTANCE hk32 = GetModuleHandle( TEXT("kernel32.dll") );
-	if( !hk32 )
+	bool ret = false;
+	// check fo kernelbase.dll
+	HMODULE hKernelBaseDLL = GetModuleHandleW( L"kernelbase.dll" );
+	unsigned int vpex_addr = 0;
+	if( hKernelBaseDLL )
 	{
-		log_error( LOG_ERROR, "Hook_CheckVirtualProtect(): cannot get handle of kernel32.dll!\n" );
-		return false;
-	}
-	unsigned int vpex_addr = (unsigned int)GetProcAddress( hk32, "VirtualProtectEx" );
-	if( !vpex_addr )
-	{
-		log_error( LOG_ERROR, "Hook_CheckVirtualProtect(): cannot find VirtualProtectEx() in kernel32.dll!\n" );
-		return false;
-	}
-	// read prolog
-	unsigned char vp_prolog[6] = {0,0,0, 0,0,0};
-	unsigned char *vpc = (unsigned char *)vpex_addr;
-	vp_prolog[0] = vpc[0];  vp_prolog[1] = vpc[1];  vp_prolog[2] = vpc[2];
-	vp_prolog[3] = vpc[3];  vp_prolog[4] = vpc[4];  vp_prolog[5] = vpc[5];
-	bool ret = true;
-	if( memcmp( vp_prolog, original_vpex_6_bytes, 6 ) == 0 )
-	{
-		log_error( LOG_OK, "seems like VirtualProtectEx is not hooked!\n" );
+		log_error( LOG_DEBUG, "Hook_CheckVirtualProtect(): kernelbase.dll found, using it\n" );
+		ret = Hook_check_func_prolog( L"kernelbase.dll", "VirtualProtectEx", original_vpex_6_bytes );
+		vpex_addr = (unsigned)GetProcAddress( hKernelBaseDLL, "VirtualProtectEx" );
+		log_error( LOG_WARNING, "Force using my unhooked Proxy_VirtualProtectEx() to kernelbase.dll!\n" );
+		Proxied_VirtualProtectEx = vpex_addr + 5;
 	}
 	else
 	{
-		log_error( LOG_WARNING, "seems like VirtualProtectEx is hooked!\n" );
-		log_error_np( LOG_WARNING, "Dump of machine codes:\n"
-			"current  : %02X %02X %02X %02X %02X %02X\n"
-			"original : %02X %02X %02X %02X %02X %02X\n",
-			vp_prolog[0], vp_prolog[1], vp_prolog[2], vp_prolog[3], vp_prolog[4], vp_prolog[5],
-			original_vpex_6_bytes[0], original_vpex_6_bytes[1], original_vpex_6_bytes[2],
-			original_vpex_6_bytes[3], original_vpex_6_bytes[4], original_vpex_6_bytes[5] );
+		log_error( LOG_DEBUG, "Hook_CheckVirtualProtect(): kernelbase.dll not found, using kernel32.dll\n" );
+		ret = Hook_check_func_prolog( L"kernel32.dll", "VirtualProtectEx", original_vpex_6_bytes );
+		vpex_addr = (unsigned)GetProcAddress( GetModuleHandleW( L"kernel32.dll" ), "VirtualProtectEx" );
+	}
+	
+	if( ret )
+	{
+		log_error( LOG_OK, "Hook_CheckVirtualProtect(): seems like VirtualProtectEx() is not hooked!\n" );
+	}
+	else
+	{
+		log_error( LOG_WARNING, "seems like VirtualProtectEx() is hooked!\n" );
+		log_error( LOG_WARNING, "Force using my unhooked Proxy_VirtualProtectEx...\n" );
 		Proxied_VirtualProtectEx = vpex_addr + 5;
 	}
 	//
