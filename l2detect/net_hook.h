@@ -12,6 +12,18 @@ bool Hook_ValidateInterception_my();
 bool Hook_IsWinsockConnectOrig();
 bool Hook_CheckVirtualProtect();
 
+// checking hooks
+extern const unsigned char original_ws2_32_connect_6_bytes[6];
+extern const unsigned char original_ws2_32_recv_6_bytes[6];
+extern const unsigned char original_ws2_32_send_6_bytes[6];
+extern const unsigned char original_ws2_32_WSAConnect_6_bytes[6];
+extern const unsigned char original_ws2_32_WSARecv_6_bytes[6];
+extern const unsigned char original_ws2_32_WSASend_6_bytes[6];
+extern const unsigned char original_vpex_6_bytes[6];
+extern const unsigned char l2walker_connect_6_bytes[6];
+// ^^ orig_bytes
+bool Hook_check_func_prolog( LPCWSTR dllName, LPCSTR funcName, const unsigned char *orig_bytes );
+
 int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen );
 int __stdcall connect_nohook_my( unsigned int sock, void *sockaddr, int addrlen );
 

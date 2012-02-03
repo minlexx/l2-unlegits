@@ -288,12 +288,21 @@ void DebugDlg_OnBnClickedValidateInterception( HWND hDlg )
 {
 	hDlg = NULL;
 	Hook_ValidateInterception_my();
+	Hook_CheckVirtualProtect();
+	Hook_check_func_prolog( L"ws2_32.dll", "WSAConnect", original_ws2_32_WSAConnect_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSASend", original_ws2_32_WSASend_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSARecv", original_ws2_32_WSARecv_6_bytes );
 }
 
 void DebugDlg_OnBnClickedInterceptConnect( HWND hDlg )
 {
 	hDlg = NULL;
 	Hook_InterceptConnect_my();
+	if( !Hook_ValidateInterception_my() )
+	{
+		log_error( LOG_ERROR, "Seems like my try to intercept ws2_32.dll!connect() failed.\n" );
+		log_error( LOG_ERROR, "All network connections will not be intercepted!\n" );
+	}
 }
 
 void DebugDlg_OnBnClickedCheckVP( HWND hDlg )
