@@ -70,6 +70,7 @@ void Hook_InterceptConnect_my()
 
 	if( Proxied_VirtualProtectEx )
 		log_error( LOG_WARNING, "Hook_InterceptConnect_my(): Using proxied VirtualProtectEx!\n" );
+	ErrorLogger_FlushLogFile();
 
 	BOOL ret;
 	DWORD old_protect = 0, old_protect_2 = 0;
@@ -137,13 +138,13 @@ bool Hook_check_func_prolog( LPCWSTR dllName, LPCSTR funcName, const unsigned ch
 	HINSTANCE hDll = GetModuleHandleW( dllName );
 	if( !hDll )
 	{
-		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%ls] not found!\n", dllName );
+		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%S] not found!\n", dllName );
 		return false;
 	}
 	unsigned int func_addr = (unsigned int)GetProcAddress( hDll, funcName );
 	if( func_addr == 0 )
 	{
-		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%ls] does not have func [%s]\n", dllName, funcName );
+		log_error( LOG_WARNING, "Hook_check_func_prolog(): module [%S] does not have func [%s]\n", dllName, funcName );
 		return false;
 	}
 	// read prolog
@@ -154,15 +155,16 @@ bool Hook_check_func_prolog( LPCWSTR dllName, LPCSTR funcName, const unsigned ch
 	// compare
 	if( memcmp( cur, orig_bytes, 6 ) == 0 )
 	{
-		log_error( LOG_OK, "Hook_check_func_prolog(): %ls ! %s() prolog OK\n", dllName, funcName );
+		log_error( LOG_OK, "Hook_check_func_prolog(): %S!%s() prolog OK\n", dllName, funcName );
 		ErrorLogger_FlushLogFile();
 		return true;
 	}
 	// not equal
 	log_error( LOG_WARNING,
-		"Hook_check_func_prolog(): %ls.%s() prolog modified, dump of machine codes:\n"
+		"Hook_check_func_prolog(): %S!%s() prolog modified, dump of machine codes:\n"
 		"  current : %02X %02X %02X %02X %02X %02X\n"
 		"  orig    : %02X %02X %02X %02X %02X %02X\n",
+		dllName, funcName,
 		(int)cur[0], (int)cur[1], (int)cur[2], (int)cur[3], (int)cur[4], (int)cur[5],
 		(int)orig_bytes[0], (int)orig_bytes[1], (int)orig_bytes[2],
 			(int)orig_bytes[3], (int)orig_bytes[4], (int)orig_bytes[5]
