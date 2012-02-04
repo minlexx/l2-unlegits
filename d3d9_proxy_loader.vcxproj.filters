@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="d3d9_proxy_loader\DllMain.cpp" />
+    <ClCompile Include="d3d9_proxy_loader\pch.cpp" />
+    <ClCompile Include="d3d9_proxy_loader\logger\Logger.cpp">
+      <Filter>logger</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="d3d9_proxy_loader\pch.h" />
+    <ClInclude Include="d3d9_proxy_loader\logger\Logger.h">
+      <Filter>logger</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d9_proxy_loader\d3d9_proxy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="d3d9_proxy_loader\proxydll.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="logger">
+      <UniqueIdentifier>{6e4bccdb-ba9d-4a27-8866-bbded29f1eb0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

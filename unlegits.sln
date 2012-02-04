@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "L2C_Login", "L2C_Login.vcxp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "L2C_Server", "L2C_Server.vcxproj", "{72DC0189-0628-48FC-AA67-A7A279A2A171}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d3d9_proxy_loader", "d3d9_proxy_loader.vcxproj", "{AD9D2AEC-9165-4DF6-B3E3-9EED13CD81AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -55,6 +57,10 @@ Global
 		{72DC0189-0628-48FC-AA67-A7A279A2A171}.Debug|Win32.Build.0 = Debug|Win32
 		{72DC0189-0628-48FC-AA67-A7A279A2A171}.Release|Win32.ActiveCfg = Release|Win32
 		{72DC0189-0628-48FC-AA67-A7A279A2A171}.Release|Win32.Build.0 = Release|Win32
+		{AD9D2AEC-9165-4DF6-B3E3-9EED13CD81AB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AD9D2AEC-9165-4DF6-B3E3-9EED13CD81AB}.Debug|Win32.Build.0 = Debug|Win32
+		{AD9D2AEC-9165-4DF6-B3E3-9EED13CD81AB}.Release|Win32.ActiveCfg = Release|Win32
+		{AD9D2AEC-9165-4DF6-B3E3-9EED13CD81AB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
