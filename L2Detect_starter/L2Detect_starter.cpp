@@ -110,8 +110,6 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 		TCHAR tszEvtName[256];
 		wsprintf( tszEvtName, TEXT("L2Detect Outgame Event_%d"), (unsigned)GetCurrentProcessId() );
 
-		//MessageBox( NULL, tszEvtName, TEXT("ggg"), 0 );
-
 		HANDLE hEvtDbg = CreateEvent( NULL, FALSE, FALSE, tszEvtName );
 
 		HINSTANCE hL2DetectDLL = Load_L2DetectDLL( foundDllName );
