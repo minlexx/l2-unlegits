@@ -3,17 +3,21 @@
 
 #define PROCESS_NAME  "l2.exe"
 #define DLL_NAME      "L2Detect.dll"
+#define DLL_NAME_D    "L2Detect_d.dll"
 #define DLL_AUTH_NAME "L2Detect_auth.dll"
 
 //I could just use PROCESS_ALL_ACCESS but it's always best to use the absolute bare minimum of priveleges, so that your code works in as
 //many circumstances as possible.
 #define CREATE_THREAD_ACCESS (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ)
- 
+
+
 BOOL WriteProcessBYTES( HANDLE hProcess, LPVOID lpBaseAddress, LPCVOID lpBuffer, SIZE_T nSize );
 int  RunProcess( HANDLE *phProcess, HANDLE *phThread );
 BOOL InjectDLL( HANDLE hProcess, char *dllName );
 
+
 extern "C" __declspec(dllimport) int getHWID( char *);
+
 
 bool validateAuthDll()
 {
@@ -43,15 +47,16 @@ bool IsWindowsNT()
 	return true;
 }
 
-/*void run_connect()
+
+void run_connect()
 {
 	SOCKET s = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
-	//addr.sin_addr.s_addr = inet_addr( "127.0.0.1" );
-	addr.sin_addr.s_addr = inet_addr( "81.30.199.5" );
-	//addr.sin_port = htons( 80 );
-	addr.sin_port = htons( 7777 );
+	addr.sin_addr.s_addr = inet_addr( "127.0.0.1" );
+	addr.sin_port = htons( 80 );
+	//addr.sin_addr.s_addr = inet_addr( "81.30.199.5" );
+	//addr.sin_port = htons( 7777 );
 	//
 	int r = connect( s, (const sockaddr *)&addr, sizeof(addr) );
 	if( r == -1 )
@@ -63,7 +68,26 @@ bool IsWindowsNT()
 	MessageBox( NULL, TEXT("connect() OK!"), TEXT("OK!"), MB_ICONINFORMATION );
 	shutdown( s, 0 );
 	closesocket( s );
-}*/
+}
+
+
+HINSTANCE Load_L2DetectDLL( char *outDllName )
+{
+	HINSTANCE hDLL = LoadLibrary( TEXT( DLL_NAME ) );
+	if( hDLL == NULL )
+	{
+		hDLL = LoadLibrary( TEXT( DLL_NAME_D ) );
+		if( hDLL == NULL )
+			return NULL;
+		else
+			strcpy( outDllName, DLL_NAME_D );
+	}
+	else
+		strcpy( outDllName, DLL_NAME );
+	return hDLL;
+}
+
+
 
 int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow )
 {
@@ -74,6 +98,8 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 	InitCommonControls();
 
 	//if( !validateAuthDll() ) return 1; // тут тоже пока отпаяем
+
+	char foundDllName[256] = {0};
 	
 	INT_PTR r = ChooseMode( hInstance );
 	if( r == IDNO ) // outgame
@@ -87,32 +113,26 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 		//MessageBox( NULL, tszEvtName, TEXT("ggg"), 0 );
 
 		HANDLE hEvtDbg = CreateEvent( NULL, FALSE, FALSE, tszEvtName );
-		HINSTANCE hDLL = LoadLibrary( TEXT( DLL_NAME ) );
 
-		if( hDLL == NULL )
+		HINSTANCE hL2DetectDLL = Load_L2DetectDLL( foundDllName );
+		if( hL2DetectDLL == NULL )
 		{
 			MessageBox( NULL,
 				TEXT("Cannot find required DLL: ")
-				TEXT( DLL_NAME ),
+				TEXT( DLL_NAME ) TEXT(" / ") TEXT( DLL_NAME_D ),
 				TEXT("Error starting L2Detect:"), MB_ICONSTOP );
 			CloseHandle( hEvtDbg );
 			WSACleanup();
 			return 0;
 		}
 
-		/*r = IDYES;
-		while( r == IDYES )
-		{
-			r = MessageBox( NULL, TEXT("Run connect()?"), TEXT("OK"), MB_ICONQUESTION | MB_YESNO );
-			if( r == IDYES ) run_connect();
-		}*/
 
 		WaitForSingleObject( hEvtDbg, INFINITE );
 		Sleep( 1000 );
 
-		//FreeLibrary( hDLL );
 		CloseHandle( hEvtDbg );
 		WSACleanup();
+		FreeLibrary( hL2DetectDLL );
 		return 0;
 	}
 	else if( r == IDYES ) // ingame
@@ -124,7 +144,7 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 			if( res == 0 ) return 0;
 			if( res == 1 )
 			{
-				InjectDLL( hProcess, DLL_NAME );
+				InjectDLL( hProcess, foundDllName );
 				ResumeThread( hThread );
 				CloseHandle( hProcess );
 				CloseHandle( hThread );
@@ -143,6 +163,29 @@ int WINAPI _tWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmd
 				MB_ICONSTOP );
 		}
 	}// if( r == IDNO )
+	else if( r == IDRETRY ) // " ( test ) "
+	{
+		HINSTANCE hL2DetectDll = Load_L2DetectDLL( foundDllName );
+		if( hL2DetectDll )
+		{
+			MessageBoxA( 0, foundDllName, "Loaded this version of L2Detect.dll:", MB_ICONINFORMATION );
+			r = IDYES;
+			while( r == IDYES )
+			{
+				r = MessageBox( NULL, TEXT("Run connect()?"), TEXT("OK"), MB_ICONQUESTION | MB_YESNO );
+				if( r == IDYES ) run_connect();
+			}
+			FreeLibrary( hL2DetectDll );
+		}
+		else
+		{
+			// not loaded
+			MessageBox( NULL,
+				TEXT("Cannot find required DLL: ")
+				TEXT( DLL_NAME ) TEXT(" / ") TEXT( DLL_NAME_D ),
+				TEXT("Error testing L2Detect:"), MB_ICONSTOP );
+		}
+	} // IDRETRY
 
 	return 0;
 }
@@ -187,6 +230,7 @@ int RunProcess( HANDLE *phProcess, HANDLE *phThread )
 	(*phThread) = pi.hThread;
 	return 1;
 }
+
 
 BOOL InjectDLL( HANDLE hProcess, char *dllName )
 {
