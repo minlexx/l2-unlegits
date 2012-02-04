@@ -93,22 +93,26 @@ void D3D9Proxy_Uninitialize()
 }
 
 
-void D3D9Proxy_LoadL2Detect()
+bool D3D9Proxy_LoadL2Detect()
 {
 	if( gl_hL2Detect != NULL )
-		return;
+		return true; // already loaded
 
 	gl_hL2Detect = LoadLibraryW( L"L2Detect_d.dll" );
-	if( gl_hL2Detect == NULL )
+	if( gl_hL2Detect == NULL ) // first try failed
 	{
 		gl_hL2Detect = LoadLibraryW( L"L2Detect.dll" );
 		if( gl_hL2Detect == NULL )
+		{
 			log_error( LOG_ERROR, "Failed to load radar DLL!  Tried to find L2Detect_d / L2Detect dlls.\n" );
+			return false;
+		}
 		else
 			log_error( LOG_OK, "Loaded L2Detect.dll at 0x%08X\n", gl_hL2Detect );
 	}
 	else
 		log_error( LOG_OK, "Loaded L2Detect_d.dll (debug version) at 0x%08X\n", gl_hL2Detect );
+	return true;
 }
 
 
@@ -149,7 +153,8 @@ IDirect3D9* WINAPI Direct3DCreate9( UINT SDKVersion )
 		::ExitProcess(0); // exit the hard way
 	}
 
-	D3D9Proxy_LoadL2Detect();
+	if( D3D9Proxy_LoadL2Detect() )
+		ErrorLogger_EnableLoggingToConsole( false );
 
 	// Request pointer from Original Dll. 
 	IDirect3D9 *pIDirect3D9_orig = D3DCreate9_fn( SDKVersion );
