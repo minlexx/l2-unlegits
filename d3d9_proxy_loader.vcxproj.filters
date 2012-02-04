@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="d3d9_proxy_loader\proxydll.def" />
+    <None Include="d3d9_proxy_loader\PostBuildEvent.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="logger">
