@@ -1,99 +1,30 @@
-// Microsoft Visual C++ generated resource script.
-//
-#include "resource.h"
-
-#define APSTUDIO_READONLY_SYMBOLS
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 2 resource.
-//
 #include <windows.h>
 #define IDC_STATIC -1
+#include "resource.h"
 
-/////////////////////////////////////////////////////////////////////////////
-#undef APSTUDIO_READONLY_SYMBOLS
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+1 RT_MANIFEST "res\\xp_manifest.xml"
 
-/////////////////////////////////////////////////////////////////////////////
-// русский resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
-#ifdef _WIN32
-LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
-#pragma code_page(1251)
-#endif //_WIN32
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //
-// TEXTINCLUDE
+// DIALOG
 //
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// RT_MANIFEST
-//
-
-1                       RT_MANIFEST             "res\\xp_manifest.xml"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_START DIALOGEX 0, 0, 316, 65
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_START DIALOGEX 0,0,316,65
 CAPTION "L2Detect: Choose Mode"
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
+FONT 8,"MS Shell Dlg",400,0,1
+STYLE WS_POPUP|WS_VISIBLE|WS_CAPTION|WS_SYSMENU|DS_CENTER|DS_MODALFRAME|DS_SETFONT|DS_FIXEDSYS
 BEGIN
-    PUSHBUTTON      "IN-GAME",IDC_INGAME,29,19,118,24
-    PUSHBUTTON      "OUT-GAME",IDC_OUTGAME,169,19,118,24
+  CONTROL "IN-GAME",IDC_INGAME,"Button",WS_CHILD|WS_VISIBLE|WS_TABSTOP,30,12,118,24
+  CONTROL "OUT-GAME",IDC_OUTGAME,"Button",WS_CHILD|WS_VISIBLE|WS_TABSTOP,170,12,118,24
+  CONTROL "( test )",IDC_B_TEST,"Button",WS_CHILD|WS_VISIBLE|WS_TABSTOP,258,48,36,11
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_START, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 309
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 58
-    END
-END
-#endif    // APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
-
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 0,6,0,0
  PRODUCTVERSION 0,6,0,0
@@ -133,22 +64,6 @@ END
 //
 // Icon
 //
-
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_L2                  ICON                    "res\\L2_c.ico"
-#endif    // русский resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-
-#ifndef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 3 resource.
-//
-
-
-/////////////////////////////////////////////////////////////////////////////
-#endif    // not APSTUDIO_INVOKED
-

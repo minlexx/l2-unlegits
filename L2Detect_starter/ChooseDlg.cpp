@@ -12,6 +12,7 @@ INT_PTR CALLBACK ChooseDlgProc( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			{
 			case IDC_INGAME: EndDialog( hDlg, IDYES ); break;
 			case IDC_OUTGAME: EndDialog( hDlg, IDNO ); break;
+			case IDC_B_TEST: EndDialog( hDlg, IDRETRY ); break;
 			}
 		} break;
 	default: return FALSE; break;
