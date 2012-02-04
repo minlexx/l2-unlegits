@@ -66,6 +66,12 @@
       <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\d3d9_proxy_loader\proxydll.def</ModuleDefinitionFile>
     </Link>
+    <PostBuildEvent>
+      <Command>d3d9_proxy_loader\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy d3d9.dll to dist</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -86,6 +92,12 @@
       <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\d3d9_proxy_loader\proxydll.def</ModuleDefinitionFile>
     </Link>
+    <PostBuildEvent>
+      <Command>d3d9_proxy_loader\PostBuildEvent.cmd $(TargetName) $(TargetDir)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy d3d9.dll to dist</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="d3d9_proxy_loader\DllMain.cpp" />
@@ -100,6 +112,10 @@
     <ClInclude Include="d3d9_proxy_loader\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="d3d9_proxy_loader\PostBuildEvent.cmd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
     <None Include="d3d9_proxy_loader\proxydll.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
