@@ -14,7 +14,11 @@ typedef enum eL2_VERSION
 	/** constant to set protocol version as Gracia Final */
 	L2_VERSION_T23 = 4,
 	/** constant to set protocol version as Gracia Epilogue */
-	L2_VERSION_T24 = 5
+	L2_VERSION_T24 = 5,
+	/** constant to set protocol version as Freya */
+	L2_VERSION_FREYA = 6,
+	/** constant to set protocol version as High Five */
+	L2_VERSION_HF = 7
 } L2_VERSION;
 
 #endif
