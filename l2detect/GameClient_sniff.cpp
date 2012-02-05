@@ -83,7 +83,7 @@ bool GameClient::PC_sniff( SOCKET scl, unsigned char *sip, unsigned short int sp
 			log_error( LOG_WARNING, "GameClient::ProcessClient_onlySniff(): Cannot open log file [%s] for writing!\n",
 				filename );
 		// open raw log data for not decrypted packets, if problems with decryption
-		// this->logfileRaw = fopen( filename_raw, "wt" );
+		this->logfileRaw = fopen( filename_raw, "wt" );
 	}
 
 	// set initial game client state
@@ -234,6 +234,11 @@ closeSocks: // all cleanup
 	{
 		fclose( this->logfile );
 		this->logfile = NULL;
+	}
+	if( this->logfileRaw )
+	{
+		fclose( this->logfileRaw );
+		this->logfileRaw = NULL;
 	}
 	// stop AI thread
 	ai.notifyEvent( UAI_EVENT_STOP );

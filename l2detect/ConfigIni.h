@@ -51,6 +51,7 @@ public:
 	int  OverrideGameProtocolVersion;
 	int  ReplyL2JGameGuardQuery;
 	int  GraciaEpilogueProtocol_148_hacks;
+	int  TeonPvP_hacks;
 
 	// L2Walker fixes
 	int  L2Walker_DropRequestGMList;

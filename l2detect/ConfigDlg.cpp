@@ -59,6 +59,8 @@ void ConfigDlg_OnInitDialog( HWND hDlg )
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.2 - Gracia Part 2") );
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.3 - Gracia Final") );
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.4 - Gracia Epilogue") );
+	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("2nd Throne - Freya") );
+	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("2nd Throne - High Five") );
 	SendMessage( h, CB_SETCURSEL, (WPARAM)g_cfg.L2_version, 0 );
 	// L2 Client Version
 	h = GetDlgItem( hDlg, IDC_CB_L2CVER );
@@ -68,6 +70,8 @@ void ConfigDlg_OnInitDialog( HWND hDlg )
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.2 - Gracia Part 2") );
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.3 - Gracia Final") );
 	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("Chaotic Throne 2.4 - Gracia Epilogue") );
+	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("2nd Throne - Freya") );
+	SendMessage( h, CB_ADDSTRING, 0, (LPARAM)TEXT("2nd Throne - High Five") );
 	SendMessage( h, CB_SETCURSEL, (WPARAM)g_cfg.L2_client_version, 0 );
 
 	// full mode enable
@@ -80,6 +84,8 @@ void ConfigDlg_OnInitDialog( HWND hDlg )
 	CheckDlgButton( hDlg, IDC_C_GAMEGUARDREPLY, g_cfg.ReplyL2JGameGuardQuery );
 	// Gracia Epilogue protocol 148 hacks
 	CheckDlgButton( hDlg, IDC_C_EPILOGUE_148_146, g_cfg.GraciaEpilogueProtocol_148_hacks );
+	// TeonPvP hacks
+	CheckDlgButton( hDlg, IDC_C_TEONPVP_HACKS, g_cfg.TeonPvP_hacks );
 
 	// L2Walker_DropRequestGMList
 	CheckDlgButton( hDlg, IDC_C_L2WDROPGMLIST, g_cfg.L2Walker_DropRequestGMList );
@@ -120,6 +126,7 @@ void ConfigDlg_OnInitDialog( HWND hDlg )
 	// forced game server select setting
 	SetDlgItemTextA( hDlg, IDC_E_FORCEGSIP, g_cfg.ForceGameServerIP );
 	SetDlgItemInt( hDlg, IDC_E_FORCEGSPORT, g_cfg.ForceGameServerPort, TRUE );
+	SetDlgItemInt( hDlg, IDC_E_INGAME_GAMESERVER_PORT, g_cfg.IngameGameServerPort, TRUE );
 
 	ConfigDlg_UpateEnabledControls( hDlg );
 }
@@ -141,6 +148,8 @@ void ConfigDlg_OnOK( HWND hDlg, BOOL bEndDialog )
 	g_cfg.ReplyL2JGameGuardQuery = IsDlgButtonChecked( hDlg, IDC_C_GAMEGUARDREPLY );
 	// Gracia Epilogue protocol 148 hacks
 	g_cfg.GraciaEpilogueProtocol_148_hacks = IsDlgButtonChecked( hDlg, IDC_C_EPILOGUE_148_146 );
+	// TeonPvP hacks
+	g_cfg.TeonPvP_hacks = IsDlgButtonChecked( hDlg, IDC_C_TEONPVP_HACKS );
 
 	// L2Walker_DropRequestGMList
 	g_cfg.L2Walker_DropRequestGMList = IsDlgButtonChecked( hDlg, IDC_C_L2WDROPGMLIST );
@@ -177,10 +186,12 @@ void ConfigDlg_OnOK( HWND hDlg, BOOL bEndDialog )
 	// forced GS settings
 	GetDlgItemTextA( hDlg, IDC_E_FORCEGSIP, g_cfg.ForceGameServerIP, sizeof(g_cfg.ForceGameServerIP) );
 	g_cfg.ForceGameServerPort = GetDlgItemInt( hDlg, IDC_E_FORCEGSPORT, NULL, TRUE );
+	g_cfg.IngameGameServerPort = GetDlgItemInt( hDlg, IDC_E_INGAME_GAMESERVER_PORT, NULL, TRUE );
 
 	//
 	g_cfg.SaveConfig();
-	if( bEndDialog == TRUE ) EndDialog( hDlg, IDOK );
+	if( bEndDialog == TRUE )
+		EndDialog( hDlg, IDOK );
 }
 
 void ConfigDlg_OnApply( HWND hDlg )
@@ -269,6 +280,11 @@ void ConfigDlg_UpateEnabledControls( HWND hDlg )
 		EnableWindow( GetDlgItem( hDlg, IDC_E_REALPORT ), FALSE );
 		//EnableWindow( GetDlgItem( hDlg, IDC_E_PLAYGSNO ), FALSE );
 	}
+	//else
+	//{
+		// disable some controls in outgame mode
+	//	EnableWindow( GetDlgItem( hDlg, IDC_E_INGAME_GAMESERVER_PORT ), FALSE );
+	//}
 	// also temporarily disable some controls
-	EnableWindow( GetDlgItem( hDlg, IDC_C_ENABLE_MODGT ), FALSE );
+	//EnableWindow( GetDlgItem( hDlg, IDC_C_ENABLE_MODGT ), FALSE );
 }

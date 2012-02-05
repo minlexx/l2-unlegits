@@ -94,7 +94,8 @@
 #define IDC_E_FORCEGSPORT               1088
 #define IDC_B_VALIDATEINTERCEPT         1089
 #define IDC_B_INTERCEPTCONNECT          1090
-#define IDC_B_CHECK_VIRTUALPROTECTEX    1091
+#define IDC_B_RESTORECONNECT            1158
+#define IDC_B_CHECK_VIRTUALPROTECTEX    1092
 #define IDC_C_L2WALKER_INJECTSTATUSUPDATE 1122
 #define IDC_B_LOADWALKER                1123
 #define IDC_B_UNLOADWALKER              1124
@@ -102,6 +103,8 @@
 #define IDC_C_EPILOGUE_148_146          1126
 #define IDC_B_DUMP_ALL_RELATIONS        1127
 #define IDC_B_PRINTADDRTID              1128
+#define IDC_C_TEONPVP_HACKS             1159
+#define IDC_E_INGAME_GAMESERVER_PORT    1160
 
 // radar sound alerts setup dlg
 #define IDC_C_SOUNDENEMYENTER           1089
