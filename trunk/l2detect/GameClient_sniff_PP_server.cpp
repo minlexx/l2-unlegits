@@ -90,7 +90,7 @@ void GameClient::PP_sniff_fromServer( unsigned char *bytes, unsigned int len )
 					delete p;
 					//
 					log_error( LOG_PACKETNAME, "TeonPvP: enbaled hacks. KeyPacket [%02X] Read key [", (unsigned)opcode );
-					for( i=0; i<16; i++ ) log_error_np( LOG_PACKETNAME, "%02X", (unsigned)this->key_client_cs[i] );
+					for( i=0; i<16; i++ ) log_error_np( LOG_PACKETNAME, "%02X ", (unsigned)this->key_client_cs[i] );
 					log_error_np( LOG_PACKETNAME, "]\n" );
 					log_error( LOG_PACKETNAME, "  protocolOk  :  %d\n", protoOk );
 					log_error( LOG_PACKETNAME, "  d1          :  %d\n", d1 );
