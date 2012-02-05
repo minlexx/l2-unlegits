@@ -77,20 +77,44 @@ void GameClient::PP_sniff_fromServer( unsigned char *bytes, unsigned int len )
 		//case 0x00: // Interlude: KeyPacket, FirstKey
 		case 0x2e: // Hellbound: KeyPacket, FirstKey
 			{
-				L2Game_KeyPacket *p = new L2Game_KeyPacket( bytes, len );
-				p->read_key( this->key_client_cs );
-				p->read_GameServerID();
-				this->opcodeObfuscator = p->read_OpcodeObfuscator();
-				L2Game_KeyPacket::createInitialHellboundKey( this->key_client_cs,
-					this->key_client_cs );
-				delete p;
+				if( g_cfg.TeonPvP_hacks )
+				{
+					L2GamePacket *p = new L2GamePacket( bytes, len );
+					unsigned char opcode = p->getPacketType();
+					unsigned char protoOk = p->readC();
+					p->readBytes( this->key_client_cs, 16 ); // 16 bytes instead of 8?
+					int d1 = p->readD();
+					int d2 = p->readD();
+					int c1 = p->readC();
+					int obf_key = p->readD();
+					delete p;
+					//
+					log_error( LOG_PACKETNAME, "TeonPvP: enbaled hacks. KeyPacket [%02X] Read key [", (unsigned)opcode );
+					for( i=0; i<16; i++ ) log_error_np( LOG_PACKETNAME, "%02X", (unsigned)this->key_client_cs[i] );
+					log_error_np( LOG_PACKETNAME, "]\n" );
+					log_error( LOG_PACKETNAME, "  protocolOk  :  %d\n", protoOk );
+					log_error( LOG_PACKETNAME, "  d1          :  %d\n", d1 );
+					log_error( LOG_PACKETNAME, "  d2          :  %d\n", d2 );
+					log_error( LOG_PACKETNAME, "  c1          :  %d\n", c1 );
+					log_error( LOG_PACKETNAME, "  obf_key     :  %d\n", obf_key );
+				}
+				else
+				{
+					L2Game_KeyPacket *p = new L2Game_KeyPacket( bytes, len );
+					p->read_key( this->key_client_cs );
+					p->read_GameServerID();
+					this->opcodeObfuscator = p->read_OpcodeObfuscator();
+					L2Game_KeyPacket::createInitialHellboundKey( this->key_client_cs,
+						this->key_client_cs );
+					delete p;
+				}
 				memcpy( this->key_client_sc, this->key_client_cs,
 					sizeof(this->key_client_cs) );
 				this->xor_enabled = true;
 				log_error( LOG_PACKETNAME, "Server: 2e KeyPacket\n" );
-				log_error( LOG_DEBUGDUMP, "Server: 2e KeyPacket: key: " );
-				for( i=0; i<16; i++ ) log_error_np( LOG_DEBUGDUMP, "%02X ", this->key_client_cs[i] );
-				log_error_np( LOG_DEBUGDUMP, "\n" );
+				log_error( LOG_PACKETNAME, "Server: 2e KeyPacket: key: " );
+				for( i=0; i<16; i++ ) log_error_np( LOG_PACKETNAME, "%02X ", this->key_client_cs[i] );
+				log_error_np( LOG_PACKETNAME, "\n" );
 				// log obfuscator, if it is != 0x00000000
 				LOG_LEVEL log_level = LOG_DEBUGDUMP;
 				if( this->opcodeObfuscator != 0x00000000 )
@@ -111,6 +135,7 @@ void GameClient::PP_sniff_fromServer( unsigned char *bytes, unsigned int len )
 					lpco->init_tables( this->opcodeObfuscator );
 					this->clsObfuscator = (void *)lpco;
 				}
+				else log_error( LOG_PACKETNAME, "Server: 2e KeyPacket: not using obfuscator\n" );
 			} break; // KeyPacket
 		case 0x09: // CharacterSelectionInfo // Hellbound
 			{

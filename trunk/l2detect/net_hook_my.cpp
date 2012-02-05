@@ -29,6 +29,9 @@ VirtualProtectEx (kernel32)             8B FF 55 8B EC 5D     // jump follows, r
                   //  rejump/relocate to VirtualProtectEx  inside  kernelbase.dll
 ===================================== */
 
+#define INSTR_PUSH 0x68
+#define INSTR_RET  0xC3
+
 unsigned char old_func_prologue[6] = {0,0,0, 0,0,0}; // область для хранения 6-ти затираемых байт начала функции
 jmp_push_ret  jump_code;               // машинные инструкции push addr; ret
 unsigned int  connect_orig;            // будущий адрес оригинальной функции
@@ -48,7 +51,9 @@ unsigned int   g_hook_flag_allow_write  = PAGE_EXECUTE_READWRITE; // PAGE_EXECUT
 bool           g_hook_restore_read_only = false;
 unsigned int   Proxied_VirtualProtectEx = 0;
 
+
 BOOL __stdcall Proxy_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect );
+
 
 void Hook_InterceptConnect_my()
 {
@@ -63,7 +68,7 @@ void Hook_InterceptConnect_my()
 	connect_orig = (DWORD)GetProcAddress( hws2_32, "connect" );
 	if( connect_orig == 0 )
 	{
-		log_error( LOG_ERROR, "Hook_InterceptConnect_my(): cannot get adress of original connect()!\n" );
+		log_error( LOG_ERROR, "Hook_InterceptConnect_my(): cannot get adress of ws2_32.dll!connect()!\n" );
 		ErrorLogger_FlushLogFile();
 		return;
 	}
@@ -78,15 +83,20 @@ void Hook_InterceptConnect_my()
 
 	// struct member alignment must be == 1 !!!!!
 	// Зададим машинный код инструкции перехода, который затем впишем в начало полученного адреса:
-	jump_code.instr_push = 0x68;
-	jump_code.push_arg   = (unsigned int)connect_hook_my;
-	jump_code.instr_ret  = 0xC3;
+	jump_code.instr_push = INSTR_PUSH;                    // PUSH
+	jump_code.push_arg   = (unsigned int)connect_hook_my; // connect_hook_my
+	jump_code.instr_ret  = INSTR_RET;                     // RET
 
 	// Прочитаем и сохраним первые оригинальные 6 байт стандартной API функции
 	po = (unsigned char *)&old_func_prologue;
 	pj = (unsigned char *)connect_orig;
-	po[0] = pj[0]; po[1] = pj[1]; po[2] = pj[2];
-	po[3] = pj[3]; po[4] = pj[4]; po[5] = pj[5];
+	if( pj[0] != INSTR_PUSH )
+	{
+		po[0] = pj[0]; po[1] = pj[1]; po[2] = pj[2];
+		po[3] = pj[3]; po[4] = pj[4]; po[5] = pj[5];
+	}
+	else
+		log_error( LOG_WARNING, "Hook_InterceptConnect_my(): current connect() prolog already contains PUSH/RET code, do not overwriting old_prolog!\n" );
 
 	// remove read-only access to memory; remember prev.access rights
 	//ret = VirtualProtect( (void *)connect_orig, 6, PAGE_EXECUTE_WRITECOPY, &old_protect );
@@ -127,8 +137,81 @@ void Hook_InterceptConnect_my()
 		}
 	}
 #ifdef _DEBUG
-	log_error( LOG_DEBUG, "Hook_InterceptConnect_my(): work done?...\n" );
+	log_error( LOG_DEBUG, "Hook_InterceptConnect_my(): END: work done?...\n" );
 #endif
+	ErrorLogger_FlushLogFile();
+}
+
+
+void Hook_RestoreConnect_my()
+{
+	HINSTANCE hws2_32 = GetModuleHandle( TEXT("ws2_32.dll") );
+	if( !hws2_32 )
+	{
+		log_error( LOG_ERROR, "Hook_RestoreConnect_my(): cannot get module handle of ws2_32.dll!\n" );
+		ErrorLogger_FlushLogFile();
+		return;
+	}
+	connect_orig = (DWORD)GetProcAddress( hws2_32, "connect" );
+	if( connect_orig == 0 )
+	{
+		log_error( LOG_ERROR, "Hook_RestoreConnect_my(): cannot get adress of ws2_32.dll!connect()!\n" );
+		ErrorLogger_FlushLogFile();
+		return;
+	}
+
+	if( Proxied_VirtualProtectEx )
+		log_error( LOG_WARNING, "Hook_RestoreConnect_my(): START: Using proxied VirtualProtectEx!\n" );
+	ErrorLogger_FlushLogFile();
+
+	BOOL ret;
+	DWORD old_protect = 0, old_protect_2 = 0;
+	unsigned char *pc = NULL, *po = NULL;
+
+	// check old prolog
+	if( old_func_prologue[0] == 0x8B )
+	{
+		// make memory page readwrite
+		DWORD flProtect = g_hook_flag_allow_write;
+		ret = 0;
+		if( Proxied_VirtualProtectEx )
+			ret = Proxy_VirtualProtectEx( (HANDLE)-1, (void *)connect_orig, 6, flProtect, &old_protect );
+		else
+			ret = VirtualProtectEx( (HANDLE)-1, (void *)connect_orig, 6, flProtect, &old_protect );
+		if( (ret != TRUE) )
+		{
+			DWORD le = GetLastError();
+			if( le == ERROR_ACCESS_DENIED )
+				log_error( LOG_ERROR, "Hook_RestoreConnect_my(): VirtialProtectEx() failed (allow write): (%d) ERROR_ACCESS_DENIED\n", le );
+			else
+				ErrorLogger_LogLastError( "Hook_RestoreConnect_my(): VirtialProtectEx() failed (allow write)", le );
+			ErrorLogger_FlushLogFile();
+		}
+		po = (unsigned char *)&old_func_prologue;
+		pc = (unsigned char *)connect_orig;
+		pc[0] = po[0]; pc[1] = po[1]; pc[2] = po[2];
+		pc[3] = po[3]; pc[4] = po[4]; pc[5] = po[5];
+		log_error( LOG_OK, "Hook_RestoreConnect_my(): restored original connect...\n" );
+		ErrorLogger_FlushLogFile();
+	}
+	else
+		log_error( LOG_WARNING, "Hook_RestoreConnect_my(): old connect() prolog is invalid :(\n" );
+
+	
+	// restore previous access to memory
+	if( g_hook_restore_read_only )
+	{
+		if( Proxied_VirtualProtectEx )
+			ret = Proxy_VirtualProtectEx( (HANDLE)-1, (void *)connect_orig, 6, old_protect, &old_protect_2 );
+		else
+			ret = VirtualProtectEx( (HANDLE)-1, (void *)connect_orig, 6, old_protect, &old_protect_2 );
+		if( (ret != TRUE) )
+		{
+			DWORD le = GetLastError();
+			ErrorLogger_LogLastError( "Hook_RestoreConnect_my(): VirtualProtectEx() failed (restore prev)", le );
+		}
+	}
+
 	ErrorLogger_FlushLogFile();
 }
 
@@ -218,7 +301,7 @@ bool Hook_ValidateInterception_my()
 		logLevel = LOG_WARNING;
 		log_error( LOG_WARNING, "Not intercepted! Dump will follow...\n" );
 	}
-	else log_error( LOG_OK, "Interception OK!\n" );
+	else log_error( LOG_OK, "ws2_32.dll!connect() Interception OK!\n" );
 
 	log_error( logLevel,
 		"dump of machine codes:\n"
@@ -251,7 +334,7 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	DWORD le = 0;
 
 	if( Proxied_VirtualProtectEx )
-		log_error( LOG_WARNING, "connect_hook_my(): Using proxied VirtualProtectEx!\n" );
+		log_error( LOG_WARNING, "connect_hook_my(): START: Using proxied VirtualProtectEx!\n" );
 
 #ifdef _DEBUG
 	log_error( LOG_DEBUGDUMP, "connect_hook_my(): before restoring old code\n" );
@@ -327,14 +410,14 @@ int __stdcall connect_hook_my( unsigned int sock, void *sockaddr, int addrlen )
 	// log
 #ifdef _DEBUG
 	if( paddr->sin_family == AF_INET )
-		log_error_np( LOG_DEBUG, "original connect() returned %d\n", ret );
+		log_error_np( LOG_DEBUG, "... original connect() returned %d\n", ret );
 	ErrorLogger_FlushLogFile();
 #endif
 
 	//Снова заменяем  6 байт функции на команду перехода на нашу функцию
 	pc[0] = pj[0]; pc[1] = pj[1]; pc[2] = pj[2];
 	pc[3] = pj[3]; pc[4] = pj[4]; pc[5] = pj[5];
-	log_error( LOG_DEBUGDUMP, "connect_hook_my(): after setting jump again\n" );
+	log_error( LOG_DEBUGDUMP, "connect_hook_my(): ENDING: after setting jump again\n" );
 
 	// restore prev. protect
 	if( g_hook_restore_read_only )
@@ -370,7 +453,8 @@ int __stdcall connect_nohook_my( unsigned int sock, void *sockaddr, int addrlen 
 	BOOL vp_ret = FALSE;
 	DWORD le = 0; // last error
 
-	if( Proxied_VirtualProtectEx ) log_error( LOG_WARNING, "connect_nohook_my(): Using proxied VirtualProtectEx!\n" );
+	if( Proxied_VirtualProtectEx )
+		log_error( LOG_WARNING, "connect_nohook_my(): Using proxied VirtualProtectEx!\n" );
 
 	po = (unsigned char *)&old_func_prologue;
 	pj = (unsigned char *)&jump_code;
@@ -506,6 +590,7 @@ bool Hook_CheckVirtualProtect()
 	//
 	return ret;
 }
+
 
 __declspec(naked) BOOL __stdcall
 	Proxy_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect )

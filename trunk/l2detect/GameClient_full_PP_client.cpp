@@ -233,7 +233,7 @@ bool GameClient::PP_full_fromClient( unsigned char *bytes, unsigned int len,
 				p->read_protoVer( &(this->gameProtoVer) );
 				delete p;
 				log_error( LOG_PACKETNAME, "Client: 0e ProtocolVersion %u\n", this->gameProtoVer );
-				if( this->gameProtoVer >= 0xFFFFFFF0 )
+				if( this->gameProtoVer >= 0xFFFFFFF0 ) // < 0
 				{
 					this->thisWasJustServerPing = true; // received client ping (full)
 					log_error( LOG_PACKETNAME, "Received client ping server... no process\n" );

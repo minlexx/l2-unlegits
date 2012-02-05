@@ -29,6 +29,7 @@
 #include <shellapi.h>
 #include <shlobj.h>
 #include <commdlg.h>
+#include <Psapi.h>
 // DirectX
 #include <ddraw.h>
 

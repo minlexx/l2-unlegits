@@ -37,6 +37,7 @@ void DebugDlg_OnTimer( HWND hDlg, UINT_PTR nIDEvent );
 void DebugDlg_updateInfo( HWND hDlg );
 void DebugDlg_OnBnClickedValidateInterception( HWND hDlg );
 void DebugDlg_OnBnClickedInterceptConnect( HWND hDlg );
+void DebugDlg_OnBnClickedRestoreConnect( HWND hDlg );
 void DebugDlg_OnBnClickedCheckVP( HWND hDlg );
 void DebugDlg_OnBnClickedDumpAllRelations( HWND hDlg );
 void DebugDlg_OnBnClickedPrintAddrTid( HWND hDlg );
@@ -63,6 +64,7 @@ INT_PTR CALLBACK DebugDlgProc( HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 			case IDC_B_CONDISABLE: DebugDlg_OnBnClickedDisableConsole( hDlg ); break;
 			case IDC_B_VALIDATEINTERCEPT: DebugDlg_OnBnClickedValidateInterception( hDlg ); break;
 			case IDC_B_INTERCEPTCONNECT: DebugDlg_OnBnClickedInterceptConnect( hDlg ); break;
+			case IDC_B_RESTORECONNECT: DebugDlg_OnBnClickedRestoreConnect( hDlg ); break;
 			case IDC_B_CHECK_VIRTUALPROTECTEX: DebugDlg_OnBnClickedCheckVP( hDlg ); break;
 			case IDC_B_LOADWALKER: DebugDlg_OnBnClickedLoadWalker( hDlg ); break;
 			case IDC_B_UNLOADWALKER: DebugDlg_OnBnClickedUnloadWalker( hDlg ); break;
@@ -303,6 +305,12 @@ void DebugDlg_OnBnClickedInterceptConnect( HWND hDlg )
 		log_error( LOG_ERROR, "Seems like my try to intercept ws2_32.dll!connect() failed.\n" );
 		log_error( LOG_ERROR, "All network connections will not be intercepted!\n" );
 	}
+}
+
+void DebugDlg_OnBnClickedRestoreConnect( HWND hDlg )
+{
+	hDlg = NULL;
+	Hook_RestoreConnect_my();
 }
 
 void DebugDlg_OnBnClickedCheckVP( HWND hDlg )

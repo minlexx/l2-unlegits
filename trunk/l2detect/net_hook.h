@@ -8,6 +8,7 @@ bool Hook_ValidateAlign();
 
 // my method
 void Hook_InterceptConnect_my();
+void Hook_RestoreConnect_my();
 bool Hook_ValidateInterception_my();
 bool Hook_IsWinsockConnectOrig();
 bool Hook_CheckVirtualProtect();

@@ -145,6 +145,7 @@ bool GameClient::PP_full_fromServer( unsigned char *bytes, unsigned int len,
 					lpco->init_tables( this->opcodeObfuscator );
 					this->clsObfuscator = (void *)lpco;
 				}
+				else log_error( LOG_PACKETNAME, "Server: 2e KeyPacket: not using obfuscation key! OK\n" );
 			} break; // KeyPacket
 		case 0x09: // CharacterSelectionInfo // Hellbound
 			{

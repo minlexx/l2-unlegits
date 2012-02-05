@@ -36,6 +36,7 @@ void CConfig::_initNull()
 	OverrideGameProtocolVersion = 0;
 	ReplyL2JGameGuardQuery = 0;
 	GraciaEpilogueProtocol_148_hacks = 0;
+	TeonPvP_hacks = 0;
 	// L2Walker fixes
 	L2Walker_DropRequestGMList = 0;
 	L2Walker_FixMoveBackwardToLocation = 1;
@@ -172,6 +173,10 @@ bool CConfig::ReadConfig( const char *szConfigFileName )
 		{
 			sscanf( token, "%d", &(this->GraciaEpilogueProtocol_148_hacks) );
 		}
+		if( strstr( line, "TeonPvP_hacks" ) == line )
+		{
+			sscanf( token, "%d", &(this->TeonPvP_hacks) );
+		}
 		if( strstr( line, "ThreadProirityRaiseEnable" ) == line )
 		{
 			sscanf( token, "%d", &(this->ThreadProirityRaiseEnable) );
@@ -221,13 +226,15 @@ bool CConfig::SaveConfig()
 	fprintf( f, ""
 "# First - configure Lineage2 game protocol version and L2 Client version.\n"
 "# Supported versions are:\n"
-"#  * Chaotic Throne 1 - The Kamael        = 0\n"
-"#  * Chaotic Throne 1.5 - Hellbound       = 1\n"
-"#  * Chaotic Throne 2 - Gracia (Part 1)   = 2\n"
-"#  * Chaotic Throne 2.2 - Gracia Part 2   = 3\n"
-"#  * Chaotic Throne 2.3 - Gracia Final    = 4\n"
-"#  * Chaotic Throne 2.4 - Gracia Epilogue = 5\n"
-"# default is 4 (CT2.3 Gracia Final)\n"
+"#  * Chaotic Throne 1   - The Kamael       = 0\n"
+"#  * Chaotic Throne 1.5 - Hellbound        = 1\n"
+"#  * Chaotic Throne 2   - Gracia (Part 1)  = 2\n"
+"#  * Chaotic Throne 2.2 - Gracia Part 2    = 3\n"
+"#  * Chaotic Throne 2.3 - Gracia Final     = 4\n"
+"#  * Chaotic Throne 2.4 - Gracia Epilogue  = 5\n"
+"#  * 2nd Throne         - Freya            = 6\n"
+"#  * 2nd Throne         - High Five        = 7\n"
+"# default is 6 (CT2.5 Freya)\n"
 "Lineage2Version = %d\n"
 "Lineage2ClientVersion = %d\n"
 "\n\n",
@@ -385,6 +392,12 @@ bool CConfig::SaveConfig()
 	GraciaEpilogueProtocol_148_hacks );
 
 	fprintf( f, ""
+"# Enables server specific protocol handlers for TeonPvP server.\n"
+"TeonPvP_hacks = %d\n"
+"\n",
+	TeonPvP_hacks );
+
+	fprintf( f, ""
 "# Fixes L2Walker wrong or old packets\n"
 "L2Walker_DropRequestGMList = %d\n"
 "L2Walker_FixMoveBackwardToLocation = %d\n"
@@ -426,13 +439,9 @@ bool CConfig::SaveConfig()
 
 void CConfig::SetDefault()
 {
-	// declared in L2PcodeObfuscator.h (include L2Packets.h)
-	//#define L2_VERSION_T1   0
-	//#define L2_VERSION_T15  1
-	//#define L2_VERSION_T2   2
-	//#define L2_VERSION_T22  3
-	L2_version = 4;
-	L2_client_version = 4;
+	// declared in L2_versions.h (include L2Packets.h)
+	L2_version = 7;
+	L2_client_version = 7;
 
 	//   Listen port setup
 	strcpy( FakeListenLoginIP, "127.0.0.1" );
@@ -462,6 +471,7 @@ void CConfig::SetDefault()
 	OverrideGameProtocolVersion = 0;
 	ReplyL2JGameGuardQuery = 0;
 	GraciaEpilogueProtocol_148_hacks = 0;
+	TeonPvP_hacks = 0;
 
 	// L2Walker fixes
 	L2Walker_DropRequestGMList = 0;

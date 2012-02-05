@@ -113,11 +113,11 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 		// window is running in the same process as we are
 		// check window class or name to check is it is main Lineage II window
 		bool isL2Window = false;
-		TCHAR wndTitle[256];
+		wchar_t wndTitle[256];
 		memset( wndTitle, 0, sizeof(wndTitle) );
-		GetWindowText( hWnd, wndTitle, 255 );
+		GetWindowTextW( hWnd, wndTitle, 255 );
 		log_error( LOG_DEBUGDUMP, ".. got window title [%S]\n", wndTitle );
-		if( _tcsicmp( wndTitle, _T("Lineage II") ) == 0 )
+		if( _wcsicmp( wndTitle, L"Lineage II" ) == 0 )
 		{
 			isL2Window = true;
 			log_error( LOG_DEBUG, "... found L2 window by title!\n" );
@@ -126,11 +126,11 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 		if( !isL2Window )
 		{
 			log_error( LOG_DEBUGDUMP, "... window title doesn't match, trying by class name...\n" );
-			TCHAR buffer_for_class_name[256] = {0};
-			if( GetClassName( hWnd, buffer_for_class_name, 255 ) )
+			wchar_t buffer_for_class_name[256] = {0};
+			if( GetClassNameW( hWnd, buffer_for_class_name, 255 ) )
 			{
 				log_error( LOG_DEBUGDUMP, ".... got window class name = [%S]\n", buffer_for_class_name );
-				if( _tcsicmp( buffer_for_class_name, _T("l2UnrealWWindowsViewportWindow") ) == 0 )
+				if( _wcsicmp( buffer_for_class_name, _T("l2UnrealWWindowsViewportWindow") ) == 0 )
 				{
 					isL2Window = true;
 					log_error( LOG_DEBUG, ".... found L2 window by class name!\n" );
@@ -138,6 +138,33 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 			}
 			else
 				ErrorLogger_LogLastError( "GetClassName()", GetLastError() );
+		}
+		// try by process name!
+		if( !isL2Window )
+		{
+			HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION, FALSE, dwPid );
+			if( hProcess )
+			{
+				wchar_t szFileName[512] = {0};
+				//QueryFullProcessImageName( // >=Vista only
+				DWORD nameLen = GetProcessImageFileNameW( hProcess, szFileName, sizeof(szFileName)/sizeof(szFileName[0]) );
+				if( nameLen > 0 )
+				{
+					const wchar_t *wExe = wcsrchr( szFileName, '\\' );
+					if( (_wcsicmp( wExe, L"l2.bin" ) == 0) || (_wcsicmp( wExe, L"l2.exe" ) == 0 ) )
+					{
+						isL2Window = true;
+						wchar_t wClassName[256] = {0};
+						GetClassNameW( hWnd, wClassName, 255 );
+						log_error( LOG_OK, "... found L2 Window by process name (what???) of class [%S]\n", wClassName );
+					}
+				}
+				else
+					ErrorLogger_LogLastError( "GetProcessImageFileName()", GetLastError() );
+				CloseHandle( hProcess );
+			}
+			else
+				ErrorLogger_LogLastError( "OpenProcess()", GetLastError() );
 		}
 		// checks...
 		if( isL2Window ) // found
