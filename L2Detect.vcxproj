@@ -79,7 +79,7 @@
       <AdditionalIncludeDirectories>$(IntDir);l2detect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>dxguid.lib;ddraw.lib;libeay32_st_MTd.lib;ssleay32_st_MTd.lib;winmm.lib;shell32.lib;comctl32.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxguid.lib;ddraw.lib;libeay32_st_MTd.lib;ssleay32_st_MTd.lib;winmm.lib;shell32.lib;comctl32.lib;comdlg32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>l2detect;lib\openssl;lib\directX;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
@@ -118,7 +118,7 @@
       <AdditionalIncludeDirectories>$(IntDir);l2detect;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>libeay32_st_MT.lib;ssleay32_st_MT.lib;user32.lib;advapi32.lib;gdi32.lib;comctl32.lib;winmm.lib;dxguid.lib;ddraw.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libeay32_st_MT.lib;ssleay32_st_MT.lib;user32.lib;advapi32.lib;gdi32.lib;comctl32.lib;winmm.lib;dxguid.lib;ddraw.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>l2detect;lib\openssl;lib\directX;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
