@@ -179,7 +179,8 @@ bool RadarDisplay::preload_surface_from_file( IDirect3DDevice9 *pdevice, IDirect
 			log_error( LOG_ERROR, "RadarDisplay::preload_surface_from_file(): Failed to load [%ux%u] [%S]! Error: %d\n",
 				width, height, fileName, hr );
 	}
-	else log_error( LOG_ERROR, "RadarDisplay::preload_surface_from_file(): Failed to create surface! Error: %d\n", hr );
+	else
+		log_error( LOG_ERROR, "RadarDisplay::preload_surface_from_file(): Failed to create surface! Error: %d (0x%08X)\n", hr, hr );
 	return (hr == NO_ERROR);
 }
 
