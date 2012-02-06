@@ -1,0 +1,9 @@
+Client: Len   23 [RequestPrivateStoreBuy]
+17 00
+83             // pcode
+CE 09 00 10    // seller player oid
+01 00 00 00    // count
+    // for each item
+D0 09 00 10  // item oid
+01 00 00 00  // count
+01 00 00 00  // price

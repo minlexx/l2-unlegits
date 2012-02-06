@@ -1,0 +1,81 @@
+Client: Len   12 [RequestActionUse] | 0C 00 / 56 / 25 00 00 00  00 00 00 00  00 
+
+Server: Len  183 [RecipeShopManageList]
+B7 00
+DE                         // pcode
+09 A5 04 10                // seller oid
+D4 A1 1E 00                // seller adena
+00 00 00 00                // isCommonCraft; 0 - dwarven, 1 - common
+14 00 00 00      // section 2 count
+14 00 00 00           // recipe ID
+01 00 00 00           // seq.number
+15 00 00 00  02 00 00 00
+19 00 00 00  03 00 00 00
+1A 00 00 00  04 00 00 00
+1B 00 00 00  05 00 00 00
+1C 00 00 00  06 00 00 00
+1D 00 00 00  07 00 00 00
+1E 00 00 00  08 00 00 00
+1F 00 00 00  09 00 00 00
+20 00 00 00  0A 00 00 00
+21 00 00 00  0B 00 00 00
+22 00 00 00  0C 00 00 00
+23 00 00 00  0D 00 00 00
+24 00 00 00  0E 00 00 00
+25 00 00 00  0F 00 00 00
+26 00 00 00  10 00 00 00
+27 00 00 00  11 00 00 00
+43 01 00 00  12 00 00 00
+44 01 00 00  13 00 00 00
+60 02 00 00  14 00 00 00
+00 00 00 00       // section 3 count
+XX XX XX XX            // recipe id
+00 00 00 00            // 0x00
+XX XX XX XX            // cost
+
+Client: Len   25 [RequestRecipeShopMessageSet]
+19 00
+BA                         // pcode
+63 00 72 00  61 00 66 00  74 00 20 00  66 00 72 00  65 00 65 00  00 00  // unicode str
+
+Client: Len   31 [RequestRecipeShopListSet]
+1F 00
+BB                         // pcode
+03 00 00 00                // count
+  [ for each recipe ]
+44 01 00 00                // recipe ID
+01 00 00 00                // price
+
+// server makes client sit down
+Server: Len   23 [ChangeWaitType] | 17 00 / 29 / 09 A5 04 10  00 00 00 00  F2 40 01 00  F5 D2 00 00  24 FA FF FF  
+
+//
+Server: Len   29 [RecipeShopMsg]
+1D 00
+E1
+09 A5 04 10    // oid?
+63 00 72 00  61 00 66 00  74 00 20 00  66 00 72 00  65 00 65 00  00 00  // message str
+
+.........
+
+Client: Len    3 [RequestRecipeShopManageQuit] | 03 00 / BC / 
+
+
+
+
+Recipe ID  ==>> item ID conversion from sql table.... or some other
+
+Client: Len   31 [RequestRecipeShopListSet]
+1F 00
+BB
+03 00 00 00
+
+14 00 00 00  // ssd (20)
+01 00 00 00
+
+15 00 00 00 // ssc (21)
+02 00 00 00
+
+44 01 00 00 // bssc (324)
+03 00 00 00  
+

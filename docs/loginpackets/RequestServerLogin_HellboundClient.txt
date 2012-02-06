@@ -1,0 +1,11 @@
+-- Packet size : 34 (22 00)
+-- Packet type : 2 (02)
+
+22 00                     // packet size: 34 bytes (0x0022)
+02                        // packet type: RequestServerLogin
+C7 41 0B 00  4B 34 ED 26  // sessionKey1
+09                        // game server ID
+00 00 00 00  00 00        // 6 0x00 bytes padding to 8-byte border
+24 85 75 E6  00 00 00 00  // checksum + 4 0x00 bytes padding
+00 00 00 00  00 00 00 00  // 8 0x00 bytes padding
+

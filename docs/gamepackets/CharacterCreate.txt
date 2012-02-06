@@ -1,0 +1,16 @@
+Client: Len   63 [CharacterCreate]
+3F 00
+0C             // opcode
+41 00 65 00  72 00 69 00  6E 00 00 00     // name
+01 00 00 00    // race
+01 00 00 00    // sex
+19 00 00 00    // class id
+1C 00 00 00    // INT
+27 00 00 00    // STR
+1E 00 00 00    // CON
+1B 00 00 00    // MEN
+23 00 00 00    // DEX
+0B 00 00 00    // WIT
+00 00 00 00    // hair style
+00 00 00 00    // hair color
+00 00 00 00    // face

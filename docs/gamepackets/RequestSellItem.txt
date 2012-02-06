@@ -1,0 +1,13 @@
+Client: Len   59 [RequestSellItem]
+3B 00
+37                // pcode
+00 00 00 00       // list ID (0 - to NPC?)
+04 00 00 00       // count
+  [[ for each item ]]
+1D 21 01 10       // objectID
+F0 0F 00 00       // itemID
+01 00 00 00       // count
+
+B4 20 01 10  F9 0F 00 00  01 00 00 00
+A5 1C 01 10  03 10 00 00  02 00 00 00
+05 23 01 10  F8 0F 00 00  01 00 00 00

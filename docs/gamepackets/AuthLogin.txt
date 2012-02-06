@@ -1,0 +1,9 @@
+21 00        // 33 b
+2B           // on L2J if obfuscator (last 4 bytes) in KeyPacket are 00 00 00 00
+             // pcode may vary on retail!
+6C 00 65 00  78 00 78 00  00 00 // account login (Unicode string)
+BC C4 1C 61  // sessionKey2 part2
+6A 92 28 32  //  sessionKey2 part1
+62 05 8C 1A  //  sessionKey1 part1
+A7 0D 32 D9  // sessionKey1 part2
+01 00 00 00  // hz

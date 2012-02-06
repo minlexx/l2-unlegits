@@ -1,0 +1,9 @@
+Server: Len   19 [GameGuardQuery]
+13 00
+74
+D9 3D 53 27  1D A5 72 2E  8B 03 17 20  A3 1E 5B C3  
+
+Client: Len   19 [GameGuardReply]
+13 00
+CB
+7F 97 F0 78  04 3C E6 D6  71 0C F6 89  DD 9E 06 70  

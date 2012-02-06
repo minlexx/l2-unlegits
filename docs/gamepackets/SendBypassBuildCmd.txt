@@ -1,0 +1,5 @@
+Client: Len   13 [SendBypassBuildCmd]
+0D 00
+74
+68 00 65 00  61 00 6C 00  00 00  _command = readS();
+

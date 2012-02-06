@@ -1,0 +1,18 @@
+14 00          // len - 20
+1F             // ptype - Action
+39 A4 00 10    // objectID 268477497 of a target
+9A CB 00 00    // originX   52122
+3D 2B FF FF    // originY  -544657
+A9 F3 FF FF    // originZ  -3159
+00             // use shift? 00 - false, 01 - true
+
+
+client sends its own coordinates
+
+(52136,-54431,-3184)
+
+[PACKET] Client: 1F Action [268477497]
+[PACKET] Server: 23 TargetSelected [268636209] -> [268477497]
+                                    my_obj_ID  -> targ_obj_ID
+[PACKET] Server: B9 MyTargetSelected [268477497]
+                                     targ_obj_ID

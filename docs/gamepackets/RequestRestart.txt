@@ -1,0 +1,6 @@
+Client: Len    3
+03 00
+57
+
+send when IN_GAME mode, to character select screen.
+if restart possible server responds with 0x57 RestartResponse

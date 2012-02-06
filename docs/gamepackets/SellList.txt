@@ -1,0 +1,56 @@
+Server: Len 1357 [SellList]
+4D 05
+06
+6F A5 34 00  // cur money
+00 00 00 00  // lease npcID ? O_o wtf
+15 00        // items count
+
+ [ for each item ]
+
+04 00        // type1
+C4 40 07 10  // objectID
+E0 02 00 00  // itemID
+0B 00 00 00  // count
+05 00        // type2
+00 00        // ??
+00 00 00 00  // body part
+00 00        // enchant level
+00 00 00 00  // ??
+C8 00 00 00  // sell price
+FE FF FF FF // atk attrib type
+00 00 00 00 // atk attrib val
+00 00 00 00 // def attr fire
+00 00 00 00 // -- water
+00 00 00 00 // -- wind
+00 00 00 00 // -- earth
+00 00 00 00 // -- holy
+00 00 00 00 // -- unholy
+
+
+L2J WriteImpl
+
+	writeC(0x06);
+	writeD(_money);
+	writeD(_lease == null ? 0x00 : 1000000 + _lease.getTemplate().npcId);
+	writeH(_selllist.size());
+	for (L2ItemInstance item : _selllist)
+	{
+		writeH(item.getItem().getType1());
+		writeD(item.getObjectId());
+		writeD(item.getItemId());
+		writeD(item.getCount());
+		writeH(item.getItem().getType2());
+		writeH(0x00);
+		writeD(item.getItem().getBodyPart());
+		writeH(item.getEnchantLevel());
+		writeH(0x00);
+		writeH(0x00);
+		writeD(item.getItem().getReferencePrice()/2);
+		// T1
+		writeD(item.getAttackElementType());
+		writeD(item.getAttackElementPower());
+		for (byte i = 0; i < 6; i++)
+		{
+			writeD(item.getElementDefAttr(i));
+		}
+	}

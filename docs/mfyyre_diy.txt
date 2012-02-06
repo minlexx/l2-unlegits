@@ -1,0 +1,79 @@
+;-+-
+;Fyyre's babblings...
+;
+;-+-
+
+
+Disabling GameGuard in the L2 client is fairly trivial, since revision 746 (Interlude client).
+
+core.dll exports ?GL2UseGameGuard@@3HA .. to put it simply, this toggles GameGuard on/off depending on whether or not
+this dword is a 0 or 1 ... you can very easily import this function, and overwrite the default value of 1 in your own dll, or just
+use a hex editor, like I do... and change the 01 to 00.
+
+the next step involves engine.dll ... there's a non-exported function, called ExRestartClient (yes, its also a packet).  You can
+locate it by searching the strings for either GameGuard or ExRestartClient..  The sole purpose of ExRestartClient is to cause your
+game to exit with the message "GameGuard Fail!  Please restart Lineage II!", when GG is disabled.  So in order to continue playing,
+we need to ignore this function - the only thing that makes it slightly tricky, Themida.
+
+The developer who added these two lines of code to engine.dll knew exactly what s/he was doing:
+
+mov eax, 1
+ret
+
+Why?  I'll tell you:
+
+because by doing so, allowed patching the Themida'd engine.dll ... ExRestartClient without any problems resulting from editing the what
+would have normally otherwise turned into a soup of garbage opcodes, now valid x86 instructions - writing mov eax, 1 retn to the start
+of ExRestartClient =)
+
+'..and?  Your point?' - I you (the reader) are thinking.
+
+Those two lines aren't present in engine.dll versions 744 and below.  The first Revision 746 Korean client (thanks for the correction smeli =)
+is when they started using Themida.  I draw my own conclusions from this observation.  Or perhaps I'm reading too much into things.
+
+Anyways... back to the point.
+
+this screenshot -->> http://mfyyre.narod.ru/images/patching_engine.jpg
+
+00371260    8EAF FAF616F2   MOV GS, WORD PTR DS:[EDI+F216F6FA] <<-- here (might be different depending on your engine, so just think -
+what I'm saying is pretty straight forward...)
+
+Open engine.dll with WinHex, and go to this offset (alt g) (yes hex... never decimal).
+
+press shift end to select the whole line, and ctrl shift C to copy it as hex.  now tab back into OllyDbg, and scroll up to the start
+of ExRestartClient function... highlight the function start:
+
+int 3
+int 3
+push ebp <<-- click once here, right click, view -> exe file .. now go to this offset in WinHex.
+mov ebp, esp
+
+...follow me?  Okay, now ctrl B .. to write what we copied to this line.  Ignore the 'files larger than 20MB message'.  Exit from
+OllyDbg, now save engine.dll in WinHex.
+
+All done?  Great!  That's all there is to it.
+
+---
+
+
+This file is a brief DIY (Do-It-Yourself) to give those of you who play these other games hints on how to continue this process yourself...
+if none of this makes any sense to you, and you want to disable anti-cheat for MMORPGs - I have three pieces of advise for you:
+
+1). learn assembly language -->> http://webster.cs.ucr.edu/ & http://win32assembly.online.fr/tutorials.html
+
+2). learn to use OllyDbg -->> http://www.ollydbg.de/
+
+3). if you get stuck, google it.  don't depend on others to answer/solve your questions - as you will not learn anything by doing this, google
+and think of the solution until it makes you crazy - it may take some time, but every problem you solve, you are learning and what you learn
+can be applied to future projects.
+
+examples of disable anti-cheat:
+
+note: for games using hackshield, after you patch the around its code, zero out any strings detailing hsupdate.exe, or ehsvc.dll.
+
+disabling gameguard is the same across many game clients (even length of certain jxx, etc are the same, hehe).  I suggest you start looking
+at the trademark two calls to CreateProcessA
+
+[removed the below, as is no longer current]
+
+//Fyyre

@@ -1,0 +1,5 @@
+1A 00                     // packet size - 26 bytes
+07                        // packet code - LoginOK
+8C BF 00 00  C7 41 0B 00  // Session Key #2
+09 2E 5C 18  41 04 00     // padding??
+1F 03 D4 57  00 44 B7 82  // checksum??

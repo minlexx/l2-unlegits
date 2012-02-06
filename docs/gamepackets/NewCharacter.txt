@@ -1,0 +1,3 @@
+Client: Len    3 [NewCharacter]
+03 00      // packet length - 3 bytes
+13         // opcode

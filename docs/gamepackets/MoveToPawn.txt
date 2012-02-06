@@ -1,0 +1,11 @@
+Server: Len   27 [MoveToPawn]
+1B 00
+72                 // MoveToPawn
+6C 08 00 10        // _charObjId   // 6C080010 objectID who is moving (can be user at least)
+B2 16 00 10        // _targetId    // B2160010 is target object id, to which he moves to
+39 00 00 00        // _distance  wtf is 57?..
+C7 AC 00 00        // x
+0A A6 00 00        // y  dunno if it is user coordinates or mob coordinates
+5D F2 FF FF        // z
+
+possible these are target's coordinates

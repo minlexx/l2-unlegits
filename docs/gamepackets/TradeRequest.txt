@@ -1,0 +1,81 @@
+Trading (requester sends):
+Client: Len    7 [TradeRequest] | 07 00
+1A              // pcode
+C5 09 00 10     // objectID of partner
+
+Trade receiver recieves:
+Server: Len    7 [SendTradeRequest]
+07 00
+70             // pcode
+CE 09 00 10    // object ID of person who wants to trade to you
+
+Trade receiver responds:
+Client: Len    7 [AnswerTradeRequest]
+07 00
+55             // pcode
+01 00 00 00    // 1 - ok, 0 - cancel
+
+// then both (requester and receiver) receive
+Server: Len  189 [TradeStart]
+BD 00
+14               // pcode
+C5 09 00 10      // partner objectID
+03 00            // items count (your inv)
+   ///   for each item
+04 00         // item type1
+CF 09 00 10   // item oid
+D4 15 00 00   // item iid
+01 00 00 00   // item count
+05 00         // item type2
+00 00         // 00
+00 00 00 00   // body part
+00 00         // enchant
+00 00 00 00   // 0000
+FE FF FF FF  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00 // attribs
+
+Server: Len   65 [TradeOtherAdd]
+41 00
+1B            // pcode
+01 00         // item cnt
+04 00         // type1
+C0 09 00 10   // oid
+39 00 00 00   // iid
+0D 00 00 00   // cnt
+04 00         // type2
+00 00         // 00
+00 00 00 00   // b.part
+00 00         // enchatnt
+00 00 00 00   // 00 ??
+FE FF FF FF  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00 // attribs
+
+Client: Len   15 [AddTradeItem]
+0F 00
+1B              // pcode
+01 00 00 00     // tradeId? O_o wtf L2J ignores this
+D1 09 00 10     // objectID
+01 00 00 00     // count
+
+Server: Len   65 [TradeOwnAdd]
+41 00
+1A             // pcode
+01 00          // count
+04 00          // type1
+D1 09 00 10    // oid
+9A 29 00 00    // iid
+01 00 00 00    // cnt
+05 00          // type2
+00 00          // 00
+00 00 00 00    // b.part
+00 00          // enchant
+00 00 00 00    // 00
+FE FF FF FF  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  // attribs
+
+Client: Len    7 [TradeDone]
+07 00
+1C              // pcode
+01 00 00 00     // num; 1 - confirm, 0 - cancel trade
+
+Server: Len    7 [TradeDone]
+07 00
+1C              // pcode
+01 00 00 00     // num; 1 - confirm, 0 - cancel trade

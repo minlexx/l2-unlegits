@@ -1,0 +1,67 @@
+Server: Len   85 [PrivateStoreListSell]
+55 00
+A1
+CE 09 00 10              // seller oid
+00 00 00 00              // is package sale
+EB B0 0B 00              // cur.user adena
+01 00 00 00              // sell items count
+ /// for each item
+05 00 00 00         // type2
+D0 09 00 10         // item oid
+F4 25 00 00         // item itemID
+01 00 00 00         // item count
+00 00               // 00
+00 00               // enchant
+00 00               // 00
+00 00 00 00         // body part
+01 00 00 00         // sell price
+00 00 00 00         // reference price (original price)
+FE FF FF FF       // atk attr type
+00 00 00 00       // atk attr val
+00 00 00 00       // def fire
+00 00 00 00       // def water
+00 00 00 00       // def wind
+00 00 00 00       // def earth
+00 00 00 00       // def holy
+00 00 00 00       // def dark
+
+	// player's private shop
+	public PrivateStoreListSell(L2PcInstance player, L2PcInstance storePlayer)
+	{
+		_objId = storePlayer.getObjectId();
+		_playerAdena = player.getAdena();
+		_items = storePlayer.getSellList().getItems();
+		_packageSale = storePlayer.getSellList().isPackaged();
+	}
+
+	@Override
+	protected final void writeImpl()
+	{
+		writeC(0xa1);
+		writeD(_objId);
+		writeD(_packageSale ? 1 : 0);
+		writeD(_playerAdena);
+
+		writeD(_items.length);
+		for (TradeList.TradeItem item : _items)
+		{
+			writeD(item.getItem().getType2());
+			writeD(item.getObjectId());
+			writeD(item.getItem().getItemId());
+			writeD(item.getCount());
+			writeH(0x00);
+			writeH(item.getEnchant());
+			writeH(0x00);
+			writeD(item.getItem().getBodyPart());
+			writeD(item.getPrice()); //your price
+			writeD(item.getItem().getReferencePrice()); //store price
+			
+			// T1
+			writeD(item.getAttackElementType());
+			writeD(item.getAttackElementPower());
+			for (byte i = 0; i < 6; i++)
+			{
+				writeD(item.getElementDefAttr(i));
+			}
+		}
+	}

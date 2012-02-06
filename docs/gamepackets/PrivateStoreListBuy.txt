@@ -1,0 +1,49 @@
+Server: Len   81 [PrivateStoreListBuy]
+51 00
+BE
+CE 09 00 10      // buyer oid
+EA B0 0B 00      // cur.user adena
+01 00 00 00      // sell items count
+  // for each item
+C7 09 00 10     // item oid
+F4 25 00 00     // item itemID
+00 00           // enchant
+02 00 00 00     // count
+00 00 00 00     // reference price
+00 00           // 00
+00 00 00 00     // body part
+05 00           // type2
+01 00 00 00     // buyers price
+02 00 00 00     // ma buy amount
+FE FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 // attributes
+
+writeC(0xbe);
+writeD(_objId); // buyer
+writeD(_playerAdena);
+
+writeD(_items.length);
+
+for (TradeList.TradeItem item : _items)
+{
+	writeD(item.getObjectId());
+	writeD(item.getItem().getItemId());
+	writeH(item.getEnchant());
+	writeD(item.getCount()); //give max possible sell amount
+
+	writeD(item.getItem().getReferencePrice());
+	writeH(0);
+
+	writeD(item.getItem().getBodyPart());
+	writeH(item.getItem().getType2());
+	writeD(item.getPrice());//buyers price
+
+	writeD(item.getCount());  // maximum possible tradecount
+	
+	// T1
+	writeD(item.getAttackElementType());
+	writeD(item.getAttackElementPower());
+	for (byte i = 0; i < 6; i++)
+	{
+		writeD(item.getElementDefAttr(i));
+	}
+}

@@ -1,0 +1,18 @@
+Server: Len   23 [StopMove]
+17 00
+47              // StopMove
+6C 08 00 10     // objectID of char who stopped
+9A AC 00 00     // x
+F9 A4 00 00     // y
+5D F2 FF FF     // z
+45 B9 00 00     // heading
+
+protected final void writeImpl()
+{
+	writeC(0x47);
+	writeD(_objectId);
+	writeD(_x);
+	writeD(_y);
+	writeD(_z);
+	writeD(_heading);
+}

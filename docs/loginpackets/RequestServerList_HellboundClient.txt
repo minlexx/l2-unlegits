@@ -1,0 +1,14 @@
+22 00                    // packet size - 34 bytes
+05                       // packet type - RequestServerList
+e0 43 ef 46  8e dc 83 f2 // sessionKey #1
+04 00 00 00  00 00 00    // some 7 bytes
+b1 6a 9f 6c  00 00 00 00 // checksum and 4 0x00 bytes of checksum padding
+00 00 00 00  00 00 00 00 // 8 0x00 bytes padding
+
+// logining to official server....
+22 00
+05
+C7 41 0B 00  F8 71 7D 00
+04 00 00 00  00 00 00
+05 3B 30 76  00 00 00 00
+00 00 00 00  00 00 00 00

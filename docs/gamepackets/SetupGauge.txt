@@ -1,0 +1,6 @@
+Server: Len   15 [SetupGauge]
+0F 00
+6B
+00 00 00 00    // color  0-blue   1-red  2-cyan  3-
+57 07 00 00    // skill cast time 1879, ms
+57 07 00 00

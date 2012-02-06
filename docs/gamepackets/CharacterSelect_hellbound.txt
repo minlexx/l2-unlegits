@@ -1,0 +1,8 @@
+Client: Len   21
+15 00
+12
+00 00 00 00 // charslot
+00 00 00 00 // rest are constant
+00 00 00 00
+00 00 00 00
+00 00 

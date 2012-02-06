@@ -1,0 +1,13 @@
+Server: Len   45 [PrivateStoreMsgBuy]
+2D 00
+BF
+99 73 06 10               // objectID
+6B 00 61 00  ... 00 00    // store msg
+
+
+protected final void writeImpl()
+{
+	writeC(0xbf);
+	writeD(_objId);
+	writeS(_storeMsg);
+}

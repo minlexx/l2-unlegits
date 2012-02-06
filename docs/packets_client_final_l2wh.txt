@@ -1,0 +1,261 @@
+00 LogoutPacket 
+01 Attack  cddddc
+02 UnknownPacket0x02 cddc
+03 RequestStartPledgeWar cS
+05 RequestStopPledgeWar cS
+07 ResponseAuthGameGuard cddddd
+09 RequestSetPledgeCrest cdb lub cd
+0B RequestGiveNickName cSS
+0C NewCharacter cSdddddddddddd
+0D CharacterDeletePacket cd
+0F MoveBackwardToLocation cdddddd
+10 Say cS
+11 EnterWorldPacket cbddddbdcccccccccccccccccccc
+12 CharacterSelect cdhddd
+13 NewCharacterPacket 
+14 ItemList 
+15 RequestEquipItem cdd
+16 RequestUnEquipItem cd
+17 RequestDraopItemPacket cdQddd
+19 UseItemPacket cdd
+1A TradeRequestPacket cd
+1b AddTradeItemPacket cddQ
+1C TradeDonePacket cd
+1F Action cddddc
+22 RequestLinkHtml cS
+23 RequestBypassToServer cS
+24 RequestBBSWrite cSSSSSS
+25 RequestCreatePledge cS
+26 RequestJoinPledge cdd
+27 RequestAnswerJoinPledge cd
+28 RequestWithDrawalPledge 
+29 RequestOustPledgeMember cS
+2C RequestGetItemFromPet? cdQd
+2E RequestAllyInfo  
+2F RequestCrystallizeItem cdQ
+30 UnknownPacket1
+32 UnknownPacket2
+33 RequestTeleportPacket cddddd lub cdddd
+34 SocialAction cd
+35 ChangeMoveType cd
+36 ChangeWaitType cd
+38 RequestMagicSkillList ddd
+39 RequestMagicSkillUse cddc
+3A SendApperingPacket 
+3D RequestShortCutReg cddddd
+3E RequestShortCutUse cddc
+3F RequestShortCutDel cd
+41 RequestDismissPledge 
+42 RequestJoinParty cSd
+43 RequestAnswerJoinParty cd
+44 RequestWithDrawalParty 
+45 RequestOustPartyMember cS
+46 RequestDismissParty 
+48 RequestTargetCancel ch
+49 Say2 cSd lub cSdS
+4D RequestPledgeMemberList 
+4F RequestMagicList 
+50 RequestSkillList 
+52 MoveWithDelta cddd
+53 GetOnVehicle cdddd
+54 GetOffVehicle cdddd
+55 AnswerTradeRequest cd
+56 RequestActionUse cddc
+57 RequestRestart 
+58 RequestSiegeInfo 
+59 ValidatePosition? cddddd
+5a RequestSEKCustom cdd
+5B StartRotating cdd
+5C FinishRotating cdd
+5e RequestShowboard cd
+5F RequestEnchantItem cdd
+60 RequestDestroyItem cdQ
+62 RequestQuestList 
+63 RequestDestroyQuest cd
+66 RequestPledgeExtendedInfo cS
+67 RequestPledgeCrest cd
+6b RequestSendL2FriendSay cSS
+6C RequestOpenMinimap 
+6d RequestSendMsnChatLog cSSd
+6e RequestReload 
+6F RequestHennaEquip cd
+70 RequestHennaUnequipList cd
+71 RequestHennaUnequipInfo cd
+72 RequestHennaUnequip cd
+73 RequestAcquireSkillInfo cddd
+74 SendBypassBuildCmd cS
+77 RequestFriendInvite cS
+78 RequestFriendAddReply cd
+79 RequestFriendList 
+7A RequestFriendDel cS
+7B CharacterRestorePacket cd
+7C RequestAcquireSkill cdddd lub cddd
+7D RequestRestartPoint cd
+7E RequestGMCommand cSdd
+7F RequestPartyMatchConfig cddd
+80 RequestPartyMatchList cdddddS
+81 RequestPartyMatchDetail cdddd
+82 UnknownPacket3 cd
+84 ReviveReply cd
+85 RequestTutorialLinkHtml cS
+86 RequestTutorialPassCmdToServer cS
+87 RequestTutorialQuestionMarkPressed cd
+88 RequestTutorialClientEvent cd
+89 RequestPetition cSd
+8A RequestPetitionCancel cS
+8B RequestGMList 
+8C RequestJoinAlly cd
+8D RequestAnswerJoinAlly cd
+8E RequestWithdrawAlly  
+8F RequestOustAlly cS
+90 RequestDismissAlly  
+91 RequestSetAllyCrest cdb
+92 RequestAllyCrest cd
+93 RequestChangePetName cS
+94 RequestPetUseItem cd
+95 RequestGiveItemToPet cdQ
+96 RequestPrivateStoreQuitSell
+97 SetPrivateStoreMsgSell cS
+98 RequestPetGetItem cd
+99 RequestPrivateStoreBuyManage?
+9b UnknownPacket4
+9c UnknownPacket5
+9d UnknownPacket6 cS
+9e UnknownPacket7 cd
+A0 SendTimeCheckPacket cdd
+a6 RequestSkillCoolTime 
+a7 RequestPackageSendableItemList cd
+A9 RequestBlock cdS lub cd
+aa RequestCastleSiegeInfo cd
+ab RequestCastleSiegeAttackerList cd
+ac RequestCastleSiegeInfo cd
+AD RequestJoinCastleSiege cddd
+AE RequestConfirmCastleSiegeWaitingList cddd
+af RequestSetCastleSiegeTime cdd
+b1 NetPing cddd
+b2 RequestRemainTime 
+b3 BypassUserCmd cd
+b4 Snoop_quit cd
+B5 RequestRecipeBookOpen cd
+B6 RequestRecipeItemDelete cd
+B7 RequestRecipeItemMakeInfo cd
+B8 RequestRecipeItemMakeSelf cd 
+B9 RequestRecipeShopManageList 
+BA RequestRecipeShopMessageSet cS
+BC RequestRecipeShopManageQuit 
+BD RequestRecipeShopManageCancel 
+BE RequestRecipeShopMakeInfo cdd
+BF RequestRecipeShopMakeDo cddQ
+C0 RequestRecipeShopSellList cd
+c1 RequestObserverEndPacket 
+c2 VoteSociality cd
+c3 RequestHennaItemList cd
+c4 RequestHennaItemInfo cd
+c6 ConfirmDlg cddd
+c8 RequestSSQStatus cc
+c9 PetitionVote cddS
+cb ReplyGameGuardQuery cdddd
+cc RequestPledgePower cddd
+CE RequestDeleteMacro  cd
+
+
+
+D001 RequestManorList ch
+D005 RequestWriteHeroWords chS
+D006 RequestExAskJoinMPCC chS
+D007 RequestExAcceptJoinMPCC chdd
+D008 RequestExOustFromMPCC chS
+D009 RequestOustFromPartyRoom chd
+D00A RequestDismissPartyRoom chdd
+D00B RequestWithdrawPartyRoom chdd
+D00C RequestHandOverPartyMaster chS
+D00D RequestAutoSoulShot chdd
+d00E RequestExEnchantSkillInfo chddd
+d00f RequestExEnchantSkill chdd
+D010 RequestExPledgeCrestLarge  chd
+D011 RequestExSetPledgeCrestLarge chdb lub chd
+D012 RequestPledgeSetAcademyMaster chdSS
+D013 RequestPledgePowerGradeList chch
+D014 RequestPledgeMemberPowerInfo chdS
+D015 RequestPledgeSetMemberPowerGrade chSd
+D016 RequestPledgeMemberInfo chdS
+D017 RequestPledgeWarList chdd
+D018 RequestExFishRanking ch
+D019 RequestPCCafeCouponUse chS
+D01b RequestDuelStart chSd
+D01c RequestDuelAnswerStart chddd
+D01d RequestExSetTutorial chd
+D01e RequestExRqItemLink chd
+D021 RequestKeyMapping ch
+D022 RequestSaveKeyMapping chdb
+D023 RequestExRemoveItemAttribute chd
+D025 RequestExitPartyMatchingWaitingRoom ch
+D026 RequestConfirmTargetItem chd
+D027 RequestConfirmRefinerItem chdd
+D028 RequestConfirmGemStone chdddQ
+D029 RequestOlympiadObserverEnd ch
+D02A RequestCursedWeaponList ch
+D02b RequestCursedWeaponLocation ch
+D02C RequestPledgeReorganizeMember chdSdS
+D02D RequestExMPCCShowPartyMembersInfo chd
+D02E RequestOlympiadMatchList ch
+D02f RequestAskJoinPartyRoom chS
+D030 AnswerJoinPartyRoom chd
+D031 RequestListPartyMatchingWaitingRoom chdddd
+d032 RequestExEnchantSkill chdd
+d033 RequestExEnchantSkill chdd
+d034 RequestExEnchantSkill chdd
+D035 RequestEnchantItemAttribute chd
+D036 NieMaNazwyAleLeciPoUtworzeniuPostaci ch
+D039 RequestBidItemAuction chdQ
+D03a RequestInfoItemAuction chd
+D03b RequestExChangeName chdSd
+D03c RequestAllCastleInfo ch
+D03d RequestAllFortressInfo ch
+D03e RequestAllAgitInfo ch
+D03f RequestFortressSiegeInfo ch
+D040 RequestGetBossRecord chd
+D041 RequestRefine chdddQ
+D042 RequestConfirmCancelItem chd
+D043 RequestConfirmCancelItem chd
+D044 RequestExMagicSkillUseGround chdddddc
+D045 RequestDuelSurrender ch
+d046 RequestExEnchantSkillInfoDetail chddd
+D048 RequestFortressMapInfo chd
+D049 RequestPVPMatchRecord ch
+D04a SetPrivateStoreWholeMsg chS
+D04b RequestDispel chdd
+D04c RequestExTryToPutEnchantTargetItem chd
+D04d RequestExTryToPutEnchantSupportItem chdd
+D04e RequestExCancelEnchantItem ch
+D04f RequestChangeNicknameColor chdSd
+D050 RequestResetNickname ch
+D052 RequestWithDrawPremiumItem chQQ
+D053 RequestJump ch
+D054 RequestStartShowCrataeCubeRank ch
+D055 RequestStopShowCrataeCubeRank ch
+D056 NotifyStartMiniGame ch
+D057 RequestJoinDominionWar chddd
+D058 RequestDominionInfo ch
+D059 RequestExCleftEnter chd
+D05a RequestExBlockGameEnter chdd
+D05b EndScenePlayer chd
+D05c RequestExBlockGameVote chdd
+D063 RequestSeedPhase ch
+D065 BR_GamePoint ch
+D066 BR_ProductList ch
+D067 BR_ProductInfo chd
+DO68 BR_BuyProduct chdd
+
+D05100 RequestBookMarkSlotInfo chd
+D05101 RequestSaveBookMarkSlot chdSdS
+D05102 RequestModifyBookMarkSlot chddSdS
+D05103 RequestDeleteBookMarkSlot chdd
+D05104 RequestTeleportBookMark chdd
+D05105 RequestChangeBookMarkSlot chddd
+
+
+4A00 SuperCmdCharacterInfo ccS
+4A01 SuperCmdSummonCmd ccS
+4A02 SuperCmdServerStatus cc
+4A03 SendL2ParamSetting ccdd

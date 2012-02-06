@@ -1,0 +1,38 @@
+Server: Len   39 [Attack]
+27 00
+33
+6C 08 00 10   // attacker
+B2 16 00 10   // target
+A6 00 00 00   // damage
+00            // flags
+9A AC 00 00     // x
+F9 A4 00 00     // y    coords of attacker
+5D F2 FF FF     // z
+00 00         // count-1
+B2 16 00 10    // attacker (same)
+A6 00 00 00    // damage (same)
+00             // flags (same)
+
+Flags:
+if (soulshot)  _flags |= 0x10 | _grade;
+if (crit)      _flags |= 0x20;
+if (shld > 0)  _flags |= 0x40;
+if (miss)      _flags |= 0x80;
+
+
+		writeC(0x33);
+
+		writeD(_attackerObjId);
+		writeD(_hits[0]._targetId);
+		writeD(_hits[0]._damage);
+		writeC(_hits[0]._flags);
+		writeD(_x);
+		writeD(_y);
+		writeD(_z);
+		writeH(_hits.length-1);
+		for (Hit temp: _hits)
+		{
+			writeD(temp._targetId);
+			writeD(temp._damage);
+			writeC(temp._flags);
+		}

@@ -1,0 +1,8 @@
+Client: Len   19 [RequestBuyItem]
+13 00
+40
+90 00 00 00     // list ID
+01 00 00 00     // count
+  [[ for each item ]]
+25 04 00 00     // itemID
+64 00 00 00     // count

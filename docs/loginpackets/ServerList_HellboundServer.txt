@@ -1,0 +1,196 @@
+L2BasePacket::dumpToFile() begin
+-- Packet size : 250 (FA 00)
+-- Packet type : 4 (04)
+
+FA 00   // packet size - 250 bytes
+04      // packet type (ServerList)
+0B      // game servers count - 11
+09      // lastServer ? :)
+
+// repeated block for each server
+01          // game server ID
+D8 6B F4 82 // game server IP
+61 1E 00 00 // game server port
+00          // age limit?
+01          // is_pvp?
+6E 09       // players online   (2414)
+70 17       // max players      (6000)
+01          // is_up? 01 - up, 00 - down
+00 00 00 00 00
+
+// so, each server info is 1+4+4+1+1+2+2+1+5 = 21 bytes long
+
+// server #2....
+02
+D8 6B F4 85
+61 1E 00 00
+00
+01
+3F 02
+70 17
+01
+00 00 00 00 00
+
+// server #3...
+03
+D8 6B F4 88
+61 1E 00 00
+00
+01
+53 04
+70 17
+01
+00 00 00 00 00
+
+// server #4...
+04
+D8 6B F4 8B
+61 1E 00 00
+00
+01
+56 03
+70 17
+01
+00 00 00 00 00
+
+// server #5...
+05
+D8 6B F4 8E
+61 1E 00 00
+00
+01
+2D 03
+70 17
+01
+00 00 00 00 00
+
+// server #6...
+06
+CE 7F 9B 82
+61 1E 00 00
+00
+01
+73 03
+70 17
+01
+00 00 00 00 00
+
+// server #7
+07
+CE 7F 9B 83
+61 1E 00 00
+00
+01
+19 05
+70 17
+01
+00 00 00 00 00
+
+// server #8
+08
+CE 7F 9B 84
+61 1E 00 00
+00
+01
+96 05
+70 17
+01
+00 00 00 00 00
+
+// server #9 (Teon?)
+09
+CE 7F 91 A2
+61 1E 00 00
+00
+01
+77 12  // cur online: 4727 :)
+70 17  // max online: 6000
+01
+00 00 00 00 00
+
+// server #10 (Franz)
+0A
+CE 7F 91 A3
+61 1E 00 00
+00
+01
+22 0D  // 3362 online
+70 17  // 6000 max online
+01
+00 00 00 00 00
+
+// server #11 (Luna)
+0B
+CE 7F 91 A5
+61 1E 00 00
+00
+01
+75 0E
+70 17
+01
+00 00 00 00 00
+
+00 00 00 00 00 DA A9 B4 02 85 1A E1 26 E0 // where here is checksum...?
+
+L2BasePacket::dumpToFile() end
+
+=======================================
+====== ServerList L2J =================
+=======================================
+
+3A 00
+04
+02
+01
+
+01
+C1 54 1F 05
+61 1E 00 00
+00
+01
+02 00
+C8 00
+01
+00 00 00 00 00
+
+02
+7F 00 00 01
+00 00 00 00
+00
+01
+00 00
+00 00
+00
+00 00 00 00 00
+
+F7 07 49                    // possibly padding
+1C FD 67 F0                 // wtf is here? padding O_o
+73 3C 7C BD                 // here's checksum
+
+==============================================
+L2J 1 server at 127.0.0.1:0000, now offline (online: 0/0)
+22 00
+04 01 01
+01
+7F 00 00 01
+00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 55 E0 40 EB 2E E0 41 EB
+==========================================================================
+L2J 1 server at 127.0.0.1:7777, now online (online: 0/10)
+22 00
+04 01 01
+01
+7F 00 00 01
+61 1E 00 00
+00 01 00 00 0A 00 01
+00 00 00 00 00
+A5 4A AA CE
+B5 54 AA CE
+
+22 00
+04 01 01
+01
+7F 00 00 01
+61 1E 00 00
+00 01 00 00 0A 00 01
+00 00 00 00 00
+6A 46 BB C7 7A 58 BB C7

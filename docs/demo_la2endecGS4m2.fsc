@@ -1,0 +1,373 @@
+// 'demo_la2-endecGS-4m.fsc' Пример ручного декодирования LA2 GS пакетов. Стандартный алгоритм.
+// внутреннее автоопределение и автодекодирование НЕ ИСПОЛЬЗУЕТСЯ, оно отключается (в скрипте).
+//
+// определение трафика и де/кодирование GS полностью на скрипте.
+//
+// используются события-функции 'OnDeCode' и 'OnEnCode'
+//
+// (для работы скрипта необходим WP507F или выше)
+// в примере используется ручная де/кодировка GS пакетов C4/C5/Interlude стандартным алгоритмом.
+// скрипт FS
+//
+// 'demo_la2-endecGS-4m.fsc' это модификация скрипта 'demo_la2-endecGS-4.fsc'
+// добавлено определение Камаэль в GS3 (для WP507F надо скачать файлы определения)
+//
+
+var // будем использовать локальные ключи, а не внутренние (хотя можно любые, без разницы)
+  Kci : string;// - для пакетов пришедших с клиента.
+  Kco : string;//  - для пакетов уходящих на клиент.
+  Ksi : string;//  - для пакетов пришедших с сервера.
+  Kso : string;//  - для пакетов уходящих на сервер.
+  s,s1 : string;
+  scode : boolean;
+  le : integer;
+  ID : integer;
+  CharName : string;
+
+  _seed : integer;  // random generator seed for mixing id tables
+  _1_byte_table : string;
+  _2_byte_table : string;
+  _id_mix : boolean;
+
+  temp_seed : integer;
+
+Procedure OnCreate; // функция-событие на старт скрипта.
+// эта ф-ция вызывается автоматически при старте скрипта (еще до первого пакета)
+// ф-ция не обязательна и может отсутствовать в скриптах ...
+begin
+  //
+  // Поотключаем все АВТОопределения и АВТОдекодирования:
+  //
+  gSys.TrafType := 0; // отключим внутреннее автоопределение трафика
+  gSys.tPDecode := 0; // отключим внутреннее автодекодирование
+  gSys.tKeyType := 0; // отключим начальное автоопределение ключа
+  gSys.Protocol := -1; // протокол соединения (у LS и GS разные ! обычно говорят о протоколе GS)
+  gSys.isGS := 0;
+  gSys.isLS := 0;
+  gSys.tParse := 2; // тип парсинга пакетов (двухбайтовый размер в начале пакета)
+  //
+  scode := false; // флаг де/кодирования GS
+  Kci := ''; Kco := ''; Ksi := ''; Kso := '';
+  //
+  CharName := '';
+  _id_mix := false;
+end;
+
+Procedure OnDestroy; // функция-событие на закрытие скрипта и соединения.
+// эта ф-ция вызывается автоматически при закрытие соединения
+// ф-ция не обязательна и может отсутствовать в скриптах ...
+begin
+end;
+
+procedure _DecGS(var bf : string;var ke : string; tk : integer); // декодируем пакет GS, это обычная ф-ция
+var i,j,b,i1,sz,sk : integer;
+begin
+  // стандартный алгоритм XOR декодирования GS la2
+  sz := length(bf);
+  sk := length(ke);
+  if sk = 0 then exit;
+  b := 0; j := 1;
+  for i := 3 to sz do begin
+    i1 := ord(bf[i]);
+    bf[i] := chr(i1 xor ord(ke[j]) xor b);
+    b := i1;
+    Inc(j,1);
+    if j > sk then j := 1;
+  end;
+  case tk of
+    1: PInt(ke,GInt(ke,1,4)+sz-2,1,4);
+    2: PInt(ke,GInt(ke,1,8)+sz-2,1,8);
+    3: PInt(ke,GInt(ke,9,8)+sz-2,9,8);
+    4: PInt(ke,GInt(ke,9,8)+sz-2,9,8);
+  end;
+end;
+
+procedure _EncGS(var bf : string;var ke : string; tk : integer); // кодируем пакет GS, это обычная ф-ция
+var i,j,b,i1,sz,sk : integer;
+begin
+  // стандартный алгоритм XOR кодирования GS la2
+  sz := length(bf);
+  sk := length(ke);
+  if sk = 0 then exit;
+  i1 := 0; j := 1;
+  for i := 3 to sz do begin
+    bf[i] := chr(ord(bf[i]) xor ord(ke[j]) xor i1);
+    i1 := ord(bf[i]);
+    Inc(j,1);
+    if j > sk then j := 1;
+  end;
+  case tk of
+    1: PInt(ke,GInt(ke,1,4)+sz-2,1,4);
+    2: PInt(ke,GInt(ke,1,8)+sz-2,1,8);
+    3: PInt(ke,GInt(ke,9,8)+sz-2,9,8);
+    4: PInt(ke,GInt(ke,9,8)+sz-2,9,8);
+  end;
+end;
+
+procedure _pseudo_srand(seed : integer);
+begin
+     _seed := seed;
+end;
+
+function _pseudo_rand: integer;
+var
+   a : integer;
+begin
+     a := (Int64(_seed) * $343fd + $269EC3) and $FFFFFFFF;
+     _seed := a;
+     result := (_seed shr $10) and $7FFF;
+//     writelogln(format('rand = %x; seed = %x',[result, _seed]));
+end;
+
+procedure _init_tables(seed: integer);
+var
+   i : integer;
+   x : byte;
+   rand_pos : integer;
+   cur_pos : integer;
+begin
+     _1_byte_table := '';
+     _2_byte_table := '';
+
+     for i := 0 to $D0 do begin
+         _1_byte_table := _1_byte_table + chr(i);
+     end;
+     for i := 0 to $4D do begin
+         _2_byte_table := _2_byte_table + chr(i) + #$0;
+     end;
+     _pseudo_srand(seed);
+     for i := 2 to $D1 do begin
+         rand_pos := (_pseudo_rand mod i) + 1;
+         x := GInt(_1_byte_table, rand_pos, 1);
+         PInt(_1_byte_table, GInt(_1_byte_table, i, 1), rand_pos, 1);
+         PInt(_1_byte_table, x, i, 1);
+     end;
+
+     cur_pos := 3;
+     for i := 2 to $4E do begin
+         rand_pos := _pseudo_rand mod i;
+         x := GInt(_2_byte_table, rand_pos * 2 + 1 , 2);
+         PInt(_2_byte_table, GInt(_2_byte_table, cur_pos, 2), rand_pos * 2 + 1, 2);
+         PInt(_2_byte_table, x, cur_pos, 2);
+         cur_pos := cur_pos + 2;
+     end;
+
+     cur_pos := Pos(#$12, _1_byte_table);
+     x := GInt(_1_byte_table, $13, 1);
+     PInt(_1_byte_table, $12, $13, 1);
+     PInt(_1_byte_table, x, cur_pos, 1);
+
+     cur_pos := Pos(#$B1, _1_byte_table);
+     x := GInt(_1_byte_table, $B2, 1);
+     PInt(_1_byte_table, $B1, $B2, 1);
+     PInt(_1_byte_table, x, cur_pos, 1);
+
+
+end;
+
+procedure _decode_ID(var buff:string);
+var
+   p: integer;
+begin
+//     writelogln(format('changing %x -> %x',[GInt(buff, 3, 1),GInt(_1_byte_table, GInt(buff, 3, 1)+1, 1) ]));
+     PInt(buff, GInt(_1_byte_table, GInt(buff, 3, 1) + 1, 1) , 3, 1);
+     if GInt(buff, 3, 1) = $D0 then begin
+
+          PInt(buff, GInt(_2_byte_table, GInt(buff, 4, 1) * 2 + 1, 1) , 4, 1);
+
+     end;
+end;
+
+procedure _encode_ID(var buff:string);
+var
+   p: integer;
+begin
+     if GInt(buff, 3, 1) = $D0 then begin
+        p:= pos(Chr(GInt(buff, 4, 1)), _2_byte_table);
+        PInt(buff, ((p + 1) shr 1) - 1, 4, 1);
+     end;
+     p := pos(Chr(GInt(buff, 3, 1)), _1_byte_table);
+//     writelogln(format('changing %x -> %x',[GInt(buff, 3, 1), p-1]));
+
+     PInt(buff, p-1, 3, 1);
+
+
+end;
+
+
+Procedure Trafic_Detector;
+var _s : string;
+begin
+  // Определим тип трафика и тип сервера.
+  // Внимание! при необходимости, определение трафика можно дополнить новыми вариантами =)
+  //
+  le := length(_dBuff); // _dBuff - входной пакет (так как эта ф-ция вызвана из OnDeCode)
+  //
+  // Определим тип трафика (в этом примере нас интересует только LA2)
+  //
+  if (gSys.TrafType = 0) and (_gAbsNumPkt = 1) then begin
+    case le of
+     $0B,$9B,$AB,$BA: begin
+                    gSys.TrafType := 2;  // LA2
+                    gSys.isLS := 1;      // LS
+                    if le = $0B then gSys.tKeyType := 1 else gSys.tKeyType := 2; // это для LS, пока не потребуется
+                  end;
+     $107: begin
+             gSys.TrafType := 2;  // LA2
+             gSys.isGS := 1;      // GS
+           end;
+     $07: begin
+             gSys.TrafType := 2;  // LA2
+             gSys.isGS := 2;      // GS
+          end;
+     else if le >= $107 then begin // более надежный способ определить LA2 GS
+            if pos(HStr('05 52 05 54 07 51 51 55 07 02 53 53 00 52 05 52'),_dBuff) <> 0 then begin
+            // если найдена строчка '.R.T.QQU..SS.R.R' (древний рим епть =) тогда это гейм сервер ла2.
+              gSys.TrafType := 2;  // LA2
+              gSys.isGS := 2;      // GS
+            end;
+
+            if StrCmp(copy(_dBuff, 3, 5), HStr('0E 3C 03 00 00')) then begin
+              writelogln('CT1 traffic detected');
+              gSys.TrafType := 2;  // LA2
+              gSys.isGS := 3;      // GS CT1
+            end;
+
+          end;
+    end;
+    //
+    if gSys.TrafType = 2 then gSys.SetIDposlen(3,1); // ID в пакетах LA2 находится в третьем байте, размер 1 байт.
+    if gSys.isGS > 0 then gSys.Protocol := gInt(_dBuff,4,4); // берем номер протокола GS
+
+    // продублим протоколы CT1
+    if gSys.Protocol >= 828 then gSys.isGS := 3;      // GS CT1
+                                                      // GS CT1+ пока такой же
+  end;
+  //
+  // определим ключ GS:
+  //
+  if (_gAbsNumPkt = 2) then
+
+  if  (gSys.TrafType = 2) and (gSys.isGS > 0) and _dFromServ then begin
+    if (le = 12) then gSys.tKeyType := 1; // 12 байтный пакет - тип 1. GSDecodeJ (90% l2j)
+    if (le = 16) then gSys.tKeyType := 2; // 16 байтный пакет - тип 2. GSDecode (sub-off servers)
+    if (le = $1A) then gSys.tKeyType := 3; // часть фри серверов Interlude
+    if (le = $1C) then gSys.tKeyType := 3; // часть фри серверов Interlude
+    if (le = $15) then gSys.tKeyType := 3; // официальные сервера Interlude (на данный момент)
+    if (le = $19) then gSys.tKeyType := 4; // официальные сервера CT1+
+    if gSys.tKeyType > 0 then begin
+      s := copy(_dBuff,5,16);
+      if gSys.tKeyType < 3 then s := copy(s,1,4)+Hstr('A1 6C 54 87'); // C4/C5/псевдо интерлюд.
+      if gSys.tKeyType = 3 then s := copy(s,1,8)+Hstr('C8 27 93 01 A1 6C 31 97'); // интерлюд.
+      if gSys.tKeyType = 4 then begin
+         s := copy(s,1,8)+Hstr('C8 27 93 01 A1 6C 31 97');
+         _id_mix := true;
+//         ScriptTimeOut(30000);
+         _init_tables(GInt(_dBuff, $16, 4));
+         writelogln('kamael+ trafic detected');
+//         writelog('one byte table');
+//         writelogHexB(_1_byte_table);
+//         writelog('two byte table');
+//         writelogHexB(_2_byte_table);
+
+//         gSys.sleep(10000);
+//         ScriptTimeOut(1000);
+      end;
+      Kci := s; Kco := s; Ksi := s; Kso := s;
+      scode := true; // запустим де/кодирование GS
+      writelogln('key:');writeloghexb(s);
+    end else writelogln('неопознанный ключевой пакет GS LA2 протокола')
+  end;
+  //
+end;
+
+Procedure OnDeCode; // функция-событие на декодирование пакета.
+// эта ф-ция вызывается при получении пакета, ДО автоматического декодирования (если включено) и ДО записей в автологгер основных пакетов
+// ф-ция не обязательна и может отсутствовать в скриптах ...
+// входной буфер '_dBuff', выходной '_dOutBuff', флаг направления '_dFromServ' (не перепутайте)
+begin
+  //writelogln('OnDeCode ..');
+
+  // _dBuff - входной пакет для декодирования
+  if _gAbsNumPkt < 6 then Trafic_Detector; // определим трафик и тип сервера (в пределах 5 первых пакетов, для LA2 этого хватит)
+  //
+  if scode and (_gAbsNumPkt > 2) then begin
+  // декодируем пакет, ручная реализация стандартного алгоритма.
+    if _dFromServ then
+      _DecGS(_dBuff,Ksi,gSys.tKeyType)
+    else begin
+      _DecGS(_dBuff,Kci,gSys.tKeyType);
+      writelogHexB(_dBuff);
+      if _id_mix then _decode_id(_dBuff);
+    end;
+    _dOutBuff := _dBuff;
+  end;
+end;
+
+Procedure OnEnCode; // функция-событие на кодирование пакета.
+// эта ф-ция вызывается перед отсылкой пакета, после записи в автологгер основных пакетов и после автоматического кодирования (если включено)
+// так же ф-ция вызывается автоматически при использовании gSys.EnSendC и gSys.EnSendS
+// !! Внимание !!
+// в OnEnCode запрещено использовать ф-ции gSys.EnSendC и gSys.EnSendS во избежание замкнутой рекурсии
+// ф-ция не обязательна и может отсутствовать в скриптах ...
+// входной буфер '_dBuff', выходной '_dOutBuff', флаг направления '_dFromServ' (не перепутайте)
+begin
+  //writelogln('OnEnCode ..');
+
+  if scode and (_gAbsNumPkt > 2) then begin
+  // кодируем пакет, ручная реализация стандартного алгоритма
+    if _dFromServ then
+      _EncGS(_dBuff,Kco,gSys.tKeyType)
+    else begin
+      if _id_mix then _encode_id(_dBuff);
+      _EncGS(_dBuff,Kso,gSys.tKeyType);
+    end;
+    _dOutBuff := _dBuff;
+
+    //if _dFromServ then gSys.EnSendC(_dBuff) else gSys.EnSendS(_dBuff);
+    //gBlockPacket;
+  end;
+end;
+
+procedure SendMsg(msg : string); // ф-ция для вывода любого сообщения в чат клиента (другим не видно)
+begin
+  if (gSys.isGS > 0) and (gSys.TrafType = 2) then  // проверка на трафик LA2 GS
+    gSys.EnSendC(FormatPck('%cddss',[#$4A,0,10,#0,msg+#0]));
+end;
+
+BEGIN
+  // Тело скрипта
+  // вызывается при получении пакета прошедшего все декодировоки и автодекодировки
+  // как обычно, здесь пакет приходит в _gBuff и если его надо изменить, то пишем в _gOutBuff
+  // ...
+
+  if length(_gBuff) < 3 then exit;
+  ID := gInt(_gBuff,3,1);
+  //if (ID = $FE) or (ID = $D0) then ID := gInt(_gBuff,3,2);
+  //
+  // в качестве примера
+  if ID = $15 then begin // возьмем имя выбранного персонажа
+    //GetAnsiStr(copy(_gBuff,4,
+    ScanPck5(_gBuff,4,'s',CharName, null, null, null, null);
+    CharName := trim(CharName);
+    Writelogln('Выбранный перс: '+CharName);
+  end;
+  //
+
+  // CT1+ table reset on char selected
+  if ID = $0B then begin
+
+      ScanPck5(_gBuff, 4, 's-99-99-04d' ,CharName, temp_seed, null, null, null);
+      writelogln(format('reseting id tables on CharSelected; Seed = %x',[temp_seed]));
+     _init_tables(temp_seed);
+
+  end;
+
+
+
+
+  // ... далее пакет логируется и уходит на автокодировку затем на кодировку (OnEnCode) и отправляется.
+END.
+
+
+

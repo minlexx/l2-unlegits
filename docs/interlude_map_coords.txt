@@ -1,0 +1,27 @@
+0,0-655,1310
+
+line 22: x =  -94 344 [ix = 182]
+line 45: x =  185 823
+dline = 23; dx = 280 167
+x per line = 12181
+
+line 24: y = -213 611
+line 62: y =  249 634
+dline = 38
+y per line = 12190
+
+-94344 - [3*12185 = 36555] = -130899; kx = -130899
+-213611 - [4*12185 = 48740] = -262351; ky = -262351
+
+line num starts with x: 19; y: 20 ... why?..
+dline on img = 61px; dline on game map ~= 12185
+dc = dlm / dli = 199.75 ~= 200
+
+===================================================
+Constants: dc = 200;   kx = -130899;   ky = -262351
+Input: mx, my - coords of point in game
+Output: ix, iy - coords of point on image
+---------------------------------------------------
+ix = (mx - kx) / dc
+iy = (my - ky) / dc
+===================================================

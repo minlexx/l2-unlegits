@@ -1,0 +1,190 @@
+// corrector-3.fsc скрипт для дополнительного [де]кодирования  ID исходящих пакетов геймсервера
+// в настоящее время, по видимому, нужен только для офа.
+// Автоопределение LA2 должно быть ВКЛЮЧЕНО.
+//
+
+var
+
+_seed : integer;  // random generator seed for mixing id tables
+_1_byte_table : string;
+_2_byte_table : string;
+_2_byte_table_size: integer;
+_id_mix : boolean;
+
+
+temp_seed : integer;
+CharName : string;
+
+Procedure OnCreate;
+begin
+
+     _id_mix := false;
+
+end;
+
+procedure _pseudo_srand(seed : integer);
+begin
+     _seed := seed;
+end;
+
+function _pseudo_rand: integer;
+var
+   a : integer;
+begin
+     a := (Int64(_seed) * $343fd + $269EC3) and $FFFFFFFF;
+     _seed := a;
+     result := (_seed shr $10) and $7FFF;
+//     writelogln(format('rand = %x; seed = %x',[result, _seed]));
+end;
+
+procedure _init_tables(seed: integer; _2_byte_size: integer);
+var
+   i : integer;
+   x : byte;
+   rand_pos : integer;
+   cur_pos : integer;
+begin
+
+     _1_byte_table := '';
+     _2_byte_table := '';
+
+     _2_byte_table_size := _2_byte_size;
+
+     for i := 0 to $D0 do begin
+         _1_byte_table := _1_byte_table + chr(i);
+     end;
+     for i := 0 to _2_byte_size do begin
+         _2_byte_table := _2_byte_table + chr(i) + #$0;
+     end;
+     _pseudo_srand(seed);
+     for i := 2 to $D1 do begin
+         rand_pos := (_pseudo_rand mod i) + 1;
+         x := GInt(_1_byte_table, rand_pos, 1);
+         PInt(_1_byte_table, GInt(_1_byte_table, i, 1), rand_pos, 1);
+         PInt(_1_byte_table, x, i, 1);
+     end;
+
+     cur_pos := 3;
+     for i := 2 to _2_byte_size+1 do begin
+         rand_pos := _pseudo_rand mod i;
+         x := GInt(_2_byte_table, rand_pos * 2 + 1 , 2);
+         PInt(_2_byte_table, GInt(_2_byte_table, cur_pos, 2), rand_pos * 2 + 1, 2);
+         PInt(_2_byte_table, x, cur_pos, 2);
+         cur_pos := cur_pos + 2;
+     end;
+
+     cur_pos := Pos(#$12, _1_byte_table);
+     x := GInt(_1_byte_table, $13, 1);
+     PInt(_1_byte_table, $12, $13, 1);
+     PInt(_1_byte_table, x, cur_pos, 1);
+
+     cur_pos := Pos(#$B1, _1_byte_table);
+     x := GInt(_1_byte_table, $B2, 1);
+     PInt(_1_byte_table, $B1, $B2, 1);
+     PInt(_1_byte_table, x, cur_pos, 1);
+
+     writelogln('one byte table');
+     writeloghexB(_1_byte_table);
+     writelogln('two byte table');
+     writeloghexB(_2_byte_table);
+
+     _id_mix := true;
+end;
+
+procedure _decode_ID(var buff:string);
+var
+   p: integer;
+begin
+//     writelogln(format('changing %x -> %x',[GInt(buff, 3, 1),GInt(_1_byte_table, GInt(buff, 3, 1)+1, 1) ]));
+     writelogln(format('id changed %x -> %x',[GInt(buff, 3, 1), GInt(_1_byte_table, GInt(buff, 3, 1) + 1, 1)]));
+     PInt(buff, GInt(_1_byte_table, GInt(buff, 3, 1) + 1, 1) , 3, 1);
+     if GInt(buff, 3, 1) = $D0 then begin
+          if GInt(buff, 4, 1) > _2_byte_table_size then begin
+             writelogln(format('incompatible subID %x detected',[GInt(buff, 4, 1)]));
+             writelogln('packet - blocked, terminating....');
+             gBlockPacket;
+             gSys.Killself;
+          end;
+          writelogln(format('sub id changed %x -> %x',[GInt(buff, 4, 1), GInt(_2_byte_table, GInt(buff, 4, 1) * 2 + 1, 1)] ));
+          PInt(buff, GInt(_2_byte_table, GInt(buff, 4, 1) * 2 + 1, 1) , 4, 1);
+     end;
+end;
+
+procedure _encode_ID(var buff:string);
+var
+   p: integer;
+begin
+     if GInt(buff, 3, 1) = $D0 then begin
+        p:= pos(Chr(GInt(buff, 4, 1)), _2_byte_table);
+        writelogln(format('changing back subID %x -> %x', [ GInt(buff, 4, 1), ((p + 1) shr 1) - 1 ]));
+        PInt(buff, ((p + 1) shr 1) - 1, 4, 1);
+
+     end;
+     p := pos(Chr(GInt(buff, 3, 1)), _1_byte_table);
+     writelogln(format('changing back ID %x -> %x',[GInt(buff, 3, 1), p-1]));
+
+     PInt(buff, p-1, 3, 1);
+
+
+end;
+
+
+
+Procedure OnDeCodeAlt;
+begin
+     if _id_mix and (not _dFromServ) then begin
+
+        _dOutBuff := _dBuff;
+        _Decode_ID(_dOutBuff);
+
+     end;
+
+end;
+
+Procedure OnEnCodeAlt;
+begin
+
+     if _id_mix and (not _dFromServ) then begin
+
+        _dOutBuff := _dBuff;
+        _Encode_ID(_dOutBuff);
+
+     end;
+
+end;
+
+
+
+begin
+
+     // определение трафика и установка таблиц
+     // жесткая привязка к используемому варианту протокола
+
+     if _gAbsNumPkt = 2 then begin
+
+        if (gSys.TrafType = 2) and (gSys.isGS = 3) and (Length(_gBuff) = $19) then begin
+           if gSys.Protocol = 851 then _init_tables(GInt(_dBuff, $16, 4), $55); // CT2
+           if gSys.Protocol = 831 then _init_tables(GInt(_dBuff, $16, 4), $4E); // CT1.5+
+
+
+        end;
+//        writelogln(format('TrafType = %d, isGS= %d, Protocol = %d',[gSys.TrafType, gSys.isGS, gSys.Protocol]));
+
+
+     end;
+
+
+       if _id_mix and (GInt(_gBuff, 3, 1) = $0B) then begin
+
+          ScanPck5(_gBuff, 4, 's-99-99-04d' ,CharName, temp_seed, null, null, null);
+          writelogln(format('reseting id tables on CharSelected; Seed = %x',[temp_seed]));
+          _init_tables(temp_seed,_2_byte_table_size);
+
+       end;
+
+
+
+
+end.
+
+

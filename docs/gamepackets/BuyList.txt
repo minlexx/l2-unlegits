@@ -1,0 +1,76 @@
+Server: Len 2765 [BuyList] |
+CD 0A
+07
+C7 55 35 00           // money    3495367
+90 00 00 00           // list ID     144
+2B 00                 // items count  43
+
+04 00            // item type 1   0-weapon/ring/earring/necklace  1-armor/shield  4-item/questitem/adena
+00 00 00 00      // objectID
+2B 07 00 00      // itemID     1835 Soulshot no grade
+00 00 00 00      // current count
+05 00            // item type2    0-weapon  1-shield/armor  2-ring/earring/necklace  3-questitem  4-adena  5-item
+00 00            // ??
+00 00 00 00      // bodypart (for armor)
+00 00            // enchant level
+00 00 00 00      // ??
+07 00 00 00      // price (=7)
+FE FF FF FF      // atk attribute type (-2) \\
+00 00 00 00      // atk attribute value      \\
+00 00 00 00      // fire def                  \\
+00 00 00 00      // water def                 ||    element attributes
+00 00 00 00      // wind def                  ||
+00 00 00 00      // earth def                 //
+00 00 00 00      // holy def                 //
+00 00 00 00      // unholy def              //
+
+
+
+
+protected final void writeImpl()
+	{
+		writeC(0x07);
+		writeD(_money);		// current money
+		writeD(_listId);
+
+		writeH(_list.size());
+
+		for (L2TradeItem item : _list)
+		{
+			if (item.getCurrentCount() > 0 || !item.hasLimitedStock())
+			{
+				writeH(item.getTemplate().getType1()); // item type1
+				writeD(0x00); //objectId
+				writeD(item.getItemId());
+				writeD(item.getCurrentCount() <0 ? 0 : item.getCurrentCount());
+				writeH(item.getTemplate().getType2());	// item type2
+				writeH(0x00);	// ?
+
+				if (item.getTemplate().getType1() != L2Item.TYPE1_ITEM_QUESTITEM_ADENA)
+				{
+					writeD(item.getTemplate().getBodyPart());
+					writeH(0x00); // item enchant level
+					writeH(0x00); // ?
+					writeH(0x00);
+				}
+				else
+				{
+					writeD(0x00);
+					writeH(0x00);
+					writeH(0x00);
+					writeH(0x00);
+				}
+
+	            if (item.getItemId() >= 3960 && item.getItemId() <= 4026)//Config.RATE_SIEGE_GUARDS_PRICE-//'
+	                writeD((int)(item.getPrice() * Config.RATE_SIEGE_GUARDS_PRICE * (1 + _taxRate)));
+	            else
+	                writeD((int)(item.getPrice() * (1 + _taxRate)));
+                
+                // T1
+				for (byte i = 0; i < 8; i++)
+				{
+					writeD(0x00);
+				}
+			}
+		}
+	}

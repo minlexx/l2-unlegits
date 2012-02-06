@@ -1,0 +1,9 @@
+Client: Len   23 [SetPrivateStoreListSell]
+17 00
+31             // pcode
+00 00 00 00    // package?
+01 00 00 00    // count
+
+2D 9A 06 10    // obj ID
+DC 13 00 00    // count
+0E 00 00 00    // price

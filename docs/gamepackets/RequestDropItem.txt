@@ -1,0 +1,14 @@
+Client: Len   23 [RequestDropItem]
+17 00
+17
+E4 09 00 10   // objectID
+01 00 00 00   // count
+F4 AA 00 00   //  x
+2F A4 00 00   //  y
+43 F2 FF FF   //  z
+
+_objectId = readD();
+_count    = readD();
+_x        = readD();
+_y        = readD();
+_z        = readD();
