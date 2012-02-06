@@ -71,6 +71,8 @@ void L2Packets_GetL2PacketName(
 	// Gracia Final has too many differences...
 	case L2_VERSION_T23:
 	case L2_VERSION_T24: // for a while think that Epilogue has same opcodes as Gracia Final
+	case L2_VERSION_FREYA:
+	case L2_VERSION_HF:
 		{
 			if( fromServer )
 				L2Packets_GetL2PacketName_fromServer_t23( opcode1, opcode2, outPacketName, cchMax );

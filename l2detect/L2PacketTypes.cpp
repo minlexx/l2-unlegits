@@ -45,7 +45,7 @@ void L2PacketTypes_LogClient
 		case 0x12: log_error( LOG_PACKETNAME, "Client: 12 CharacterSelect\n" ); break;
 		case 0x13: log_error( LOG_PACKETNAME, "Client: 13 NewCharacter\n" ); break;
 		case 0x0c: log_error( LOG_PACKETNAME, "Client: 0c CharacterCreate\n" ); break;
-		case 0xd0:
+		case 0xd0:	
 			{
 				switch( ptype2 )
 				{
@@ -87,6 +87,7 @@ void L2PacketTypes_LogClient
 	} // switch( state )
 }
 
+
 void L2PacketTypes_LogServer
 (
 	L2_VERSION      l2_version,
@@ -102,9 +103,18 @@ void L2PacketTypes_LogServer
 	{
 	case GCST_CONNECTED:
 		{
+			switch( ptype )
+			{
+			case 0x2e: log_error( LOG_PACKETNAME, "Server: 2e KeyPacket\n" ); break;
+			case 0x09: log_error( LOG_PACKETNAME, "Server: 09 CharacterSelectionInfo\n" ); break;
+			}
 		} break;
 	case GCST_AUTHED:
 		{
+			switch( ptype )
+			{
+			case 0x09: log_error( LOG_PACKETNAME, "Server: 09 CharacterSelectionInfo\n" ); break;
+			}
 		} break;
 	case GCST_IN_GAME:
 		{
