@@ -1,0 +1,72 @@
+Server: Len  313 [CharacterSelectionInfo]
+39 01
+09
+01 00 00 00   // num chars
+07 00 00 00   // server max chars
+00            // 00 
+
+41 00 6C 00 65 00 78 00 78 00 69 00 61 00 00 00  // name
+7A 0B 03 00                                      // oid
+6D 00 69 00 6E 00 6C 00 65 00 78 00 78 00 00 00  // acc
+46 8D 2A 54                             /// play ok 1
+00 00 00 00                                /// clan id
+00 00 00 00         // 0x00
+01 00 00 00         // sex
+00 00 00 00         // race
+10 00 00 00         // base cls
+01 00 00 00         // 0x01 - active
+E8 AA 00 00         \
+58 42 FF FF          > x,y,z
+E8 FC FF FF         /
+00 00 00 00  00 06 A6 40  // hp cur
+00 00 00 00  00 98 AC 40  // mp cur
+39 B9 56 00               // sp
+A6 8E F5 0B  00 00 00 00  // exp
+3F 00 00 00                // level 63
+00 00 00 00              // karma
+00 00 00 00              // pk
+02 00 00 00              // pvp
+00 00 00 00             \
+00 00 00 00
+00 00 00 00
+00 00 00 00                 > 7 zero dwords
+00 00 00 00
+00 00 00 00
+00 00 00 00              /
+70 25 00 00            \  HAIRALL
+39 30 00 00               REAR
+32 30 00 00               LEAR
+30 30 00 00               NECK
+31 30 00 00               RFINGER
+31 30 00 00               LFINGER
+00 02 00 00               HEAD
+C2 2E 00 00               RHAND
+00 00 00 00               LHAND
+87 16 00 00               GLOVES
+67 09 00 00               CHEST
+00 00 00 00               LEGS
+93 16 00 00               FEET
+00 00 00 00               BACK
+00 00 00 00               LRHAND
+F4 22 00 00               HAIR
+00 00 00 00               HAIR2
+75 25 00 00               RBRACELET
+00 00 00 00               LBRACELET
+00 00 00 00               DECO1
+00 00 00 00                   2
+00 00 00 00                   3
+00 00 00 00                   4
+00 00 00 00                   5
+00 00 00 00                   6
+00 00 00 00               BELT
+02 00 00 00               hStyle
+03 00 00 00                hColor
+00 00 00 00                 face
+00 00 00 00 00 06 A6 40       HP max 
+00 00 00 00 00 98 AC 40       MP max
+00 00 00 00                 del secs
+10 00 00 00             classId
+01 00 00 00            1 - last used char
+00                 enchantEffect
+00 00 00 00        aug Id
+00 00 00 00        transform id

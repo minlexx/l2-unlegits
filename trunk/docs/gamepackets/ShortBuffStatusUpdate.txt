@@ -1,0 +1,13 @@
+protected final void writeImpl()
+{
+	writeC(0xfa);
+	writeD(_skillId);
+	writeD(_skillLvl);
+	writeD(_duration); // in seconds!
+}
+
+0D 00
+FA
+XX XX XX XX
+XX XX XX XX
+XX XX XX XX  // in seconds!

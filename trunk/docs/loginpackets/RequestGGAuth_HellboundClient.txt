@@ -1,0 +1,12 @@
+2a 00       // length .... 0x2A = 42 bytes... data length must be 40 bytes
+07          // packet ID -  RequestGGAuth     // 1 // byte count
+e2 76 b8 e3 // wtf? SessionID?                // 5
+00 00 00 00                                   // 9
+00 00 00 00                                   // 13
+00 00 00 00                                   // 17
+00 00 00 00                                   // 21
+00 00 00     // 3 bytes - padding?            // 24 // padded to 8-byte border
+e4 e2 76 b8  // checksum?                     // 28
+00 00 00 00                                   // 32 // pad must end here!... why more 16 bytes?..
+00 00 00 00                                   // 36
+00 00 00 00                                   // 40

@@ -1,0 +1,59 @@
+/**
+ * 3 section to this packet
+ * 1)playerinfo which is always sent
+ * 2)list of items which can be added to sell
+ * 3)list of items which have already been setup
+ */
+
+Server: Len 2255 [PrivateStoreManageListSell]
+CF 08
+A0            // pcode
+
+// section 1
+
+09 A5 04 10   // player (user) objectID
+00 00 00 00   // is package sale
+87 C1 00 00   // player (user) adena
+
+// section 2
+
+24 00 00 00   // items count in section 2
+  [[ for each item ]]
+05 00 00 00   // type2
+39 D6 05 10   // objectID
+B2 05 00 00   // itemID
+2E 00 00 00   // count
+00 00         // 00
+00 00         // enchant
+00 00         // 00
+00 00 00 00   // body part
+8A 02 00 00   // store price
+FE FF FF FF   // atk attr type
+00 00 00 00   // atk attr val
+00 00 00 00   // fire def
+00 00 00 00   // water def
+00 00 00 00   // wind def
+00 00 00 00   // earth def
+00 00 00 00   // holy def
+00 00 00 00   // dark def
+
+// section 2
+00 00 00 00   // items count in section 3
+D             // type2
+D             // oid
+D             // itemID
+D             // cnt
+H             // 0
+H             // ench
+H             // 0
+D             // b.part
+D             // your price
+D             // referencePrice (store price)
+FE FF FF FF   // atk attr type
+00 00 00 00   // atk attr val
+00 00 00 00   // fire def
+00 00 00 00   // water def
+00 00 00 00   // wind def
+00 00 00 00   // earth def
+00 00 00 00   // holy def
+00 00 00 00   // dark def

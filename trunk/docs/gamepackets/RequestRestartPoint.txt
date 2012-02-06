@@ -1,0 +1,15 @@
+Client: Len    7 [RequestRestartPoint]
+07 00
+7D
+00 00 00 00    // 00 - to village
+
+
+case 1: // to clanhall
+case 2: // to castle
+case 3: // to fortress
+case 4: // to siege HQ
+case 5: // Fixed or Player is a festival participant
+
+after successful restart point server sends TeleportToLocation
+then client send Appearing
+then server sends Revive

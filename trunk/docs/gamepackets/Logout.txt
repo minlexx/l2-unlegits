@@ -1,0 +1,8 @@
+Client: Len    3
+03 00
+00
+
+send when IN_GAME mode, to disconnect and close client
+if restart possible server responds with 0x84 LeaveWorld from IN_GAME mode
+
+from character selection screen, whe client sends this packet, server just disconencts... TODO: check...

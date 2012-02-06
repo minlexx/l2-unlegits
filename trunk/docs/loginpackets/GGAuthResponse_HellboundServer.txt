@@ -1,0 +1,4 @@
+2A // packet len - 42 bytes
+0B
+XX XX XX XX - SessionID (same from Init packet)
+// rest is trash....

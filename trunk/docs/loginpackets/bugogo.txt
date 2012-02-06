@@ -1,0 +1,37 @@
+Login Server ready on 127.0.0.1:2106
+packet dump :o
+1e 00 fa 57 88 8a 32 85 6b 5f d7 ed 27 f5 7d 1f a5 eb d7 ed 27 f5 7d 1f a5 eb 00 00 packet dump end :o
+Wrong checksum from client: [127.0.0.1]
+
+packet dump :o (RequestGGAuth)
+2a 00                  // packet size - 42 bytes
+07            1 / 1
+f2 d0 fd 1c   4 / 5    // must be sessionID
+00 00 00 00   4 / 9    //  \
+00 00 00 00   4 / 13   //  |  16 bytes
+00 00 00 00   4 / 17   //  |    of some shit :\
+00 00 00 00   4 / 21   //  /
+00 00 00      3 / 24   // 3 bytes, padded data to 8-byte border maybe?
+1b f2 d0 fd   4 / 28   // 4 bytes checksum?
+00 00 00 00   4 / 32   // here also pdded at 8byte-border, wtf is next?
+00 00 00 00   4 / 36   // %(
+00 00         2 / 38   // %(
+packet dump end :o
+
+packet dump :o (RequestAuthLogin)
+b2 00 00 19 89 27 f1 8f cc b9 8c 6f 2a 59 22 4a 11 cb a7 b3 ed fd fd 53 a8 1b f5 67 0c 2f 61 30 b5 03 76 df 48 b6 24 64
+34 45 a4 13 a4 83 72 53 cb 35 a8 4c 51 74 db c3 42 f6 90 b4 5d cb 59 ea ed e5 a4 9e 11 84 4f 07 ce 05 b0 91 23 c8 d3 8e
+85 00 2a da d8 e3 d5 eb 76 42 0d 5b 93 88 8b 22 30 71 b8 3b 70 f1 d0 d1 19 62 71 06 90 7e e8 2f 1c 60 d6 11 94 65 7a 1e
+d4 00 60 3e 96 fe 35 7b 74 0d 13 f2 d0 fd 1c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00
+00 00 59 93 d1 d8 00 00 00 00 00 00 00 00 00 00 packet dump end :o
+
+RequestGGAuth
+LoginCrypt::decrypt( offset 2, size 40 )
+packet dump: offset = 2; size = 40
+2a 00
+07
+2e 55 ae df
+00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
+00 00 00
+d8 2e 55 ae
+00 00 00 00  00 00 00 00  00 00 00 00

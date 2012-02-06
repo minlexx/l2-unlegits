@@ -1,0 +1,32 @@
+Client: Len   23 [ValidatePosition]
+17 00
+59
+B3 A5 00 00    // x 42419
+39 A4 00 00    // y 42041
+5B F2 FF FF    // z -3493
+E2 24 00 00    // heading 9442
+00 00 00 00    // wtf data? L2J ignores
+
+After TeleportToLocation client sends ValidatePosition twice.
+First is above
+Second below:
+Both coordinates x,y,z are coords BEFORE teleport.
+
+Client: Len   23 [ValidatePosition]
+17 00
+59
+B3 A5 00 00    // x,y,z are the same
+39 A4 00 00
+5B F2 FF FF
+00 00 00 00    // client changes heading to 0
+00 00 00 00
+
+Then client sends Appearing (trigger).
+After that server sends UserInfo with all info, icluding new coords.
+
+ValidatePosition L2J:
+_x  = readD();
+_y  = readD();
+_z  = readD();
+_heading  = readD();
+_data  = readD();

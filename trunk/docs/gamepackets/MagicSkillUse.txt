@@ -1,0 +1,15 @@
+Server: Len   49 [MagicSkillUse]
+31 00
+48
+6C 08 00 10   // objectId
+AC 16 00 10   // targetObjectId
+79 05 00 00   // skillID          1401 - Major HEal
+0A 00 00 00   // skillLevel       level 10
+57 07 00 00   // hitTime          cast time 1879 ms
+CF 08 00 00   // reuseDelay       2255 reuse delay
+5B AD 00 00   // x
+E5 A4 00 00   // y
+5D F2 FF FF   // z
+00 00 00 00   // ??
+00 00 00 00   // ??
+00 00         // ??

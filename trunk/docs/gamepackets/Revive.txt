@@ -1,0 +1,4 @@
+Server: Len    7 [Revive]
+07 00
+01
+3F 8E 05 10   // objectID?

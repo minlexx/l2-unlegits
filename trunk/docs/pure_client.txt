@@ -1,0 +1,463 @@
+upper line is pure client (with GG killed)
+lower line is client with INGAME L2Walker injected
+
+[+] ProtocolVersion
+Client: Len  267 | 0B 01 / 0E / 0C 00 00 00  09 07 54 56  03 09 0B 01  07 02 54 54  56 07 00 02  55 56 00 51  00 53 57 04  07 55 08 54  01 07 01 53  00 56 55 56  01 06 05 04  51 03 08 51  08 51 56 04  54 06 55 08  02 09 51 56  01 53 06 55  04 53 00 56  56 53 01 09  02 09 01 51  54 51 09 55  56 09 03 04  07 05 55 04  06 55 04 06  09 04 51 01  08 08 06 05  52 06 04 01  07 54 03 06  52 55 06 55  55 51 01 02  04 54 03 55  54 01 57 51  55 05 52 05  54 07 51 51  55 07 02 53  53 00 52 05  52 07 01 54  00 03 05 05  08 06 05 05  06 03 00 0D  08 01 07 09  03 51 03 07  53 09 51 06  07 54 0A 50  56 02 52 04  05 55 51 02  53 00 08 54  04 52 56 06  02 09 00 08  03 53 56 01  05 00 55 06  08 56 04 0D  06 07 52 06  07 04 0A 06  01 04 54 04  00 05 02 04  54 00 09 52  53 05 04 01  04 05 05 01  52 51 52 0D  06 51 08 09  54 53 00 0D  01 02 03 54  53 01 05 03  08 56 54 07  02 54 0B 06  EB EF 3D E6  
+Client: Len  267 | 0B 01 / 0E / 0C 00 00 00  09 07 54 56  03 09 0B 01  07 02 54 54  56 07 00 02  55 56 00 51  00 53 57 04  07 55 08 54  01 07 01 53  00 56 55 56  01 06 05 04  51 03 08 51  08 51 56 04  54 06 55 08  02 09 51 56  01 53 06 55  04 53 00 56  56 53 01 09  02 09 01 51  54 51 09 55  56 09 03 04  07 05 55 04  06 55 04 06  09 04 51 01  08 08 06 05  52 06 04 01  07 54 03 06  52 55 06 55  55 51 01 02  04 54 03 55  54 01 57 51  55 05 52 05  54 07 51 51  55 07 02 53  53 00 52 05  52 07 01 54  00 03 05 05  08 06 05 05  06 03 00 0D  08 01 07 09  03 51 03 07  53 09 51 06  07 54 0A 50  56 02 52 04  05 55 51 02  53 00 08 54  04 52 56 06  02 09 00 08  03 53 56 01  05 00 55 06  08 56 04 0D  06 07 52 06  07 04 0A 06  01 04 54 04  00 05 02 04  54 00 09 52  53 05 04 01  04 05 05 01  52 51 52 0D  06 51 08 09  54 53 00 0D  01 02 03 54  53 01 05 03  08 56 54 07  02 54 0B 06  EB EF 3D E6  
+
+[+] RequestAuthLogin differens sessionIDs, its normal...
+Client: Len   41 | 29 00 / 2B / 6C 00 65 00  78 00 78 00  00 00 23 CB  E3 2E 8B FD  FD 8C 2C 50  08 11 3D 34  B6 F0 01 00  00 00 01 D2  21 F0 1C 00  00 00 
+Client: Len   41 | 29 00 / 2B / 6C 00 65 00  78 00 78 00  00 00 B8 37  51 15 54 A5  05 D6 F1 48  FC ED 66 B2  16 80 01 00  00 00 01 D2  21 F0 1C 00  00 00 
+
+[+] CharacterSelect
+Client: Len   21 | 15 00 / 12 / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 
+Client: Len   21 | 15 00 / 12 / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  00 00 
+
+[+] RequestManorList
+Client: Len    5 | 05 00 / D0 / 01 00 
+Client: Len    5 | 05 00 / D0 / 01 00 
+
+[+] RequestKeyMapping
+Client: Len    5 | 05 00 / D0 / 21 00 
+Client: Len    5 | 05 00 / D0 / 21 00 
+
+[+] EnterWorld
+Client: Len  107 | 6B 00 / 11 / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  C9 BC F2 A7  66 5A 0B 98  36 A5 BD 89  ED 7F E4 D7  6B 49 E2 9F  EF 76 EB CE  A3 FA F4 BF  0C 64 A3 B4  A4 CE DC C6  08 3E 6E EA  45 CA D3 FE  88 13 87 B8  06 2C 96 F0  9B 1E 8E BC  C6 9B 98 C8  63 16 CF D0  29 00 00 00  0A E1 74 17  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  
+Client: Len  107 | 6B 00 / 11 / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  C9 BC F2 A7  66 5A 0B 98  36 A5 BD 89  ED 7F E4 D7  6B 49 E2 9F  EF 76 EB CE  A3 FA F4 BF  0C 64 A3 B4  A4 CE DC C6  08 3E 6E EA  45 CA D3 FE  88 13 87 B8  06 2C 96 F0  9B 1E 8E BC  C6 9B 98 C8  63 16 CF D0  29 00 00 00  0A E1 74 17  00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  
+
+[+] GameGuardReply (empty reply :( )
+Client: Len   19 | 13 00 / CB / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  
+Client: Len   19 | 13 00 / CB / 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  
+
+[+] RequestSkillCoolTime (twice...? both client and bot...)
+Client: Len    3 | 03 00 / A6 / 
+Client: Len    3 | 03 00 / A6 / 
+
+Client: Len    3 | 03 00 / A6 / 
+Client: Len    3 | 03 00 / A6 / 
+
+!!Warn!! Client did not send these!..
+* RequestSkillList
+Client: Len    3 | 03 00 / 50 / 
+* RequestSkillCoolTime...
+Client: Len    3 | 03 00 / A6 / 
+* RequestGMList
+Client: Len    3 | 03 00 / 8B / 
+but seems that l2r does not ban for RequestGMList
+it bans for MoveBackwardToLocation
+
+[?] Action different objectIDs, but same coords...?
+Client: Len   20 | 14 00 / 1F / 2D 0F 00 10  A1 B0 FE FF  1F DA 03 00  B9 F1 FF FF  00 
+Client: Len   20 | 14 00 / 1F / 4B 0F 00 10  A1 B0 FE FF  1F DA 03 00  B9 F1 FF FF  00 
+
+[?] RequestMagicSkillUse (L2Walker "presses" control)
+                            c   d           d(ctrlPressed) c(shiftPresed)
+Client: Len   12 | 0C 00 / 39 / 99 04 00 00  00 00 00 00  00 
+Client: Len   12 | 0C 00 / 39 / 94 04 00 00  08 00 00 00  00 
+seems there is no ban for RequestMagicSkillUse
+
+ValidatePosition
+Client: Len   23 | 17 00 / 59 / A1 B0 FE FF  1F DA 03 00  B9 F1 FF FF  00 00 00 00  00 00 00 00  
+Client: Len   23 | 17 00 / 59 / A1 B0 FE FF  1F DA 03 00  B9 F1 FF FF  00 00 00 00  00 00 00 00  
+
+client did not send these...
+RequestMagicSkillUse again?...
+Client: Len   12 | 0C 00 / 39 / 94 04 00 00  08 00 00 00  00 
+ValidatePosition several times...
+Client: Len   23 | 17 00 / 59 / A2 B0 FE FF  21 DA 03 00  B9 F1 FF FF  70 F7 00 00  00 00 00 00  
+Client: Len   23 | 17 00 / 59 / AA B0 FE FF  37 DA 03 00  B8 F1 FF FF  E3 32 00 00  00 00 00 00  
+Client: Len   23 | 17 00 / 59 / AA B0 FE FF  37 DA 03 00  B8 F1 FF FF  E3 32 00 00  00 00 00 00  
+Client: Len   23 | 17 00 / 59 / AA B0 FE FF  37 DA 03 00  B8 F1 FF FF  E3 32 00 00  00 00 00 00  
+Client: Len   23 | 17 00 / 59 / AA B0 FE FF  37 DA 03 00  B8 F1 FF FF  E3 32 00 00  00 00 00 00  
+but seems there is no ban for this packet...
+
+[+] RequestInventorySaveOrder
+Client: Len   33 | 21 00 / D0 / 24 00 03 00  00 00 6E 08  00 10 00 00  00 00 6F 08  00 10 01 00  00 00 70 08  00 10 02 00  00 00 
+Client: Len   33 | 21 00 / D0 / 24 00 03 00  00 00 6E 08  00 10 00 00  00 00 6F 08  00 10 01 00  00 00 70 08  00 10 02 00  00 00 
+
+[+] LogoutRequest
+Client: Len    3 | 03 00 / 00 / 
+Client: Len    3 | 03 00 / 00 / 
+
+
+================================
+Test MoveBackwardtoLocation
+Client: Len 31 | 1F 00 / 0F / 5D AF FE FF  E4 D7 03 00  C7 F1 FF FF  AB B0 FE FF  3D DA 03 00  B7 F1 FF FF  01 00 00 00
+Walker: Len 27 | 1B 00 / 0F / 16 AF FE FF  E4 D7 03 00  DF F1 FF FF  5D AF FE FF  E4 D7 03 00  DF F1 FF FF
+
+Walker does not send last 4 bytes... we can fix it by adding them!...
+
+
+
+
+
+
+
+
+MoveBackwardToLocation
+package l2r.gameserver.clientpackets;
+
+import java.util.logging.Logger;
+
+import l2r.Config;
+import l2r.Config.L2WalkerAllowed;
+import l2r.gameserver.geodata.network.GeoConfig;
+import l2r.gameserver.loginservercon.LSConnection;
+import l2r.gameserver.loginservercon.gspackets.ChangeAccessLevel;
+import l2r.gameserver.model.L2Player;
+import l2r.gameserver.network.L2GameClient;
+import l2r.util.Location;
+import l2r.util.Log;
+
+// cdddddd(d)
+public class MoveBackwardToLocation extends L2GameClientPacket
+{
+	private static Logger _log = Logger.getLogger(MoveBackwardToLocation.class.getName());
+	private static String _C__0F_MOVEBACKWARDTOLOC = "[C] 0F MoveBackwardToLoc";
+	private Location _targetLoc = new Location(0, 0, 0);
+	private Location _originLoc = new Location(0, 0, 0);
+	private int _moveMovement;
+
+	/**
+	 * packet type id 0x0f
+	 */
+	@Override
+	public void readImpl()
+	{
+		_targetLoc.x = readD();
+		_targetLoc.y = readD();
+		_targetLoc.z = readD();
+		_originLoc.x = readD();
+		_originLoc.y = readD();
+		_originLoc.z = readD();
+		L2GameClient client = getClient();
+		L2Player activeChar = client.getActiveChar();
+		if(activeChar == null)
+			return;
+
+		if(_buf.hasRemaining())
+			_moveMovement = readD();
+		else if(Config.allowL2Walker(activeChar))
+		{
+			activeChar.setIsBot(2);
+			_moveMovement = 1;
+			if(Config.ALLOW_L2WALKER_CLIENT == L2WalkerAllowed.Peace)
+				activeChar.startBotCheck();
+		}
+		else
+		{
+			_log.warning("Incompatible client found: L2Walker? " + client.getLoginName() + "/" + client.getIpAddr());
+
+			if(Config.L2WALKER_PUNISHMENT != 0)
+			{
+				Log.LogChar(activeChar, Log.L2WalkerFound, client.getLoginName());
+				if(Config.L2WALKER_PUNISHMENT == 2)
+				{
+					LSConnection.getInstance().sendPacket(new ChangeAccessLevel(client.getLoginName(), -66, "Walker Autoban", -1));
+					activeChar.setAccessLevel(-66);
+				}
+				activeChar.logout(false, false, true);
+			}
+		}
+	}
+
+	@Override
+	public void runImpl()
+	{
+		L2Player activeChar = getClient().getActiveChar();
+
+		if(activeChar == null)
+			return;
+
+		/*if(_targetLoc.x == 0 || _targetLoc.y == 0 || _targetLoc.x == Integer.MAX_VALUE || _targetLoc.y == Integer.MAX_VALUE)
+		{
+			System.out.println("MoveBackwardToLocation: zero coords");
+			return;
+		}*/
+
+		if(System.currentTimeMillis() - activeChar.getLastPacket() < 100)
+		{
+			activeChar.sendActionFailed();
+			return;
+		}
+
+		activeChar.setLastPacket();
+
+		/*if(Math.abs(_originLoc.z) > 0xFFFF || Math.abs(_targetLoc.y) > 0x40000)
+		{
+			System.out.println("MTL: too big range: " + _originLoc.toString() + " -> " + _targetLoc.toString());
+			System.out.println("     " + activeChar.getName() + " server position: " + activeChar.getLoc().toString());
+			return;
+		}*/
+
+		if(activeChar.inObserverMode() && activeChar.getOlympiadGameId() == -1)
+		{
+			activeChar.sendActionFailed();
+			return;
+		}
+
+		if(activeChar.isOutOfControl() && activeChar.getOlympiadGameId() == -1)
+		{
+			activeChar.sendActionFailed();
+			return;
+		}
+
+		if(activeChar.isInBoat())
+			activeChar.setInBoat(false);
+
+		if(activeChar.getTeleMode() > 0)
+		{
+			if(activeChar.getTeleMode() == 1)
+				activeChar.setTeleMode(0);
+			activeChar.sendActionFailed();
+			activeChar.teleToLocation(_targetLoc);
+			return;
+		}
+
+		if(_moveMovement == 0 && GeoConfig.GEODATA_MODE == 0)
+		{
+			activeChar.sendActionFailed();
+			return;
+		}
+
+		activeChar.moveToLocation(_targetLoc, 0, (_moveMovement != 0));
+	}
+
+	@Override
+	public String getType()
+	{
+		return _C__0F_MOVEBACKWARDTOLOC;
+	}
+}
+
+
+
+
+
+L2Player.java
+/**
+	 * Устанавливает активный сабкласс
+	 *
+	 * <li>Retrieve from the database all skills of this L2Player and add them to _skills </li>
+	 * <li>Retrieve from the database all macroses of this L2Player and add them to _macroses</li>
+	 * <li>Retrieve from the database all shortCuts of this L2Player and add them to _shortCuts</li><BR><BR>
+	 */
+	public void setActiveSubClass(final Short subId, final boolean store)
+	{
+		storeEffects();
+		storeDisableSkills();
+
+		if(QuestManager.getQuest(422) != null)
+		{
+			String qn = QuestManager.getQuest(422).getName();
+			if(qn != null)
+			{
+				QuestState qs = getQuestState(qn);
+				if(qs != null)
+					qs.exitCurrentQuest(true);
+			}
+		}
+
+		if(store && _classlist.containsKey(_activeClass))
+		{
+			final L2SubClass oldsub = _classlist.get(_activeClass);
+			oldsub.setCp(getCurrentCp());
+			oldsub.setExp(getExp());
+			oldsub.setHp(getCurrentHp());
+			oldsub.setLevel(getLevel());
+			oldsub.setMp(getCurrentMp());
+			oldsub.setSp(getSp());
+			oldsub.setActive(false);
+			_classlist.put(_activeClass, oldsub);
+		}
+
+		final L2SubClass sub = _classlist.get(subId);
+		sub.setActive(true);
+		_activeClass = sub.getClassId();
+		_classlist.put(_activeClass, sub);
+		_level = sub.getLevel();
+		_exp = sub.getExp();
+		_sp = sub.getSp();
+
+		setClassId(subId, false);
+
+		removeAllSkills();
+
+		stopAllEffects();
+
+		if(getPet() != null && getPet().isSummon)
+			getPet().unSummon();
+		if(!_cubics.isEmpty())
+		{
+			for(final L2CubicInstance cubic : _cubics.values())
+			{
+				cubic.stopAction();
+				cubic.cancelDisappear();
+			}
+			_cubics.clear();
+		}
+		setAgathion(0);
+
+		checkRecom();
+		restoreSkills();
+		rewardSkills();
+		sendPacket(new SkillList(this));
+
+		getInventory().refreshListeners();
+
+		for(int i = 0; i < 3; i++)
+			_henna[i] = null;
+
+		restoreHenna();
+		sendPacket(new HennaInfo(this));
+
+		restoreEffects();
+		if(isInWorld())
+			restoreDisableSkills();
+
+		_currentHp = sub.getHp();
+		setCurrentHpMp(sub.getHp(), sub.getMp());
+		setCurrentCp(sub.getCp());
+		broadcastUserInfo();
+		updateStats();
+
+		_shortCuts.restore();
+		sendPacket(new ShortCutInit(this));
+		if(!isBot() || Config.KILL_BOTS_WITH_SKILLCOOLTIME)
+			sendPacket(new SkillCoolTime(this));
+
+		broadcastPacket(new SocialAction(getObjectId(), 15));
+
+		getDeathPenalty().restore();
+
+		setIncreasedForce(0);
+	}
+
+	public void setIsBot(final int isBot)
+	{
+		_isBot = isBot;
+	}
+
+	public int isBotLevel()
+	{
+		return _isBot;
+	}
+
+	public boolean isBot()
+	{
+		return _isBot > 0;
+	}
+
+	public void startBotCheck()
+	{
+		if(_botCheck == null && _isBot > 0)
+			_botCheck = ThreadPoolManager.getInstance().scheduleGeneral(new BotCheck(this, _isBot), Rnd.get(30, 90) * 1000);
+	}
+
+	public void stopBotCheck()
+	{
+		if(_botCheck != null)
+		{
+			_botCheck.cancel(true);
+			_botCheck = null;
+		}
+	}
+
+	class BotCheck implements Runnable
+	{
+		L2Player _player;
+		int _isBot;
+
+		BotCheck(final L2Player player, final int isBot)
+		{
+			_player = player;
+			_isBot = isBot;
+		}
+
+		public void run()
+		{
+			if(!_player.isBot())
+			{
+				_player.stopBotCheck();
+				return;
+			}
+			if(Config.ALLOW_L2WALKER_CLIENT == Config.L2WalkerAllowed.True || _player.getPlayerAccess().AllowWalker || Config.ALLOW_L2WALKER_CLIENT == L2WalkerAllowed.Peace && isInZone(ZoneType.peace_zone))
+			{
+				setNameColor(Config.BOT_NAME_COLOUR);
+				return;
+			}
+			_log.warning("Bot detected. Char: " + _player.getName() + ", Account: " + _player.getAccountName() + ", Ip: " + _player.getIP());
+			if(Config.L2WALKER_PUNISHMENT == 1)
+				_player.logout(false, false, true);
+			else if(Config.L2WALKER_PUNISHMENT == 2)
+			{
+				_player.setAccountAccesslevel(-66, "botcheck", -1);
+				_player.logout(false, false, true);
+			}
+		}
+	}
+
+
+	
+L2GamePacketHandler
+EnterWorld:
+case 0x11:
+	activeChar = client.getActiveChar();
+	if(activeChar != null && activeChar.isBotLevel() > 0)
+		activeChar.setIsBot(1);
+	msg = new EnterWorld();
+	break;
+RequestSkillCoolTime:
+case 0xa6:
+	activeChar = client.getActiveChar();
+	if(activeChar != null)
+		activeChar.startBotCheck();
+	msg = !Config.KILL_BOTS_WITH_SKILLCOOLTIME && activeChar != null && activeChar.isBot() ? null : new RequestSkillCoolTime();
+	break;
+
+D0:01 RequestManorList
+case 0xd0: // 824 protocol
+	if(!data.hasRemaining())
+	{
+		handleIncompletePacket(client);
+		break;
+	}
+	id3 = data.getShort() & 0xffff;
+	switch(id3)
+	{
+		case 0x00:
+			//	msg = new ?();
+			break;
+		case 0x01:
+			activeChar = client.getActiveChar();
+			if(activeChar != null)
+				if(activeChar.isBotLevel() == 2)
+					activeChar.setIsBot(0);
+				else if(activeChar.isBotLevel() == 1)
+					activeChar.setIsBot(2);
+			msg = new RequestManorList();
+	break;
+	
+L2Player:restore() setIsBot(2)
+
+so, client send CharSelect. _isBot = 2
+client send RequestManorList.
+	if(activeChar.isBotLevel() == 2) activeChar.setIsBot(0); <- executes
+	_isBot = 0
+...
+client send EnterWorld.
+	if(activeChar != null && activeChar.isBotLevel() > 0) activeChar.setIsBot(1); <- NOT executes
+	_isBot = 0;
+client send RequestSkillCoolTime first time
+	activeChar.startBotCheck(); // start bot check
+	bot check not starts, because _isBot == 0
+	msg = !Config.KILL_BOTS_WITH_SKILLCOOLTIME && activeChar.isBot() ? null : new RequestSkillCoolTime();
+	msg = RequestSkillCoolTime();
+	SkillCoolTIme is sent on l2r (l2j does not send)
+
+client send RequestSkillCoolTime 2nd time
+	the same, _isBot == 0, check not starts, SkillCoolTime is sent on l2r (l2j does not send)
+
+client send RequestSkillCoolTime 3rd time, al the same
+	the same, _isBot == 0, check not starts, SkillCoolTime is sent on l2r (l2j does not send)
+

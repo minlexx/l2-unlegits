@@ -1,0 +1,5 @@
+Client: Len   11 [RequestDestroyItem]
+0B 00
+60
+71 08 00 10 // objectID
+01 00 00 00 // count

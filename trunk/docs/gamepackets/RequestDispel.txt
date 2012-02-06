@@ -1,0 +1,5 @@
+Client: Len   13 [RequestDispel]
+0D 00
+D0 4E 00        // D0:004E RequestDispel
+4B 05 00 00     // skillID    1355 (PoWater?)
+01 00 00 00     // skillLvl    lvl 1

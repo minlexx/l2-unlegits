@@ -1,0 +1,51 @@
+Server: Len   75
+4B 00
+4E
+6C 08 00 10          // party leader object id
+00 00 00 00          // party loot type
+01 00 00 00          // number of members (except you)
+
+6C 08 00 10     // member oobject id
+41 00 65 00  72 00 69 00  6E 00 00 00    // member name
+CD 06 00 00     // current cp
+CD 06 00 00     // max cp
+61 0D 00 00     // current hp
+61 0D 00 00     // max hp
+7B 0A 00 00     // current mp
+7B 0A 00 00     // max mp
+50 00 00 00     // level
+1E 00 00 00     // class id
+00 00 00 00     // constant 00 00 00 00
+01 00 00 00     // race
+00 00 00 00     // constant 00 00 00 00
+
+
+	protected final void writeImpl()
+	{
+		writeC(0x4e);
+		writeD(_partyMembers.get(0).getObjectId()); // c3 party leader id
+		writeD(_partyMembers.get(0).getParty().getLootDistribution());//c3 party loot type (0,1,2,....)
+		writeD(_partyMembers.size()-1);
+
+		for(L2PcInstance member: _partyMembers)
+		{
+			if (member != _exclude)
+			{
+				writeD(member.getObjectId());
+				writeS(member.getName());
+
+				writeD((int) member.getCurrentCp()); //c4
+				writeD(member.getMaxCp()); //c4
+
+				writeD((int) member.getCurrentHp());
+				writeD(member.getMaxHp());
+				writeD((int) member.getCurrentMp());
+				writeD(member.getMaxMp());
+				writeD(member.getLevel());
+				writeD(member.getClassId().getId());
+				writeD(0);//writeD(0x01); ??
+				writeD(member.getRace().ordinal());
+				writeD(0);
+			}
+		}
+	}

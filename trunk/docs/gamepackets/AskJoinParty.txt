@@ -1,0 +1,11 @@
+Server: 39 AskJoinParty: len 23
+17 00
+39
+41 00 6C 00  65 00 78 00  78 00 69 00  61 00 00 00  // inviter A l e x x i a
+04 00 00 00                                         // loot type
+
+// 0 - Finders Keepers
+// 1 - Random
+// 2 - Random including spoil
+// 3 - by turn
+// 4 - by turn including spoil

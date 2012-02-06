@@ -1,0 +1,24 @@
+Client Len    7 [            RequestUserCommand]
+07 00
+B3
+00 00 00 00 // command ID
+
+================================
+
+Decimal command numbers:
+
+0 - /loc
+52 - /unstuck (Escape)
+61 - /Mount
+62 - /DisMount
+77 - /time
+81 - /partyinfo
+88 - /AttackList
+89 - /underattacklist
+90 - /warlist
+93 - /ChannelDelete
+96 - /ChannelLeave
+97 - /ChannelListUpdate
+100 - /ClanPenalty
+109 - /OlympiadStat
+114 - /InstanceZone

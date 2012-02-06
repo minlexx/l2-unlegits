@@ -1,0 +1,9 @@
+protected void readImpl()
+{
+    _name = readS();
+}
+
+Client: Len   13
+0D 00
+45
+4C 00 65 00 78 00 78 00 00 00

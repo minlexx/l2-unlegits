@@ -1,0 +1,75 @@
+S->C Len  317
+3D 01              // length (example 317)
+09                 // packet code
+01 00 00 00        // number of chars
+07 00 00 00        // max chars on server?
+00                 // always 0x00
+
+// repeated block unknown length, because of var-length strings
+// minimum length must be 281 bytes (not sure)
+46 00 6C 00 61 00 6D 00 65 00 64 00 53 00 6F 00 75 00 6C 00  00 00 // char name (Unicode)
+37 0B 0E 00        // char ID
+6C 00 65 00 78 00 78 00 68 00 75 00 6C 00 65 00  00 00 // login name
+0D FE 0F 00        // sessionID (playOkId1)
+4E 2A 00 00        // clanID
+00 00 00 00        // L2J says it's always 00 00 00 00; as I saw, on retail also 
+01 00 00 00        //  sex
+00 00 00 00        //  race
+0A 00 00 00        // character base class ID
+01 00 00 00        // active? (c) L2J // useless >_<
+9F B1 FF FF        \
+32 E4 01 00         |    (( x ,y ,z )) ?
+00 F3 FF FF        /
+B8 1E 85 EB 51 F8 79 40  // HP cur
+C2 F5 28 5C 8F 92 78 40  // MP cur
+85 51 00 00        // SP
+0C BA 0D 00 00 00 00 00 // Exp
+14 00 00 00        // Level
+00 00 00 00        // karma
+00 00 00 00        // PK kills
+00 00 00 00        // PVP kills
+00 00 00 00         \
+00 00 00 00          \
+00 00 00 00           |  some 7 zero dwords
+00 00 00 00           |
+00 00 00 00          /
+00 00 00 00         /
+00 00 00 00        /
+00 00 00 00        // itemID hair all
+4E 03 00 00        // itemID r ear
+4E 03 00 00        // itemID l ear
+8D 03 00 00        //        necklace
+6E 03 00 00        //        r finger
+6E 03 00 00        //        l finger
+2C 00 00 00        //        head
+37 01 00 00        //        r hand
+71 02 00 00        //        l hand
+33 00 00 00        //        gloves
+4D 04 00 00        //        chest
+50 04 00 00        //        legs
+27 00 00 00        //        feet
+00 00 00 00        //        back
+00 00 00 00        //        LR hand
+00 00 00 00        //        hair
+00 00 00 00        //        hair 2
+00 00 00 00        //        R bracelet
+00 00 00 00        //        L bracelet
+00 00 00 00        \
+00 00 00 00         \
+00 00 00 00          |      some 6 null dwords
+00 00 00 00          |
+00 00 00 00         /
+00 00 00 00        /
+02 00 00 00        // hair style
+03 00 00 00        // hair color
+00 00 00 00        // face
+B8 1E 85 EB 51 F8 79 40   // HP max
+C2 F5 28 5C 8F 92 78 40   // MP max
+00 00 00 00        // deleteDays; if != 0 then char is inactive
+0A 00 00 00        // classID
+01 00 00 00        // 0x00000001 if last used char, 0x00000000 otherwise
+00                 // enchantEffect (<=127)
+00 00              // Augmentation ID
+00 00              // something also for augment
+00 00 00 00        // transformation ID
+                   //    (but on retail you cannot see transform on char select screen) 

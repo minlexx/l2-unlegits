@@ -1,0 +1,18 @@
+Server: Len   23 [ValidateLocation]
+17 00
+79
+B2 16 00 10     // mob/npc objectID
+91 AC 00 00     // x
+C5 A4 00 00     // y
+5D F2 FF FF     // z
+FA C5 00 00     // heading
+
+protected final void writeImpl()
+{
+	writeC(0x79);
+	writeD(_charObjId);
+	writeD(_x);
+	writeD(_y);
+	writeD(_z);
+	writeD(_heading);
+}

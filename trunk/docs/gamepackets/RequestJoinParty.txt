@@ -1,0 +1,5 @@
+Client: Len   15
+0F 00
+42
+6C 00 6F 00 6C 00 00 00   // target char name
+00 00 00 00               // loot type, item distribution

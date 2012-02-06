@@ -1,0 +1,22 @@
+===================================
+L2J
+19 00                     // p.len 25
+2E                        // pcode
+01                        // always const
+42 55 77 8F  C3 05 69 87  // xorkey first part
+01 00 00 00               // always const 
+01                        // possible Game Server ID // on L2J always 01
+00 00 00 00               // always NULLs
+00 00 00 00               // in L2J always NULLs - no obfuscation
+
+==========================================
+Retail NCSoft
+19 00                     // p.len 25
+2E                        // pcode
+01                        // always const
+42 55 77 8F  C3 05 69 87  // xorkey first part
+01 00 00 00               // always const 
+01                        // possible Game Server ID - depends on game server ID
+00 00 00 00               // always NULLs
+XX XX XX XX               // always different, non-nulls: opcode obfuscator
+ 

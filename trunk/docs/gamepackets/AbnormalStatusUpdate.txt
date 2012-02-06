@@ -1,0 +1,22 @@
+Server: 85 AbnormalStatusUpdate: len 25
+19 00
+85
+02 00             // nEffects = 2
+3E 14 00 00       // skillID 5182  \
+01 00             // level 1        > 1
+BF 1E 00 00       // duration 7871 /
+E2 10 00 00       // skillID       \
+01 00             // level 1        > 2
+42 0F 00 00       // duration 3906 /
+
+19 00
+85
+02 00
+3E 14 00 00 // skill 
+01 00
+C5 1E 00 00 // 7877
+E2 10 00 00
+01 00
+47 0F 00 00 // 3911
+
+duration in seconds...?

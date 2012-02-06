@@ -1,0 +1,13 @@
+Server: Len   35 [Die]
+23 00
+00
+3F 8E 05 10   // objectID?
+01 00 00 00   // 1 - can resurrect to nearest village
+00 00 00 00   // 1 - can res to CH
+01 00 00 00   // 1 - can res to castle
+00 00 00 00   // 1 - can res to siege HQ
+
+also possible that next will follow:
+00 00 00 00   // sweepable (blue glow)
+00 00 00 00   // allow fixed res
+00 00 00 00   // to fortress

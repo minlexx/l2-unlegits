@@ -1,0 +1,13 @@
+Server: Len   19 [TeleportToLocation]
+13 00
+22
+6D 08 00 10   // oid 268437613
+3F 1D 01 00   //  x 73023
+DC CE 01 00   //  y 118492
+9D F1 FF FF   //  z -3683
+
+writeC(0x22);
+writeD(_targetObjId);
+writeD(_x);
+writeD(_y);
+writeD(_z);

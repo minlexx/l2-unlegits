@@ -1,0 +1,9 @@
+This "hide" as it's called here, is actually nothing but a standard setting inside the L2 client.
+
+It's been part of an invisible options menu since the birth of L2, under CPU settings. There, you could set some extraordinary values which would cause the client to "lag" in the same fashion as regular zone lag, and cause the infamous "teleport". A key bind into the actual L2 client could be set there as well.
+
+The built-in teleport is actually better utilized than this programmed version. Since it allows you to literally click a location on the floor (even at the opposite side of a room/dungeon/field) and teleport right to it.
+
+Back in the day, the few who knew about it simply called it a "teleport hack".
+
+I've used it 2 times to personally test, but never after that. it's way to sketchy to risk getting banned for that, imo. 
