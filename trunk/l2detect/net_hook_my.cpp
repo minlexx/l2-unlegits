@@ -24,6 +24,15 @@ connect         8B FF 55 8B EC 83
 send            8B FF 55 8B EC 83
 recv            8B FF 55 8B EC 83
 
+accept          8B FF 55 8B EC 6A 00  (6A 00 = PUSH 00) ( really calls WSAAccept(1, 2, 3, 0, 0) )
+WSAAccept       8B FF 55 8B EC 51 51  (51 51 = PUSH ECX; PUSH ECX)
+
+listen          8B FF 55 8B EC 51 81
+
+WSASocketA      8B FF 55 8B EC 81 EC  (81 EC = SUB ESP, 278)
+WSASocketW      6A 20 68 A0 3D AA 75  (PUSH 20; PUSH rel a03daa75)
+socket          8B FF 55 8B EC 51 56  (51 = PUSH ECX; 56 = PUSH ESI) (calls WSASocketW)
+
 VirtualProtectEx (from kernelbase.dll)  8B FF 55 8B EC 56
 VirtualProtectEx (kernel32)             8B FF 55 8B EC 5D     // jump follows, relocate,
                   //  rejump/relocate to VirtualProtectEx  inside  kernelbase.dll
@@ -44,6 +53,14 @@ const unsigned char original_ws2_32_send_6_bytes[6]       = { 0x8B, 0xFF, 0x55, 
 const unsigned char original_ws2_32_WSAConnect_6_bytes[6] = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
 const unsigned char original_ws2_32_WSARecv_6_bytes[6]    = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
 const unsigned char original_ws2_32_WSASend_6_bytes[6]    = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+
+const unsigned char original_ws2_32_listen_6_bytes[6]     = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_ws2_32_accept_6_bytes[6]     = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x6A };
+const unsigned char original_ws2_32_WSAAccept_6_bytes[6]  = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_ws2_32_socket_6_bytes[6]     = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x51 };
+const unsigned char original_ws2_32_WSASocketA_6_bytes[6] = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x81 };
+const unsigned char original_ws2_32_WSASocketW_6_bytes[6] = { 0x6A, 0x20, 0x68, 0xA0, 0x3D, 0xAA };
+
 const unsigned char original_vpex_6_bytes[6]              = { 0x8B, 0xFF, 0x55, 0x8B, 0xEC, 0x56 };
 const unsigned char l2walker_connect_6_bytes[6]           = { 0xE9, 0xB1, 0x3A, 0xB7, 0x90, 0xC3 };
 
@@ -299,7 +316,7 @@ bool Hook_ValidateInterception_my()
 	if( !inok )
 	{
 		logLevel = LOG_WARNING;
-		log_error( LOG_WARNING, "Not intercepted! Dump will follow...\n" );
+		log_error( LOG_WARNING, "ws2_32.dll!connect() Not intercepted! Dump will follow...\n" );
 	}
 	else log_error( LOG_OK, "ws2_32.dll!connect() Interception OK!\n" );
 
