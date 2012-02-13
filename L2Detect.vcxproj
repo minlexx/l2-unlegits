@@ -247,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="l2detect\ConfigIni.cpp" />
+    <ClCompile Include="l2detect\net_hook_iphlp.cpp" />
     <ClCompile Include="l2detect\RemoteServerInfo.cpp" />
     <ClCompile Include="l2detect\main.cpp" />
     <ClCompile Include="l2detect\stdafx.cpp">

@@ -70,6 +70,7 @@ unsigned int   Proxied_VirtualProtectEx = 0;
 
 
 BOOL __stdcall Proxy_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect );
+BOOL __stdcall Call_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect );
 
 
 void Hook_InterceptConnect_my()
@@ -622,4 +623,28 @@ __declspec(naked) BOOL __stdcall
 	__asm push ebp
 	__asm mov ebp, esp
 	__asm jmp Proxied_VirtualProtectEx
+}
+
+
+BOOL __stdcall Call_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect )
+{
+	BOOL vp_ret = FALSE;
+	if( Proxied_VirtualProtectEx )
+	{
+		log_error( LOG_DEBUG, "Call_VirtualProtectEx(): using proxy...\n" );
+		vp_ret = Proxy_VirtualProtectEx( hProcess, (void *)connect_orig, 6, flNewProtect, lpflOldProtect );
+	}
+	else
+	{
+		log_error( LOG_DEBUG, "Call_VirtualProtectEx(): calling real...\n" );
+		vp_ret = VirtualProtectEx( hProcess, (void *)connect_orig, 6, flNewProtect, lpflOldProtect );
+	}
+	if( !vp_ret )
+	{
+		DWORD le = GetLastError();
+		log_error( LOG_ERROR, "Call_VirtualProtectEx(): failed for address 0x%08X (err = 0x%08X (%d))\n",
+			(unsigned int)lpAddress, le, le );
+		SetLastError( le );
+	}
+	return vp_ret;
 }

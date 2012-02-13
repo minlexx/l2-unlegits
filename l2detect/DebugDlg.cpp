@@ -308,6 +308,7 @@ void DebugDlg_OnBnClickedValidateInterception( HWND hDlg )
 	if( GetModuleHandleW( L"iphlpapi.dll" ) )
 	{
 		log_error( LOG_WARNING, "Iphlpapi.dll loaded\n" );
+		Hook_GetTcpTable();
 	}
 	else
 	{
