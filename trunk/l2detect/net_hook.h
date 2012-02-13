@@ -12,6 +12,9 @@ void Hook_RestoreConnect_my();
 bool Hook_ValidateInterception_my();
 bool Hook_IsWinsockConnectOrig();
 bool Hook_CheckVirtualProtect();
+void Hook_GetTcpTable();
+
+BOOL __stdcall Call_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect );
 
 // checking hooks
 extern const unsigned char original_ws2_32_connect_6_bytes[6];

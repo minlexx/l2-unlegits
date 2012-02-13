@@ -802,5 +802,8 @@
       <Filter>containers\array</Filter>
     </ClCompile>
     <ClCompile Include="l2detect\fakeExport.cpp" />
+    <ClCompile Include="l2detect\net_hook_iphlp.cpp">
+      <Filter>hooks</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
