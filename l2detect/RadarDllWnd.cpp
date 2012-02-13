@@ -114,7 +114,9 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 		// check window class or name to check is it is main Lineage II window
 		bool isL2Window = false;
 		wchar_t wndTitle[256];
+		wchar_t buffer_for_class_name[256] = {0};
 		memset( wndTitle, 0, sizeof(wndTitle) );
+		memset( buffer_for_class_name, 0, sizeof(buffer_for_class_name) );
 		GetWindowTextW( hWnd, wndTitle, 255 );
 		log_error( LOG_DEBUGDUMP, ".. got window title [%S]\n", wndTitle );
 		if( _wcsicmp( wndTitle, L"Lineage II" ) == 0 )
@@ -126,7 +128,6 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 		if( !isL2Window )
 		{
 			log_error( LOG_DEBUGDUMP, "... window title doesn't match, trying by class name...\n" );
-			wchar_t buffer_for_class_name[256] = {0};
 			if( GetClassNameW( hWnd, buffer_for_class_name, 255 ) )
 			{
 				log_error( LOG_DEBUGDUMP, ".... got window class name = [%S]\n", buffer_for_class_name );
@@ -150,13 +151,43 @@ BOOL CALLBACK RadarDllWindowThread_EnumWindowsProc( HWND hWnd, LPARAM lParam )
 				DWORD nameLen = GetProcessImageFileNameW( hProcess, szFileName, sizeof(szFileName)/sizeof(szFileName[0]) );
 				if( nameLen > 0 )
 				{
+					log_error( LOG_DEBUGDUMP, "..... got process name [%S]\n", szFileName );
 					const wchar_t *wExe = wcsrchr( szFileName, '\\' );
-					if( (_wcsicmp( wExe, L"l2.bin" ) == 0) || (_wcsicmp( wExe, L"l2.exe" ) == 0 ) )
+					if( wExe )
 					{
-						isL2Window = true;
-						wchar_t wClassName[256] = {0};
-						GetClassNameW( hWnd, wClassName, 255 );
-						log_error( LOG_OK, "... found L2 Window by process name (what???) of class [%S]\n", wClassName );
+						wExe++;
+						log_error( LOG_DEBUGDUMP, "..... got EXE name [%S]\n", wExe );
+						if( (_wcsicmp( wExe, L"l2.bin" ) == 0) || (_wcsicmp( wExe, L"l2.exe" ) == 0 ) )
+						{
+							std::list<std::wstring> wrong_classes;
+							wrong_classes.push_back( std::wstring(L"IME") );
+							wrong_classes.push_back( std::wstring(L"MSCTFIME UI") );
+							wrong_classes.push_back( std::wstring(L"DIEmWin") );
+							wrong_classes.push_back( std::wstring(L"GFxVideoSoundWindowClass") );
+							wrong_classes.push_back( std::wstring(L"NSplashWnd") );
+							wchar_t wClassName[256] = {0};
+							GetClassNameW( hWnd, wClassName, 255 );
+							bool wrong_class = false; // assume class OK
+							for( std::list<std::wstring>::const_iterator iter = wrong_classes.begin();
+								iter != wrong_classes.end();  iter++ )
+							{
+								if( wcscmp( wClassName, iter->c_str() ) == 0 ) // wrong class
+								{
+									wrong_class = true; // equals to some wrong class
+									break;
+								}
+								if( wClassName[0] == L'#' )
+								{
+									wrong_class = true; // equals to some wrong class // "#32770" for example (dialog)
+									break;
+								}
+							}
+							if( !wrong_class )
+							{
+								isL2Window = true;
+								log_error( LOG_DEBUG, ".... found L2 window by exe [%S] of class [%S]!\n", wExe, wClassName );
+							}
+						}
 					}
 				}
 				else

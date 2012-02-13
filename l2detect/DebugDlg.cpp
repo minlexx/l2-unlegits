@@ -291,9 +291,28 @@ void DebugDlg_OnBnClickedValidateInterception( HWND hDlg )
 	hDlg = NULL;
 	Hook_ValidateInterception_my();
 	Hook_CheckVirtualProtect();
+	Hook_check_func_prolog( L"ws2_32.dll", "connect", original_ws2_32_connect_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "recv", original_ws2_32_recv_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "send", original_ws2_32_send_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "listen", original_ws2_32_listen_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "socket", original_ws2_32_socket_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "accept", original_ws2_32_accept_6_bytes );
+
 	Hook_check_func_prolog( L"ws2_32.dll", "WSAConnect", original_ws2_32_WSAConnect_6_bytes );
-	Hook_check_func_prolog( L"ws2_32.dll", "WSASend", original_ws2_32_WSASend_6_bytes );
 	Hook_check_func_prolog( L"ws2_32.dll", "WSARecv", original_ws2_32_WSARecv_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSASend", original_ws2_32_WSASend_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSAAccept", original_ws2_32_WSAAccept_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSASocketA", original_ws2_32_WSASocketA_6_bytes );
+	Hook_check_func_prolog( L"ws2_32.dll", "WSASocketW", original_ws2_32_WSASocketW_6_bytes );
+
+	if( GetModuleHandleW( L"iphlpapi.dll" ) )
+	{
+		log_error( LOG_WARNING, "Iphlpapi.dll loaded\n" );
+	}
+	else
+	{
+		log_error( LOG_OK, "Iphlpapi.dll not loaded\n" );
+	}
 }
 
 void DebugDlg_OnBnClickedInterceptConnect( HWND hDlg )
