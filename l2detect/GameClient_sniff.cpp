@@ -35,6 +35,24 @@ bool GameClient::PC_sniff( SOCKET scl, unsigned char *sip, unsigned short int sp
 		log_error( LOG_ERROR, "GameClient::ProcessClient_onlySniff(): real GS socket create\n" );
 		return false;
 	}
+
+	// TeonPVP hack
+	if( g_cfg.TeonPvP_hacks )
+	{
+		unsigned short teon_port = 43880;
+		log_error( LOG_WARNING, "TeonPvP hacks: bind to port %d\n", teon_port );
+		int rr = L2PNet_bind( sg, "0.0.0.0", teon_port );
+		if( rr != 0 )
+			log_error( LOG_ERROR, "TeonPvP hacks: bind failed!!!!\n" );
+		sockaddr_in soaddr;
+		memset( &soaddr, 0, sizeof(soaddr) );
+		rr = L2PNet_getsockname( (SOCKET)sg, &soaddr );
+		if( rr == 0 )
+		{
+			log_error( LOG_OK, "TeonPvP hacks: Bound outcome socket to address %s:%d\n",
+				L2PNet_inet_ntoa(soaddr.sin_addr), (int)L2PNet_ntohs(soaddr.sin_port) );
+		}
+	}
 	
 	// connect to real game server
 	log_error( LOG_DEBUG, "GameClient::ProcessClient_onlySniff(): Connecting to real game server %s:%d ", ssip, (int)sport );

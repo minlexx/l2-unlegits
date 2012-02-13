@@ -30,6 +30,7 @@ int L2PNet_Cleanup();
 #define L2PFUNC_SELECT        8
 #define L2PFUNC_SOCKET        9
 #define L2PFUNC_LISTEN        10
+#define L2PFUNC_GETSOCKNAME   11
 /** Overrides specified function for L2Packets network layer.\n
  * New function must have the same prototype as corresponding
  * L2PNet_* function!
@@ -191,5 +192,13 @@ int L2PNet_FD_ISSET( unsigned int sock, fd_set *set );
 * \param pinAddr output struct. pinAddr->s_addr will be resulting IP address
 */
 bool L2PNet_resolveHostname( const char *hostname, struct in_addr *pinAddr );
+
+
+/** Gets local socket address.\n
+* \param sock socket
+* \param saddr output struct that receives address
+* \return 0 on success
+*/
+int L2PNet_getsockname( unsigned int sock, struct sockaddr_in *saddr );
 
 #endif /* H_L2P_NET_LAYER */

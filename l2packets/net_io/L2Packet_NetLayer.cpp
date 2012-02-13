@@ -3,12 +3,12 @@
 #include <ws2tcpip.h>
 
 // network function pointers table
-#define l2pnet_ft_size 11
-void *l2pnet_ft[l2pnet_ft_size] = {0, 0,0,0, 0,0,0, 0,0,0, 0};
+#define l2pnet_ft_size 12
+void *l2pnet_ft[l2pnet_ft_size] = {0, 0,0,0, 0,0,0, 0,0,0, 0,0}; // winsock override function table
 CRITICAL_SECTION l2pnet_cs;
 // winsock2 functions
 HINSTANCE l2pnet_hws2_32;
-void *ws2_func[l2pnet_ft_size] = {0, 0,0,0, 0,0,0, 0,0,0, 0};
+void *ws2_func[l2pnet_ft_size] = {0, 0,0,0, 0,0,0, 0,0,0, 0,0};
 char l2pnet_static_inet_ntoa_buffer[32];
 
 typedef int  (__stdcall *select_func)( int, fd_set *, fd_set *, fd_set *, const struct timeval *);
@@ -19,6 +19,7 @@ typedef int  (__stdcall *WSACleanup_func)(void);
 //typedef void *(__stdcall *gethostbyname_func)( const char * );
 typedef int  (__stdcall *getaddrinfo_func)( const char *, const char *, void *, void * ); /* Success returns zero. Failure returns error code */
 typedef void (__stdcall *freeaddrinfo_func)( void * );
+typedef int  (__stdcall *getsockname_func)( unsigned int, void *, void * );
 
 //select_func select_winsock = NULL;
 
@@ -57,6 +58,7 @@ int L2PNet_InitDefault()
 	ws2_func[L2PFUNC_SELECT]      = (void *)GetProcAddress( l2pnet_hws2_32, "select" );
 	ws2_func[L2PFUNC_SOCKET]      = (void *)GetProcAddress( l2pnet_hws2_32, "socket" );
 	ws2_func[L2PFUNC_LISTEN]      = (void *)GetProcAddress( l2pnet_hws2_32, "listen" );
+	ws2_func[L2PFUNC_GETSOCKNAME] = (void *)GetProcAddress( l2pnet_hws2_32, "getsockname" );
 	for( i=1; i<l2pnet_ft_size; i++ )
 	{
 		if( ws2_func[i] == NULL )
@@ -631,4 +633,18 @@ bool L2PNet_resolveHostname( const char *hostname, struct in_addr *pinAddr )
 		pinAddr->s_addr = addr.s_addr;
 	}
 	return true;
+}
+
+
+int L2PNet_getsockname( unsigned int sock, struct sockaddr_in *saddr )
+{
+	int ret = -1;
+	int addrlen = sizeof(sockaddr_in);
+	getsockname_func proxy_getsockname = (getsockname_func)l2pnet_ft[L2PFUNC_GETSOCKNAME]; // find override
+	if( proxy_getsockname == NULL ) // no overrides
+		proxy_getsockname = (getsockname_func)ws2_func[L2PFUNC_GETSOCKNAME]; // call original
+	if( proxy_getsockname == NULL ) // still??
+		return -1;
+	ret = proxy_getsockname( sock, (void *)saddr, (void *)&addrlen );
+	return ret;
 }
