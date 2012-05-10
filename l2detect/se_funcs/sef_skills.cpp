@@ -54,3 +54,35 @@ int l2c_isCastingNow( lua_State *L )
 	lua_pushboolean( L, b );
 	return 1;
 }
+
+
+// table l2c_getUserSkills()
+int l2c_getUserSkills( lua_State *L )
+{
+	if( !g_game_client ) { lua_pushboolean( L, 0 ); return 1; }
+	UserSkills *sk = &(g_game_client->ai.skills);
+	//
+	int tableIndex = 0;
+	lua_createtable( L, 0, 0 );
+	int i = 0;
+	char skillName[255] = {0};
+	for( i=0; i<UserSkills::USERSKILL_MAX_SKILLS; i++ )
+	{
+		if( sk->skill[i].isUnused() ) continue;
+		sk->skill[i].getSkillName( skillName, sizeof(skillName)-1 );
+		lua_pushnumber( L, tableIndex );
+		lua_createtable( L, 0, 0 );
+		//
+		lua_pushstring( L, "skillId" );
+		lua_pushinteger( L, sk->skill[i].skillID );
+		lua_settable( L, -3 );
+		//
+		lua_pushstring( L, "skillName" );
+		lua_pushstring( L, skillName );
+		lua_settable( L, -3 );
+		//
+		lua_settable( L, -3 );
+	}
+	//
+	return 1;
+}

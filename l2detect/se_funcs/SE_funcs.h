@@ -48,6 +48,7 @@ int l2c_useSkill( lua_State *L );
 int l2c_getSkillLevel( lua_State *L );
 int l2c_getSkillReuseLeft( lua_State *L );
 int l2c_isCastingNow( lua_State *L );
+int l2c_getUserSkills( lua_State *L );
 // Buffs
 int l2c_getBuffs( lua_State *L );
 int l2c_buffCancel( lua_State *L );

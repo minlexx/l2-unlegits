@@ -12,6 +12,7 @@ public:
 	void setUnused();
 	bool isUnused() { return (skillID == 0); }
 	void getSkillName( wchar_t *out, size_t maxCount );
+	void getSkillName( char *out, size_t maxCount );
 public:
 	unsigned int skillID;
 	unsigned int level;
