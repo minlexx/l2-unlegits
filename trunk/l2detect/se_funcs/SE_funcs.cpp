@@ -50,6 +50,7 @@ void SE_funcs_register( lua_State *L )
 	lua_register( L, "l2c_getSkillLevel",     l2c_getSkillLevel );
 	lua_register( L, "l2c_getSkillReuseLeft", l2c_getSkillReuseLeft );
 	lua_register( L, "l2c_isCastingNow",      l2c_isCastingNow );
+	lua_register( L, "l2c_getUserSkills",     l2c_getUserSkills );
 	// Buffs
 	lua_register( L, "l2c_getBuffs",          l2c_getBuffs );
 	lua_register( L, "l2c_buffCancel",        l2c_buffCancel );

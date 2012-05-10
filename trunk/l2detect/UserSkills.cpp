@@ -48,9 +48,21 @@ void UserSkill::setUnused()
 
 void UserSkill::getSkillName( wchar_t *out, size_t maxCount )
 {
-	char aname[256] = {0};
+	char aname[1024] = {0};
 	L2Data_DB_GetSkillNameByID( skillID, aname );
 	MultiByteToWideChar( CP_ACP, 0, aname, -1, out, maxCount );
+}
+
+void UserSkill::getSkillName( char *out, size_t maxCount )
+{
+	out[0] = 0;
+	char *aname = (char *)malloc( 1024 );
+	if( aname )
+	{
+		L2Data_DB_GetSkillNameByID( skillID, aname );
+		strncpy( out, aname, maxCount );
+		free( aname );
+	}
 }
 
 void UserSkill::process_coolTime( unsigned int curTick )
