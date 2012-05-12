@@ -43,6 +43,7 @@ int l2c_getItemCount( lua_State *L );
 int l2c_useItem( lua_State *L );
 int l2c_useItemByObjectId( lua_State *L );
 int l2c_getPaperdollItem( lua_State *L );
+int l2c_getUserItems( lua_State *L );
 // Skills
 int l2c_useSkill( lua_State *L );
 int l2c_getSkillLevel( lua_State *L );

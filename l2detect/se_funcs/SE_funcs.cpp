@@ -45,6 +45,7 @@ void SE_funcs_register( lua_State *L )
 	lua_register( L, "l2c_useItem",           l2c_useItem );
 	lua_register( L, "l2c_useItemByObjectId", l2c_useItemByObjectId );
 	lua_register( L, "l2c_getPaperdollItem",  l2c_getPaperdollItem );
+	lua_register( L, "l2c_getUserItems",      l2c_getUserItems );
 	// Skills
 	lua_register( L, "l2c_useSkill",          l2c_useSkill );
 	lua_register( L, "l2c_getSkillLevel",     l2c_getSkillLevel );
