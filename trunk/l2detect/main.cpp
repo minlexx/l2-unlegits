@@ -124,12 +124,12 @@ DWORD WINAPI DllThread(LPVOID lpParam)
 			log_error( LOG_WARNING, "Maybe we're running in GameGuard protected program?\n" );
 			log_error( LOG_WARNING, "Be careful!\n" );
 		}
-		//Hook_InterceptConnect_my();
-		//if( !Hook_ValidateInterception_my() )
-		//{
-		//	log_error( LOG_ERROR, "Seems like my try to intercept ws2_32.dll!connect() failed.\n" );
-		//	log_error( LOG_ERROR, "All network connections will not be intercepted!\n" );
-		//}
+		Hook_InterceptConnect_my();
+		if( !Hook_ValidateInterception_my() )
+		{
+			log_error( LOG_ERROR, "Seems like my try to intercept ws2_32.dll!connect() failed.\n" );
+			log_error( LOG_ERROR, "All network connections will not be intercepted!\n" );
+		}
 		//Hook_InterceptConnect_Dis(); // this unused..
 #ifdef _MSC_VER
 	}

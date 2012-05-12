@@ -195,7 +195,7 @@ DWORD WINAPI UserAI::UserAIThread( LPVOID lpParam )
 			}
 		}
 		if( shouldExit ) break;
-		if( !was_message ) Sleep( 250 );
+		if( !was_message ) Sleep( 100 );
 
 		// process all L2Character moves in visible area, also process user move
 		// process buff ticks, skill reuses

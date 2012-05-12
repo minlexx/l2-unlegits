@@ -159,6 +159,7 @@ void UserSkills::parse_SkillList( L2GamePacket *p )
 			s.isEnchanted = p->readChar(); // writeC(temp.enchanted ? 1 : 0);
 		addSkill( &s );
 	}
+	log_error( LOG_USERAI, "UserSkills::parse_SkillList(): %d skills parsed\n", nSkills );
 }
 
 void UserSkills::parse_SkillCoolTime( L2GamePacket *p )

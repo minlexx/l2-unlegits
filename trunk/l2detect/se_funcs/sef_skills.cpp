@@ -57,12 +57,21 @@ int l2c_isCastingNow( lua_State *L )
 
 
 // table l2c_getUserSkills()
+/*
+local sk = l2c_getUserSkills();
+local sks = #sk;
+l2h_print( sks, " skills found.\n" );
+local i = 0;
+for i=1,sks do
+	l2h_print( i, ": ", sk[i].skillId, " - ", sk[i].skillName, "\n" );
+end
+*/
 int l2c_getUserSkills( lua_State *L )
 {
 	if( !g_game_client ) { lua_pushboolean( L, 0 ); return 1; }
 	UserSkills *sk = &(g_game_client->ai.skills);
 	//
-	int tableIndex = 0;
+	int tableIndex = 1;
 	lua_createtable( L, 0, 0 );
 	int i = 0;
 	char skillName[255] = {0};
@@ -81,7 +90,16 @@ int l2c_getUserSkills( lua_State *L )
 		lua_pushstring( L, skillName );
 		lua_settable( L, -3 );
 		//
+		lua_pushstring( L, "isActive" );
+		lua_pushinteger( L, sk->skill[i].isPassive ? 0 : 1 );
 		lua_settable( L, -3 );
+		//
+		lua_pushstring( L, "level" );
+		lua_pushinteger( L, sk->skill[i].level );
+		lua_settable( L, -3 );
+		//
+		lua_settable( L, -3 );
+		tableIndex++;
 	}
 	//
 	return 1;
