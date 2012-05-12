@@ -222,6 +222,10 @@ int l2c_getObjectInfoByObjectId( lua_State *L )
 				sprintf( ansi, "%S", chars_array[idx]->charName );
 				lua_pushstring( L, ansi );
 				lua_settable( L, -3 );
+				lua_pushstring( L, "title" );
+				sprintf( ansi, "%S", chars_array[idx]->charTitle );
+				lua_pushstring( L, ansi );
+				lua_settable( L, -3 );
 				//
 				lua_pushstring( L, "curHp" );
 				lua_pushnumber( L, chars_array[idx]->curHp );
@@ -280,6 +284,10 @@ int l2c_getObjectInfoByObjectId( lua_State *L )
 				sprintf( ansi, "%S", npc_array[idx]->charName );
 				lua_pushstring( L, ansi );
 				lua_settable( L, -3 );
+				lua_pushstring( L, "title" );
+				sprintf( ansi, "%S", npc_array[idx]->charTitle );
+				lua_pushstring( L, ansi );
+				lua_settable( L, -3 );
 				//
 				lua_pushstring( L, "curHp" );
 				lua_pushnumber( L, npc_array[idx]->curHp );
@@ -322,7 +330,7 @@ int l2c_getObjectInfoByObjectId( lua_State *L )
 				lua_settable( L, -3 );
 				//
 				lua_pushstring( L, "name" );
-				char itemName[256] = {0};
+				char itemName[512] = {0};
 				L2Data_DB_GetItemNamePicByID( a->gi_array[idx]->itemID, itemName, NULL );
 				lua_pushstring( L, itemName ); // at last
 				lua_settable( L, -3 );
