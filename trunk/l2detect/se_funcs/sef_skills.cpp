@@ -91,7 +91,7 @@ int l2c_getUserSkills( lua_State *L )
 		lua_settable( L, -3 );
 		//
 		lua_pushstring( L, "isActive" );
-		lua_pushinteger( L, sk->skill[i].isPassive ? 0 : 1 );
+		lua_pushboolean( L, sk->skill[i].isPassive ? 0 : 1 );
 		lua_settable( L, -3 );
 		//
 		lua_pushstring( L, "level" );
