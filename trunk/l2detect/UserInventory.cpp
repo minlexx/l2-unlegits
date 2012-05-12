@@ -5,6 +5,20 @@
 
 extern class CConfig g_cfg;
 
+
+void UserInventoryItem::getItemName( char *out, size_t maxCount )
+{
+	out[0] = 0;
+	char *aname = (char *)malloc( 1024 );
+	if( aname )
+	{
+		L2Data_DB_GetItemNamePicByID( itemID, aname, NULL );
+		strncpy( out, aname, maxCount );
+		free( aname );
+	}
+}
+
+
 UserInventory::UserInventory()
 {
 	clear();
@@ -34,7 +48,7 @@ int UserInventory::addItem( UserInventoryItem& it )
 	int i;
 	for( i=0; i<USERINV_MAX_ITEMS; i++ )
 	{
-		if( item[i].objectID == 0 )
+		if( item[i].isUnused() )
 		{
 			add_idx = i;
 			break;
