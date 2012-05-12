@@ -27,7 +27,7 @@ void UserAI::UAI_Parse_Die( class UserAI *cls, void *l2_game_packet )
 			case L2OT_PC:
 				{
 					chars_array[idx]->isAlikeDead = 1;
-					log_error( LOG_USERAI, "Character [%S] died", chars_array[idx]->charName );
+					log_error( LOG_USERAI, "Character [%S] died\n", chars_array[idx]->charName );
 					RadarWnd_UpdChar( objectID );
 				} break;
 			case L2OT_NPC:
@@ -89,7 +89,7 @@ void UserAI::UAI_Parse_Revive( class UserAI *cls, void *l2_game_packet )
 		case L2OT_PC:
 			{
 				chars_array[idx]->isAlikeDead = 0;
-				log_error( LOG_USERAI, "Character [%S] revived", chars_array[idx]->charName );
+				log_error( LOG_USERAI, "Character [%S] revived\n", chars_array[idx]->charName );
 				RadarWnd_UpdChar( objectID );
 			} break;
 		}
