@@ -148,7 +148,10 @@ bool UserAI::UAI_process_RequestBypassToServer( unsigned char *bytes, unsigned i
 	wchar_t *cmd = p.readUnicodeString();
 	if( !cmd ) return false;
 	// parse command // ex.: bypass [L2Detect_resetStats]
-	log_error( LOG_USERAI, "BypassToServer/LinkHtml: [%S]\n", cmd );
+	if( opcode == 0x22 )
+		log_error( LOG_USERAI, "RequestLinkHtml: [%S]\n", cmd );
+	if( opcode == 0x23 )
+		log_error( LOG_USERAI, "RequestBypassToServer: [%S]\n", cmd );
 	if( !wcsstr( cmd, L"L2Detect_" ) )
 	{
 		// this is not radar setup bypass, send it to server unchanged
