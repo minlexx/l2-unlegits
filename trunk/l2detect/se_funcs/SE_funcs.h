@@ -24,6 +24,8 @@ int l2c_sayPm( lua_State *L );
 int l2c_npcDlg( lua_State *L );
 int l2c_npcDlgClear( lua_State *L );
 int l2c_npcDlgExists( lua_State *L );
+int l2c_RequestBypassToServer( lua_State *L );
+int l2c_RequestLinkHtml( lua_State *L );
 // Moving
 int l2c_getPos( lua_State *L );
 int l2c_moveTo( lua_State *L );

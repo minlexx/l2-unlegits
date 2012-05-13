@@ -26,6 +26,8 @@ void SE_funcs_register( lua_State *L )
 	lua_register( L, "l2c_npcDlg",            l2c_npcDlg );
 	lua_register( L, "l2c_npcDlgClear",       l2c_npcDlgClear );
 	lua_register( L, "l2c_npcDlgExists",      l2c_npcDlgExists );
+	lua_register( L, "l2c_RequestBypassToServer", l2c_RequestBypassToServer );
+	lua_register( L, "l2c_RequestLinkHtml",    l2c_RequestLinkHtml );
 	// Moving
 	lua_register( L, "l2c_getPos",            l2c_getPos );
 	lua_register( L, "l2c_moveTo",            l2c_moveTo );
