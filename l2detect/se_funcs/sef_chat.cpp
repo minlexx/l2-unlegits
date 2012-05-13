@@ -138,3 +138,32 @@ int l2c_npcDlgExists( lua_State *L )
 	return 1;
 }
 
+
+// l2c_RequestBypassToServer( string bypass )
+int l2c_RequestBypassToServer( lua_State *L )
+{
+	int nArgs = lua_gettop( L );
+	if( nArgs < 1 ) return 0;
+	if( !g_game_client ) return 0;
+	const char *abypass = lua_tolstring( L, 1, NULL );
+	if( !abypass ) return 0;
+	wchar_t wsz[512];
+	MultiByteToWideChar( CP_ACP, 0, abypass, -1, wsz, 511 );
+	PGen_RequestBypassToserver( wsz );
+	return 0;
+}
+
+
+// l2c_RequestLinkHtml( string link )
+int l2c_RequestLinkHtml( lua_State *L )
+{
+	int nArgs = lua_gettop( L );
+	if( nArgs < 1 ) return 0;
+	if( !g_game_client ) return 0;
+	const char *abypass = lua_tolstring( L, 1, NULL );
+	if( !abypass ) return 0;
+	wchar_t wsz[512];
+	MultiByteToWideChar( CP_ACP, 0, abypass, -1, wsz, 511 );
+	PGen_RequestLinkHtml( wsz );
+	return 0;
+}
