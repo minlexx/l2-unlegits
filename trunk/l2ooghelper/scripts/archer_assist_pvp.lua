@@ -150,17 +150,17 @@ function isDead( objectId )
 	local objectInfo = l2c_getObjectInfoByObjectId( objectId );
 	if objectInfo == nil then return true end
 	if( objectInfo.type == "pc" ) then
-		if( objectInfo.isAlikeDead == 1 ) then
+		if( objectInfo.isAlikeDead ) then
 			return true
 		end
 	end
 	if( objectInfo.type == "npc" ) then
-		if( objectInfo.isAlikeDead == 1 ) then
+		if( objectInfo.isAlikeDead ) then
 			return true
 		end
 	end
 	if( objectInfo.type == "mob" ) then
-		if( objectInfo.isAlikeDead == 1 ) then
+		if( objectInfo.isAlikeDead ) then
 			return true
 		end
 	end

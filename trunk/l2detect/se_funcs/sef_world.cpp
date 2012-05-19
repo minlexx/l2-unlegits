@@ -234,7 +234,7 @@ int l2c_getObjectInfoByObjectId( lua_State *L )
 				lua_pushnumber( L, chars_array[idx]->maxHp );
 				lua_settable( L, -3 );
 				lua_pushstring( L, "isAlikeDead" );
-				lua_pushnumber( L, chars_array[idx]->isAlikeDead );
+				lua_pushboolean( L, chars_array[idx]->isAlikeDead );
 				lua_settable( L, -3 );
 				// player specific
 				lua_pushstring( L, "classID" );
@@ -296,7 +296,7 @@ int l2c_getObjectInfoByObjectId( lua_State *L )
 				lua_pushnumber( L, npc_array[idx]->maxHp );
 				lua_settable( L, -3 );
 				lua_pushstring( L, "isAlikeDead" );
-				lua_pushnumber( L, npc_array[idx]->isAlikeDead );
+				lua_pushboolean( L, npc_array[idx]->isAlikeDead );
 				lua_settable( L, -3 );
 				// npc specific
 				lua_pushstring( L, "templateID" );
