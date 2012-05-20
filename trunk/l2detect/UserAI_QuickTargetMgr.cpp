@@ -44,6 +44,7 @@ void UserAI_QuickTargetManager::refrestCurrentTargetsList( const UserAI_QuickTar
 
 void UserAI_QuickTargetManager::createInitialList( const UserAI_QuickTargetSetup *cfg )
 {
+	UNREFERENCED_PARAMETER( cfg ); // TODO: remove this after method complete
 	/*int i = 0, nChars = 0, nMaxChars = CharArray_GetCount();
 	m_init_list.clear();
 	int usr_x = g_game_client->ai.usr.x;
