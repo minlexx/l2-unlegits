@@ -632,18 +632,18 @@ BOOL __stdcall Call_VirtualProtectEx( HANDLE hProcess, LPVOID lpAddress, SIZE_T 
 	if( Proxied_VirtualProtectEx )
 	{
 		log_error( LOG_DEBUG, "Call_VirtualProtectEx(): using proxy...\n" );
-		vp_ret = Proxy_VirtualProtectEx( hProcess, (void *)connect_orig, 6, flNewProtect, lpflOldProtect );
+		vp_ret = Proxy_VirtualProtectEx( hProcess, (void *)lpAddress, dwSize, flNewProtect, lpflOldProtect );
 	}
 	else
 	{
 		log_error( LOG_DEBUG, "Call_VirtualProtectEx(): calling real...\n" );
-		vp_ret = VirtualProtectEx( hProcess, (void *)connect_orig, 6, flNewProtect, lpflOldProtect );
+		vp_ret = VirtualProtectEx( hProcess, (void *)lpAddress, dwSize, flNewProtect, lpflOldProtect );
 	}
 	if( !vp_ret )
 	{
 		DWORD le = GetLastError();
-		log_error( LOG_ERROR, "Call_VirtualProtectEx(): failed for address 0x%08X (err = 0x%08X (%d))\n",
-			(unsigned int)lpAddress, le, le );
+		log_error( LOG_ERROR, "Call_VirtualProtectEx(): failed for address 0x%08X (of size %u) (err = 0x%08X (%d))\n",
+			(unsigned int)lpAddress, dwSize, le, le );
 		SetLastError( le );
 	}
 	return vp_ret;
