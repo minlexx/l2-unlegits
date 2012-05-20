@@ -388,6 +388,9 @@
     <ClInclude Include="l2detect\NpcArray.h">
       <Filter>containers\array</Filter>
     </ClInclude>
+    <ClInclude Include="l2detect\lua\lctype.h">
+      <Filter>lua_lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="l2detect\ConfigIni.cpp">
@@ -804,6 +807,15 @@
     <ClCompile Include="l2detect\fakeExport.cpp" />
     <ClCompile Include="l2detect\net_hook_iphlp.cpp">
       <Filter>hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lbitlib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lcorolib.c">
+      <Filter>lua_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lctype.c">
+      <Filter>lua_lib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

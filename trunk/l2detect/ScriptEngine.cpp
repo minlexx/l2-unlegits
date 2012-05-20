@@ -268,7 +268,8 @@ void ScriptEngine::call_onChat( unsigned int senderObjectId, int channelId, cons
 	message_ansi[sizeof(message_ansi)-1] = 0;
 	from_ansi[sizeof(from_ansi)-1] = 0;
 	//
-	lua_getfield( L, LUA_GLOBALSINDEX, m_onChat_functionName ); // function to be called
+	//lua_getfield( L, LUA_GLOBALSINDEX, m_onChat_functionName ); // function to be called
+	lua_getglobal( L, m_onChat_functionName );     // function to be called
 	lua_pushinteger( L, senderObjectId );          // param 1 - sender object ID
 	lua_pushinteger( L, channelId );               // param 2 - channel ID
 	lua_pushstring( L, message_ansi );             // param 3 - chat message

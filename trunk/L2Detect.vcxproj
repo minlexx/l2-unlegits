@@ -151,6 +151,7 @@
     <ResourceCompile Include="l2detect\res\SetupDialogs.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="l2detect\lua\lctype.h" />
     <ClInclude Include="l2detect\Resource.h" />
     <ClInclude Include="l2detect\ConfigIni.h" />
     <ClInclude Include="l2detect\RemoteServerInfo.h" />
@@ -248,6 +249,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="l2detect\ConfigIni.cpp" />
+    <ClCompile Include="l2detect\lua\lbitlib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lcorolib.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="l2detect\lua\lctype.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
+    </ClCompile>
     <ClCompile Include="l2detect\net_hook_iphlp.cpp" />
     <ClCompile Include="l2detect\RemoteServerInfo.cpp" />
     <ClCompile Include="l2detect\main.cpp" />
