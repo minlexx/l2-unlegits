@@ -105,6 +105,7 @@
 #define IDC_B_PRINTADDRTID              1128
 #define IDC_C_TEONPVP_HACKS             1159
 #define IDC_E_INGAME_GAMESERVER_PORT    1160
+#define IDC_E_COORDS                    1161
 
 // radar sound alerts setup dlg
 #define IDC_C_SOUNDENEMYENTER           1089
