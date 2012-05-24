@@ -37,13 +37,15 @@ void UserAI_LockTargetMgr::onUserRequestAction( unsigned int actionObjectID )
 	if( g_game_client->ai.usr.targetObjectID != actionObjectID )
 	{
 		m_toid = 0;
-		log_error( LOG_USERAI, "[LockTarget]: user wishes to change target\n" );
+		if( m_enabled )
+			log_error( LOG_USERAI, "[LockTarget]: user wishes to change target\n" );
 	}
 }
 
 void UserAI_LockTargetMgr::onUserRequestUnselectTarget()
 {
-	log_error( LOG_USERAI, "[LockTarget]: user wishes to unselect target\n" );
+	if( m_enabled )
+		log_error( LOG_USERAI, "[LockTarget]: user wishes to unselect target\n" );
 	m_toid = 0;
 }
 
