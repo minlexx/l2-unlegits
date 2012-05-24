@@ -261,6 +261,7 @@ void DebugDlg_updateInfo( HWND hDlg )
 	if( g_game_client->getState() == GCST_IN_GAME )
 	{
 		TCHAR tstr[256];
+		TCHAR tstr_test[256] = {0};
 		// hp
 		wsprintf( tstr, _T("%d / %d"), g_game_client->ai.usr.hp, g_game_client->ai.usr.hp_max );
 		SetDlgItemText( hDlg, IDC_HP, tstr );
@@ -276,6 +277,13 @@ void DebugDlg_updateInfo( HWND hDlg )
 			g_game_client->ai.usr.level,
 			g_game_client->ai.usr.getClassStr(), g_game_client->ai.usr.getBaseClassStr() );
 		SetDlgItemText( hDlg, IDC_CHARNAME, tstr );
+		// coords
+		wsprintf( tstr, _T("(%d,%d,%d) -> (%d,%d,%d)"),
+			g_game_client->ai.usr.x, g_game_client->ai.usr.y, g_game_client->ai.usr.z,
+			g_game_client->ai.usr.xDst, g_game_client->ai.usr.yDst, g_game_client->ai.usr.zDst );
+		GetDlgItemText( hDlg, IDC_E_COORDS, tstr_test, sizeof(tstr_test)/sizeof(tstr_test[0]) );
+		if( _tcscmp( tstr, tstr_test ) ) // set new text only if changed
+			SetDlgItemText( hDlg, IDC_E_COORDS, tstr );
 	}
 	else SetDlgItemText( hDlg, IDC_CHARNAME, TEXT("<Not in game!>") );
 }
